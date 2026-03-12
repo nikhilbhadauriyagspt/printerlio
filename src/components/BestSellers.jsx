@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Heart, Check, ShoppingBag, ArrowUpRight, Plus } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, Check, Plus } from "lucide-react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Link } from "react-router-dom";
@@ -26,34 +26,42 @@ export default function BestSellers({ products = [] }) {
       const imgs = typeof images === 'string' ? JSON.parse(images) : images;
       if (Array.isArray(imgs) && imgs.length > 0) return `/${imgs[0]}`;
     } catch (e) { }
-    return "https://via.placeholder.com/400x400?text=No+Image";
+    return "https://via.placeholder.com/400x400?text=Product";
   };
 
   return (
-    <section className="px-6 md:px-10 lg:px-16 py-20 lg:py-24 bg-white font-urbanist relative overflow-hidden">
+    <section className="px-6 md:px-10 py-20 bg-white font-sans relative overflow-hidden">
       
-      <div className="max-w-[1920px] mx-auto relative z-10">
+      <div className="max-w-[1920px] mx-auto">
         
-        {/* --- HEADER --- */}
-        <div className="flex flex-col items-center text-center mb-20 relative">
-          <div className="relative">
-            <h2 className="text-4xl md:text-5xl font-black leading-none tracking-tighter uppercase inline-block relative z-10">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500">
-                Top Rated Best Sellers
-              </span>
+        {/* --- MINIMALIST HEADER --- */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-black text-slate-900 ">
+              Market Favorites
             </h2>
+            <p className="mt-2 text-slate-600 text-sm font-bold">
+              Our most requested hardware and supplies this month.
+            </p>
           </div>
-          <p className="mt-6 text-slate-500 text-sm md:text-base font-medium max-w-xl leading-relaxed mx-auto px-6">
-            Discover our most trusted printers and supplies as rated by industry professionals.
-          </p>
+          
+          {/* Custom Navigation */}
+          <div className="flex items-center gap-3 hidden md:flex">
+            <button className="bs-prev h-12 w-12 rounded-xl border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all cursor-pointer">
+              <ChevronLeft size={24} />
+            </button>
+            <button className="bs-next h-12 w-12 rounded-xl border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all cursor-pointer">
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
 
-        <div className="relative group/carousel">
+        <div className="relative">
           <Swiper
             modules={[Navigation, Autoplay]}
-            spaceBetween={24}
+            spaceBetween={20}
             slidesPerView={1.2}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
+            autoplay={{ delay: 5000, disableOnInteraction: false }}
             navigation={{ prevEl: '.bs-prev', nextEl: '.bs-next' }}
             breakpoints={{
               640: { slidesPerView: 2 },
@@ -66,15 +74,21 @@ export default function BestSellers({ products = [] }) {
             {products.slice(0, 15).map((p) => (
                 <SwiperSlide key={p.id}>
                   <div 
-                    className="relative bg-white border border-slate-100 rounded-[2.5rem] p-6 transition-all duration-500 flex flex-col group hover:border-indigo-600 hover:shadow-2xl hover:shadow-indigo-500/5 h-[520px]"
+                    className="relative bg-white border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group hover:border-blue-600/30 h-[500px]"
                   >
-                    {/* Image Area with Pure White Background */}
-                    <div className="relative aspect-square rounded-[2rem] bg-white border border-slate-50 flex items-center justify-center p-8 overflow-hidden mb-8 transition-all duration-500 group-hover:border-indigo-100 group-hover:bg-slate-50/30">
+                    {/* Image Panel (Upper) */}
+                    <div className="relative h-[280px] bg-white flex items-center justify-center p-8 overflow-hidden transition-colors duration-500">
+                      <div className="absolute top-4 left-4 z-20">
+                        <span className="text-[9px] font-black text-blue-600 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">
+                          {p.brand_name || 'Premium'}
+                        </span>
+                      </div>
+                      
                       <button 
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(p); }}
                         className={cn(
-                          "absolute top-4 right-4 z-20 h-10 w-10 bg-white rounded-full flex items-center justify-center transition-all duration-300 shadow-sm border border-slate-50",
-                          isInWishlist(p.id) ? "text-red-500 scale-110" : "text-slate-300 hover:text-red-500 hover:scale-110"
+                          "absolute top-4 right-4 z-20 h-10 w-10 bg-white rounded-xl flex items-center justify-center transition-all duration-300 border border-gray-100 shadow-sm hover:scale-110",
+                          isInWishlist(p.id) ? "text-red-500" : "text-gray-300 hover:text-red-500"
                         )}
                       >
                         <Heart size={18} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
@@ -87,58 +101,42 @@ export default function BestSellers({ products = [] }) {
                       />
                     </div>
 
-                    {/* Content Details */}
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest px-3 py-1 bg-indigo-50 rounded-full">
-                          {p.brand_name || 'AUTHENTIC'}
-                        </span>
+                    {/* Metadata Panel (Lower) */}
+                    <div className="flex-1 p-6 flex flex-col justify-between bg-white relative">
+                      <div className="space-y-3">
+                        <Link to={`/product/${p.slug}`} className="block">
+                          <h3 className="font-black text-slate-900 text-[17px] leading-[1.2] line-clamp-2 group-hover:text-blue-600 transition-colors">
+                            {p.name}
+                          </h3>
+                        </Link>
                       </div>
 
-                      <Link to={`/product/${p.slug}`} className="flex-1">
-                        <h3 className="font-black text-indigo-950 text-lg md:text-xl capitalize tracking-tight line-clamp-2 leading-[1.1] group-hover:text-indigo-600 transition-colors">
-                          {p.name.toLowerCase()}
-                        </h3>
-                      </Link>
-
-                      <div className="mt-8 flex items-center justify-between pt-6 border-t border-slate-100">
-                        <div className="flex flex-col">
-                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Price</span>
-                           <span className="text-2xl font-black text-indigo-950 tracking-tighter">${p.price}</span>
+                      {/* Integrated Action Panel */}
+                      <div className="flex items-stretch mt-6 h-14 border border-gray-100 rounded-xl overflow-hidden group/actions">
+                        <div className="flex-1 flex flex-col justify-center px-5 bg-gray-50 group-hover/actions:bg-white transition-colors">
+                           <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter leading-none mb-1">Standard Price</span>
+                           <span className="text-lg font-black text-slate-900 leading-none">${p.price}</span>
                         </div>
-
                         <button 
                           onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAddToCart(p); }}
                           disabled={addedItems[p.id]}
                           className={cn(
-                            "h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg active:scale-90 z-30 relative",
+                            "w-16 flex items-center justify-center transition-all duration-500 active:scale-95 z-30 relative",
                             addedItems[p.id] 
-                              ? "bg-emerald-500 text-white shadow-emerald-500/20" 
-                              : "bg-indigo-950 text-white hover:bg-amber-500 hover:text-indigo-950 shadow-indigo-950/20 hover:shadow-amber-500/30"
+                              ? "bg-emerald-500 text-white" 
+                              : "bg-black text-white hover:bg-blue-600"
                           )}
                         >
-                          {addedItems[p.id] ? <Check size={24} strokeWidth={3} /> : <Plus size={24} strokeWidth={3} />}
+                          {addedItems[p.id] ? <Check size={22} strokeWidth={3} /> : <Plus size={22} strokeWidth={3} />}
                         </button>
                       </div>
                     </div>
 
-                    <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-full z-0 rounded-[2.5rem]" />
+                    <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-[85%] z-0" />
                   </div>
                 </SwiperSlide>
               ))}
           </Swiper>
-
-          {/* Controls */}
-          <div className="absolute top-1/2 -left-8 -translate-y-1/2 z-30 pointer-events-none hidden xl:block transition-all duration-500 opacity-0 group-hover/carousel:opacity-100">
-             <button className="bs-prev h-16 w-16 bg-white border border-slate-100 rounded-full flex items-center justify-center text-indigo-950 hover:bg-indigo-950 hover:text-white transition-all duration-300 pointer-events-auto shadow-xl cursor-pointer active:scale-90">
-                <ChevronLeft size={32} />
-             </button>
-          </div>
-          <div className="absolute top-1/2 -right-8 -translate-y-1/2 z-30 pointer-events-none hidden xl:block transition-all duration-500 opacity-0 group-hover/carousel:opacity-100">
-             <button className="bs-next h-16 w-16 bg-white border border-slate-100 rounded-full flex items-center justify-center text-indigo-950 hover:bg-indigo-950 hover:text-white transition-all duration-300 pointer-events-auto shadow-xl cursor-pointer active:scale-90">
-                <ChevronRight size={32} />
-             </button>
-          </div>
         </div>
       </div>
     </section>

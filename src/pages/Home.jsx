@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <div className="bg-white font-snpro overflow-x-hidden text-slate-900">
       <SEO 
-        title="PrinterPrime
+        title="MaxPrinter
  
   | Premium Printers & Hardware" 
         description="Premium destination for professional printers, and essential accessories. Delivering excellence in tech solutions across the USA."
@@ -93,45 +93,43 @@ export default function Home() {
       <Hero />
       <Features />
       <ShopByCategory categories={data.categories} />
-      <Collections />
+      
       <BestSellers products={data.all} />
-      <BrandShowcase brands={data.brands} />
+      
       <ProductGrid products={data.mixedArrivals.slice(0, 30)} />
-
+       <Collections />
       <CategorySlider 
         title="Office Printers" 
         subtitle="Laser & Inkjet" 
         products={data.printers} 
       />
-
+       <BrandShowcase brands={data.brands} />
       {/* --- MINIMAL CONTACT CTA BANNER --- */}
-      <section className="py-20 lg:py-28 bg-white font-urbanist px-6">
+      <section className="py-20 bg-white font-sans px-6">
         <div className="max-w-[1920px] mx-auto">
-          <div className="relative bg-indigo-950 rounded-[3rem] p-12 lg:p-24 overflow-hidden flex flex-col items-center text-center">
-            {/* Background Accent */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-            
-            <div className="relative z-10 max-w-3xl space-y-8">
-              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight ">
-                Need help with your <br />
-                <span className="text-amber-500">Printing Setup?</span>
+          <div className="relative bg-gray-50 border border-gray-100 rounded-2xl p-12 lg:p-24 overflow-hidden flex flex-col items-center text-center group">
+            {/* Subtle Corner Accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-600/10 transition-colors duration-700" />
+
+            <div className="relative z-10 max-w-3xl space-y-6">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight tracking-tight">
+                Need help with your printing setup?
               </h2>
-              <p className="text-indigo-200/60 text-lg font-medium">
+              <p className="text-slate-500 text-base md:text-lg font-bold tracking-wide max-w-2xl mx-auto">
                 Our experts are ready to provide simple and reliable advice to help you pick the best tools for your office.
               </p>
-              
-              <div className="pt-6">
-                <Link to="/contact" className="inline-block group">
-                  <button className="h-15 px-10 bg-amber-500 text-indigo-950 font-black text-sm uppercase tracking-[0.2em] rounded-2xl hover:bg-amber-400 transition-all active:scale-95 flex items-center gap-4 shadow-xl shadow-amber-500/20">
-                    CONTACT OUR EXPERTS
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
+
+              <div className="pt-8">
+                <Link to="/contact" className="inline-flex items-center uppercase gap-4 bg-black text-white h-14 px-12 text-[11px] font-black tracking-[0.2em] rounded-xl hover:bg-blue-600 transition-all group/btn">
+                  Contact our experts
+                  <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section>    </div>
+    
   );
+  
 }

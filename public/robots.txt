@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://printerprime.shop/sitemap.xml
+Sitemap: https://maxprinter.shop/sitemap.xml

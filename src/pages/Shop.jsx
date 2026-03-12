@@ -4,18 +4,11 @@ import SEO from '@/components/SEO';
 import { useCart } from '../context/CartContext';
 import { 
   Search, 
-  ChevronDown, 
   Filter, 
-  LayoutGrid, 
-  List, 
-  ShoppingBag, 
   Heart,
   X,
   Loader2,
   Check,
-  ArrowUpDown,
-  SlidersHorizontal,
-  ArrowRight,
   Plus,
   Box,
   ChevronRight
@@ -106,18 +99,10 @@ export default function Shop() {
       .catch(() => setLoading(false));
   }, [searchParams, pathCategory, pathBrand, navigate]);
 
-  // Dynamically calculate which brands have products in the current inventory
-  // (ignoring current brand filter to allow selection)
   const availableBrands = brands.filter(b => {
     const brandName = b.name.toLowerCase().trim();
-    // Special handling for the core printer brands the user mentioned
-    const coreBrands = ['brother', 'canon', 'epson', 'hp', 'lexmark', 'xerox'];
-    
-    // Hide if it's one of the known technical/computer brands
     const computerBrands = ['acer', 'asus', 'dell', 'lenovo'];
     if (computerBrands.includes(brandName)) return false;
-
-    // Show if it has at least one matching product in our entire filtered set
     return products.some(p => 
       p.brand_id === b.id || 
       p.brand_name?.toLowerCase().trim() === brandName
@@ -137,104 +122,88 @@ export default function Shop() {
       const imgs = typeof images === 'string' ? JSON.parse(images) : images;
       if (Array.isArray(imgs) && imgs.length > 0) return `/${imgs[0]}`;
     } catch (e) { }
-    return "https://via.placeholder.com/400x400?text=No+Image";
+    return "https://via.placeholder.com/400x400?text=Product";
   };
 
   return (
-    <div className="bg-white min-h-screen font-urbanist">
+    <div className="bg-white min-h-screen font-sans">
       <SEO 
-        title="Store | PrinterPrime
- 
- " 
+        title="Store | MaxPrinter" 
         description="Browse our selection of professional printing solutions."
       />
       
       {/* --- PAGE HEADER --- */}
-      <div className="py-20 px-6 md:px-10 lg:px-16 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[40%] h-full bg-indigo-50/50 blur-[120px] rounded-full pointer-events-none" />
-        
-        <div className="max-w-[1920px] mx-auto relative z-10 flex flex-col items-center text-center">
-          <div className="mb-16">
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <div className="h-[1px] w-12 bg-amber-500" />
-              <span className="text-[11px] font-black text-indigo-600 uppercase tracking-[0.5em]">Inventory Hub</span>
-              <div className="h-[1px] w-12 bg-amber-500" />
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-indigo-950 leading-none ">
-              Browse Our <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500">Inventory.</span>
+      <div className="py-16 px-6 md:px-10 bg-white">
+        <div className="max-w-[1920px] mx-auto">
+          <div className="flex flex-col space-y-2 mb-10">
+            <h1 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+              Hardware Inventory
             </h1>
+            <p className="text-slate-400 text-sm font-bold tracking-wide">
+              Showing {products.length} professional terminal units and supplies.
+            </p>
           </div>
 
-          <div className="w-full max-w-2xl relative group px-6">
+          <div className="w-full max-w-2xl relative group">
              <input 
                type="text" 
                placeholder="Search for printers, ink, or accessories..."
                value={search}
                onChange={(e) => updateFilter('search', e.target.value)}
-               className="w-full h-16 pl-14 pr-6 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 transition-all shadow-sm"
+               className="w-full h-14 pl-14 pr-6 bg-gray-50 border border-gray-100 rounded-xl text-sm font-bold focus:outline-none focus:bg-white focus:border-blue-600 transition-all"
              />
-             <Search className="absolute left-10 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600" size={20} />
+             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600" size={20} />
           </div>
         </div>
       </div>
 
       {/* --- MAIN LAYOUT --- */}
-      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 pb-24">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10 pb-24">
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* --- LEFT SIDEBAR: FILTERS --- */}
-          <aside className="hidden lg:block w-80 shrink-0 space-y-12">
+          <aside className="hidden lg:block w-72 shrink-0 space-y-12">
             
             {/* Categories */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-3">
-                <div className="h-1.5 w-1.5 bg-amber-500 rounded-full" />
-                <h4 className="text-[12px] font-black text-indigo-950 uppercase tracking-[0.3em]">Collections</h4>
-              </div>
+            <div className="space-y-6">
+              <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.3em]">Collections</h4>
               <div className="space-y-1">
                 <button 
                   onClick={() => updateFilter('category', '')}
                   className={cn(
-                    "w-full text-left px-6 py-3 text-[13px] font-black uppercase transition-all rounded-xl flex items-center justify-between",
-                    !category ? "text-white bg-indigo-950 shadow-lg shadow-indigo-950/20" : "text-slate-400 hover:text-indigo-950 hover:bg-slate-50"
+                    "w-full text-left px-4 py-2.5 text-[13px] font-bold transition-all rounded-lg flex items-center justify-between",
+                    !category ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-slate-900 hover:bg-gray-50"
                   )}
                 >
                   All Products
-                  {!category && <ChevronRight size={14} />}
                 </button>
                 {categories.map(cat => (
                   <button 
                     key={cat.id} onClick={() => updateFilter('category', cat.slug)}
                     className={cn(
-                      "w-full text-left px-6 py-3 text-[13px] font-black uppercase transition-all rounded-xl flex items-center justify-between",
-                      category === cat.slug ? "text-white bg-indigo-950 shadow-lg shadow-indigo-950/20" : "text-slate-400 hover:text-indigo-950 hover:bg-slate-50"
+                      "w-full text-left px-4 py-2.5 text-[13px] font-bold transition-all rounded-lg flex items-center justify-between",
+                      category === cat.slug ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-slate-900 hover:bg-gray-50"
                     )}
                   >
                     {cat.name}
-                    {category === cat.slug && <ChevronRight size={14} />}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Brands */}
-            <div className="space-y-8">
-              <div className="flex items-center gap-3">
-                <div className="h-1.5 w-1.5 bg-amber-500 rounded-full" />
-                <h4 className="text-[12px] font-black text-indigo-950 uppercase tracking-[0.3em]">Partner Brands</h4>
-              </div>
+            <div className="space-y-6">
+              <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-[0.3em]">Brands</h4>
               <div className="grid grid-cols-1 gap-1">
                 {availableBrands.map(b => (
                   <button 
                     key={b.id} onClick={() => updateFilter('brand', brand === b.name ? '' : b.name)}
                     className={cn(
-                      "w-full text-left px-6 py-3 text-[13px] font-black uppercase transition-all rounded-xl flex items-center justify-between",
-                      brand === b.name ? "text-white bg-indigo-950 shadow-lg shadow-indigo-950/20" : "text-slate-400 hover:text-indigo-950 hover:bg-slate-50"
+                      "w-full text-left px-4 py-2.5 text-[13px] font-bold transition-all rounded-lg flex items-center justify-between",
+                      brand === b.name ? "text-blue-600 bg-blue-50" : "text-slate-400 hover:text-slate-900 hover:bg-gray-50"
                     )}
                   >
                     {b.name}
-                    {brand === b.name && <ChevronRight size={14} />}
                   </button>
                 ))}
               </div>
@@ -244,9 +213,9 @@ export default function Shop() {
             {(category || brand || search) && (
               <button 
                 onClick={() => navigate('/shop')}
-                className="w-full py-4 bg-white border-2 border-indigo-950 text-indigo-950 text-[11px] font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-indigo-950 hover:text-white transition-all flex items-center justify-center gap-3 active:scale-95"
+                className="w-full py-3.5 bg-black text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-blue-600 transition-all flex items-center justify-center gap-3 active:scale-95"
               >
-                <X size={14} /> Clear All Filters
+                <X size={14} /> Clear Filters
               </button>
             )}
           </aside>
@@ -255,24 +224,24 @@ export default function Shop() {
           <div className="flex-1">
             
             {/* Top Bar: Sort & Mobile Filter Toggle */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 pb-8 border-b border-slate-100">
-              <div className="flex items-center gap-6">
+            <div className="flex items-center justify-between gap-6 mb-10">
+              <div className="flex items-center gap-4">
                 <button 
                   onClick={() => setIsMobileFilterOpen(true)}
-                  className="lg:hidden flex items-center gap-3 h-14 px-8 bg-indigo-950 text-white text-[11px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-indigo-950/20"
+                  className="lg:hidden flex items-center gap-3 h-12 px-6 bg-slate-900 text-white text-[11px] font-black uppercase tracking-widest rounded-xl"
                 >
                   <Filter size={18} /> Filters
                 </button>
               </div>
 
-              <div className="flex items-center gap-4 w-full md:w-auto">
+              <div className="flex items-center gap-4">
                 <select 
                   value={sort} onChange={(e) => updateFilter('sort', e.target.value)}
-                  className="w-full md:w-64 h-14 px-6 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] font-black uppercase focus:outline-none focus:ring-4 focus:ring-indigo-50 cursor-pointer text-indigo-950 transition-all"
+                  className="h-12 px-4 bg-gray-50 border border-gray-100 rounded-xl text-[11px] font-black uppercase focus:outline-none focus:border-blue-600 cursor-pointer text-slate-900 transition-all"
                 >
-                  <option value="newest">Recent Arrivals</option>
-                  <option value="price_low">Price: Low to High</option>
-                  <option value="price_high">Price: High to Low</option>
+                  <option value="newest">Recent</option>
+                  <option value="price_low">Price: Low</option>
+                  <option value="price_high">Price: High</option>
                   <option value="name_asc">Alphabetical</option>
                 </select>
               </div>
@@ -281,74 +250,80 @@ export default function Shop() {
             {/* Results Grid */}
             {loading ? (
               <div className="flex flex-col items-center justify-center py-48">
-                <Loader2 className="animate-spin h-12 w-12 text-indigo-600 mb-6" />
-                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300">Synchronizing Stock...</p>
+                <Loader2 className="animate-spin h-10 w-10 text-blue-600 mb-4" />
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-300">Synchronizing Stock...</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-48 text-center bg-slate-50 border border-slate-100 rounded-[3rem]">
-                <Box size={48} className="text-slate-200 mb-6" />
-                <h2 className="text-3xl font-black text-indigo-950 uppercase tracking-tight mb-2">No matching units</h2>
-                <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-10">Try a different search or refine your filters</p>
-                <button onClick={() => navigate('/shop')} className="px-12 py-5 bg-indigo-950 text-white font-black text-[11px] uppercase tracking-[0.2em] rounded-2xl hover:bg-amber-500 transition-all shadow-xl shadow-indigo-950/10">Clear Refinement</button>
+              <div className="flex flex-col items-center justify-center py-48 text-center bg-gray-50 rounded-2xl">
+                <Box size={40} className="text-slate-200 mb-4" />
+                <h2 className="text-2xl font-black text-slate-900">No matching units</h2>
+                <p className="text-slate-400 text-sm font-bold mt-2 mb-8">Try a different search or refine your filters</p>
+                <button onClick={() => navigate('/shop')} className="px-10 py-4 bg-black text-white font-black text-[11px] uppercase tracking-widest rounded-xl hover:bg-blue-600 transition-all">Clear Refinement</button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-                {products.map((p, i) => (
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+                {products.map((p) => (
                   <div 
                     key={p.id}
-                    className="group relative bg-white border border-slate-100 rounded-[2.5rem] p-5 transition-all duration-500 flex flex-col hover:border-indigo-600 hover:shadow-2xl hover:shadow-indigo-500/5 h-full overflow-hidden"
+                    className="relative bg-white border border-gray-100 rounded-2xl overflow-hidden transition-all duration-500 flex flex-col group hover:border-blue-600/30 h-[440px]"
                   >
-                    {/* Image Area */}
-                    <div className="relative aspect-square rounded-[2rem] bg-white border border-slate-50 flex items-center justify-center p-6 mb-6 overflow-hidden transition-all duration-500 group-hover:bg-slate-50/50">
+                    {/* Image Panel */}
+                    <div className="relative h-[220px] bg-white flex items-center justify-center p-6 overflow-hidden transition-colors duration-500">
+                      <div className="absolute top-3 left-3 z-20">
+                        <span className="text-[9px] font-black text-blue-600 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full tracking-widest">
+                          {p.brand_name || 'Premium'}
+                        </span>
+                      </div>
+                      
                       <button 
                         onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(p); }}
                         className={cn(
-                          "absolute top-3 right-3 z-20 h-9 w-9 bg-white rounded-full flex items-center justify-center transition-all duration-300 shadow-sm border border-slate-50",
-                          isInWishlist(p.id) ? "text-red-500 scale-110" : "text-slate-300 hover:text-red-500 hover:scale-110"
+                          "absolute top-3 right-3 z-20 h-8 w-8 bg-white rounded-lg flex items-center justify-center transition-all duration-300 border border-gray-100 shadow-sm hover:scale-110",
+                          isInWishlist(p.id) ? "text-red-500" : "text-gray-300 hover:text-red-500"
                         )}
                       >
-                        <Heart size={16} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
+                        <Heart size={14} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
                       </button>
 
                       <img 
                         src={getImagePath(p.images)} 
-                        alt={p.name}
-                        className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/400x400?text=Hardware"; }}
+                        className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110" 
+                        alt={p.name} 
                       />
                     </div>
 
-                    {/* Info */}
-                    <div className="flex-1 flex flex-col px-2">
-                      <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mb-2 px-2.5 py-1 bg-indigo-50 self-start rounded-full">
-                        {p.brand_name || 'AUTHENTIC'}
-                      </span>
-                      
-                      <Link to={`/product/${p.slug}`} className="flex-1">
-                        <h3 className="text-base md:text-lg font-black text-indigo-950 capitalize tracking-tight line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
-                          {p.name.toLowerCase()}
-                        </h3>
-                      </Link>
+                    {/* Metadata Panel */}
+                    <div className="flex-1 p-5 flex flex-col justify-between bg-white relative">
+                      <div className="space-y-2">
+                        <Link to={`/product/${p.slug}`} className="block">
+                          <h3 className="font-black text-slate-900 text-[14px] leading-[1.3] line-clamp-2 group-hover:text-blue-600 transition-colors">
+                            {p.name}
+                          </h3>
+                        </Link>
+                      </div>
 
-                      <div className="mt-6 flex items-center justify-between pt-5 border-t border-slate-100">
-                        <span className="text-2xl font-black text-indigo-950 tracking-tighter">${p.price}</span>
-
+                      {/* Integrated Action Panel */}
+                      <div className="flex items-stretch mt-4 h-11 border border-gray-100 rounded-xl overflow-hidden group/actions">
+                        <div className="flex-1 flex flex-col justify-center px-4 bg-gray-50 group-hover/actions:bg-white transition-colors">
+                           <span className="text-[8px] font-black text-gray-400 uppercase tracking-tighter leading-none mb-1">Standard Price</span>
+                           <span className="text-[15px] font-black text-slate-900 leading-none">${p.price}</span>
+                        </div>
                         <button 
                           onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAddToCart(p); }}
                           disabled={addedItems[p.id]}
                           className={cn(
-                            "h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg active:scale-90 z-30 relative",
+                            "w-12 flex items-center justify-center transition-all duration-500 active:scale-95 z-30 relative",
                             addedItems[p.id] 
-                              ? "bg-emerald-500 text-white shadow-emerald-500/20" 
-                              : "bg-indigo-950 text-white hover:bg-amber-500 hover:text-indigo-950 shadow-indigo-950/20 hover:shadow-amber-500/30"
+                              ? "bg-emerald-500 text-white" 
+                              : "bg-black text-white hover:bg-blue-600"
                           )}
                         >
-                          {addedItems[p.id] ? <Check size={20} strokeWidth={3} /> : <Plus size={20} strokeWidth={3} />}
+                          {addedItems[p.id] ? <Check size={18} strokeWidth={3} /> : <Plus size={18} strokeWidth={3} />}
                         </button>
                       </div>
                     </div>
 
-                    <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-full z-0 rounded-[2.5rem]" />
+                    <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-[85%] z-0" />
                   </div>
                 ))}
               </div>
@@ -369,10 +344,10 @@ export default function Shop() {
             <motion.div 
               initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 h-full w-[320px] bg-white z-[110] shadow-2xl lg:hidden flex flex-col p-8 space-y-10 overflow-y-auto custom-scrollbar"
+              className="fixed top-0 left-0 h-full w-[300px] bg-white z-[110] shadow-2xl lg:hidden flex flex-col p-8 space-y-10 overflow-y-auto custom-scrollbar"
             >
               <div className="flex justify-between items-center pb-6 border-b border-slate-100">
-                <h3 className="text-xl font-black text-indigo-950 uppercase tracking-tighter">Refine Selection.</h3>
+                <h3 className="text-xl font-black text-slate-900">Refine Selection.</h3>
                 <button onClick={() => setIsMobileFilterOpen(false)} className="h-10 w-10 bg-slate-50 flex items-center justify-center rounded-xl border border-slate-100">
                   <X size={20} />
                 </button>
@@ -380,12 +355,12 @@ export default function Shop() {
 
               <div className="space-y-10">
                 <div className="space-y-6">
-                  <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.4em]">Collections</h4>
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Collections</h4>
                   <div className="space-y-1">
                     {categories.map(cat => (
                       <button 
                         key={cat.id} onClick={() => { updateFilter('category', cat.slug); setIsMobileFilterOpen(false); }}
-                        className={cn("w-full text-left px-4 py-3 text-[11px] font-black uppercase transition-all rounded-xl", category === cat.slug ? "bg-indigo-950 text-white" : "text-slate-400 hover:bg-slate-50")}
+                        className={cn("w-full text-left px-4 py-2.5 text-[13px] font-bold transition-all rounded-lg", category === cat.slug ? "bg-blue-50 text-blue-600" : "text-slate-400 hover:bg-slate-50")}
                       >
                         {cat.name}
                       </button>
@@ -394,12 +369,12 @@ export default function Shop() {
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.4em]">Brands</h4>
+                  <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Brands</h4>
                   <div className="grid grid-cols-2 gap-2">
                     {availableBrands.map(b => (
                       <button 
                         key={b.id} onClick={() => { updateFilter('brand', b.name); setIsMobileFilterOpen(false); }}
-                        className={cn("px-4 py-3 text-[10px] font-black uppercase border transition-all rounded-xl", brand === b.name ? "bg-indigo-950 text-white border-indigo-950" : "bg-white border-slate-100 text-slate-400")}
+                        className={cn("px-4 py-2.5 text-[11px] font-bold border transition-all rounded-lg", brand === b.name ? "bg-blue-50 text-blue-600 border-blue-100" : "bg-white border-slate-100 text-slate-400")}
                       >
                         {b.name}
                       </button>
@@ -410,7 +385,7 @@ export default function Shop() {
 
               <button 
                 onClick={() => { navigate('/shop'); setIsMobileFilterOpen(false); }}
-                className="w-full py-4 bg-amber-500 text-indigo-950 text-[10px] font-black uppercase tracking-widest mt-auto rounded-2xl shadow-xl shadow-amber-500/20"
+                className="w-full py-4 bg-black text-white text-[11px] font-black uppercase tracking-widest mt-auto rounded-xl"
               >
                 Reset All Filters
               </button>

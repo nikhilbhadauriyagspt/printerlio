@@ -15,13 +15,14 @@ import {
   LayoutGrid,
   ShoppingBasket,
   Box,
-  Menu,
-  Printer,
-  ShieldCheck,
-  Headset,
-  ShoppingCart
-} from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+  Menu, 
+  Printer, 
+  ShieldCheck, 
+  Headset, 
+  ShoppingCart,
+  ArrowUpRight,
+  ArrowRight
+  } from 'lucide-react';import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../lib/utils';
 
 export default function Header() {
@@ -40,17 +41,12 @@ export default function Header() {
   const searchRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  // Calculate cart total
   const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
-        setSearchQuery('');
-      }
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setActiveDropdown(null);
-      }
+      if (searchRef.current && !searchRef.current.contains(event.target)) setSearchQuery('');
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) setActiveDropdown(null);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -63,10 +59,9 @@ export default function Header() {
         try {
           const pRes = await fetch(`${API_BASE_URL}/products?search=${encodeURIComponent(searchQuery)}&limit=5`);
           const pData = await pRes.json();
-          const filteredProds = (pData.status === 'success' ? pData.data : []);
-          setSuggestions({ products: filteredProds, categories: [] });
+          setSuggestions({ products: pData.status === 'success' ? pData.data : [], categories: [] });
         } catch (err) {
-          console.error("Search error:", err);
+          console.error(err);
         } finally {
           setIsSearching(false);
         }
@@ -91,11 +86,9 @@ export default function Header() {
       .then(res => res.json())
       .then(data => {
         if(data.status === 'success') {
-          // Filter out Laptops/Computers
           const filtered = data.data.filter(cat => {
             const name = cat.name.toLowerCase();
-            const slug = cat.slug.toLowerCase();
-            return !name.includes('laptop') && !slug.includes('laptop') && !name.includes('computer') && !name.includes('pc');
+            return !name.includes('laptop') && !name.includes('computer');
           });
           setCategories(filtered);
           if (filtered.length > 0) setHoveredParent(filtered[0].id);
@@ -127,55 +120,67 @@ export default function Header() {
     { name: 'FAQ', path: '/faq' }
   ];
 
-  const activeParent = categories.find(c => String(c.id) === String(hoveredParent));
-  const subCategoriesToDisplay = activeParent?.children || [];
+  const flattenedSubCats = categories.flatMap(cat => cat.children || []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-[100] font-urbanist">
+      <header className="fixed top-0 left-0 w-full z-[100] font-sans bg-white">
         
-        {/* --- ROW 1: PREMIUM INDIGO TOP BAR --- */}
-        <div className="bg-indigo-950 py-3 md:py-4 border-b border-white/5">
-          <div className="w-full max-w-[1920px] mx-auto px-6 md:px-10 flex items-center justify-between gap-6 md:gap-12">
+       
+
+        {/* --- ROW 2: BRANDED MAIN BAR (CLEAN SQUARE) --- */}
+        <div className="py-5 px-6 md:px-10">
+          <div className="w-full max-w-[1920px] mx-auto flex items-center justify-between gap-12">
             
-            {/* Brand Logo */}
+            {/* Logo */}
             <Link to="/" className="shrink-0">
-              <img src="/logo/MYPRINTERMANNN.png" alt="PrinterPrime" className="h-8 md:h-9 w-auto object-contain brightness-140" />
+              <img src="/logo/MYPRINTERMANNN.png" alt="MaxPrinter" className="h-8 md:h-11 w-auto object-contain" />
             </Link>
 
-            {/* Expansive Search Bar with Amber Action */}
-            <div className="hidden lg:flex flex-1 max-w-3xl relative group" ref={searchRef}>
-              <form onSubmit={handleSearch} className="w-full relative">
+            {/* Premium Search Terminal */}
+            <div className="hidden lg:flex flex-1 max-w-4xl relative" ref={searchRef}>
+              <form onSubmit={handleSearch} className="flex w-full group items-center bg-gray-50 hover:bg-gray-100 transition-all focus-within:bg-white border border-gray-200 focus-within:border-blue-600/30 rounded-xl overflow-hidden focus-within:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)]">
+                <div className="px-6 flex items-center text-gray-400 group-focus-within:text-blue-600 transition-colors">
+                  <Search size={18} strokeWidth={2.5} />
+                </div>
                 <input 
                   type="text" 
-                  placeholder="Search for premium printers, inks and supplies..."
+                  placeholder="Search for printers, toner, or hardware..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-11 pl-5 pr-32 bg-white border-none rounded-xl text-sm text-gray-900 focus:outline-none focus:ring-4 focus:ring-amber-500/20 transition-all placeholder:text-gray-400"
+                  className="flex-1 h-12 bg-transparent text-[13px] text-gray-900 focus:outline-none font-bold placeholder:text-gray-400 placeholder:font-medium"
                 />
-                <button type="submit" className="absolute right-1 top-1 bottom-1 px-6 bg-amber-500 text-indigo-950 rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-amber-400 transition-all">
-                  Search
+                <button type="submit" className="bg-black text-white px-10 h-12 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-blue-600 transition-all flex items-center gap-3 group/btn">
+                  <span>Search</span>
+                  <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </form>
 
-              {/* Quick Suggestions */}
+              {/* Enhanced Suggestions Terminal */}
               <AnimatePresence>
                 {searchQuery.trim().length > 0 && (
-                  <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }} className="absolute top-full left-0 w-full mt-2 bg-white rounded-xl overflow-hidden z-[110] shadow-2xl border border-gray-100">
-                    <div className="p-2">
+                  <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }} className="absolute top-full left-0 right-0 mt-2 bg-white z-[110] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] rounded-xl overflow-hidden border border-gray-100">
+                    <div className="p-2 bg-gray-50/50">
                       {isSearching ? (
-                        <div className="p-6 text-center text-xs text-gray-400 font-bold uppercase tracking-widest animate-pulse">Searching Inventory...</div>
+                        <div className="p-12 text-center">
+                          <Loader2 size={24} className="mx-auto animate-spin mb-4 text-blue-600" />
+                          <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Accessing Database...</p>
+                        </div>
                       ) : (
-                        <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
+                        <div className="max-h-[480px] overflow-y-auto custom-scrollbar space-y-1">
                           {suggestions.products.map(p => (
-                            <Link key={p.id} to={`/product/${p.slug}`} onClick={() => setSearchQuery('')} className="flex items-center gap-4 p-2.5 hover:bg-indigo-50 rounded-lg group transition-colors">
-                              <div className="h-10 w-10 bg-white border border-gray-100 rounded flex items-center justify-center p-1">
+                            <Link key={p.id} to={`/product/${p.slug}`} onClick={() => setSearchQuery('')} className="flex items-center gap-6 p-4 bg-white hover:bg-black group transition-all rounded-lg">
+                              <div className="h-14 w-14 bg-gray-50 flex items-center justify-center p-2 shrink-0 group-hover:bg-white transition-colors rounded-lg">
                                 <img src={p.images ? `${(typeof p.images === 'string' ? JSON.parse(p.images)[0] : p.images[0])}` : ''} className="max-w-full max-h-full object-contain" alt="" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-[11px] font-bold text-gray-800 uppercase truncate group-hover:text-indigo-600">{p.name}</p>
-                                <p className="text-[10px] font-black text-indigo-600">${p.price}</p>
+                                <p className="text-[12px] font-black text-gray-900 group-hover:text-white uppercase truncate tracking-tight transition-colors">{p.name}</p>
+                                <div className="flex items-center gap-3 mt-1">
+                                  <span className="text-[11px] font-black text-blue-600 group-hover:text-blue-400 transition-colors">${p.price}</span>
+                                  <span className="text-[8px] font-black text-gray-400 group-hover:text-gray-500 uppercase tracking-tighter transition-colors">SKU: {p.id}</span>
+                                </div>
                               </div>
+                              <ArrowRight size={16} className="text-gray-200 group-hover:text-white transition-all opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0" />
                             </Link>
                           ))}
                         </div>
@@ -186,167 +191,129 @@ export default function Header() {
               </AnimatePresence>
             </div>
 
-            {/* Action Center - Extreme Right Order: Wishlist, Cart, Account */}
-            <div className="flex items-center gap-4 md:gap-8">
+            {/* Refined Action Hub */}
+            <div className="flex items-center gap-4">
+              <Link to="/wishlist" className="hidden xl:flex h-12 w-12 items-center justify-center bg-gray-50 hover:bg-gray-100 text-gray-900 rounded-xl transition-all relative group">
+                <Heart size={20} strokeWidth={2} />
+                {wishlistCount > 0 && <span className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 text-white text-[9px] font-black flex items-center justify-center rounded-full border-2 border-white shadow-sm">{wishlistCount}</span>}
+              </Link>
               
-              {/* My Wishlist */}
-              <Link to="/wishlist" className="flex items-center gap-2.5 group text-white/90 hover:text-white transition-colors">
-                <div className="relative">
-                  <Heart size={22} className="group-hover:fill-red-500 group-hover:text-red-500 transition-all" />
-                  {wishlistCount > 0 && <span className="absolute -top-1.5 -right-1.5 h-4 w-4 bg-amber-500 text-indigo-950 text-[8px] font-black rounded-full flex items-center justify-center border border-indigo-900">{wishlistCount}</span>}
-                </div>
-                <div className="hidden xl:flex flex-col ">
-                   <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">My</span>
-                   <span className="text-[11px] font-black uppercase">Wishlist</span>
+              <Link to={user ? "/profile" : "/login"} className="h-12 px-6 flex items-center gap-3 bg-white border border-gray-100 hover:border-blue-600/20 hover:bg-blue-50/30 text-gray-900 rounded-xl transition-all group">
+                <User size={20} className="group-hover:text-blue-600 transition-colors" />
+                <div className="hidden xl:flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mb-1">Account</span>
+                  <span className="text-[11px] font-black uppercase tracking-widest">{user ? user.name.split(' ')[0] : 'Sign In'}</span>
                 </div>
               </Link>
 
-              {/* My Cart */}
-              <button onClick={openCartDrawer} className="flex items-center gap-2.5 group text-white/90 hover:text-white transition-colors">
-                <div className="relative h-10 w-10 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-amber-500 transition-all">
-                  <ShoppingCart size={20} className="group-hover:text-indigo-950 transition-all" />
-                  <span className="absolute -top-1.5 -right-1.5 h-4 w-4 bg-amber-500 text-indigo-950 text-[8px] font-black rounded-full flex items-center justify-center group-hover:bg-white transition-all">{cartCount}</span>
+              <button onClick={openCartDrawer} className="h-12 px-6 bg-black text-white flex items-center gap-4 hover:bg-blue-600 rounded-xl transition-all relative group shadow-lg shadow-black/5">
+                <div className="flex flex-col items-end leading-none border-r border-white/20 pr-4">
+                  <span className="text-[9px] font-bold text-blue-200 uppercase tracking-tight mb-1">My Cart</span>
+                  <span className="text-[13px] font-black tracking-widest">${cartTotal}</span>
                 </div>
-                <div className="hidden xl:flex flex-col  text-left">
-                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">My Cart</span>
-                  <span className="text-[11px] font-black uppercase">${cartTotal}</span>
+                <div className="relative">
+                  <ShoppingBag size={20} className="group-hover:scale-110 transition-transform" />
+                  {cartCount > 0 && <span className="absolute -top-2 -right-2 h-5 w-5 bg-blue-500 text-white text-[9px] font-black flex items-center justify-center rounded-full border-2 border-black">{cartCount}</span>}
                 </div>
               </button>
 
-              {/* Account / Sign In (Extreme Right) */}
-              <div className="relative" onMouseEnter={() => setIsProfileOpen(true)} onMouseLeave={() => setIsProfileOpen(false)}>
-                <Link to={user ? "/profile" : "/login"} className="flex items-center gap-3 group text-white/90 hover:text-white transition-colors">
-                  <div className="h-10 w-10 bg-amber-500 text-indigo-950 rounded-xl flex items-center justify-center group-hover:bg-white group-hover:text-indigo-600 transition-all shadow-lg">
-                    {user ? <span className="text-xs font-black uppercase">{user.name.charAt(0)}</span> : <User size={20} />}
-                  </div>
-                  <div className="hidden xl:flex flex-col  text-left">
-                    <span className="text-[9px] font-bold text-white/40 uppercase ">Account</span>
-                    <span className="text-[11px] font-black uppercase">{user ? user.name.split(' ')[0] : 'Sign In'}</span>
-                  </div>
-                </Link>
-
-                <AnimatePresence>
-                  {isProfileOpen && user && (
-                    <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 5 }} className="absolute top-full right-0 mt-2 w-52 bg-white border border-gray-200 rounded-xl z-[110] p-2 shadow-2xl">
-                      <Link to="/profile" className="flex items-center gap-3 px-4 py-2.5 text-[11px] font-black text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all uppercase">Dashboard</Link>
-                      <Link to="/orders" className="flex items-center gap-3 px-4 py-2.5 text-[11px] font-black text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all uppercase">My Orders</Link>
-                      <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-black text-red-600 hover:bg-red-50 rounded-lg transition-all mt-1 border-t border-gray-50 pt-2 uppercase">Logout</button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Mobile Trigger */}
-              <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden h-10 w-10 bg-white/10 text-white rounded-xl flex items-center justify-center active:scale-95 transition-all">
-                <Menu size={22} />
-              </button>
+              <button onClick={() => setIsSidebarOpen(true)} className="lg:hidden h-12 w-12 flex items-center justify-center bg-gray-50 text-black hover:bg-gray-100 rounded-xl transition-all"><Menu size={24} /></button>
             </div>
           </div>
         </div>
 
-        {/* --- ROW 2: CLEAN NAVIGATION & DEPARTMENTS --- */}
-        <div className="hidden lg:block h-12 bg-white border-b border-gray-200">
-          <div className="w-full max-w-[1920px] mx-auto px-6 md:px-10 flex items-center h-full">
+        {/* --- ROW 3: NAV & CATEGORY MARQUEE (VIBRANT BLUE) --- */}
+        <div className="hidden lg:block bg-blue-600">
+          <div className="w-full max-w-[1920px] mx-auto px-6 md:px-10 flex items-center h-10">
             
-            {/* Departments Dropdown */}
-            <div className="relative h-full" onMouseEnter={() => setActiveDropdown('categories')} onMouseLeave={() => setActiveDropdown(null)} ref={dropdownRef}>
-              <button className={cn(
-                "flex items-center gap-3 px-6 h-full text-[11px] font-black text-gray-900 uppercase tracking-widest border-x border-gray-100 transition-all",
-                activeDropdown === 'categories' ? "bg-indigo-600 text-white border-transparent" : "hover:bg-gray-50"
-              )}>
-                <LayoutGrid size={16} />
-                Departments
-                <ChevronDown size={14} className={cn("transition-transform duration-300", activeDropdown === 'categories' && "rotate-180")} />
-              </button>
-
-              <AnimatePresence>
-                {activeDropdown === 'categories' && (
-                  <motion.div initial={{ opacity: 0, y: 0 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 0 }} className="absolute top-full left-0 w-[900px] bg-white border border-gray-200 z-[90] flex shadow-2xl rounded-b-xl overflow-hidden">
-                    <div className="w-[280px] bg-gray-50/50 p-4 border-r border-gray-100 space-y-1">
-                      {categories.map(cat => (
-                        <div key={cat.id} onMouseEnter={() => setHoveredParent(cat.id)} className={cn("flex items-center justify-between p-3.5 rounded-lg cursor-pointer transition-all", hoveredParent === cat.id ? "bg-white text-indigo-600 border border-gray-100 shadow-sm" : "text-gray-600 hover:text-gray-900")}>
-                          <div className="flex items-center gap-3">
-                             <Printer size={14} />
-                             <span className="text-[11px] font-black uppercase tracking-tight">{cat.name}</span>
-                          </div>
-                          <ChevronRight size={14} className={hoveredParent === cat.id ? "opacity-100" : "opacity-0"} />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex-1 p-8 bg-white">
-                      <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-                        <h4 className="text-lg font-black text-gray-900 uppercase tracking-tighter">{activeParent?.name}</h4>
-                        <Link to={`/shop?category=${activeParent?.slug}`} onClick={() => setActiveDropdown(null)} className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline">Explore Category</Link>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        {subCategoriesToDisplay.map(sub => (
-                          <Link key={sub.id} to={`/shop?category=${sub.slug}`} onClick={() => setActiveDropdown(null)} className="flex items-center gap-3 p-4 rounded-xl border border-gray-50 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all group">
-                            <div className="h-9 w-9 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
-                              <ShoppingBasket size={18} />
-                            </div>
-                            <span className="text-[11px] font-black text-gray-700 uppercase group-hover:text-indigo-600">{sub.name}</span>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* Horizontal Nav Links */}
-            <nav className="flex items-center ml-4 h-full">
+            {/* Main Nav */}
+            <nav className="flex h-full items-center mr-12 shrink-0">
               {navLinks.map((link) => (
-                <Link key={link.name} to={link.path} className={cn("px-5 h-full flex items-center text-[11px] font-black uppercase tracking-widest transition-all relative group", location.pathname === link.path ? "text-indigo-600" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50")}>
+                <Link 
+                  key={link.name} to={link.path} 
+                  className={cn(
+                    "text-[11px] font-black uppercase tracking-[0.2em] px-6 h-full flex items-center transition-all relative group",
+                    location.pathname === link.path ? "text-white" : "text-blue-100 hover:text-white"
+                  )}
+                >
                   {link.name}
-                  {location.pathname === link.path && <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-indigo-600" />}
+                  <span className={cn(
+                    "absolute bottom-0 left-6 right-6 h-1 bg-white transition-transform origin-left",
+                    location.pathname === link.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  )} />
                 </Link>
               ))}
             </nav>
+
+            {/* Category Marquee (Clean & Blue Theme) */}
+            <div className="flex-1 overflow-hidden relative group/marquee mx-4">
+              <div className="flex items-center h-10
+               animate-marquee pause-on-hover">
+                {[...flattenedSubCats, ...flattenedSubCats].map((sub, idx) => (
+                  <Link 
+                    key={`header-sub-${sub.id}-${idx}`} 
+                    to={`/shop?category=${sub.slug}`}
+                    className="flex items-center gap-4 shrink-0 px-10 h-14 hover:bg-white/10 transition-all group"
+                  >
+                    <div className="h-14 w-20 bg-white flex items-center justify-center overflow-hidden shrink-0 transition-all group-hover:scale-105">
+                      {sub.image ? (
+                        <img 
+                          src={sub.image.startsWith('http') ? sub.image : `/${sub.image}`} 
+                          alt="" 
+                          className="h-25 w-full object-contain"
+                          onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
+                        />
+                      ) : null}
+                      <ShoppingBasket size={24} className={cn("text-blue-600", sub.image ? "hidden" : "block")} />
+                    </div>
+                    <span className="text-[10px] font-black text-blue-50 uppercase tracking-widest group-hover:text-white transition-colors whitespace-nowrap">{sub.name}</span>
+                  </Link>
+                ))}
+              </div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-blue-600 to-transparent pointer-events-none z-10" />
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-blue-600 to-transparent pointer-events-none z-10" />
+            </div>
+
+           
+
           </div>
         </div>
       </header>
 
-      {/* Dynamic Spacer */}
-      <div className="h-[64px] md:h-[76px] lg:h-[116px]"></div>
+      {/* Spacer (Adjusted Height) */}
+      <div className="h-[76px] md:h-[136px] lg:h-[152px]"></div>
 
-      {/* --- MOBILE SIDEBAR --- */}
+      {/* --- MOBILE SIDEBAR (SQUARE) --- */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm" />
-            <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ type: "spring", damping: 25, stiffness: 200 }} className="fixed top-0 left-0 h-full w-[300px] bg-white z-[210] flex flex-col shadow-2xl">
-              <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-indigo-900">
-                <img src="/logo/PrinterPrime.png" alt="PrinterPrime" className="h-8 w-auto object-contain brightness-0 invert" />
-                <button onClick={() => setIsSidebarOpen(false)} className="h-9 w-9 flex items-center justify-center text-white/60 hover:text-white bg-white/10 rounded-lg"><X size={20} /></button>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 z-[200] bg-black/60" />
+            <motion.div initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} className="fixed top-0 left-0 h-full w-[300px] bg-white z-[210] flex flex-col border-r border-gray-200">
+              <div className="p-6 flex justify-between items-center border-b border-gray-200">
+                <Link to="/" onClick={() => setIsSidebarOpen(false)}><img src="/logo/MYPRINTERMANNN.png" alt="MaxPrinter" className="h-8 w-auto object-contain" /></Link>
+                <button onClick={() => setIsSidebarOpen(false)} className="h-10 w-10 flex items-center justify-center bg-gray-50 border border-gray-100"><X size={20} /></button>
               </div>
               <div className="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
-                <form onSubmit={handleSearch} className="relative">
-                  <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full h-11 pl-10 pr-4 bg-gray-100 rounded-lg text-sm font-bold border-none focus:ring-2 focus:ring-indigo-600" />
-                  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                </form>
-                <nav className="space-y-1">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Quick Menu</p>
+                <nav className="space-y-2">
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] mb-4">Main Menu</p>
                   {navLinks.map(link => (
-                    <Link key={link.name} to={link.path} onClick={() => setIsSidebarOpen(false)} className={cn("flex items-center gap-4 px-4 py-3.5 rounded-xl text-[12px] font-black uppercase transition-all", location.pathname === link.path ? "bg-indigo-900 text-white" : "text-gray-600 hover:bg-gray-50")}>
-                      {link.name}
+                    <Link key={link.name} to={link.path} onClick={() => setIsSidebarOpen(false)} className={cn("flex items-center justify-between px-4 py-4 text-[12px] font-black uppercase tracking-widest border border-transparent transition-all", location.pathname === link.path ? "bg-black text-white" : "text-gray-600 border-gray-100")}>
+                      {link.name} <ChevronRight size={16} />
                     </Link>
                   ))}
                 </nav>
-                <div className="pt-8 border-t border-gray-100">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Categories</p>
-                  <div className="space-y-1">
-                     {categories.map(cat => (
-                       <Link key={cat.id} to={`/shop?category=${cat.slug}`} onClick={() => setIsSidebarOpen(false)} className="flex items-center justify-between p-4 text-[11px] font-black uppercase text-gray-500 hover:text-indigo-600 rounded-lg transition-all">
-                         {cat.name} <ChevronRight size={14} />
-                       </Link>
-                     ))}
+                <div className="pt-8 border-t border-gray-200">
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-[0.4em] mb-4">Account</p>
+                  <div className="space-y-2">
+                     <Link to="/profile" onClick={() => setIsSidebarOpen(false)} className="flex items-center gap-4 p-4 text-[12px] font-black uppercase border border-gray-100"><User size={18} /> Profile</Link>
+                     <Link to="/wishlist" onClick={() => setIsSidebarOpen(false)} className="flex items-center gap-4 p-4 text-[12px] font-black uppercase border border-gray-100"><Heart size={18} /> Wishlist</Link>
+                     {user ? (
+                       <button onClick={handleLogout} className="w-full flex items-center gap-4 p-4 text-[12px] font-black uppercase text-red-600 border border-red-100 bg-red-50 mt-4">Logout</button>
+                     ) : (
+                       <Link to="/login" onClick={() => setIsSidebarOpen(false)} className="w-full flex items-center gap-4 p-4 text-[12px] font-black uppercase text-white bg-black mt-4">Login</Link>
+                     )}
                   </div>
                 </div>
-              </div>
-              <div className="p-6 bg-gray-50 border-t border-gray-100 flex items-center gap-3">
-                 <ShieldCheck size={18} className="text-indigo-600" />
-                 <span className="text-[10px] font-black text-gray-900 uppercase tracking-widest">Secured Printer Hub</span>
               </div>
             </motion.div>
           </>

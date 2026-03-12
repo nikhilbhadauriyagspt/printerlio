@@ -7,12 +7,12 @@ export default function CookiePolicy() {
     <PolicyLayout
       title="Cookie Policy"
       subtitle="This Cookie Policy explains how we use cookies and similar technologies."
-      lastUpdated="March 12, 2026"
+      lastUpdated="March 13, 2026"
     >
       <p className="lead">
-        This Cookie Policy explains how PrinterPrime
+        This Cookie Policy explains how MaxPrinter
  
-   ("Company," "we," "us," or "our") uses cookies and similar technologies when you visit our website: <a href="https://printerprime.shop/">https://printerprime.shop/</a>
+   ("Company," "we," "us," or "our") uses cookies and similar technologies when you visit our website: <a href="https://maxprinter.shop/">https://maxprinter.shop/</a>
       </p>
       <p>
         This Cookie Policy should be read together with our <Link to="/privacy-policy">Privacy Policy</Link> and <Link to="/terms-and-conditions">Terms and Conditions</Link>.
@@ -24,10 +24,10 @@ export default function CookiePolicy() {
       </p>
       <p>Cookies may be:</p>
       <ul>
-        <li><strong>Session Cookies</strong> – Deleted when you close your browser</li>
-        <li><strong>Persistent Cookies</strong> – Remain stored until they expire or are deleted</li>
-        <li><strong>First-Party Cookies</strong> – Set by our website</li>
-        <li><strong>Third-Party Cookies</strong> – Set by external service providers</li>
+        <li><strong>Session Cookies</strong> â€“ Deleted when you close your browser</li>
+        <li><strong>Persistent Cookies</strong> â€“ Remain stored until they expire or are deleted</li>
+        <li><strong>First-Party Cookies</strong> â€“ Set by our website</li>
+        <li><strong>Third-Party Cookies</strong> â€“ Set by external service providers</li>
       </ul>
 
       <h2>2. HOW WE USE COOKIES</h2>
@@ -137,14 +137,14 @@ export default function CookiePolicy() {
 
       <h2>8. SALE OR SHARING OF PERSONAL INFORMATION</h2>
       <p>
-        We do not sell personal information. If cookies are considered “sharing” under certain US state privacy laws (such as targeted advertising), you may exercise your rights by:
+        We do not sell personal information. If cookies are considered â€œsharingâ€ under certain US state privacy laws (such as targeted advertising), you may exercise your rights by:
       </p>
       <ul>
-        <li>Emailing: <a href="mailto:info@printerprime.shop">info@printerprime.shop</a></li>
-        <li>Visiting: <Link to="/contact">https://printerprime.shop/contact</Link></li>
+        <li>Emailing: <a href="mailto:info@maxprinter.shop">info@maxprinter.shop</a></li>
+        <li>Visiting: <Link to="/contact">https://maxprinter.shop/contact</Link></li>
       </ul>
 
-      <h2>9. CHILDREN’S PRIVACY</h2>
+      <h2>9. CHILDRENâ€™S PRIVACY</h2>
       <p>Our website is not intended for individuals under the age of 18. We do not knowingly collect personal information from minors.</p>
 
       <h2>10. UPDATES TO THIS COOKIE POLICY</h2>
@@ -157,12 +157,12 @@ export default function CookiePolicy() {
       <p>If you have any questions regarding this Cookie Policy, please contact:</p>
       <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed space-y-2 uppercase tracking-tighter">
-          <p className="text-slate-900 font-black">Printer Prime</p>
+          <p className="text-slate-900 font-black">MaxPrinter</p>
           <p></p>
-          <p>256 NE Elm St</p>
-          <p>Billings, MO 65610</p>
+          <p>Prestonia Louisville</p>
+          <p>KY 40213</p>
           <p>United States</p>
-          <p className="pt-4 text-blue-600 font-black lowercase">info@printerprime.shop</p>
+          <p className="pt-4 text-blue-600 font-black lowercase">info@maxprinter.shop</p>
         </address>
       </div>
     </PolicyLayout>

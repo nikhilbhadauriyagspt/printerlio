@@ -1,35 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Zap, ShieldCheck, Headphones, Truck, CreditCard } from 'lucide-react';
+
+import banner1 from '@/assets/bannerr/banner1.jpg';
+import banner2 from '@/assets/bannerr/Banner2.jpg';
+import banner3 from '@/assets/bannerr/banner3.jpg';
+import banner4 from '@/assets/bannerr/banner4.jpg';
 
 const slides = [
   {
     id: 1,
-    title: "Precision",
-    highlight: "Laser Printers.",
-    desc: "Experience unmatched speed and crystal-clear text with our professional-grade laser printing solutions. Built for heavy-duty office performance.",
-    image: "/category/laser-printers.jpg",
-    btnPrimary: "Shop Laser",
-    btnSecondary: "View All"
+    subtitle: "Premium office performance",
+    title: "Master Laser Series",
+    desc: "Uncompromising speed and professional precision. Designed for high-volume business environments that demand the sharpest text and graphics.",
+    image: banner1,
+    color: "bg-slate-900"
   },
   {
     id: 2,
-    title: "All-In-One",
-    highlight: "Solutions.",
-    desc: "Print, scan, copy, and fax with a single powerful machine. Versatile hardware designed to streamline your entire business workflow.",
-    image: "/category/all-in-one-printers.jpg",
-    btnPrimary: "Browse All-In-One",
-    btnSecondary: "Elite Models"
+    subtitle: "Creative studio quality",
+    title: "Inkjet Systems",
+    desc: "Bring your vision to life with exceptional color accuracy and high-resolution output. Perfect for design studios and home creative hubs.",
+    image: banner2,
+    color: "bg-indigo-950"
   },
   {
     id: 3,
-    title: "Professional",
-    highlight: "Inkjet Tech.",
-    desc: "Vibrant colors and photo-quality precision. Perfect for marketing materials, creative projects, and high-impact visual communication.",
-    image: "/category/inkjet-printers.jpg",
-    btnPrimary: "Explore Inkjet",
-    btnSecondary: "Shop Supplies"
+    subtitle: "Modern eco-printing",
+    title: "Eco-Tank Efficiency",
+    desc: "Maximize productivity while minimizing waste. Our supertank systems offer ultra-low cost per page with high-capacity integrated ink tanks.",
+    image: banner3,
+    color: "bg-blue-900"
   }
 ];
 
@@ -39,7 +41,7 @@ const Hero = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
@@ -47,108 +49,131 @@ const Hero = () => {
   const prevSlide = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <section className="relative w-full overflow-hidden font-urbanist bg-white py-6">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-8">
+    <section className="w-full bg-white font-sans">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-4">
         
-        {/* MAIN SLIDER CONTAINER */}
-        <div className="relative min-h-[550px] lg:min-h-[650px] w-full bg-[#1e1b4b] rounded-[2.5rem] overflow-hidden flex items-center shadow-sm">
+        {/* --- TOP GRID: SLIDER + SIDE BANNERS --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
           
-          {/* Background Decorative Elements */}
-          <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
-            <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-500 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
-            <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-          </div>
+          {/* Main Slider (70%) */}
+          <div className="lg:col-span-9 relative h-[350px] md:h-[450px] lg:h-[500px] overflow-hidden group">
+            <AnimatePresence mode='wait'>
+              <motion.div 
+                key={current}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8 }}
+                className="absolute inset-0 flex items-center px-8 md:px-16"
+              >
+                {/* Full Image Background */}
+                <img src={slides[current].image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                {/* Dark Gradient Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent z-0" />
+                
+                <div className="relative z-10 w-full max-w-2xl">
+                  <div className="space-y-4 text-white">
+                    <motion.p initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} className="text-blue-400 font-bold text-xs ">{slides[current].subtitle}</motion.p>
+                    <motion.h1 initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3 }} className="text-3xl md:text-5xl lg:text-6xl font-black">
+                      {slides[current].title}
+                    </motion.h1>
+                    <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.4 }} className="text-sm md:text-base text-white/70 max-w-md font-medium leading-relaxed">
+                      {slides[current].desc}
+                    </motion.p>
+                    <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="pt-2">
+                      <Link to="/shop" className="inline-flex items-center gap-3 bg-white text-black h-12 px-8 text-[10px] font-black tracking-widest uppercase hover:bg-blue-600 hover:text-white transition-all">
+                        Shop Collection <ArrowRight size={16} />
+                      </Link>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
 
-          <AnimatePresence mode='wait'>
-            <motion.div 
-              key={current}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative w-full z-10 grid lg:grid-cols-12 items-center gap-8 px-8 lg:px-24 py-12"
-            >
-              {/* LEFT CONTENT */}
-              <div className="lg:col-span-7 flex flex-col space-y-8">
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="space-y-6"
-                >
-                  <h1 className="text-5xl md:text-7xl xl:text-8xl font-black text-white leading-[0.9]">
-                    {slides[current].title} <br />
-                    <span className="text-amber-400">{slides[current].highlight}</span>
-                  </h1>
-                  <p className="max-w-lg text-lg lg:text-xl text-indigo-100/70 font-medium leading-relaxed">
-                    {slides[current].desc}
-                  </p>
-                </motion.div>
-
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="flex flex-wrap items-center gap-4"
-                >
-                  <Link 
-                    to="/shop" 
-                    className="px-10 py-5 bg-amber-500 text-indigo-950 font-black text-sm uppercase tracking-widest rounded-2xl flex items-center gap-3 hover:bg-amber-400 transition-all active:scale-95 shadow-lg shadow-amber-500/20"
-                  >
-                    {slides[current].btnPrimary} <ArrowRight size={18} />
-                  </Link>
-                  <Link 
-                    to="/shop" 
-                    className="px-10 py-5 bg-white/10 text-white border border-white/10 font-black text-sm uppercase tracking-widest rounded-2xl hover:bg-white hover:text-indigo-950 transition-all"
-                  >
-                    {slides[current].btnSecondary}
-                  </Link>
-                </motion.div>
-              </div>
-
-              {/* RIGHT VISUAL */}
-              <div className="lg:col-span-5 relative hidden lg:block">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                  className="relative group"
-                >
-                  <div className="absolute inset-0 bg-indigo-500/20 rounded-[2rem] blur-2xl group-hover:bg-amber-500/20 transition-colors duration-700" />
-                  <img 
-                    src={slides[current].image} 
-                    alt="Hardware" 
-                    className="relative w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] rounded-[2rem] object-cover aspect-[4/3] transition-transform duration-700 hover:scale-105"
-                  />
-                </motion.div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* SLIDER NAVIGATION */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-6 z-20">
-            <button onClick={prevSlide} className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-white hover:text-indigo-950 transition-all">
-              <ChevronLeft size={24} />
-            </button>
-            
-            {/* Dots */}
-            <div className="flex items-center gap-3">
-              {slides.map((_, i) => (
-                <button 
-                  key={i} 
-                  onClick={() => setCurrent(i)}
-                  className={`h-1.5 transition-all duration-500 rounded-full ${current === i ? 'w-12 bg-amber-500' : 'w-2 bg-white/20'}`}
-                />
-              ))}
+            {/* Slider Controls */}
+            <div className="absolute bottom-6 left-8 md:left-16 flex items-center gap-3 z-20">
+              <button onClick={prevSlide} className="h-10 w-10 bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <ChevronLeft size={20} />
+              </button>
+              <button onClick={nextSlide} className="h-10 w-10 bg-black/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <ChevronRight size={20} />
+              </button>
             </div>
-
-            <button onClick={nextSlide} className="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-white hover:text-indigo-950 transition-all">
-              <ChevronRight size={24} />
-            </button>
           </div>
 
+          {/* Right Side Ad Banner (Single Tall) */}
+          <div className="lg:col-span-3 relative h-[350px] md:h-[450px] lg:h-[500px] overflow-hidden group">
+            <img src={banner4} alt="Premium Hardware" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
+              <div className="space-y-3">
+                <h3 className="text-2xl font-black text-white leading-tight ">
+                  Pro-Lab <br /> Visual Series
+                </h3>
+                <p className="text-[15px] text-white/60 font-bold ">Gallery grade printing.</p>
+                <div className="pt-2">
+                  <Link to="/shop" className="flex items-center justify-center bg-blue-600 text-white h-11 w-full text-[10px] font-black tracking-widest uppercase hover:bg-white hover:text-black transition-colors">
+                    Shop Now
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* --- BOTTOM GRID: ENRICHED IMAGE BANNERS --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {/* Banner 1: All-in-One */}
+          <div className="relative h-48 md:h-52 lg:h-56 overflow-hidden group cursor-pointer">
+            <img src="/category/all-in-one-printers.jpg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-black/60 group-hover:bg-blue-600/40 transition-colors duration-500" />
+            <div className="absolute inset-0 p-8 flex flex-col justify-between text-white">
+              <div className="space-y-3">
+                <h4 className="text-xl font-black  uppercase">All-in-One</h4>
+                <div className="space-y-1">
+                  <p className="text-[15px] font-bold text-white/80 flex items-center gap-2"><Zap size={10} className="text-blue-400" /> Print, Scan, Copy, Fax</p>
+                  <p className="text-[15px] font-bold text-white/80  flex items-center gap-2"><Zap size={10} className="text-blue-400" /> Wireless Mobile Setup</p>
+                  <p className="text-[15px] font-bold text-white/80  flex items-center gap-2"><Zap size={10} className="text-blue-400" /> Pro-Sync Cloud Connect</p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          {/* Banner 2: Thermal */}
+          <div className="relative h-48 md:h-52 lg:h-56 overflow-hidden group cursor-pointer">
+            <img src="/category/thermal-printers.jpg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-gray-900/60 group-hover:bg-black/80 transition-colors duration-500" />
+            <div className="absolute inset-0 p-8 flex flex-col justify-between text-white">
+              <div className="space-y-3">
+                <h4 className="text-xl font-black  uppercase">Thermal Lab</h4>
+                <div className="space-y-1">
+                  <p className="text-[15px] font-bold text-white/80  flex items-center gap-2"><Zap size={10} className="text-amber-400" /> Industrial Labeling</p>
+                  <p className="text-[15px] font-bold text-white/80  flex items-center gap-2"><Zap size={10} className="text-amber-400" /> High-Speed Direct Mode</p>
+                  <p className="text-[15px] font-bold text-white/80  flex items-center gap-2"><Zap size={10} className="text-amber-400" /> No Ink Or Toner Required</p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          {/* Banner 3: LED Printers */}
+          <div className="relative h-48 md:h-52 lg:h-56 overflow-hidden group cursor-pointer">
+            <img src="/category/led-printers.jpg" alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <div className="absolute inset-0 bg-blue-900/60 group-hover:bg-blue-600/80 transition-colors duration-500" />
+            <div className="absolute inset-0 p-8 flex flex-col justify-between text-white">
+              <div className="space-y-3">
+                <h4 className="text-xl font-black  uppercase">LED Series</h4>
+                <div className="space-y-1">
+                  <p className="text-[15px] font-bold text-white/80 flex items-center gap-2"><Zap size={10} className="text-blue-300" /> Energy Efficient Tech</p>
+                  <p className="text-[15px] font-bold text-white/80 flex items-center gap-2"><Zap size={10} className="text-blue-300" /> Sharp Vibrance Engine</p>
+                  <p className="text-[15px] font-bold text-white/80 flex items-center gap-2"><Zap size={10} className="text-blue-300" /> Compact Footprint</p>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

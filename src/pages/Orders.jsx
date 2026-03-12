@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, ChevronRight, Search, Loader2, Calendar, CreditCard, Truck, X, CheckCircle2, Clock, Box, MapPin, ArrowRight, ShoppingCart } from 'lucide-react';
+import { Package, X, CheckCircle2, Clock, Box, MapPin, ArrowRight, Loader2, Truck, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import API_BASE_URL from '../config';
 import { cn } from '../lib/utils';
@@ -51,34 +51,30 @@ export default function Orders() {
 
   if (!user && orders.length === 0 && !loading) {
     return (
-      <div className="min-h-screen bg-white pt-40 pb-20 font-urbanist px-6 relative overflow-hidden flex flex-col items-center justify-center">
-        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-indigo-50/50 blur-[120px] rounded-full pointer-events-none" />
-        <div className="max-w-xl w-full text-center relative z-10">
-          <div className="h-24 w-24 bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center mx-auto mb-10 shadow-sm">
-            <Package size={40} className="text-slate-200" />
+      <div className="min-h-200 bg-white pt-40 pb-20 font-sans px-6 flex flex-col items-center justify-center text-slate-900">
+        <div className="max-w-md w-full text-center">
+          <div className="h-20 w-20 bg-gray-50 border border-gray-100 rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm">
+            <Package size={32} className="text-slate-200" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-indigo-950 leading-none tracking-tighter uppercase mb-6">
-            Track Your <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-amber-500">Order.</span>
-          </h1>
-          <p className="text-slate-500 font-medium text-lg mb-12 max-w-sm mx-auto">Login to see your history or enter your guest email below.</p>
+          <h1 className="text-3xl md:text-5xl font-black mb-4">Track your order</h1>
+          <p className="text-slate-400 font-bold text-sm mb-10 max-w-sm mx-auto">Login to see your full history or enter your guest email below.</p>
           
-          <form onSubmit={handleGuestSearch} className="flex flex-col gap-4 mb-16 bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-indigo-500/5">
+          <form onSubmit={handleGuestSearch} className="space-y-4 bg-white p-8 rounded-2xl border border-gray-100 shadow-2xl shadow-black/5">
             <div className="space-y-2 text-left">
-               <label className="text-[10px] font-black text-indigo-950 uppercase tracking-widest ml-2">Email Address</label>
+               <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Email address</label>
                <input 
-                 type="email" required placeholder="email@domain.com" value={guestEmail}
+                 type="email" required placeholder="john@example.com" value={guestEmail}
                  onChange={(e) => setGuestEmail(e.target.value)}
-                 className="w-full h-16 px-8 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all"
+                 className="w-full h-14 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all"
                />
             </div>
-            <button className="h-16 px-12 bg-indigo-950 text-white rounded-2xl font-black text-[11px] uppercase tracking-widest hover:bg-amber-500 hover:text-indigo-950 transition-all shadow-xl shadow-indigo-950/10 active:scale-95">
-              TRACK SHIPMENT NOW
+            <button className="w-full h-14 bg-black text-white rounded-xl font-black text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95 shadow-lg shadow-black/5">
+              Track shipment now
             </button>
           </form>
 
-          <div className="pt-10 border-t border-slate-100">
-            <Link to="/login" className="text-indigo-600 font-black text-xs uppercase tracking-widest hover:underline">SIGN IN FOR FULL ORDER HISTORY</Link>
+          <div className="mt-8 pt-8 border-t border-gray-50">
+            <Link to="/login" className="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline">Sign in for full history</Link>
           </div>
         </div>
       </div>
@@ -86,119 +82,107 @@ export default function Orders() {
   }
 
   return (
-    <div className="min-h-screen bg-white pt-40 pb-24 font-urbanist relative overflow-hidden">
-      <SEO title="Order History | PrinterPrime
- 
- " />
-      <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-indigo-50/50 blur-[120px] rounded-full pointer-events-none" />
-
-      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 relative z-10">
+    <div className="min-h-screen bg-white pt-40 pb-24 font-urbanist text-slate-900">
+      <SEO title="Order History | MaxPrinter" />
+      
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16">
         
         {/* --- PAGE HEADER --- */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8 pb-12 relative">
-          <div className="flex flex-col items-start text-left">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-[1px] w-8 bg-amber-500" />
-              <span className="text-[11px] font-black text-indigo-600 uppercase tracking-[0.5em]">History Archive</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-indigo-950 leading-none tracking-tighter uppercase">
-              My <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500">Orders.</span>
-            </h1>
-          </div>
-          <div className="flex items-center gap-4 bg-indigo-50/50 px-8 py-4 rounded-[2rem] border border-indigo-100/50">
-             <div className="h-2 w-2 bg-indigo-600 rounded-full animate-pulse" />
-             <p className="text-[11px] font-black uppercase tracking-[0.2em] text-indigo-900">{orders.length} Total Units Ordered</p>
-          </div>
+        <div className="flex flex-col space-y-2 mb-16">
+          <h1 className="text-4xl md:text-5xl font-black leading-tight uppercase">
+            Order History
+          </h1>
+          <p className="text-slate-400 text-base font-bold tracking-wide">
+            {orders.length} hardware deployments registered to your account.
+          </p>
         </div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-48">
-            <Loader2 className="animate-spin h-12 w-12 text-indigo-600 mb-6" />
-            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300">Searching Records...</p>
+            <Loader2 className="animate-spin h-10 w-10 text-blue-600 mb-4" />
+            <p className="text-[10px] font-black uppercase tracking-widest text-slate-300">Searching records...</p>
           </div>
         ) : orders.length === 0 ? (
-          <div className="text-center py-32 bg-slate-50 border border-slate-100 rounded-[3rem]">
-            <Package size={48} className="text-slate-200 mx-auto mb-8" />
-            <h3 className="text-3xl font-black text-indigo-950 uppercase tracking-tighter">No Orders Found</h3>
-            <Link to="/shop" className="h-16 px-12 bg-indigo-950 text-white inline-flex items-center gap-4 font-black text-[11px] uppercase tracking-widest hover:bg-amber-500 hover:text-indigo-950 transition-all mt-10 rounded-2xl shadow-xl shadow-indigo-950/10">
-              EXPLORE HARDWARE <ArrowRight size={18} />
+          <div className="text-center py-32 bg-gray-50 border border-gray-100 rounded-2xl">
+            <Package size={40} className="text-slate-200 mx-auto mb-6" />
+            <h3 className="text-2xl font-black text-slate-900">No orders found</h3>
+            <Link to="/shop" className="h-12 px-10 bg-black text-white inline-flex items-center gap-3 font-black text-[11px] uppercase tracking-widest hover:bg-blue-600 transition-all mt-8 rounded-xl">
+              Explore hardware <ArrowRight size={16} />
             </Link>
           </div>
         ) : (
-          <div className="space-y-10">
+          <div className="space-y-8">
             {orders.map((order) => (
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                key={order.id} className="bg-white border border-slate-100 rounded-[3rem] overflow-hidden group hover:border-indigo-600 transition-all duration-500 shadow-xl shadow-indigo-500/5"
+                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                key={order.id} className="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-blue-600/30 transition-all duration-500 shadow-2xl shadow-black/5"
               >
                 {/* Order Meta Header */}
-                <div className="p-8 lg:p-10 border-b border-slate-50 flex flex-wrap items-center justify-between gap-8 bg-slate-50/50">
+                <div className="p-6 lg:p-8 border-b border-gray-50 flex flex-wrap items-center justify-between gap-8 bg-gray-50/50">
                   <div className="flex items-center gap-10">
                     <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Order Identity</p>
-                      <h3 className="text-base font-black text-indigo-950 uppercase tracking-tight">#{order.order_code || order.id}</h3>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Identity</p>
+                      <h3 className="text-base font-black text-slate-900 uppercase tracking-tight">#{order.order_code || order.id}</h3>
                     </div>
-                    <div className="h-10 w-px bg-slate-200 hidden sm:block" />
+                    <div className="h-8 w-px bg-gray-200 hidden sm:block" />
                     <div>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Timeline</p>
-                      <p className="text-sm font-black text-indigo-950 uppercase">{new Date(order.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Timeline</p>
+                      <p className="text-sm font-black text-slate-900">{new Date(order.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-12">
+                  <div className="flex items-center gap-10">
                     <div className={cn(
-                      "px-5 py-2.5 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 rounded-full border shadow-sm",
-                      order.status === 'completed' || order.status === 'delivered' ? "bg-emerald-50 text-emerald-600 border-emerald-100" :
-                      order.status === 'pending' ? "bg-amber-50 text-amber-600 border-amber-100" :
-                      "bg-indigo-50 text-indigo-600 border-indigo-100"
+                      "px-4 py-1.5 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 rounded-full border shadow-sm bg-white",
+                      order.status === 'completed' || order.status === 'delivered' ? "text-emerald-600 border-emerald-100" :
+                      order.status === 'pending' ? "text-amber-600 border-amber-100" :
+                      "text-blue-600 border-blue-100"
                     )}>
                       <div className={cn("h-1.5 w-1.5 rounded-full", 
                         order.status === 'completed' || order.status === 'delivered' ? "bg-emerald-500" :
-                        order.status === 'pending' ? "bg-amber-500" : "bg-indigo-500"
+                        order.status === 'pending' ? "bg-amber-500" : "bg-blue-500"
                       )} />
                       {order.status}
                     </div>
                     <div className="text-right">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Final Total</p>
-                      <p className="text-3xl font-black text-indigo-950 tracking-tighter">${parseFloat(order.total_amount).toLocaleString()}</p>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total</p>
+                      <p className="text-2xl font-black text-slate-900 tracking-tighter">${parseFloat(order.total_amount).toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Order Items & Shipping */}
-                <div className="p-8 lg:p-12 flex flex-col lg:flex-row gap-16">
-                  <div className="flex-1 space-y-8">
+                <div className="p-6 lg:p-10 flex flex-col lg:flex-row gap-12">
+                  <div className="flex-1 space-y-6">
                     {order.items && order.items.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-8 group/item">
-                        <div className="h-24 w-24 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-5 shrink-0 transition-all group-hover/item:border-indigo-200 group-hover/item:bg-white group-hover/item:shadow-lg group-hover/item:shadow-indigo-500/5">
-                          <img src={item.images ? (typeof item.images === 'string' ? JSON.parse(item.images)[0] : item.images[0]) : ''} className="max-w-full max-h-full object-contain mix-blend-multiply transition-transform group-hover/item:scale-110" alt="" />
+                      <div key={idx} className="flex items-center gap-6 group/item">
+                        <div className="h-20 w-20 bg-white border border-gray-100 rounded-xl flex items-center justify-center p-4 shrink-0 transition-all group-hover/item:border-blue-600/20">
+                          <img src={item.images ? (typeof item.images === 'string' ? JSON.parse(item.images)[0] : item.images[0]) : ''} className="max-w-full max-h-full object-contain" alt="" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mb-1.5 block">Premium Hardware</span>
-                          <h4 className="text-lg font-black text-indigo-950 uppercase truncate group-hover/item:text-indigo-600 transition-colors leading-none mb-2">{item.product_name.toLowerCase()}</h4>
-                          <div className="flex items-center gap-4">
+                          <h4 className="text-base font-black text-slate-900 uppercase truncate mb-1">{item.product_name}</h4>
+                          <div className="flex items-center gap-3">
                              <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Qty: {item.quantity}</p>
-                             <div className="h-1 w-1 rounded-full bg-slate-200" />
-                             <p className="text-[11px] font-black text-indigo-950 uppercase tracking-widest">${parseFloat(item.price).toLocaleString()}</p>
+                             <div className="h-1 w-1 rounded-full bg-gray-200" />
+                             <p className="text-[11px] font-black text-slate-900 tracking-widest">${parseFloat(item.price).toLocaleString()}</p>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
                   
-                  <div className="lg:w-[400px] space-y-8 lg:border-l lg:border-slate-100 lg:pl-16">
-                    <div className="space-y-4">
+                  <div className="lg:w-[350px] space-y-6 lg:border-l lg:border-gray-100 lg:pl-12">
+                    <div className="space-y-3">
                        <div className="flex items-center gap-2">
-                          <MapPin size={16} className="text-indigo-600" />
-                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Delivery Destination</p>
+                          <MapPin size={14} className="text-blue-600" />
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Destination</p>
                        </div>
-                       <p className="text-sm font-black text-indigo-950 uppercase leading-relaxed">{order.address}<br/>{order.city}, {order.zipCode}</p>
+                       <p className="text-sm font-bold text-slate-900 leading-relaxed uppercase">{order.address}<br/>{order.city}, {order.zipCode}</p>
                     </div>
                     
-                    <button onClick={() => setSelectedOrder(order)} className="w-full h-16 bg-indigo-950 text-white rounded-[1.5rem] flex items-center justify-center gap-4 text-[11px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-indigo-950 transition-all shadow-xl shadow-indigo-950/10 active:scale-95 group">
-                      TRACK SHIPMENT STATUS 
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <button onClick={() => setSelectedOrder(order)} className="w-full h-12 bg-black text-white rounded-xl flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg shadow-black/5 active:scale-95 group">
+                      Track status
+                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -210,28 +194,28 @@ export default function Orders() {
         <AnimatePresence>
           {selectedOrder && (
             <>
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedOrder(null)} className="fixed inset-0 bg-indigo-950/20 backdrop-blur-sm z-[1000]" />
-              <motion.div initial={{ opacity: 0, scale: 0.95, y: '-45%' }} animate={{ opacity: 1, scale: 1, y: '-50%' }} exit={{ opacity: 0, scale: 0.95, y: '-45%' }} className="fixed top-1/2 left-1/2 w-full max-w-xl bg-white z-[1001] shadow-2xl rounded-[3rem] p-12 font-urbanist border border-slate-100">
-                <div className="flex items-center justify-between mb-12 pb-8 border-b border-slate-100">
-                  <div className="space-y-1">
-                     <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest">Real-time Node</span>
-                     <h2 className="text-3xl font-black text-indigo-950 uppercase tracking-tighter">Tracking Live.</h2>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedOrder(null)} className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-[1000]" />
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-xl bg-white z-[1001] shadow-2xl rounded-2xl p-10 font-urbanist border border-gray-100">
+                <div className="flex items-center justify-between mb-10 pb-6 border-b border-gray-100">
+                  <div>
+                     <h2 className="text-2xl font-black text-slate-900 uppercase">Live Tracking</h2>
+                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Real-time status synchronization</p>
                   </div>
-                  <button onClick={() => setSelectedOrder(null)} className="h-12 w-12 bg-slate-50 rounded-2xl flex items-center justify-center text-indigo-950 hover:bg-indigo-950 hover:text-white transition-all border border-slate-100 active:scale-90"><X size={24} /></button>
+                  <button onClick={() => setSelectedOrder(null)} className="h-10 w-10 bg-gray-50 rounded-xl flex items-center justify-center text-slate-400 hover:text-black hover:bg-gray-100 transition-all active:scale-90 border border-gray-100"><X size={20} /></button>
                 </div>
-                <div className="space-y-12 relative px-4">
-                  <div className="absolute left-[35px] top-4 bottom-4 w-[2px] bg-slate-100" />
+                <div className="space-y-10 relative px-2">
+                  <div className="absolute left-[31px] top-4 bottom-4 w-[2px] bg-gray-100" />
                   {statusMap.map((step, idx) => {
                     const isCompleted = getStatusIndex(selectedOrder.status) >= idx;
                     const Icon = step.icon;
                     return (
-                      <div key={step.key} className="relative flex gap-10">
-                        <div className={cn("h-10 w-10 rounded-xl flex items-center justify-center z-10 transition-all duration-700 border-2", isCompleted ? 'bg-indigo-950 text-white border-indigo-950 shadow-lg shadow-indigo-950/20' : 'bg-white text-slate-200 border-slate-100')}>
-                          <Icon size={20} />
+                      <div key={step.key} className="relative flex gap-8">
+                        <div className={cn("h-8 w-8 rounded-lg flex items-center justify-center z-10 transition-all duration-700 border-2", isCompleted ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-600/20' : 'bg-white text-slate-200 border-gray-100')}>
+                          <Icon size={16} />
                         </div>
-                        <div className="flex-1 pt-1">
-                          <h4 className={cn("text-sm font-black uppercase tracking-widest", isCompleted ? 'text-indigo-950' : 'text-slate-300')}>{step.label}</h4>
-                          <p className={cn("text-xs font-medium mt-1.5 leading-relaxed", isCompleted ? 'text-slate-500' : 'text-slate-300')}>{step.desc}</p>
+                        <div className="flex-1 pt-0.5">
+                          <h4 className={cn("text-[13px] font-black uppercase tracking-widest", isCompleted ? 'text-slate-900' : 'text-slate-300')}>{step.label}</h4>
+                          <p className={cn("text-[11px] font-bold mt-1 leading-relaxed", isCompleted ? 'text-slate-500' : 'text-slate-300')}>{step.desc}</p>
                         </div>
                       </div>
                     );

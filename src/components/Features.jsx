@@ -3,52 +3,50 @@ import { motion } from "framer-motion";
 const features = [
   {
     title: "Fast Shipping",
-    desc: "We deliver your orders quickly and safely to your doorstep, every time.",
-    accent: "indigo"
+    desc: "Orders delivered quickly and safely to your doorstep.",
   },
   {
     title: "Best Prices",
-    desc: "Get high-quality products at prices that fit your budget perfectly.",
-    accent: "amber"
+    desc: "Premium quality at rates that fit your budget.",
   },
   {
     title: "Great Quality",
-    desc: "We only provide the best products that are built to last and work well.",
-    accent: "indigo"
+    desc: "Excellence in every unit, built for durability.",
   },
   {
     title: "Helpful Support",
-    desc: "Our friendly team is here to help you with any questions you have.",
-    accent: "amber"
+    desc: "Friendly team ready to assist with any questions.",
   }
 ];
 
 export default function Features() {
   return (
-    <section className="bg-white font-urbanist py-12 border-b border-slate-100">
-      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-l border-slate-100">
+    <section className="bg-white font-urbanist py-20 lg:py-28">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {features.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-10 border-r border-b border-slate-100 flex flex-col group hover:bg-slate-50 transition-all duration-300"
+              className="flex flex-col items-center text-center space-y-6 group cursor-default"
             >
-              {/* Text */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-black text-indigo-950  group-hover:text-indigo-600 transition-colors">
+              {/* Centered Small Line Accent */}
+              <div className="relative h-1 w-12 bg-gray-100 overflow-hidden">
+                <div className="absolute inset-0 bg-blue-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out" />
+              </div>
+
+              {/* Typographic Content */}
+              <div className="space-y-2">
+                <h3 className="text-xl font-black text-slate-900 group-hover:text-blue-600 transition-colors duration-500 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-sm font-medium text-slate-500 leading-relaxed">
+                <p className="text-[13px] font-bold text-slate-400 leading-relaxed group-hover:text-slate-500 transition-colors duration-500 max-w-[200px] mx-auto">
                   {item.desc}
                 </p>
               </div>
-
-              {/* Simple Bottom Accent */}
-              <div className={`mt-8 h-1 w-10 transition-all duration-500 ${item.accent === 'amber' ? 'bg-amber-400 group-hover:w-16' : 'bg-indigo-600 group-hover:w-16'}`} />
             </motion.div>
           ))}
         </div>

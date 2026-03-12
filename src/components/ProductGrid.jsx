@@ -1,9 +1,16 @@
 import { motion } from "framer-motion";
-import { ShoppingBag, Heart, ArrowRight, Check, Plus } from "lucide-react";
+import { Heart, Check, Plus, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
 import { cn } from "../lib/utils";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import banner5 from '@/assets/bannerr/banner5.jpg';
 
 export default function ProductGrid({ products = [] }) {
   const { addToCart, toggleWishlist, isInWishlist } = useCart();
@@ -22,103 +29,122 @@ export default function ProductGrid({ products = [] }) {
       const imgs = typeof images === 'string' ? JSON.parse(images) : images;
       if (Array.isArray(imgs) && imgs.length > 0) return `/${imgs[0]}`;
     } catch (e) { }
-    return "https://via.placeholder.com/400x400?text=No+Image";
+    return "https://via.placeholder.com/400x400?text=Hardware";
   };
 
   return (
-    <section className="px-6 md:px-10 lg:px-16 py-20 lg:py-28 bg-white font-urbanist relative overflow-hidden">
-      
-      <div className="max-w-[1920px] mx-auto relative z-10">
-        
-        {/* --- MATCHING CENTERED AMBER HEADER --- */}
-        <div className="flex flex-col items-center text-center mb-20 relative px-6">
-          <div className="relative">
-            <h2 className="text-4xl md:text-5xl font-black leading-none tracking-tighter uppercase inline-block relative z-10">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500">
-                New Arrivals
-              </span>
-            </h2>
-            
-          </div>
-          <p className="mt-6 text-slate-500 text-sm md:text-base font-medium max-w-xl leading-relaxed mx-auto">
-            Explore our latest inventory of high-performance printing hardware and precision tools.
-          </p>
-        </div>
-
-        {/* --- MODERN PRODUCT GRID --- */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
-          {products.map((p, i) => (
-              <div 
-                key={p.id}
-                className="group relative bg-white border border-slate-100 rounded-[2.5rem] p-5 transition-all duration-500 flex flex-col hover:border-indigo-600 hover:shadow-2xl hover:shadow-indigo-500/5 h-full overflow-hidden"
-              >
-                {/* Image Area - Pure White */}
-                <div className="relative aspect-square rounded-[2rem] bg-white border border-slate-50 flex items-center justify-center p-6 mb-6 overflow-hidden transition-all duration-500 group-hover:bg-slate-50/50">
-                  <button 
-                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(p); }}
-                    className={cn(
-                      "absolute top-3 right-3 z-20 h-9 w-9 bg-white rounded-full flex items-center justify-center transition-all duration-300 shadow-sm border border-slate-50",
-                      isInWishlist(p.id) ? "text-red-500 scale-110" : "text-slate-300 hover:text-red-500 hover:scale-110"
-                    )}
-                  >
-                    <Heart size={16} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
+    <section className="py-20 bg-white font-sans relative">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10">
+        <div className="relative flex flex-col lg:flex-row items-center gap-0">
+          
+          {/* --- LEFT SIDE: FIXED PROMO (Z-INDEX 30) --- */}
+          <div className="w-full lg:w-[480px] shrink-0 z-30 lg:pr-10 bg-white">
+            <div className="relative h-[500px] lg:h-[650px] rounded-2xl overflow-hidden group shadow-2xl shadow-black/10">
+              <img src={banner5} alt="New Arrivals" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-10">
+                <h2 className="text-4xl md:text-5xl font-black text-white leading-none uppercase tracking-tighter">
+                  New <br /> Arrivals
+                </h2>
+                <p className="mt-4 text-white/60 text-sm font-bold tracking-wide">
+                  Specialized printing units fresh in our inventory.
+                </p>
+                
+                {/* Fixed Position Controls Inside Banner */}
+                <div className="mt-8 flex items-center gap-4">
+                  <button className="na-prev h-12 w-12 rounded-xl bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-black transition-all cursor-pointer border border-white/10 active:scale-90">
+                    <ChevronLeft size={24} />
                   </button>
-
-                  <img 
-                    src={getImagePath(p.images)} 
-                    alt={p.name}
-                    className="max-w-full max-h-full object-contain transition-transform duration-700 group-hover:scale-110"
-                    onError={(e) => { e.target.src = "https://via.placeholder.com/400x400?text=Hardware"; }}
-                  />
+                  <button className="na-next h-12 w-12 rounded-xl bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-white hover:text-black transition-all cursor-pointer border border-white/10 active:scale-90">
+                    <ChevronRight size={24} />
+                  </button>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                {/* Info */}
-                <div className="flex-1 flex flex-col px-2">
-                  <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mb-2 px-2.5 py-1 bg-indigo-50 self-start rounded-full">
-                    {p.brand_name || 'AUTHENTIC'}
-                  </span>
-                  
-                  <Link to={`/product/${p.slug}`} className="flex-1">
-                    <h3 className="text-base md:text-lg font-black text-slate-900 capitalize tracking-tight line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
-                      {p.name.toLowerCase()}
-                    </h3>
-                  </Link>
+          {/* --- RIGHT SIDE: SLIDING PRODUCTS (Z-INDEX 10) --- */}
+          <div className="w-full lg:absolute lg:left-[480px] lg:right-0 z-10 overflow-hidden mt-10 lg:mt-0">
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              spaceBetween={24}
+              slidesPerView={1.2}
+              navigation={{
+                prevEl: '.na-prev',
+                nextEl: '.na-next',
+              }}
+              autoplay={{ delay: 6000, disableOnInteraction: false }}
+              breakpoints={{
+                640: { slidesPerView: 2.2 },
+                1024: { slidesPerView: 2.5 },
+                1440: { slidesPerView: 3.2 },
+                1600: { slidesPerView: 4.2 },
+              }}
+              className="!overflow-visible px-4 lg:pl-12 pr-10"
+            >
+              {products.slice(0, 15).map((p) => (
+                <SwiperSlide key={p.id}>
+                  <div 
+                    className="relative bg-white border border-gray-100 rounded-xl p-5 transition-all duration-500 flex flex-col group hover:border-blue-600/20 hover:shadow-xl hover:shadow-black/5 h-[450px]"
+                  >
+                    {/* Compact Image Area */}
+                    <div className="relative aspect-square rounded-lg bg-gray-50 flex items-center justify-center p-6 overflow-hidden mb-6 transition-all duration-500 group-hover:bg-white">
+                      <button 
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(p); }}
+                        className={cn(
+                          "absolute top-3 right-3 z-20 h-9 w-9 bg-white/80 backdrop-blur-sm rounded-lg flex items-center justify-center transition-all duration-300 border border-gray-100 shadow-sm hover:scale-110",
+                          isInWishlist(p.id) ? "text-red-500" : "text-gray-300 hover:text-red-500"
+                        )}
+                      >
+                        <Heart size={16} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
+                      </button>
 
-                  <div className="mt-6 flex items-center justify-between pt-5 border-t border-slate-50">
-                    <div className="flex flex-col">
-                       <span className="text-2xl font-black text-slate-900 tracking-tighter">${p.price}</span>
+                      <img 
+                        src={getImagePath(p.images)} 
+                        alt={p.name}
+                        className="max-w-full max-h-full object-contain"
+                      />
                     </div>
 
-                    <button 
-                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAddToCart(p); }}
-                      disabled={addedItems[p.id]}
-                      className={cn(
-                        "h-12 w-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg active:scale-90 z-30 relative",
-                        addedItems[p.id] 
-                          ? "bg-emerald-500 text-white shadow-emerald-500/20" 
-                          : "bg-indigo-950 text-white hover:bg-amber-500 hover:text-indigo-950 shadow-indigo-950/20 hover:shadow-amber-500/30"
-                      )}
-                    >
-                      {addedItems[p.id] ? <Check size={20} strokeWidth={3} /> : <Plus size={20} strokeWidth={3} />}
-                    </button>
+                    {/* Info Panel */}
+                    <div className="flex-1 flex flex-col">
+                      <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase mb-2">
+                        {p.brand_name || 'Premium'}
+                      </span>
+                      
+                      <Link to={`/product/${p.slug}`} className="flex-1">
+                        <h3 className="text-[16px] font-black text-slate-800 leading-[1.3] line-clamp-2 group-hover:text-blue-600 transition-colors">
+                          {p.name}
+                        </h3>
+                      </Link>
+
+                      <div className="mt-6 flex items-center justify-between pt-5 border-t border-gray-100">
+                        <span className="text-xl font-black text-slate-900">${p.price}</span>
+
+                        <button 
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleAddToCart(p); }}
+                          disabled={addedItems[p.id]}
+                          className={cn(
+                            "h-12 w-12 rounded-xl flex items-center justify-center transition-all duration-500 active:scale-95 z-30 relative",
+                            addedItems[p.id] 
+                              ? "bg-emerald-500 text-white" 
+                              : "bg-black text-white hover:bg-blue-600"
+                          )}
+                        >
+                          {addedItems[p.id] ? <Check size={20} strokeWidth={3} /> : <Plus size={20} strokeWidth={3} />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-full z-0" />
                   </div>
-                </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
 
-                <Link to={`/product/${p.slug}`} className="absolute top-0 left-0 w-full h-full z-0 rounded-[2.5rem]" />
-              </div>
-            ))}
-        </div>
-
-        {/* --- EXPLORE BUTTON --- */}
-        <div className="mt-20 flex justify-center">
-           <Link to="/shop" className="group flex items-center gap-6 p-2 pr-10 bg-slate-50 border border-slate-100 rounded-full hover:bg-indigo-950 hover:border-indigo-900 transition-all duration-500">
-              <div className="h-14 w-14 bg-indigo-950 group-hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors">
-                 <ArrowRight size={24} className="text-white group-hover:text-indigo-950" />
-              </div>
-              <span className="text-sm font-black text-indigo-950 group-hover:text-white uppercase tracking-widest">Explore Full Inventory</span>
-           </Link>
         </div>
       </div>
     </section>
   );
 }
+

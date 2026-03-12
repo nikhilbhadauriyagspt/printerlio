@@ -45,15 +45,15 @@ export default function SEO({ title, description, keywords, schemaType = "Websit
       "@context": "https://schema.org",
       "@type": schemaType === "Product" ? "Product" : "Organization",
       "name": "MyPrinterMan",
-      "url": "https://printerprime.shop",
-      "logo": "https://printerprime.shop/logo/MYPRINTERMAN.png",
+      "url": "https://maxprinter.shop",
+      "logo": "https://maxprinter.shop/logo/MYPRINTERMAN.png",
       "description": finalDesc,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "256 NE Elm St",
-        "addressLocality": "Billings",
-        "addressRegion": "MO",
-        "postalCode": "65610",
+        "streetAddress": "Prestonia Louisville",
+        "addressLocality": "Louisville",
+        "addressRegion": "KY",
+        "postalCode": "40213",
         "addressCountry": "US"
       },
       "contactPoint": {

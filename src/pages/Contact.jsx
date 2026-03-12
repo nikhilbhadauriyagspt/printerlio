@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SEO from '@/components/SEO';
-import { Mail, Phone, MapPin, Send, CheckCircle2, Loader2, ArrowRight, ChevronDown } from 'lucide-react';
+import { Mail, MapPin, CheckCircle2, Loader2, ArrowRight, ChevronDown } from 'lucide-react';
 import API_BASE_URL from '../config';
 import { cn } from '../lib/utils';
 
@@ -42,142 +42,133 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-white min-h-screen pt-32 pb-24 font-urbanist overflow-hidden">
+    <div className="bg-white min-h-screen font-sans text-slate-900">
       <SEO 
-        title="Contact Us | PrinterPrime
- 
- " 
-        description="Get in touch with PrinterPrime
- 
-  for help with your printers or order. Our team is here to assist you."
+        title="Contact Us | MaxPrinter" 
+        description="Get in touch with MaxPrinter for help with your equipment or deployment. Our team is here to assist you."
       />
       
       {/* --- PAGE HEADER --- */}
-      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16 mb-20 relative z-10">
-        <div className="flex flex-col items-center text-center relative">
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="h-[1px] w-12 bg-amber-500" />
-            <span className="text-[11px] font-black text-indigo-600 uppercase tracking-[0.5em]">Get Help</span>
-            <div className="h-[1px] w-12 bg-amber-500" />
-          </div>
-          <div className="relative">
-            <h1 className="text-5xl md:text-7xl font-black   inline-block relative z-10">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-orange-500">
-                Contact Us
-              </span>
+      <div className="py-16 px-6 md:px-10 bg-white">
+        <div className="max-w-[1920px] mx-auto">
+          <div className="flex flex-col space-y-2 mb-10">
+            <h1 className="text-4xl md:text-5xl font-black text-slate-900">
+              Get In Touch.
             </h1>
-          
+            <p className="text-slate-400 text-sm font-bold tracking-wide">
+              Connect with our specialists for expert guidance and order assistance.
+            </p>
           </div>
-          <p className="mt-6 text-slate-500 text-lg font-medium max-w-xl leading-relaxed mx-auto">
-            Have a question? We're here to help. Reach out to our friendly team for any assistance with your order or our products.
-          </p>
         </div>
       </div>
 
-      <div className="max-w-[1920px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+      <div className="max-w-[1920px] mx-auto px-6 md:px-10 pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           
           {/* --- CONTACT INFO SIDEBAR --- */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 group transition-all duration-500 hover:border-indigo-600 hover:bg-white hover:shadow-2xl hover:shadow-indigo-500/5">
-              <div className="h-14 w-14 bg-white rounded-2xl border border-slate-100 text-indigo-950 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-indigo-950 group-hover:text-amber-500">
-                <Mail size={24} />
+          <div className="lg:col-span-4 space-y-4">
+            <div className="p-8 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between h-48 group hover:border-blue-600/20 transition-all">
+              <div className="h-10 w-10 bg-white rounded-lg border border-gray-100 text-blue-600 flex items-center justify-center mb-4 transition-colors group-hover:bg-blue-600 group-hover:text-white shadow-sm">
+                <Mail size={20} />
               </div>
-              <p className="text-[15px] font-black text-slate-400  mb-2">Email Us</p>
-              <h4 className="text-lg font-black text-indigo-950 tracking-tight group-hover:text-indigo-600 transition-colors">info@printerprime.shop</h4>
+              <div className="space-y-1">
+                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">General inquiry</p>
+                <h4 className="text-lg font-black text-slate-900">info@maxprinter.shop</h4>
+              </div>
             </div>
 
-            <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100 group transition-all duration-500 hover:border-indigo-600 hover:bg-white hover:shadow-2xl hover:shadow-indigo-500/5">
-              <div className="h-14 w-14 bg-white rounded-2xl border border-slate-100 text-indigo-950 flex items-center justify-center mb-6 transition-colors duration-500 group-hover:bg-indigo-950 group-hover:text-amber-500">
-                <MapPin size={24} />
+            <div className="p-8 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between h-48 group hover:border-blue-600/20 transition-all">
+              <div className="h-10 w-10 bg-white rounded-lg border border-gray-100 text-blue-600 flex items-center justify-center mb-4 transition-colors group-hover:bg-blue-600 group-hover:text-white shadow-sm">
+                <MapPin size={20} />
               </div>
-              <p className="text-[15px] font-black text-slate-400  mb-2">Visit Office</p>
-              <h4 className="text-lg font-black text-indigo-950 leading-tight group-hover:text-indigo-600 transition-colors">256 NE Elm St, Billings <br/> MO 65610, USA</h4>
+              <div className="space-y-1">
+                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Deployment HQ</p>
+                <h4 className="text-lg font-black text-slate-900 leading-tight">Prestonia Louisville, <br/> KY 40213, USA</h4>              </div>
             </div>
           </div>
 
           {/* --- CONTACT FORM --- */}
           <div className="lg:col-span-8">
-            <div className="bg-white border border-slate-100 rounded-[3rem] p-10 md:p-16 shadow-xl transition-all duration-500 hover:border-indigo-100">
+            <div className="bg-white border border-gray-100 rounded-xl p-8 md:p-12 transition-all">
               {status === 'success' ? (
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
-                  <div className="h-20 w-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-8 border border-emerald-100">
-                    <CheckCircle2 size={40} />
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-20">
+                  <div className="h-16 w-16 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-6 border border-emerald-100">
+                    <CheckCircle2 size={32} />
                   </div>
-                  <h2 className="text-4xl font-black text-indigo-950 uppercase tracking-tighter mb-4">Message Sent.</h2>
-                  <p className="text-slate-500 text-sm font-bold uppercase tracking-widest mb-10">We will get back to you within 24 hours.</p>
-                  <button onClick={() => setStatus(null)} className="h-14 px-12 bg-indigo-950 text-white rounded-2xl text-[11px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-indigo-950 transition-colors">SEND ANOTHER</button>
+                  <h2 className="text-3xl font-black text-slate-900 mb-2">Message sent.</h2>
+                  <p className="text-slate-400 text-sm font-bold mb-10 tracking-wide">We will respond to your request within 24 hours.</p>
+                  <button onClick={() => setStatus(null)} className="h-12 px-10 bg-black text-white rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all">Send another</button>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-indigo-950 uppercase tracking-[0.2em] ml-2">Your Name</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Full name</label>
                       <input 
-                        required type="text" placeholder="Full Name" value={formData.name}
+                        required type="text" placeholder="John Doe" value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all"
+                        className="w-full h-14 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all"
                       />
                     </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-indigo-950 uppercase tracking-[0.2em] ml-2">Email Address</label>
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Email address</label>
                       <input 
-                        required type="email" placeholder="email@domain.com" value={formData.email}
+                        required type="email" placeholder="john@example.com" value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all"
+                        className="w-full h-14 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-indigo-950 uppercase tracking-[0.2em] ml-2">Phone Number</label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Phone number</label>
                       <input 
                         type="tel" placeholder="+1 (000) 000-0000" value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all"
+                        className="w-full h-14 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all"
                       />
                     </div>
-                    <div className="space-y-3">
-                      <label className="text-[10px] font-black text-indigo-950 uppercase tracking-[0.2em] ml-2">Subject</label>
+                    <div className="space-y-2">
+                      <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Subject</label>
                       <div className="relative">
                         <select 
                           value={formData.subject}
                           onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                          className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all appearance-none cursor-pointer pr-12"
+                          className="w-full h-14 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all appearance-none cursor-pointer pr-12"
                         >
                           <option>General Inquiry</option>
                           <option>Product Support</option>
                           <option>Order Inquiries</option>
                           <option>Warranty Claim</option>
                         </select>
-                        <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
+                        <ChevronDown className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black text-indigo-950 uppercase tracking-[0.2em] ml-2">Your Message</label>
+                  <div className="space-y-2">
+                    <label className="text-[11px] font-black text-slate-900 uppercase tracking-widest ml-1">Message</label>
                     <textarea 
-                      required rows="6" placeholder="How can we help you?" value={formData.message}
+                      required rows="5" placeholder="How can we help your office?" value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="w-full p-6 bg-slate-50 border border-slate-100 rounded-3xl focus:bg-white focus:border-indigo-600 focus:ring-4 focus:ring-indigo-50 outline-none text-sm font-bold transition-all resize-none"
+                      className="w-full p-5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:border-blue-600 outline-none text-sm font-bold transition-all resize-none"
                     ></textarea>
                   </div>
 
                   <div className="pt-4">
                     <button 
                       disabled={loading}
-                      className="h-16 px-12 bg-amber-500 text-indigo-950 rounded-2xl flex items-center justify-center gap-4 text-[12px] font-black uppercase tracking-[0.3em] hover:bg-indigo-950 hover:text-white transition-colors disabled:opacity-50 shadow-xl shadow-amber-500/20 active:scale-95"
+                      className="h-14 px-10 bg-black text-white rounded-xl flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/5"
                     >
                       {loading ? (
-                        <Loader2 className="animate-spin" size={20} />
+                        <Loader2 className="animate-spin" size={18} />
                       ) : (
-                        <>SEND MESSAGE <ArrowRight size={20} /></>
+                        <>Send message <ArrowRight size={18} /></>
                       )}
                     </button>
                   </div>
-                  {status === 'error' && <p className="text-red-500 text-[10px] font-black uppercase tracking-widest mt-4 ml-2">Failed to send. Please try again.</p>}
+                  {status === 'error' && <p className="text-red-500 text-[10px] font-black uppercase tracking-widest mt-4 ml-1">Failed to send. Please try again.</p>}
                 </form>
               )}
             </div>

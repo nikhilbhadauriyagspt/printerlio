@@ -117,7 +117,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-white pt-40 pb-24 font-urbanist overflow-hidden">
-      <SEO title="Account Dashboard | PrinterPrime
+      <SEO title="Account Dashboard | MaxPrinter
  
  " />
       
