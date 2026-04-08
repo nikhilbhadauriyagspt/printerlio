@@ -7,7 +7,7 @@ export default function CookiePolicy() {
     <PolicyLayout
       title="Cookie policy"
       subtitle="This cookie policy explains how we use cookies and similar technologies to provide you with a better shopping experience."
-      lastUpdated="April 3, 2026"
+      lastUpdated="April 9, 2026"
     >
       <p className="lead">
         This cookie policy explains howLux Printers

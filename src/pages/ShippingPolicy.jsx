@@ -7,7 +7,7 @@ export default function ShippingPolicy() {
     <PolicyLayout
       title="Shipping policy"
       subtitle="Read our shipping and delivery options, timeframes, and policies."
-      lastUpdated="April 3, 2026"
+      lastUpdated="April 9, 2026"
     >
       <p className="lead">
         This shipping & delivery policy is part of our terms and conditions ("terms") and should be therefore read alongside our main terms: <Link to="/terms-and-conditions">https://luxprinters.shop/terms-and-conditions</Link>.

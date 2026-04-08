@@ -65,7 +65,7 @@ export default function Footer() {
 
   const legalLinks = [
     { name: 'Privacy Policy', path: '/privacy-policy' },
-    { name: 'Terms of Service', path: '/terms-of-service' },
+    { name: 'Terms of Service', path: '/terms-and-conditions' },
     { name: 'Return Policy', path: '/return-policy' },
     { name: 'Shipping Policy', path: '/shipping-policy' },
     { name: 'Cookie Policy', path: '/cookie-policy' },

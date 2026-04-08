@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     <PolicyLayout
       title="Privacy Policy"
       subtitle="Your privacy is our priority. Learn how we handle and protect your personal information with transparency and care."
-      lastUpdated="April 3, 2026"
+      lastUpdated="April 9, 2026"
     >
       <p className="lead">
         This Privacy Notice forLux Printers ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:

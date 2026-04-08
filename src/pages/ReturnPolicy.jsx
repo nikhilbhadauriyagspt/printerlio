@@ -6,7 +6,7 @@ export default function ReturnPolicy() {
     <PolicyLayout
       title="Return Policy"
       subtitle="Read our return and refund policy for your purchases."
-      lastUpdated="April 3, 2026"
+      lastUpdated="April 9, 2026"
     >
       <h2>RETURNS</h2>
       <p>
