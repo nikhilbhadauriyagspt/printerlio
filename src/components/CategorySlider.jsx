@@ -1,12 +1,12 @@
 import React from 'react';
-import { ChevronLeft, ChevronRight, Heart, ShoppingBag, Zap } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, ShoppingBag, Eye, Star } from "lucide-react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, FreeMode } from 'swiper/modules';
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
 import { Skeleton } from './ui/skeleton';
+import { motion } from 'framer-motion';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -29,47 +29,41 @@ export default function CategorySlider({ title, products = [], loading = false }
     return "https://via.placeholder.com/400x400?text=Product";
   };
 
-  const words = title?.split(" ") || [];
-  const firstWord = words[0] || "";
-  const restWords = words.slice(1).join(" ");
-
   return (
     <section className="bg-white py-16 md:py-24 w-full overflow-hidden">
       <div className="w-full px-4 md:px-10 lg:px-16 max-w-[1920px] mx-auto">
         
-        {/* --- HEADER: MATCHING DESIGN SYSTEM --- */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 md:mb-16 gap-6">
-          <div className="flex flex-col gap-3">
-             <div className="flex items-center gap-2">
-                <div className="h-[2px] w-8 bg-blue-600 rounded-full" />
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Specialized Selection</span>
-             </div>
-             <div className="flex flex-col gap-2">
-                <h2 className="text-3xl md:text-5xl font-black  leading-none">
-                  <span className="text-slate-900">{firstWord}</span> <span className="text-blue-600 relative">{restWords}
-                    <svg className="absolute -bottom-2 left-0 w-full h-2 text-blue-100 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                      <path d="M0 5 Q 25 0 50 5 T 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
-                    </svg>
-                  </span>
-                </h2>
-                <p className="text-slate-500 text-sm md:text-base font-medium max-w-lg mt-2 leading-relaxed">
-                  Professional-grade office printers engineered for high-volume productivity.
-                </p>
-             </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button className={`cs-prev-${title.replace(/\s+/g, '-')} h-12 w-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 hover:bg-blue-50 transition-all shadow-sm active:scale-90`}>
-              <ChevronLeft size={22} strokeWidth={2.5} />
-            </button>
-            <button className={`cs-next-${title.replace(/\s+/g, '-')} h-12 w-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 hover:bg-blue-50 transition-all shadow-sm active:scale-90`}>
-              <ChevronRight size={22} strokeWidth={2.5} />
-            </button>
-          </div>
+        {/* --- CENTERED E-COM HEADER --- */}
+        <div className="flex flex-col items-center text-center mb-12 md:mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <span className="h-px w-8 bg-blue-600" />
+            <span className="text-[11px] font-black text-blue-600 uppercase tracking-[0.3em]">Specialized Selection</span>
+            <span className="h-px w-8 bg-blue-600" />
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-black text-slate-900 "
+          >
+            {title}
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-slate-500 text-sm md:text-lg font-medium max-w-2xl mt-4 leading-relaxed"
+          >
+            Professional-grade {title.toLowerCase()} engineered for high-volume productivity and precision.
+          </motion.p>
         </div>
 
-        {/* --- PRODUCT SLIDER --- */}
-        <div className="relative">
+        {/* --- PRODUCT SLIDER WITH PREMIUM CARDS --- */}
+        <div className="relative group/slider">
           <Swiper
             modules={[Navigation, Autoplay, FreeMode]}
             spaceBetween={24}
@@ -90,61 +84,91 @@ export default function CategorySlider({ title, products = [], loading = false }
             {loading ? (
               Array.from({ length: 8 }).map((_, index) => (
                 <SwiperSlide key={`skeleton-${index}`}>
-                  <Skeleton className="w-full aspect-square rounded-2xl bg-slate-50" />
+                  <div className="flex flex-col gap-4">
+                    <Skeleton className="w-full aspect-[4/5] rounded-[2rem] bg-slate-50" />
+                    <Skeleton className="h-6 w-3/4 bg-slate-50" />
+                    <Skeleton className="h-4 w-1/2 bg-slate-50" />
+                  </div>
                 </SwiperSlide>
               ))
             ) : (
               products.slice(0, 15).map((p) => (
                 <SwiperSlide key={p.id}>
-                  <Link to={`/product/${p.slug}`} className="group flex flex-col h-full bg-white border border-slate-100 rounded-2xl p-4 transition-all duration-300 hover:shadow-xl hover:border-blue-100">
-                    
+                  <Link 
+                    to={`/product/${p.slug}`} 
+                    className="group relative flex flex-col h-full bg-white rounded-[2rem] overflow-hidden border border-slate-100 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:border-blue-100 hover:-translate-y-2"
+                  >
+                  
+
                     {/* Image Container */}
-                    <div className="relative aspect-square rounded-xl bg-white flex items-center justify-center p-6 mb-5 overflow-hidden">
+                    <div className="relative aspect-[4/5]  flex items-center justify-center p-8 overflow-hidden">
                       <img 
                         src={getImagePath(p.images)} 
                         alt={p.name} 
-                        className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                        className="max-w-full max-h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110"
                         onError={(e) => { e.target.src = "https://via.placeholder.com/400x400?text=" + p.name; }}
                       />
                       
-                      {/* Wishlist Button */}
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          toggleWishlist(p);
-                        }}
-                        className={cn(
-                          "absolute top-3 right-3 h-9 w-9 rounded-full bg-white shadow-md flex items-center justify-center transition-all duration-300",
-                          isInWishlist(p.id) ? "text-red-500 scale-110" : "text-slate-300 hover:text-red-500 hover:scale-110"
-                        )}
-                      >
-                        <Heart size={18} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
-                      </button>
+                      {/* Floating Action Bar (Vertical) */}
+                      <div className="absolute right-5 top-5 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500">
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleWishlist(p);
+                          }}
+                          className={cn(
+                            "h-10 w-10 rounded-full bg-white shadow-xl flex items-center justify-center transition-all duration-300 border border-slate-50",
+                            isInWishlist(p.id) ? "text-red-500" : "text-slate-400 hover:text-red-500"
+                          )}
+                        >
+                          <Heart size={18} fill={isInWishlist(p.id) ? "currentColor" : "none"} />
+                        </button>
+                        <div className="h-10 w-10 rounded-full bg-white shadow-xl flex items-center justify-center text-slate-400 hover:text-blue-600 border border-slate-50">
+                           <Eye size={18} />
+                        </div>
+                      </div>
+
+                      {/* Quick Add Overlay */}
+                      <div className="absolute bottom-0 left-0 w-full p-5 translate-y-full group-hover:translate-y-0 transition-all duration-500">
+                        <button
+                          onClick={(e) => handleAddToCart(e, p)}
+                          className="w-full h-12 bg-white text-slate-900 rounded-2xl flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-widest shadow-2xl hover:bg-blue-600 hover:text-white transition-all active:scale-95"
+                        >
+                          <ShoppingBag size={18} />
+                          Quick Add
+                        </button>
+                      </div>
                     </div>
 
                     {/* Details */}
-                    <div className="flex flex-col flex-1">
-                      <h4 className="text-[13px] font-bold text-slate-900 truncate mb-1 uppercase ">
+                    <div className="flex flex-col p-6 bg-white flex-1">
+                     
+                      <h4 className="text-[14px] font-black text-slate-800 uppercase tracking-wide leading-tight group-hover:text-blue-600 transition-colors mb-2 line-clamp-2">
                         {p.name}
                       </h4>
-                      <p className="text-lg font-black text-blue-600 mb-4">
-                        ${p.price}
-                      </p>
-                      
-                      <button
-                        onClick={(e) => handleAddToCart(e, p)}
-                        className="mt-auto w-full h-11 bg-slate-900 text-white rounded-xl flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95"
-                      >
-                        <ShoppingBag size={16} />
-                        Add to Cart
-                      </button>
+                      <div className="mt-auto flex items-end justify-between">
+                        <p className="text-xl font-black text-slate-900">
+                          ${p.price}
+                        </p>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-blue-600 transition-colors">
+                          View Details
+                        </p>
+                      </div>
                     </div>
                   </Link>
                 </SwiperSlide>
               ))
             )}
           </Swiper>
+
+          {/* Custom Navigation - Center Aligned Side Buttons */}
+          <button className={`cs-prev-${title.replace(/\s+/g, '-')} absolute top-1/2 -left-4 md:-left-10 -translate-y-12 z-20 h-10 w-10 md:h-14 md:w-14 rounded-full bg-white shadow-2xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white transition-all border border-slate-50 opacity-0 group-hover/slider:opacity-100 active:scale-90`}>
+            <ChevronLeft size={24} strokeWidth={3} />
+          </button>
+          <button className={`cs-next-${title.replace(/\s+/g, '-')} absolute top-1/2 -right-4 md:-right-10 -translate-y-12 z-20 h-10 w-10 md:h-14 md:w-14 rounded-full bg-white shadow-2xl flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-white transition-all border border-slate-50 opacity-0 group-hover/slider:opacity-100 active:scale-90`}>
+            <ChevronRight size={24} strokeWidth={3} />
+          </button>
         </div>
       </div>
     </section>

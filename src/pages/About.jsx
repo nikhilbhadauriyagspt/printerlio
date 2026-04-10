@@ -1,41 +1,39 @@
 import React from 'react';
 import {
-  ArrowRight,
+  Cpu,
+  HardDrive,
   Printer,
-  Truck,
-  Globe,
-  Box,
-  CheckCircle2,
-  Settings,
-  FileText,
-  PenTool,
+  SlidersHorizontal,
+  Shield,
+  Wifi,
+  ArrowRight,
   Sparkles,
-  ShieldCheck,
-  Layers,
-  Headphones,
-  Award
+  CheckCircle2,
+  Layers3,
+  Zap,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import SEO from '@/components/SEO';
 import { motion } from 'framer-motion';
+import SEO from '@/components/SEO';
+import banner2 from '@/assets/bannerr/about.png';
 
 const offerings = [
   {
     title: 'Inkjet Printers',
-    desc: 'Perfect for high-quality photo printing and everyday home documents with vibrant color reproduction.'
+    desc: 'Perfect for high-quality photo printing and everyday home documents with vibrant color reproduction.',
   },
   {
     title: 'Laser Printers',
-    desc: 'The go-to choice for fast, crisp text documents and high-volume office tasks.'
+    desc: 'The go-to choice for fast, crisp text documents and high-volume office tasks.',
   },
   {
     title: 'All-in-One Units',
-    desc: 'Versatile machines that combine printing, scanning, copying, and faxing into one space-saving device.'
+    desc: 'Versatile machines that combine printing, scanning, copying, and faxing into one space-saving device.',
   },
   {
     title: 'Ink & Toner Supplies',
-    desc: 'A comprehensive range of cartridges and tanks to keep your machines running without interruption.'
-  }
+    desc: 'A comprehensive range of cartridges and tanks to keep your machines running without interruption.',
+  },
 ];
 
 const features = [
@@ -48,415 +46,293 @@ const features = [
   'High Paper Capacity',
   'Reliable Scanning',
   'Compact Designs',
-  'Durable Build Quality'
+  'Durable Build Quality',
 ];
 
 const processCards = [
   {
-    icon: Box,
     title: 'Secure Packaging',
-    desc: 'Every printer is protected with specialized cushioning to ensure it arrives at your doorstep without a single scratch.'
+    desc: 'Every printer is protected with specialized cushioning to ensure it arrives at your doorstep without a single scratch.',
   },
   {
-    icon: Truck,
     title: 'Prompt Delivery',
-    desc: 'We coordinate with leading delivery services across the USA to get your printer to you as quickly as possible.'
+    desc: 'We coordinate with leading delivery services across the USA to get your printer to you as quickly as possible.',
   },
   {
-    icon: Settings,
     title: 'Quality Check',
-    desc: 'Before any item is listed, we ensure it meets our standards for performance and reliability.'
+    desc: 'Before any item is listed, we ensure it meets our standards for performance and reliability.',
   },
   {
-    icon: FileText,
     title: 'Clear Documentation',
-    desc: 'We provide easy-to-follow guides and information for every model we carry in our store.'
+    desc: 'We provide easy-to-follow guides and information for every model we carry in our store.',
   },
   {
-    icon: Globe,
     title: 'National Reach',
-    desc: 'Serving homes and businesses in every state with reliable printing equipment and supplies.'
+    desc: 'Serving homes and businesses in every state with reliable printing equipment and supplies.',
   },
   {
-    icon: PenTool,
     title: 'Usage Tips',
-    desc: 'Learn how to optimize your printer settings for better quality and lower ink consumption.'
-  }
+    desc: 'Learn how to optimize your printer settings for better quality and lower ink consumption.',
+  },
 ];
 
 const supportPoints = [
   'Expert Guidance on Model Selection',
   'Comprehensive Setup Instructions',
-  'Guidance on Ink & Toner Compatibility'
+  'Guidance on Ink & Toner Compatibility',
 ];
 
-const stats = [
-  { number: 'Wide', label: 'Printer Range' },
-  { number: 'Home + Office', label: 'Use Cases Covered' },
-  { number: 'Clear', label: 'Buying Guidance' },
-  { number: 'Reliable', label: 'Long-Term Support' }
+const leftModules = [
+  {
+    icon: Printer,
+    title: 'Home Printing',
+    desc: 'Reliable everyday printers designed for assignments, bills, family documents, and routine color printing at home.',
+  },
+  {
+    icon: Layers3,
+    title: 'Office Efficiency',
+    desc: 'Fast and dependable machines built for frequent printing, sharp text output, and smoother daily workflows.',
+  },
+  {
+    icon: HardDrive,
+    title: 'Supplies & Support',
+    desc: 'Ink, toner, accessories, and practical guidance to keep your printer running with less interruption.',
+  },
 ];
+
+const rightModules = [
+  {
+    icon: SlidersHorizontal,
+    title: 'Advanced Features',
+    desc: 'Wireless printing, duplex support, mobile connectivity, and productivity-focused functions for modern users.',
+  },
+  {
+    icon: Shield,
+    title: 'Trusted Performance',
+    desc: 'Carefully selected models focused on consistent results, dependable operation, and long-term value.',
+  },
+  {
+    icon: Wifi,
+    title: 'Smart Connectivity',
+    desc: 'Simple setup across Wi-Fi networks, mobile devices, laptops, and office environments for flexible printing.',
+  },
+];
+
+const architectureStats = [
+  { value: 'Wide', label: 'Printer Range' },
+  { value: 'Home + Office', label: 'Use Cases Covered' },
+  { value: 'Clear', label: 'Buying Guidance' },
+  { value: 'Reliable', label: 'Long-Term Support' },
+];
+
+const FloatingCard = ({ item, align = 'left' }) => {
+  const Icon = item.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.45 }}
+      className={`flex items-start gap-4 ${align === 'right' ? 'md:flex-row-reverse md:text-right' : ''}`}
+    >
+      <div className="h-14 w-14 shrink-0 rounded-full border border-blue-100 bg-blue-50 text-blue-600 flex items-center justify-center shadow-sm">
+        <Icon size={22} />
+      </div>
+
+      <div className={align === 'right' ? 'max-w-xs' : 'max-w-xs'}>
+        <h3 className="text-xl font-black  text-slate-950">{item.title}</h3>
+        <p className="mt-2 text-sm md:text-[15px] leading-7 font-medium text-slate-500">{item.desc}</p>
+      </div>
+    </motion.div>
+  );
+};
 
 const About = () => {
   return (
-    <div className="bg-white min-h-screen font-jakarta text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-[#f7f8fb] text-slate-900">
       <SEO
-        title="About Us | Iconic Printers"
-        description="Learn about our wide range of printers, ink, and toner solutions for home and office use across the USA."
+        title="About Us | Printer Loop"
+        description="Learn about our wide range of printers, ink, toner solutions, and dependable support for home and office printing needs."
       />
 
-      {/* HERO */}
-      <section className="relative pt-28 md:pt-36 pb-20 md:pb-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-50" />
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          <div className="absolute -top-16 -left-16 h-72 w-72 rounded-full bg-blue-100/50 blur-3xl" />
-          <div className="absolute top-32 right-0 h-80 w-80 rounded-full bg-sky-100/40 blur-3xl" />
-        </div>
+      <section className="relative overflow-hidden pt-24 md:pt-28 lg:pt-25 pb-20 md:pb-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.08),transparent_35%),linear-gradient(to_bottom,#f8fafc,#f7f8fb)]" />
+        <div className="absolute inset-0 opacity-50 [background-image:linear-gradient(to_right,rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.05)_1px,transparent_1px)] [background-size:72px_72px]" />
 
-        <div className="relative w-full px-4 md:px-10 lg:px-16">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="lg:col-span-7"
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-blue-100 shadow-sm text-[10px] font-black uppercase tracking-[0.25em] text-slate-700 mb-6">
-                <Printer size={14} className="text-blue-600" />
-                Your Dedicated Printer Resource
-              </div>
+        <div className="relative mx-auto w-full max-w-full px-4 md:px-8 lg:px-10 xl:px-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mx-auto max-w-4xl text-center"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/90 px-5 py-2 text-[10px] font-black uppercase tracking-[0.32em] text-blue-600 shadow-sm">
+              <Sparkles size={14} />
+              Printer Collection
+            </div>
 
-              <h1 className="text-4xl md:text-6xl xl:text-7xl font-black leading-[1.05]  text-slate-900 max-w-5xl">
-                Complete Solutions
-                <span className="block text-blue-600">for Every Print Need.</span>
-              </h1>
+            <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.98]  text-slate-950">
+              Find the Right
+              <span className="block text-blue-600">Printer for Every Need</span>
+            </h1>
 
-              <p className="mt-6 max-w-3xl text-slate-600 text-base md:text-lg font-semibold leading-8">
-                We focus on one thing: making sure you have the right printer for your documents,
-                photos, and projects. From simple home setups to high-volume office machines, we
-                provide the tools you need to get the job done.
-              </p>
+            <p className="mx-auto mt-6 max-w-3xl text-base md:text-xl font-medium leading-8 text-slate-500">
+              Explore a thoughtfully organized printer range built for homes, offices, creative work, and everyday document needs with dependable performance.
+            </p>
+          </motion.div>
 
-              <div className="flex flex-wrap gap-4 mt-8">
-                <Link
-                  to="/shop"
-                  className="group inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all"
-                >
-                  Browse Printers
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-white border border-slate-200 text-slate-900 text-[11px] font-black uppercase tracking-[0.2em] hover:border-blue-200 hover:text-blue-600 transition-all"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </motion.div>
+          <div className="mt-16 grid grid-cols-1 items-center gap-10 xl:grid-cols-[1fr_520px_1fr] 2xl:grid-cols-[1fr_580px_1fr]">
+            <div className="space-y-10 lg:space-y-14">
+              {leftModules.map((item, index) => (
+                <FloatingCard key={index} item={item} align="left" />
+              ))}
+            </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.55, delay: 0.08 }}
-              className="lg:col-span-5"
+              className="relative mx-auto flex w-full max-w-[580px] items-center justify-center"
             >
-              <div className="relative rounded-[2rem] border border-blue-100 bg-white/90 backdrop-blur shadow-[0_20px_80px_rgba(15,23,42,0.08)] p-6 md:p-7">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl bg-blue-600 p-5 text-white">
-                    <ShieldCheck className="mb-6" size={28} />
-                    <h3 className="text-sm font-black uppercase tracking-[0.18em] mb-2">
-                      Trusted Selection
-                    </h3>
-                    <p className="text-xs md:text-sm font-semibold leading-6 text-blue-50">
-                      Carefully chosen machines for dependable everyday performance.
-                    </p>
-                  </div>
+              <div className="absolute inset-0 -z-10 rounded-full bg-blue-100/70 blur-3xl" />
 
-                  <div className="rounded-2xl bg-slate-50 p-5 border border-slate-100">
-                    <Layers className="mb-6 text-blue-600" size={28} />
-                    <h3 className="text-sm font-black uppercase tracking-[0.18em] mb-2 text-slate-900">
-                      Multiple Categories
-                    </h3>
-                    <p className="text-xs md:text-sm font-semibold leading-6 text-slate-600">
-                      Home, office, creative, and high-volume printing options.
-                    </p>
-                  </div>
+              <div className="relative flex h-[360px] w-[360px] items-center justify-center rounded-full border-[14px] border-white bg-white shadow-[0_30px_90px_rgba(15,23,42,0.10)] md:h-[430px] md:w-[430px]">
+                <img
+                  src={banner2}
+                  alt="Modern printer workspace"
+                  className="h-full w-full rounded-full object-cover"
+                />
 
-                  <div className="rounded-2xl bg-slate-50 p-5 border border-slate-100">
-                    <Headphones className="mb-6 text-blue-600" size={28} />
-                    <h3 className="text-sm font-black uppercase tracking-[0.18em] mb-2 text-slate-900">
-                      Ongoing Guidance
-                    </h3>
-                    <p className="text-xs md:text-sm font-semibold leading-6 text-slate-600">
-                      Support beyond purchase with resources and helpful direction.
-                    </p>
-                  </div>
+                <div className="absolute -left-2 bottom-10 md:-left-5 md:bottom-14 h-14 w-14 rounded-2xl bg-slate-950 text-blue-400 shadow-xl flex items-center justify-center">
+                  <Zap size={22} />
+                </div>
 
-                  <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-white p-5 border border-blue-100">
-                    <Award className="mb-6 text-blue-600" size={28} />
-                    <h3 className="text-sm font-black uppercase tracking-[0.18em] mb-2 text-slate-900">
-                      Better Experience
-                    </h3>
-                    <p className="text-xs md:text-sm font-semibold leading-6 text-slate-600">
-                      Designed to make printer buying feel simpler and smarter.
-                    </p>
-                  </div>
+                <div className="absolute -right-3 top-10 md:-right-6 md:top-12 h-14 w-14 rounded-2xl bg-white text-blue-600 shadow-xl flex items-center justify-center border border-slate-100">
+                  <SlidersHorizontal size={22} />
                 </div>
               </div>
             </motion.div>
+
+            <div className="space-y-10 lg:space-y-14">
+              {rightModules.map((item, index) => (
+                <FloatingCard key={index} item={item} align="right" />
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-14 flex justify-center">
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-3 rounded-full bg-slate-950 px-8 py-4 text-[12px] font-black uppercase tracking-[0.18em] text-white shadow-xl transition-all hover:-translate-y-0.5 hover:bg-blue-600"
+            >
+              Consult a Printer Expert
+              <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+ 
+      <section className="border-y border-slate-200/70 bg-white py-16 md:py-20">
+        <div className="mx-auto grid w-full max-w-full gap-8 px-4 md:px-8 lg:grid-cols-12 lg:px-10 xl:px-16">
+          <div className="lg:col-span-5">
+            <div className="max-w-xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-slate-700">
+                <Shield size={14} className="text-blue-600" />
+                Our Commitment to Support
+              </div>
+              <h2 className="mt-4 text-3xl md:text-4xl font-black leading-tight text-slate-950">
+                Buying a printer is only the beginning.
+              </h2>
+              <p className="mt-5 text-base md:text-lg font-medium leading-8 text-slate-500">
+                We are committed to helping you maintain your machine for years to come. Whether you need guidance on supplies or setup, our resources are designed to keep things simple.
+              </p>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="grid gap-4 md:grid-cols-3">
+              {supportPoints.map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-[28px] border border-slate-200/70 bg-[#f8fafc] p-6 shadow-sm"
+                >
+                  <CheckCircle2 size={22} className="mb-4 text-blue-600" />
+                  <p className="text-sm font-black uppercase tracking-[0.14em] leading-6 text-slate-900">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* STATS STRIP */}
-      <section className="pb-8 md:pb-12">
-        <div className="w-full px-4 md:px-10 lg:px-16">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {stats.map((item, i) => (
+      <section className="py-20 md:py-24">
+        <div className="mx-auto w-full max-w-full px-4 md:px-8 lg:px-10 xl:px-16">
+          <div className="mx-auto mb-14 max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-blue-600">
+              Our Careful Process
+            </div>
+            <h2 className="mt-4 text-3xl md:text-4xl font-black leading-tight text-slate-950">
+              Thoughtful handling at every step.
+            </h2>
+            <p className="mt-5 text-base md:text-lg font-medium leading-8 text-slate-500">
+              We handle every order with care, making sure your machine arrives in excellent condition and is backed by clear information and practical guidance.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {processCards.map((item, idx) => (
               <div
-                key={i}
-                className="rounded-[1.5rem] border border-slate-100 bg-white shadow-sm px-6 py-5 text-center hover:shadow-md transition-all"
+                key={idx}
+                className="group rounded-[30px] border border-slate-200/70 bg-white p-7 md:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="text-lg md:text-2xl font-black text-blue-600">{item.number}</div>
-                <div className="text-[10px] md:text-xs font-black uppercase tracking-[0.18em] text-slate-500 mt-1">
-                  {item.label}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <span className="text-lg font-black">0{idx + 1}</span>
+                  </div>
+                  <span className="text-5xl font-black text-slate-100">0{idx + 1}</span>
                 </div>
+                <h4 className="text-lg font-black text-slate-950">{item.title}</h4>
+                <p className="mt-3 text-sm md:text-base font-medium leading-7 text-slate-500">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* STORY + OFFERINGS */}
-      <section className="py-16 md:py-20">
-        <div className="w-full px-4 md:px-10 lg:px-16">
-          <div className="grid lg:grid-cols-12 gap-8 md:gap-10 items-start">
-            <div className="lg:col-span-5">
-              <div className="sticky top-28 rounded-[2rem] bg-slate-950 text-white p-8 md:p-10 overflow-hidden">
-                <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
-                <div className="relative">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/10 text-[10px] font-black uppercase tracking-[0.2em] mb-5">
-                    <Sparkles size={14} className="text-blue-300" />
-                    Reliable Printing Simplified
-                  </div>
-
-                  <h2 className="text-3xl md:text-4xl font-black leading-tight">
-                    Better layout,
-                    <span className="block text-blue-400">same strong content.</span>
-                  </h2>
-
-                  <p className="mt-6 text-slate-300 text-base font-medium leading-8 italic border-l-4 border-blue-500 pl-5">
-                    "A printer is more than just a machine; it is the final step in bringing your
-                    ideas to life on paper. We ensure that step is always smooth and consistent."
-                  </p>
-
-                  <p className="mt-6 text-slate-300 text-sm md:text-base font-medium leading-8">
-                    Our journey started with a simple observation: finding the right printer
-                    shouldn't be complicated. Whether you are printing school assignments, office
-                    reports, or family photos, you need a machine that works every time you press
-                    print. We have curated a selection of printers that cater to diverse
-                    requirements, ensuring that every user finds their perfect match.
-                  </p>
-
-                  <p className="mt-5 text-slate-300 text-sm md:text-base font-medium leading-8">
-                    We understand the frustration of blurry text, faded colors, and paper jams.
-                    That is why we focus on machines that are known for their durability and clear
-                    output. Our collection includes everything from compact inkjet models for tight
-                    spaces to robust laser printers built for speed and volume.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="mb-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-                  What We Offer
-                </div>
-                <h3 className="text-3xl md:text-4xl font-black text-slate-900">
-                  Printer categories built for different needs.
-                </h3>
-                <p className="mt-4 text-slate-600 text-base md:text-lg font-semibold leading-8 max-w-3xl">
-                  From home use to professional workloads, our range is organized to help buyers
-                  choose more confidently and faster.
-                </p>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-5">
-                {offerings.map((item, i) => (
-                  <div
-                    key={i}
-                    className="group relative rounded-[1.75rem] border border-slate-100 bg-white p-6 md:p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
-                  >
-                    <div className="h-11 w-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                      <Printer size={20} />
-                    </div>
-
-                    <h4 className="text-lg font-black text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                      {item.title}
-                    </h4>
-
-                    <p className="text-slate-600 text-sm md:text-base font-medium leading-7">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-10 rounded-[2rem] bg-gradient-to-br from-blue-600 to-blue-700 p-8 md:p-10 text-white shadow-xl shadow-blue-200">
-                <div className="grid md:grid-cols-2 gap-8 items-start">
-                  <div>
-                    <h3 className="text-2xl md:text-3xl font-black leading-tight">
-                      Why Choose Our Printers
-                    </h3>
-                    <p className="mt-4 text-blue-50 text-sm md:text-base font-semibold leading-8 opacity-95">
-                      We take pride in our selection process. Every printer in our inventory is
-                      chosen based on its ability to deliver consistent results. We look for
-                      machines that offer easy connectivity, intuitive controls, and efficient ink
-                      usage. Our goal is to provide you with a printing experience that is
-                      productive and stress-free.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {features.map((item, i) => (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 rounded-xl bg-white/10 border border-white/10 px-4 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-white"
-                      >
-                        <div className="h-2 w-2 rounded-full bg-white shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SUPPORT */}
-      <section className="py-16 md:py-20 bg-slate-50 border-y border-slate-100">
-        <div className="w-full px-4 md:px-10 lg:px-16">
-          <div className="grid lg:grid-cols-12 gap-8 md:gap-10 items-center">
-            <div className="lg:col-span-5">
-              <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-slate-200 text-[10px] font-black uppercase tracking-[0.2em] text-slate-700 mb-4">
-                  <ShieldCheck size={14} className="text-blue-600" />
-                  Our Commitment to Support
-                </div>
-
-                <h2 className="text-3xl md:text-4xl font-black leading-tight text-slate-900">
-                  Buying a printer is only the beginning.
-                </h2>
-
-                <p className="mt-5 text-slate-600 text-base md:text-lg font-semibold leading-8">
-                  We are committed to helping you maintain your machine for years to come. Whether
-                  you need help choosing the right ink or tips on how to keep your print heads
-                  clean, our resources are always available.
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="grid md:grid-cols-3 gap-4">
-                {supportPoints.map((item, i) => (
-                  <div
-                    key={i}
-                    className="rounded-[1.5rem] bg-white border border-slate-100 p-6 md:p-7 shadow-sm hover:shadow-lg transition-all"
-                  >
-                    <CheckCircle2 size={22} className="text-blue-600 mb-4" />
-                    <p className="text-sm font-black uppercase tracking-[0.16em] leading-6 text-slate-900">
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section className="py-20 md:py-24 bg-white">
-        <div className="w-full px-4 md:px-10 lg:px-16">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-              Our Careful Process
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
-              Thoughtful handling at every step.
-            </h2>
-            <p className="mt-5 text-slate-600 text-base md:text-lg font-semibold leading-8">
-              We handle every order with care, making sure your machine arrives in excellent
-              condition and is backed by clear information and practical guidance.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {processCards.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="group rounded-[1.75rem] border border-slate-100 bg-white p-7 md:p-8 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-500"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="h-14 w-14 rounded-2xl bg-slate-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
-                      <Icon size={24} />
-                    </div>
-                    <span className="text-4xl font-black text-slate-100 group-hover:text-blue-100 transition-colors">
-                      0{idx + 1}
-                    </span>
-                  </div>
-
-                  <h4 className="text-lg font-black text-slate-900 mb-3">{item.title}</h4>
-                  <p className="text-slate-600 text-sm md:text-base font-medium leading-7">
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
       <section className="pb-24">
-        <div className="w-full px-4 md:px-10 lg:px-16">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-slate-950 px-6 py-14 md:px-12 md:py-16 text-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.24),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.18),transparent_24%)]" />
+        <div className="mx-auto w-full max-w-[1450px] px-4 md:px-8 lg:px-10 xl:px-16">
+          <div className="relative overflow-hidden rounded-[40px] bg-slate-950 px-6 py-14 text-center md:px-12 md:py-16">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.22),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.16),transparent_24%)]" />
 
-            <div className="relative max-w-4xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] mb-5">
+            <div className="relative mx-auto max-w-4xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-[10px] font-black uppercase tracking-[0.24em] text-white">
                 Future of Printing
               </div>
 
-              <h2 className="text-3xl md:text-5xl font-black leading-tight text-white">
-                Bringing Better Printing
-                <span className="block text-blue-400">to Your Desk.</span>
+              <h2 className="mt-5 text-3xl md:text-5xl font-black leading-tight text-white">
+                Bringing Better Printing.
+                
               </h2>
 
-              <p className="mt-6 text-slate-300 text-base md:text-lg font-semibold leading-8 max-w-3xl mx-auto">
-                Whether you are a student, a creative professional, or a business owner, our
-                printers are designed to help you succeed. Explore our range today and find the one
-                that fits your life.
+              <p className="mx-auto mt-6 max-w-3xl text-base md:text-lg font-medium leading-8 text-slate-300">
+                Whether you are a student, a creative professional, or a business owner, our printers are designed to help you succeed. Explore our range today and find the one that fits your life.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4 pt-8">
                 <Link
                   to="/shop"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:bg-blue-700 transition-all shadow-lg shadow-blue-900/20"
+                  className="group inline-flex items-center gap-3 rounded-2xl bg-blue-600 px-8 py-4 text-[11px] font-black uppercase tracking-[0.18em] text-white transition-all hover:bg-blue-700"
                 >
                   Browse Printers
-                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                 </Link>
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-slate-900 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:bg-blue-50 transition-all"
+                  className="inline-flex items-center gap-3 rounded-2xl bg-white px-8 py-4 text-[11px] font-black uppercase tracking-[0.18em] text-slate-900 transition-all hover:bg-blue-50"
                 >
                   Get in Touch
                 </Link>

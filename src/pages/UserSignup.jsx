@@ -60,7 +60,7 @@ export default function UserSignup() {
 
   return (
     <div className="min-h-screen font-jakarta text-slate-900 bg-slate-50 flex items-center justify-center p-4 relative overflow-hidden py-12">
-      <SEO title="Create Account | Iconic Printers" />
+      <SEO title="Create Account | Printer Loop" />
 
       {/* Subtle Background Accents */}
       <div className="absolute top-[10%] right-[10%] w-[30%] h-[30%] bg-blue-400/20 rounded-full blur-[120px] pointer-events-none" />

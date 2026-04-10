@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iconicprinters.shop/sitemap.xml
+Sitemap: https://printerloop.shop/sitemap.xml

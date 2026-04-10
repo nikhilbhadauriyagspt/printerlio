@@ -117,13 +117,13 @@ Delivering top-tier printing solutions across the United States, engineered for 
                <div className="flex items-start gap-3">
                   <MapPin size={18} className="text-blue-600 shrink-0 mt-0.5" />
                   <span className="text-[12px] font-black text-slate-700 uppercase  leading-tight">
-                    8560 Florida Blvd, Baton Rouge, LA 70815, USA
+                    1311 N Hancock St Philadelphia, PA 19122, USA
                   </span>
                </div>
                <div className="flex items-center gap-3">
                   <Mail size={18} className="text-blue-600 shrink-0" />
-                  <a href="mailto:info@iconicprinters.shop" className="text-[15px] font-black text-slate-700  hover:text-blue-600 transition-colors">
-                    info@iconicprinters.shop
+                  <a href="mailto:info@printerloop.shop" className="text-[15px] font-black text-slate-700  hover:text-blue-600 transition-colors">
+                    info@printerloop.shop
                   </a>
                </div>
                
@@ -177,7 +177,7 @@ Delivering top-tier printing solutions across the United States, engineered for 
         {/* --- BOTTOM SECTION --- */}
         <div className="pt-10 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[9px] text-slate-400 font-black uppercase tracking-[4px]">
-            © 2026 Iconic Printers. All rights reserved.
+            © 2026 Printer Loop. All rights reserved.
           </p>
           
           <div className="flex items-center gap-6">

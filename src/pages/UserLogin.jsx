@@ -58,7 +58,7 @@ export default function UserLogin() {
 
   return (
     <div className="min-h-screen font-jakarta text-slate-900 bg-slate-50 flex items-center justify-center p-4 relative overflow-hidden">
-      <SEO title="Sign In | Iconic Printers" />
+      <SEO title="Sign In | Printer Loop" />
 
       {/* Subtle Background Accents */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-400/20 rounded-full blur-[120px] pointer-events-none" />
