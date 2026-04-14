@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Assets
-import banner2 from '@/assets/bannerr/ban1.jpg';
+import banner2 from '@/assets/bannerr/ban1.png';
 
 const Hero = () => {
   return (

@@ -57,7 +57,7 @@ export default function UserLogin() {
 
   return (
     <div className="min-h-screen font-['Poppins'] text-slate-900 bg-white flex items-center justify-center p-4 relative overflow-hidden">
-      <SEO title="Sign In | Print Ease" />
+      <SEO title="Sign In | Printing State" />
 
       {/* Blue Background Gradient */}
       <div 
@@ -72,9 +72,7 @@ export default function UserLogin() {
         className="w-full max-w-md bg-white border border-slate-200 p-8 md:p-12 relative z-10 shadow-2xl shadow-blue-900/5"
       >
         <div className="text-center mb-10">
-          <Link to="/" className="inline-block mb-6">
-            <img src="/logo/logo.png" alt="Logo" className="h-10 mx-auto" />
-          </Link>
+          
           <h1 className="text-2xl md:text-3xl font-bold text-slate-900">Sign In</h1>
           <p className="text-slate-500 font-medium text-sm mt-2">Login to your account to manage your orders.</p>
         </div>
@@ -137,7 +135,7 @@ export default function UserLogin() {
 
           <button
             disabled={loading}
-            className="w-full h-12 bg-blue-600 text-white font-bold text-sm uppercase tracking-widest hover:bg-slate-900 transition-all disabled:opacity-50 flex items-center justify-center gap-3 mt-4"
+            className="w-full h-12 bg-black text-white font-bold text-sm uppercase tracking-widest hover:bg-blue-900 transition-all disabled:opacity-50 flex items-center justify-center gap-3 mt-4"
           >
             {loading ? <Loader2 className="animate-spin" size={18} /> : (
               <>

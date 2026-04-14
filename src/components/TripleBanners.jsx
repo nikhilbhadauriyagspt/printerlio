@@ -1,86 +1,92 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Printer } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ArrowRight, ChevronRight } from 'lucide-react';
+import { cn } from '../lib/utils';
 
 // Assets
 import trip1 from '@/assets/bannerr/trip1.jpg';
 import trip2 from '@/assets/bannerr/trip2.jpg';
-import trip3 from '@/assets/bannerr/trip3.jpg';
 
 const banners = [
   {
     id: "01",
-    title: "Workforce Pro Series",
-    subtitle: "Enterprise Solutions",
-    desc: "Industrial-grade efficiency for high-volume corporate environments.",
+    label: "Professional Series",
+    title: "Business Powerhouse",
+    desc: "Experience industrial-grade efficiency for high-volume corporate spaces.",
     image: trip1,
+    gradient: "from-slate-50 to-blue-100/50"
   },
   {
     id: "02",
-    title: "Precision Laser Tech",
-    subtitle: "Advanced Documentation",
-    desc: "Next-gen imaging for crystal clear documentation and accuracy.",
+    label: "Next-Gen Tech",
+    title: "Ultra HD Printing",
+    desc: "Achieve professional-grade clarity with our next-gen imaging technology.",
     image: trip2,
-  },
-  {
-    id: "03",
-    title: "Supply Eco System",
-    subtitle: "Authentic Components",
-    desc: "Reliable components ensuring peak mechanical longevity.",
-    image: trip3,
+    gradient: "from-blue-50 to-indigo-100/50"
   }
 ];
 
 export default function TripleBanners() {
-  const gradientStyle = {
-    background: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(29, 78, 216) 50%, rgb(37, 99, 235) 100%)'
-  };
-
   return (
-    <section className="w-full bg-white py-12 md:py-16 font-['Poppins']">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <section className="w-full bg-white py-16 md:py-24 font-poppins">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+          
           {banners.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="relative overflow-hidden group flex flex-row min-h-[220px] md:min-h-[280px] shadow-xl shadow-blue-900/10"
-              style={gradientStyle}
+              className={cn(
+                "relative  overflow-hidden flex flex-col md:flex-row min-h-[400px] border border-slate-100 ",
+                `bg-gradient-to-br ${item.gradient}`
+              )}
             >
-              {/* --- LEFT CONTENT --- */}
-              <div className="w-[60%] p-6 md:p-8 flex flex-col justify-center text-white relative z-10">
-                <span className="inline-block text-[11px] font-bold text-blue-100/70 mb-2 tracking-wider">
-                  {item.subtitle}
+              {/* --- LEFT SIDE: TEXT CONTENT --- */}
+              <div className="flex-1 p-8 md:p-12 lg:p-14 flex flex-col justify-center relative z-10">
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4 block">
+                  {item.label}
                 </span>
-                <h3 className="text-xl md:text-2xl font-bold leading-tight mb-3">
+                <h3 className="text-3xl md:text-3xl font-bold text-slate-900 mb-4 leading-[1.1] t">
                   {item.title}
                 </h3>
-                <p className="text-[12px] md:text-[13px] text-blue-50/70 line-clamp-2 mb-6">
+                <p className="text-slate-500 text-[14px] md:text-[15px] font-medium leading-relaxed mb-10 max-w-[280px]">
                   {item.desc}
                 </p>
                 <Link 
                   to="/shop" 
-                  className="inline-flex items-center justify-center px-6 py-2 bg-white text-black text-[12px] font-bold transition-all hover:bg-slate-900 hover:text-white w-fit"
+                  className="group/btn inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[13px] uppercase tracking-widest transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-600/20 w-fit active:scale-95"
                 >
-                  Buy Now
+                  Shop Now
+                  <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" strokeWidth={3} />
                 </Link>
               </div>
 
-              {/* --- RIGHT IMAGE --- */}
-              <div className="w-[40%] relative overflow-hidden bg-white/5">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="absolute inset-0 w-full h-full object-cover "
-                />
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10" />
+              {/* --- RIGHT SIDE: CIRCULAR IMAGE CUTOUT --- */}
+              <div className="flex-1 relative flex items-center justify-center p-8 md:p-10 lg:p-12 overflow-hidden">
+                {/* Large Background Circle Decoration */}
+                <div className="absolute w-[80%] aspect-square bg-white/60 rounded-full blur-2xl -right-10 -top-10" />
+                
+                {/* Main Circular Cutout */}
+                <div className="relative w-full aspect-square max-w-[320px] rounded-full bg-white shadow-inner border-[12px] border-white/50 overflow-hidden group-hover:scale-105 transition-transform duration-700 ease-out">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+                  {/* Subtle Overlay Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                </div>
+
+                {/* Decorative Sparkle */}
+                <div className="absolute top-1/4 right-10 h-2 w-2 bg-blue-400 rounded-full animate-ping opacity-40" />
               </div>
             </motion.div>
           ))}
+
         </div>
       </div>
     </section>

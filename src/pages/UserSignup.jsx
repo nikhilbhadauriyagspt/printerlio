@@ -59,7 +59,7 @@ export default function UserSignup() {
 
   return (
     <div className="min-h-screen font-['Poppins'] text-slate-900 bg-white flex items-center justify-center p-4 relative overflow-hidden py-12">
-      <SEO title="Create Account | Print Ease" />
+      <SEO title="Create Account | Printing State" />
 
       {/* Blue Background Gradient */}
       <div 
@@ -74,9 +74,7 @@ export default function UserSignup() {
         className="w-full max-w-md bg-white border border-slate-200 p-8 md:p-12 relative z-10 shadow-2xl shadow-blue-900/5"
       >
         <div className="text-center mb-10">
-          <Link to="/" className="inline-block mb-6">
-            <img src="/logo/logo.png" alt="Logo" className="h-10 mx-auto" />
-          </Link>
+          
           <h1 className="text-2xl md:text-3xl font-bold text-slate-900">Create Account</h1>
           <p className="text-slate-500 font-medium text-sm mt-2">Join us for the best printer deals and support.</p>
         </div>
@@ -183,7 +181,7 @@ export default function UserSignup() {
 
           <button
             disabled={loading}
-            className="w-full h-12 bg-blue-600 text-white font-bold text-sm uppercase tracking-widest hover:bg-slate-900 transition-all disabled:opacity-50 flex items-center justify-center gap-3 mt-2"
+            className="w-full h-12 bg-black text-white font-bold text-sm uppercase tracking-widest hover:bg-blue-900 transition-all disabled:opacity-50 flex items-center justify-center gap-3 mt-2"
           >
             {loading ? <Loader2 className="animate-spin" size={18} /> : (
               <>

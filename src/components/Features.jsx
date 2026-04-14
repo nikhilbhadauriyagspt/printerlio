@@ -1,35 +1,36 @@
 import React from 'react';
 import { Truck, RotateCcw, ShieldCheck, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cn } from '../lib/utils';
 
 const features = [
   {
-    icon: <Truck size={18} />,
+    icon: <Truck size={14} />,
     title: "Free Shipping",
-    desc: "All US Orders"
+    desc: "On all orders "
   },
   {
-    icon: <RotateCcw size={18} />,
+    icon: <RotateCcw size={14} />,
     title: "Money Back",
-    desc: "7 Day Guarantee"
+    desc: "7-day easy returns"
   },
   {
-    icon: <ShieldCheck size={18} />,
+    icon: <ShieldCheck size={14} />,
     title: "Safe Checkout",
-    desc: "100% Secure"
+    desc: "100% Secure Payments"
   },
   {
-    icon: <Headphones size={18} />,
+    icon: <Headphones size={14} />,
     title: "Expert Help",
-    desc: "24/7 Support"
+    desc: "24/7 Dedicated Support"
   }
 ];
 
 export default function Features() {
   return (
-    <section className="w-full bg-blue-600 py-3 md:py-4 font-['Poppins'] border-y border-blue-500/30">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-2">
+    <section className="w-full bg-slate-50 border-b border-slate-100 h-10 md:h-12 flex items-center font-poppins overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-10 w-full">
+        <div className="flex items-center justify-between md:justify-center gap-4 md:gap-16 overflow-x-auto no-scrollbar py-1">
           {features.map((item, index) => (
             <motion.div 
               key={index}
@@ -37,20 +38,22 @@ export default function Features() {
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex items-center justify-center gap-3 group px-2"
+              className="flex items-center gap-2 shrink-0 group"
             >
-              <div className="h-8 w-8 shrink-0 rounded-lg bg-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-blue-600 transition-all duration-300">
+              <div className="text-blue-600 group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
-
-              <div className="flex items-center gap-2">
-                <h3 className="text-[12px] md:text-[13px] font-bold text-white leading-none whitespace-nowrap">
+              <div className="flex items-center gap-1.5 whitespace-nowrap">
+                <span className="text-[11px] md:text-[12px] font-bold text-slate-900 uppercase tracking-tight">
                   {item.title}:
-                </h3>
-                <p className="text-blue-100/70 text-[11px] md:text-[12px] font-medium leading-none whitespace-nowrap">
+                </span>
+                <span className="text-slate-500 text-[10px] md:text-[11px] font-medium">
                   {item.desc}
-                </p>
+                </span>
               </div>
+              {index !== features.length - 1 && (
+                <div className="hidden md:block h-3 w-[1px] bg-slate-200 ml-12" />
+              )}
             </motion.div>
           ))}
         </div>

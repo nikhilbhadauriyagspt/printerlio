@@ -91,7 +91,7 @@ export default function Checkout() {
         total: total,
         items: cart,
         payment_details: paymentDetails,
-        source: 'printease.shop',
+        source: 'printingstate.shop',
       };
  
       const response = await fetch(`${API_BASE_URL}/orders`, {
@@ -150,7 +150,7 @@ export default function Checkout() {
   if (step === 3) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center pt-20 px-6 font-['Poppins'] text-slate-900">
-        <SEO title="Order Confirmed | Print Ease" />
+        <SEO title="Order Confirmed | Printing State" />
         <div className="max-w-[500px] w-full text-center space-y-8 p-10 border border-slate-200 shadow-2xl shadow-blue-900/5">
           <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="h-20 w-20 bg-green-50 text-green-600 flex items-center justify-center mx-auto border border-green-100">
             <CheckCircle2 size={40} />
@@ -177,7 +177,7 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-white font-['Poppins'] text-slate-900 pt-32 pb-24">
-      <SEO title="Secure Checkout | Print Ease" />
+      <SEO title="Secure Checkout | Printing State" />
       
       <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20">
         

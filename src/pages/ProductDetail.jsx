@@ -109,7 +109,7 @@ export default function ProductDetail() {
 
   return (
     <div className="bg-white min-h-screen pt-32 pb-24 font-['Poppins'] text-slate-900">
-      <SEO title={`${product.name} | Print Ease`} description={product.description?.substring(0, 160)} />
+      <SEO title={`${product.name} | Printing State`} description={product.description?.substring(0, 160)} />
       
       <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20">
         

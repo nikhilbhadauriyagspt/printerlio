@@ -1,56 +1,87 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import promoImg from '@/assets/bannerr/6.png';
 
 export default function PromoBanner() {
   return (
-    <section className="max-w-[1750px] mx-auto overflow-hidden font-['Poppins']">
-      <div className="flex flex-col lg:flex-row min-h-[400px] md:h-[500px]">
-        {/* --- IMAGE SIDE --- */}
-        <div className="w-full lg:w-1/2 relative overflow-hidden bg-slate-100 min-h-[300px] lg:min-h-full">
-          <img 
-            src={promoImg} 
-            alt="Premium Printers" 
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/20 to-transparent" />
-        </div>
-
-        {/* --- TEXT SIDE (BLUE BG) --- */}
-        <div 
-          className="w-full lg:w-1/2 flex items-center px-6 py-12 md:px-16 lg:px-24 text-white relative"
-          style={{ background: 'linear-gradient(135deg, rgb(30, 58, 138) 0%, rgb(29, 78, 216) 50%, rgb(37, 99, 235) 100%)' }}
+    <section className="w-full bg-white py-10 md:py-14 font-poppins">
+      <div className="max-w-[1950px] mx-auto px-4 md:px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          viewport={{ once: true }}
+          className="overflow-hidden  bg-[#eaf4ff] shadow-sm"
         >
-          <div className="relative z-10 max-w-xl">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
-                Fast & Clear Printing <br /> 
-                <span className="text-blue-200">For Home & Work</span>
-              </h2>
-              <p className="text-blue-50/80 text-sm md:text-base mb-8 leading-relaxed max-w-md">
-                Get the best printing results every day. Our new 2026 printers are very easy to use, fast, and help you save more money on ink.
-              </p>
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[420px] lg:min-h-[520px]">
             
+            {/* LEFT IMAGE SIDE */}
+            <div className="relative h-[300px] sm:h-[380px] lg:h-full bg-white">
+              <img
+                src={promoImg}
+                alt="Promotional banner"
+                className="h-full w-full object-cover"
+              />
 
-              <div className="flex flex-wrap gap-4">
-                <Link 
-                  to="/shop" 
-                  className="px-8 py-4 bg-white text-blue-600  font-bold text-sm flex items-center gap-2 hover:bg-slate-900 hover:text-white transition-all shadow-xl shadow-blue-900/20 group"
+              {/* Optional subtle overlay for premium feel */}
+              <div className="absolute inset-0 bg-black/5" />
+            </div>
+
+            {/* RIGHT CONTENT SIDE */}
+            <div className="relative flex items-center justify-center bg-[#eaf4ff] px-6 py-12 sm:px-10 md:px-14 lg:px-16">
+              <div className="max-w-[1920px] text-center">
+                <motion.span
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="mb-5 inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-slate-700"
                 >
-                  Shop Now <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </Link>
-                
+                  Save More on Smart Printing
+                </motion.span>
+
+                <motion.h2
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="text-[30px] leading-tight sm:text-[38px] md:text-[46px] font-bold  text-slate-900"
+                >
+                  Premium Printers
+                  <br />
+                  For Home & Office
+                </motion.h2>
+
+                <motion.p
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="mx-auto mt-5 max-w-[430px] text-sm sm:text-[15px] leading-7 text-slate-600"
+                >
+                  Discover efficient, high-quality printers with modern design,
+                  smooth wireless performance, and dependable everyday output.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="mt-8"
+                >
+                  <Link
+                    to="/shop"
+                    className="inline-flex items-center justify-center rounded-full bg-blue-700 px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:scale-[1.02]"
+                  >
+                    Shop Now
+                  </Link>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
