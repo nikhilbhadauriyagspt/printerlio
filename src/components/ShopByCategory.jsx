@@ -1,92 +1,99 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { cn } from '../lib/utils';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function ShopByCategory({ categories = [], loading = false }) {
-  const filteredCategories = categories.filter(cat => {
+  const filteredCategories = categories.filter((cat) => {
     const name = cat.name.toLowerCase();
     const slug = cat.slug.toLowerCase();
-    return !name.includes('laptop') && 
-           !slug.includes('laptop') && 
-           !name.includes('computer') && 
-           !name.includes('pc') &&
-           !name.includes('chromebook') &&
-           !name.includes('notebook');
+    return (
+      !name.includes('laptop') &&
+      !slug.includes('laptop') &&
+      !name.includes('computer') &&
+      !name.includes('pc') &&
+      !name.includes('chromebook') &&
+      !name.includes('notebook')
+    );
   });
 
   const subcategories = filteredCategories
-    .flatMap(parent => parent.children || [])
-    .filter(sub => {
+    .flatMap((parent) => parent.children || [])
+    .filter((sub) => {
       const name = sub.name.toLowerCase();
       const slug = sub.slug.toLowerCase();
-      return !name.includes('laptop') && 
-             !slug.includes('laptop') && 
-             !name.includes('computer') && 
-             !name.includes('pc');
+      return (
+        !name.includes('laptop') &&
+        !slug.includes('laptop') &&
+        !name.includes('computer') &&
+        !name.includes('pc')
+      );
     })
-    .slice(0, 10); // Showing all 10 in one row
+    .slice(0, 10);
 
   const getImagePath = (image) => {
     if (image) return `/${image}`;
-    return "https://via.placeholder.com/400x400?text=Category";
+    return "https://via.placeholder.com/300x300?text=Category";
   };
 
   return (
-    <section className="bg-white py-12 md:py-16 w-full font-poppins">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
+    <section className="w-full bg-[#f5f6fa] py-8 md:py-10 font-poppins">
+      <div className="max-w-[1920px] mx-auto px-3 md:px-4">
         
-        {/* --- CENTERED HEADER --- */}
-        <div className="text-center mb-10 md:mb-14">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-2">
-            Shop by <span className="text-blue-600">Category</span>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4 md:mb-5">
+          <h2 className="text-[24px] md:text-[30px] font-extrabold uppercase text-black ">
+            TOP CATEGORIES
           </h2>
-          <p className="text-slate-400 text-[13px] md:text-[14px] font-medium max-w-xl mx-auto">
-            Explore our diverse range of high-performance printers and accessories.
-          </p>
+
+          
         </div>
 
-        {/* --- 10-COLUMN ONE ROW GRID --- */}
-        <div className="flex items-start justify-between gap-4 md:gap-6 overflow-x-auto no-scrollbar pb-4 md:pb-0 md:grid md:grid-cols-10 md:overflow-visible">
+        {/* Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-10 gap-3">
           {loading ? (
-             Array.from({ length: 10 }).map((_, i) => (
-               <div key={i} className="flex-shrink-0 w-24 md:w-full space-y-3">
-                 <div className="aspect-square rounded-2xl bg-slate-50 animate-pulse" />
-                 <div className="h-3 w-12 bg-slate-50 mx-auto rounded-full animate-pulse" />
-               </div>
-             ))
+            Array.from({ length: 10 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-[210px] rounded-lg bg-white animate-pulse border border-gray-200"
+              />
+            ))
           ) : (
             subcategories.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="flex-shrink-0 w-28 md:w-full group"
+                className="group"
               >
-                <Link 
-                  to={`/shop?category=${item.slug}`} 
-                  className="flex flex-col items-center gap-4"
+                <Link
+                  to={`/shop?category=${item.slug}`}
+                  className="h-[210px] bg-[#f7f7f7] border border-[#e6e6e6] rounded-lg flex flex-col items-center justify-center px-3 text-center transition-all duration-300 hover:bg-blue-600 hover:border-blue-600"
                 >
-                  {/* Image Container - Circular & Subtle Border */}
-                  <div className="relative w-full aspect-square overflow-hidden rounded-full bg-white border border-slate-100 group-hover:border-blue-200 transition-all duration-500">
-                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-full p-2 md:p-3">
-                       <img 
-                        src={getImagePath(item.image)} 
-                        alt={item.name} 
-                        className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out rounded-full"
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/400x400?text=" + item.name; }}
-                      />
-                    </div>
+                  {/* Big Circle Image */}
+                  <div className="w-[110px] h-[110px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden flex items-center justify-center bg-white shadow-sm mb-5 shrink-0">
+                    <img
+                      src={getImagePath(item.image)}
+                      alt={item.name}
+                      className="w-full  object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        e.target.src =
+                          "https://via.placeholder.com/300x300?text=" + item.name;
+                      }}
+                    />
                   </div>
 
-                  {/* Text Label - Minimal */}
-                  <div className="text-center px-1">
-                    <h4 className="text-[11px] md:text-[13px] font-bold text-slate-700 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">
-                      {item.name}
-                    </h4>
-                  </div>
+                  {/* Normal Text */}
+                  <span className="text-[15px] md:text-[16px] font-medium text-[#111111] leading-snug transition-all duration-300 group-hover:hidden">
+                    {item.name}
+                  </span>
+
+                  {/* Hover Text */}
+                  <span className="hidden group-hover:block text-[15px] md:text-[16px] font-semibold text-white tracking-wide">
+                    Shop Now
+                  </span>
                 </Link>
               </motion.div>
             ))

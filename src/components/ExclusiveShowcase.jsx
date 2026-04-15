@@ -25,12 +25,12 @@ export default function ExclusiveShowcase() {
       
       {/* --- UNIQUE HEADING: WATERMARK STYLE --- */}
       <div className="relative mb-20">
-        <span className="absolute -top-12 -left-4 text-[120px] font-black text-gray-50 select-none pointer-events-none er uppercase">
+        <span className="absolute -top-12 -left-4 text-[120px] font-bold text-gray-50 select-none pointer-events-none er uppercase">
           Exclusive
         </span>
         <div className="relative z-10">
-          <span className="text-blue-600 font-black text-xs tracking-[0.4em] uppercase block mb-2 ml-1">Limited Edition</span>
-          <h2 className="text-5xl font-black text-slate-900 er uppercase">
+          <span className="text-blue-600 font-bold text-xs tracking-[0.4em] uppercase block mb-2 ml-1">Limited Edition</span>
+          <h2 className="text-5xl font-bold text-slate-900 er uppercase">
             The <span className="italic">Elite</span> Series.
           </h2>
         </div>
@@ -53,18 +53,18 @@ export default function ExclusiveShowcase() {
             {/* Content Side */}
             <div className="w-full lg:w-1/2 flex flex-col items-start text-left">
               <div className={`h-1 w-20 bg-gradient-to-r ${p.accent} mb-8 rounded-full`}></div>
-              <h3 className="text-4xl font-black text-slate-900 er mb-4 uppercase">{p.name}</h3>
+              <h3 className="text-4xl font-bold text-slate-900 er mb-4 uppercase">{p.name}</h3>
               <p className="text-slate-500 text-lg font-bold leading-relaxed mb-8 max-w-lg">{p.desc}</p>
               
               <div className="flex items-center gap-8 mb-10">
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Starting Price</p>
-                  <p className="text-3xl font-black text-slate-900">{p.price}</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Starting Price</p>
+                  <p className="text-3xl font-bold text-slate-900">{p.price}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 w-full sm:w-auto">
-                <Button size="xl" className="flex-1 sm:flex-none bg-black hover:bg-blue-600 text-white rounded-2xl px-10 h-14 font-black text-xs tracking-widest shadow-xl transition-all">
+                <Button size="xl" className="flex-1 sm:flex-none bg-black hover:bg-blue-600 text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-xl transition-all">
                   ORDER NOW <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <button className="h-14 w-14 rounded-2xl border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors">

@@ -1,61 +1,106 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import banner6 from "@/assets/bannerr/promo.jpg";
+import { ArrowRight, Box, Layers, Zap } from 'lucide-react';
+import colImg from "@/assets/bannerr/col.png";
+import promoImg from "@/assets/bannerr/ban4.png";
+import bannerImg from "@/assets/bannerr/banner6.png";
+
+const collectionData = [
+  {
+    title: "Home Office Set",
+    desc: "Everything you need for a productive home workspace.",
+    image: colImg,
+    link: "/shop?category=inkjet-printers",
+    tag: "Essential"
+  },
+  {
+    title: "Enterprise Hub",
+    desc: "High-volume solutions for growing businesses.",
+    image: promoImg,
+    link: "/shop?category=laser-printers",
+    tag: "Professional"
+  },
+  {
+    title: "Creative Studio",
+    desc: "Vibrant photo printing for design professionals.",
+    image: bannerImg,
+    link: "/shop?category=photo-printers",
+    tag: "Premium"
+  }
+];
 
 export default function Collections() {
   return (
-    <section className="w-full bg-white py-10 md:py-14 font-['Poppins']">
-      <div className="max-w-[1950px] mx-auto px-4 md:px-6">
-        <div className="overflow-hidden bg-white">
-          <div className="flex flex-col lg:flex-row min-h-[420px] md:min-h-[500px]">
-            
-            {/* IMAGE SIDE */}
-            <div className="w-full lg:w-1/2 relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden">
-              <img
-                src={banner6}
-                alt="Premium Accessories"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-
-            {/* TEXT SIDE */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center bg-[#eaf4ff] px-6 py-12 md:px-12 lg:px-20">
-              <div className="max-w-[540px] text-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                >
-                  <span className="inline-block mb-5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">
-                    Premium Printing Essentials
-                  </span>
-
-                  <h2 className="text-[30px] sm:text-[38px] md:text-[46px] font-bold leading-[1.15] tracking-[-0.03em] text-slate-900 mb-5">
-                    Premium Accessories
-                    <br />
-                    For Perfect Prints
-                  </h2>
-
-                  <p className="text-slate-600 text-sm md:text-[15px] leading-7 max-w-[430px] mx-auto mb-8">
-                    Find the right ink and parts for your printer with trusted,
-                    quality accessories designed for smooth performance and
-                    better everyday printing.
-                  </p>
-
-                  <Link
-                    to="/shop"
-                    className="inline-flex items-center justify-center rounded-full bg-blue-700 px-8 md:px-10 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800"
-                  >
-                    Shop Now
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-
+    <section className="w-full bg-white py-20 font-poppins overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
+        
+        {/* --- Header Section --- */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-[11px] font-bold mb-4 uppercase tracking-widest">
+             <Layers size={14} />
+             <span>Curated Sets</span>
           </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1A1A1A]  mb-4">
+            Exclusive <span className="text-blue-600">Collections</span>
+          </h2>
+          <p className="text-gray-500 text-[15px] font-medium leading-relaxed">
+            Handpicked printer and accessory bundles tailored for your specific needs.
+          </p>
         </div>
+
+        {/* --- Collections Grid --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {collectionData.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative flex flex-col rounded-[2.5rem] overflow-hidden bg-[#FAF9F6] border border-[#E8E6E1] hover:border-blue-500/20 transition-all duration-500"
+            >
+              {/* Image Container */}
+              <div className="relative h-[280px] overflow-hidden">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Tag */}
+                <div className="absolute top-6 left-6 px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-[11px] font-bold text-[#1A1A1A] shadow-sm uppercase tracking-widest">
+                  {item.tag}
+                </div>
+              </div>
+
+              {/* Content Section */}
+              <div className="p-10 flex flex-col items-center text-center">
+                <h3 className="text-2xl font-bold text-[#1A1A1A] mb-3 group-hover:text-blue-600 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-[14px] text-gray-500 font-medium leading-relaxed mb-8 max-w-[280px]">
+                  {item.desc}
+                </p>
+                
+                <Link 
+                  to={item.link} 
+                  className="inline-flex items-center gap-3 text-[14px] font-bold text-[#1A1A1A] border-b-2 border-[#1A1A1A] pb-1 hover:text-blue-600 hover:border-blue-600 transition-all group/link"
+                >
+                  View Collection 
+                  <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
+              {/* Decorative Corner Element */}
+              <div className="absolute bottom-0 right-0 w-24 h-24 bg-blue-600/5 rounded-tl-[3rem] -z-0" />
+            </motion.div>
+          ))}
+        </div>
+
+      
+
       </div>
     </section>
   );

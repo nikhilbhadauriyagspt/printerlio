@@ -21,7 +21,7 @@ export default function BrandShowcase({ brands = [] }) {
         
         {/* --- MINIMALIST HEADER --- */}
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 leading-tight uppercase">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 leading-tight uppercase">
             Official Partners
           </h2>
           <p className="mt-2 text-slate-400 text-sm font-bold tracking-wide">
@@ -48,7 +48,7 @@ export default function BrandShowcase({ brands = [] }) {
                   
                   {/* Subtle Brand Name Overlay on Hover */}
                   <div className="absolute bottom-2 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest">{brand.name}</span>
+                    <span className="text-[9px] font-bold text-blue-600 uppercase tracking-widest">{brand.name}</span>
                   </div>
                 </div>
               </Link>

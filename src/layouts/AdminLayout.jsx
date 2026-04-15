@@ -52,7 +52,7 @@ const AdminLayout = () => {
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
         <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800">
           <div className="flex items-center">
-            <span className="text-xl font-black er">Printing State<span className="text-blue-500">.</span>ADMIN</span>
+            <span className="text-xl font-bold er">Printistan<span className="text-blue-500">.</span>ADMIN</span>
           </div>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-slate-400 hover:text-white">
             <X size={20} />
@@ -108,10 +108,10 @@ const AdminLayout = () => {
             <div className="h-8 w-px bg-gray-100 mx-1" />
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-end">
-                <p className="text-sm font-black text-slate-900 leading-none">System Admin</p>
+                <p className="text-sm font-bold text-slate-900 leading-none">System Admin</p>
                 <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Superuser</p>
               </div>
-              <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-black text-sm">
+              <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-sm">
                 AD
               </div>
             </div>

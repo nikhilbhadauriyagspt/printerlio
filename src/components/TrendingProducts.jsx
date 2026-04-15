@@ -45,11 +45,11 @@ export default function TrendingProducts() {
         
         {/* --- CENTERED HEADER --- */}
         <div className="text-center mb-16 md:mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-[11px] font-black uppercase tracking-[0.2em] mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] mb-6">
              <Zap size={14} fill="currentColor" />
              <span>Top Trending</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold text-slate-900  mb-6">
             Best <span className="text-blue-600">Sellers</span>
           </h2>
           <p className="text-slate-400 text-[14px] md:text-[16px] font-medium max-w-2xl mx-auto leading-relaxed">
@@ -83,7 +83,7 @@ export default function TrendingProducts() {
                 </div>
                 
                 {/* Badge */}
-                <span className="absolute top-6 left-6 text-[10px] font-black uppercase tracking-widest bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
+                <span className="absolute top-6 left-6 text-[10px] font-bold uppercase tracking-widest bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-100 shadow-sm">
                   {p.tag}
                 </span>
 
@@ -96,7 +96,7 @@ export default function TrendingProducts() {
 
                 {/* Bottom Action (Desktop only) */}
                 <div className="absolute bottom-0 left-0 w-full p-6 translate-y-20 group-hover:translate-y-0 transition-all duration-500">
-                   <button className="w-full h-14 bg-slate-900 text-white rounded-2xl font-black text-[13px] uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors shadow-xl">
+                   <button className="w-full h-14 bg-slate-900 text-white rounded-2xl font-bold text-[13px] uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-colors shadow-xl">
                       <ShoppingCart size={18} />
                       Add to Cart
                    </button>
@@ -106,17 +106,17 @@ export default function TrendingProducts() {
               {/* Product Info */}
               <div className="mt-6 px-2">
                 <div className="flex justify-between items-start mb-2">
-                  <h4 className="font-black text-slate-900 text-[18px] group-hover:text-blue-600 transition-colors truncate flex-1 pr-4">
+                  <h4 className="font-bold text-slate-900 text-[18px] group-hover:text-blue-600 transition-colors truncate flex-1 pr-4">
                     {p.name}
                   </h4>
                   <div className="flex items-center gap-1.5 bg-amber-50 px-2 py-1 rounded-lg">
                     <Star size={12} className="fill-amber-400 text-amber-400" />
-                    <span className="text-[12px] font-black text-amber-600">{p.rating}</span>
+                    <span className="text-[12px] font-bold text-amber-600">{p.rating}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                   <p className="text-blue-600 font-black text-[20px]">{p.price}</p>
-                   <Link to="/shop" className="text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors">
+                   <p className="text-blue-600 font-bold text-[20px]">{p.price}</p>
+                   <Link to="/shop" className="text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-colors">
                       Details <ArrowRight size={12} strokeWidth={3} />
                    </Link>
                 </div>

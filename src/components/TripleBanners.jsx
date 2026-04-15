@@ -1,93 +1,106 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ChevronRight, Zap, Target, PenTool } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 // Assets
-import trip1 from '@/assets/bannerr/trip1.jpg';
-import trip2 from '@/assets/bannerr/trip2.jpg';
+import png1 from '@/assets/bannerr/png-1.png';
+import png2 from '@/assets/bannerr/png-2.png';
+import png3 from '@/assets/bannerr/png-3.png';
 
 const banners = [
   {
     id: "01",
-    label: "Professional Series",
-    title: "Business Powerhouse",
-    desc: "Experience industrial-grade efficiency for high-volume corporate spaces.",
-    image: trip1,
-    gradient: "from-slate-50 to-blue-100/50"
+    tag: "Pro Series",
+    title: "Enterprise Solutions",
+    desc: "Laser precision for high-volume printing.",
+    image: png1,
+    bg: "bg-[#F3F1ED]",
+    accent: "text-blue-600",
+    link: "/shop?category=laser-printers",
+    icon: <Zap size={16} className="text-blue-600" />
   },
   {
     id: "02",
-    label: "Next-Gen Tech",
-    title: "Ultra HD Printing",
-    desc: "Achieve professional-grade clarity with our next-gen imaging technology.",
-    image: trip2,
-    gradient: "from-blue-50 to-indigo-100/50"
+    tag: "Creative",
+    title: "Precision Inkjet",
+    desc: "Vibrant colors for professional results.",
+    image: png2,
+    bg: "bg-blue-50/60",
+    accent: "text-indigo-600",
+    icon: <Target size={16} className="text-indigo-600" />
+  },
+  {
+    id: "03",
+    tag: "Essential",
+    title: "Inks & Toners",
+    desc: "Genuine supplies for flawless prints.",
+    image: png3,
+    bg: "bg-orange-50/40",
+    accent: "text-orange-600",
+    icon: <PenTool size={16} className="text-orange-600" />
   }
 ];
 
 export default function TripleBanners() {
   return (
-    <section className="w-full bg-white py-16 md:py-24 font-poppins">
+    <section className="w-full bg-white py-12 md:py-16 font-poppins overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {banners.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
               className={cn(
-                "relative  overflow-hidden flex flex-col md:flex-row min-h-[400px] border border-slate-100 ",
-                `bg-gradient-to-br ${item.gradient}`
+                "group relative h-[220px] md:h-[240px] rounded-[2rem] overflow-hidden border border-[#E8E6E1] p-6 md:p-8 flex items-center justify-between",
+                item.bg
               )}
             >
-              {/* --- LEFT SIDE: TEXT CONTENT --- */}
-              <div className="flex-1 p-8 md:p-12 lg:p-14 flex flex-col justify-center relative z-10">
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-4 block">
-                  {item.label}
-                </span>
-                <h3 className="text-3xl md:text-3xl font-bold text-slate-900 mb-4 leading-[1.1] t">
+              {/* Content Side */}
+              <div className="relative z-10 w-[60%] flex flex-col justify-center h-full">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="h-8 w-8 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                    {item.icon}
+                  </div>
+                  <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{item.tag}</span>
+                </div>
+                
+                <h3 className="text-xl md:text-2xl font-bold text-[#1A1A1A] leading-tight mb-2">
                   {item.title}
                 </h3>
-                <p className="text-slate-500 text-[14px] md:text-[15px] font-medium leading-relaxed mb-10 max-w-[280px]">
+                <p className="text-[13px] text-gray-500 font-medium leading-tight mb-5 line-clamp-1">
                   {item.desc}
                 </p>
+                
                 <Link 
-                  to="/shop" 
-                  className="group/btn inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[13px] uppercase tracking-widest transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-600/20 w-fit active:scale-95"
+                  to={item.link || "/shop"} 
+                  className="group/link flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-blue-600 transition-colors w-fit"
                 >
-                  Shop Now
-                  <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" strokeWidth={3} />
+                  Shop Now 
+                  <ChevronRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
                 </Link>
               </div>
 
-              {/* --- RIGHT SIDE: CIRCULAR IMAGE CUTOUT --- */}
-              <div className="flex-1 relative flex items-center justify-center p-8 md:p-10 lg:p-12 overflow-hidden">
-                {/* Large Background Circle Decoration */}
-                <div className="absolute w-[80%] aspect-square bg-white/60 rounded-full blur-2xl -right-10 -top-10" />
-                
-                {/* Main Circular Cutout */}
-                <div className="relative w-full aspect-square max-w-[320px] rounded-full bg-white shadow-inner border-[12px] border-white/50 overflow-hidden group-hover:scale-105 transition-transform duration-700 ease-out">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  {/* Subtle Overlay Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                </div>
-
-                {/* Decorative Sparkle */}
-                <div className="absolute top-1/4 right-10 h-2 w-2 bg-blue-400 rounded-full animate-ping opacity-40" />
+              {/* Image Side */}
+              <div className="relative w-[40%] h-full flex items-center justify-center pointer-events-none">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="max-w-full max-h-[85%] object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-out"
+                />
               </div>
+
+              {/* Subtle Decorative Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.div>
           ))}
-
         </div>
+
       </div>
     </section>
   );

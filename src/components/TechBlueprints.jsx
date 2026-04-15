@@ -41,7 +41,7 @@ export default function TechBlueprints() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-blue-600 rounded-full"></div>
         </div>
         <div>
-          <h2 className="text-4xl font-black text-slate-900 er uppercase leading-none">
+          <h2 className="text-4xl font-bold text-slate-900 er uppercase leading-none">
             Printer <br /><span className="text-blue-600 italic">Blueprints.</span>
           </h2>
           <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-4 flex items-center gap-2">
@@ -65,16 +65,16 @@ export default function TechBlueprints() {
             </div>
 
             <div className="mb-12">
-              <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase">{p.series}</span>
-              <h3 className="text-3xl font-black text-slate-900 er mt-1">{p.name}</h3>
+              <span className="text-[10px] font-bold tracking-widest text-blue-600 uppercase">{p.series}</span>
+              <h3 className="text-3xl font-bold text-slate-900 er mt-1">{p.name}</h3>
             </div>
 
             {/* Performance Bars */}
             <div className="space-y-8">
               <div>
                 <div className="flex justify-between items-end mb-2">
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Processing Power</span>
-                  <span className="text-sm font-black text-slate-900">{p.perf}%</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Processing Power</span>
+                  <span className="text-sm font-bold text-slate-900">{p.perf}%</span>
                 </div>
                 <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                   <motion.div 
@@ -88,8 +88,8 @@ export default function TechBlueprints() {
 
               <div>
                 <div className="flex justify-between items-end mb-2">
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Thermal Efficiency</span>
-                  <span className="text-sm font-black text-slate-900">{p.thermal}%</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Thermal Efficiency</span>
+                  <span className="text-sm font-bold text-slate-900">{p.thermal}%</span>
                 </div>
                 <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
                   <motion.div 
@@ -105,10 +105,10 @@ export default function TechBlueprints() {
             <div className="mt-12 pt-8 border-t border-dashed border-gray-200">
                <div className="flex justify-between items-center">
                  <div>
-                   <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Display Standard</p>
-                   <p className="text-sm font-black text-slate-900 uppercase">{p.display}</p>
+                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Display Standard</p>
+                   <p className="text-sm font-bold text-slate-900 uppercase">{p.display}</p>
                  </div>
-                 <button className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Full Specs</button>
+                 <button className="text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:underline">Full Specs</button>
                </div>
             </div>
           </motion.div>

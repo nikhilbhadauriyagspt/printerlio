@@ -33,7 +33,7 @@ export default function Toast() {
             </div>
 
             <div className="flex-1 pr-4">
-              <p className="text-[11px] font-black uppercase tracking-widest leading-tight">
+              <p className="text-[11px] font-bold uppercase tracking-widest leading-tight">
                 {toast.message}
               </p>
             </div>

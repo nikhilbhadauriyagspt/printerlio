@@ -43,16 +43,16 @@ export default function ProConfigurator() {
         >
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/20 to-transparent"></div>
           <div className="relative z-10">
-            <span className="text-[10px] font-black tracking-[0.3em] uppercase text-blue-400 mb-4 block">Engineered for Pro</span>
-            <h3 className="text-5xl font-black er mb-6 leading-none">BUILD YOUR <br />ULTIMATE RIG.</h3>
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">Engineered for Pro</span>
+            <h3 className="text-5xl font-bold er mb-6 leading-none">BUILD YOUR <br />ULTIMATE RIG.</h3>
             <p className="text-slate-400 font-bold max-w-md">Customize every component to match your professional workflow. From memory to graphics.</p>
           </div>
           
           <div className="relative z-10 flex items-center gap-4">
-            <Button size="xl" className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-8 h-12 font-black text-xs tracking-widest transition-all">
+            <Button size="xl" className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-8 h-12 font-bold text-xs tracking-widest transition-all">
               START CONFIGURING
             </Button>
-            <span className="text-[10px] font-black text-slate-500 flex items-center gap-2">
+            <span className="text-[10px] font-bold text-slate-500 flex items-center gap-2">
               <MousePointer2 size={12} /> 14,000+ CONFIGURATIONS
             </span>
           </div>
@@ -74,7 +74,7 @@ export default function ProConfigurator() {
                   <f.icon size={22} />
                 </div>
                 <div>
-                  <h4 className="font-black text-slate-900 text-sm">{f.title}</h4>
+                  <h4 className="font-bold text-slate-900 text-sm">{f.title}</h4>
                   <p className="text-[10px] font-bold text-slate-500 uppercase ">{f.desc}</p>
                 </div>
               </motion.div>

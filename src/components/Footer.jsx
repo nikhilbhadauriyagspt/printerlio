@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, ShieldCheck, Loader2, ChevronRight } from 'lucide-react';
+import { Mail, MapPin, ShieldCheck, Loader2, ChevronRight, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import API_BASE_URL from '../config';
@@ -69,50 +69,64 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white text-slate-900 pt-16 pb-8 font-poppins border-t border-slate-100">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20">
+    <footer className="bg-[#1A1A1A] text-[#FAF9F6] pt-20 pb-10 font-poppins relative overflow-hidden">
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20 relative z-10">
         
         {/* --- TOP ROW: NEWSLETTER --- */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 pb-12 mb-12 border-b border-slate-50">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 pb-16 mb-16 border-b border-white/10">
           <div className="max-w-xl text-center lg:text-left">
-            <h3 className="text-xl md:text-2xl  text-slate-900 ">Stay Connected</h3>
-            <p className="text-slate-400 text-[14px] font-medium mt-1">Join our newsletter for the latest tech updates and exclusive printer deals.</p>
+           
+            <h3 className="text-3xl md:text-4xl  text-white  mb-3">Join Our Newsletter</h3>
+            <p className="text-gray-400 text-[14px] font-medium leading-relaxed">
+              Subscribe to get the latest updates on printing technology and exclusive offers.
+            </p>
           </div>
-          <form onSubmit={handleSubscribe} className="w-full max-w-md flex items-center bg-slate-50 rounded-2xl p-1.5 border border-slate-100 focus-within:border-blue-500 transition-all">
-            <input
-              required type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="flex-1 bg-transparent px-5 py-2.5 text-[13px] font-medium outline-none"
-            />
+
+          <form onSubmit={handleSubscribe} className="w-full max-w-lg flex flex-col sm:flex-row items-center gap-3 bg-white/5 p-2 rounded-[1.5rem] border border-white/10 focus-within:border-blue-500/50 transition-all backdrop-blur-md">
+            <div className="flex-1 flex items-center gap-3 px-4 w-full">
+              <Mail size={20} className="text-gray-400" />
+              <input
+                required type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="w-full bg-transparent py-3 text-[14px] font-medium text-white outline-none placeholder:text-gray-500"
+              />
+            </div>
             <button
               disabled={loading}
-              className="bg-slate-900 text-white px-8 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95"
+              className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3.5 rounded-xl text-[14px] font-bold hover:bg-white hover:text-[#1A1A1A] transition-all active:scale-95 flex items-center justify-center gap-2"
             >
-              {loading ? <Loader2 className="animate-spin" size={16} /> : "Subscribe"}
+              {loading ? <Loader2 className="animate-spin" size={18} /> : "Subscribe"}
             </button>
           </form>
         </div>
 
         {/* --- MAIN GRID --- */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           
           {/* Column 1: Brand */}
-          <div className="col-span-2 lg:col-span-1 space-y-6">
+          <div className="lg:col-span-2 pr-0 lg:pr-12">
             <Link to="/">
-              <img src="/logo/logo.png" alt="Printing State" className="h-8 md:h-10" />
+              <img src="/logo/logo.png" alt="Printistan" className="h-10 md:h-12 mb-6 invert brightness-0" />
             </Link>
-            <p className="text-slate-500 text-[13px] leading-relaxed mt-5 font-medium">
-              The industry benchmark for premium printing solutions. Engineered for excellence, delivering perfection across the USA.
+            <p className="text-gray-400 max-w-sm text-[14px] leading-relaxed font-medium mb-8">
+              Your trusted partner for high-quality printers, inks, and accessories. 
+              We are dedicated to providing the best printing solutions with uncompromising support.
             </p>
+            
           </div>
 
           {/* Column 2: Navigation */}
           <div>
-            <h4 className="text-[11px] font-black text-slate-900 mb-6 uppercase tracking-widest">Shop</h4>
-            <ul className="space-y-3">
+            <h4 className="text-[16px] font-bold text-white mb-6">Quick Links</h4>
+            <ul className="space-y-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className="text-slate-500 hover:text-blue-600 text-[13px] font-bold transition-all">
+                  <Link to={link.path} className="text-gray-400 hover:text-white text-[14px] font-medium transition-colors flex items-center gap-2 group">
+                    <span className="w-1 h-1 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.name}
                   </Link>
                 </li>
@@ -122,11 +136,12 @@ export default function Footer() {
 
           {/* Column 3: Categories */}
           <div>
-            <h4 className="text-[11px] font-black text-slate-900 mb-6 uppercase tracking-widest">Categories</h4>
-            <ul className="space-y-3">
+            <h4 className="text-[16px] font-bold text-white mb-6">Top Categories</h4>
+            <ul className="space-y-4">
               {categories.map((cat) => (
                 <li key={cat.id}>
-                  <Link to={`/shop?category=${cat.slug}`} className="text-slate-500 hover:text-blue-600 text-[13px] font-bold transition-all capitalize">
+                  <Link to={`/shop?category=${cat.slug}`} className="text-gray-400 hover:text-white text-[14px] font-medium transition-colors flex items-center gap-2 group capitalize">
+                    <span className="w-1 h-1 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                     {cat.name}
                   </Link>
                 </li>
@@ -134,55 +149,65 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Legal */}
+          {/* Column 4: Contact */}
           <div>
-            <h4 className="text-[11px] font-black text-slate-900 mb-6 uppercase tracking-widest">Legal</h4>
-            <ul className="space-y-3">
-              {legalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-slate-500 hover:text-blue-600 text-[13px] font-bold transition-all">
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-[16px] font-bold text-white mb-6">Get in Touch</h4>
+            <ul className="space-y-5">
+               <li>
+                 <a href="mailto:info@printistan.shop" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors group">
+                    <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-blue-600 transition-colors">
+                      <Mail size={18} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-0.5">Email Support</p>
+                      <p className="text-[14px] font-bold text-white">info@printistan.shop</p>
+                    </div>
+                 </a>
+               </li>
+               <li>
+                 <div className="flex items-center gap-3 text-gray-400">
+                    <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                      <MapPin size={18} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-0.5">Location</p>
+                      <p className="text-[13px] font-medium text-white leading-snug">
+                        3001 27th St N, Birmingham, AL 35207, USA
+                      </p>
+                    </div>
+                 </div>
+               </li>
             </ul>
           </div>
-
-          {/* Column 5: Contact */}
-          <div className="col-span-2 md:col-span-1">
-            <h4 className="text-[11px] font-black text-slate-900 mb-6 uppercase tracking-widest">Contact</h4>
-            <div className="space-y-5">
-               <div className="flex items-start gap-3">
-                  <MapPin size={18} className="text-blue-600 shrink-0 mt-0.5" />
-                  <span className="text-[13px] font-medium text-slate-500 leading-snug">
-                    Junction Plaza, Ashburn, VA 20147, USA
-                  </span>
-               </div>
-               <div className="flex items-center gap-3">
-                  <Mail size={18} className="text-blue-600 shrink-0" />
-                  <a href="mailto:info@printingstate.shop" className="text-[13px] font-black text-slate-900 hover:text-blue-600 transition-colors">info@printingstate.shop</a>
-               </div>
-            </div>
-          </div>
         </div>
 
-        {/* --- BOTTOM SECTION --- */}
-        <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
-            © 2026 Printing State. All rights reserved.
-          </p>
+        {/* --- BOTTOM SECTION & LEGAL --- */}
+        <div className="pt-8 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-6">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-6">
+            {legalLinks.map((link) => (
+               <Link key={link.name} to={link.path} className="text-gray-500 hover:text-white text-[12px] font-bold transition-colors">
+                 {link.name}
+               </Link>
+            ))}
+          </div>
           
-          <div className="flex items-center gap-8">
-           
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6" />
+          <div className="flex items-center gap-4">
+            <span className="text-[12px] font-bold text-gray-500">Secure Payments via</span>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-5 opacity-80 hover:opacity-100 transition-opacity" />
           </div>
         </div>
 
-        {/* --- DISCLAIMER --- */}
-        <div className="mt-10 text-center border-t border-slate-50 pt-8 opacity-40">
-           <p className="text-slate-600 text-[9px] font-bold uppercase tracking-[0.3em] max-w-2xl mx-auto leading-relaxed">
-Disclaimer - For Informational only. No software installation or distribution.           </p>
+        <div className="mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+           <p className="text-[13px] font-medium text-gray-500">
+             © {new Date().getFullYear()} Printistan. All rights reserved.
+           </p>
+           
+           {/* DISCLAIMER */}
+           <p className="text-gray-600 text-[10px] font-bold uppercase tracking-widest text-center md:text-right max-w-xl">
+             Disclaimer - For Informational only. No software installation or distribution.
+           </p>
         </div>
+
       </div>
     </footer>
   );

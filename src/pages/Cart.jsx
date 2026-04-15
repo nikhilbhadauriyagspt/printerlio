@@ -9,7 +9,8 @@ import {
   ShoppingBag,
   ChevronLeft,
   ShieldCheck,
-  Truck
+  Truck,
+  Sparkles,
 } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import SEO from '@/components/SEO';
@@ -34,54 +35,68 @@ export default function Cart() {
   };
 
   return (
-    <div className="bg-white min-h-screen font-['Poppins'] text-black">
+    <div className="min-h-screen bg-[#f8fafc] font-['Poppins'] text-black">
       <SEO
-        title="Your Shopping Cart | Printing State"
+        title="Your Shopping Cart | Printistan"
         description="Review your selected items before completing your purchase."
       />
 
-      {/* HEADER */}
-      <section className="pt-32 pb-16 md:pb-20 border-b border-black/10 bg-white">
-        <div className="max-w-[1850px] mx-auto px-4 md:px-8 lg:px-14">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-[12px] md:text-[13px] font-semibold tracking-[0.22em] uppercase text-black mb-3">
+      {/* HERO */}
+      <section className="relative overflow-hidden border-b border-black/10 bg-white pt-28 pb-16 md:pt-32 md:pb-20">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-blue-100/70 blur-3xl" />
+          <div className="absolute right-0 top-10 h-72 w-72 rounded-full bg-blue-50 blur-3xl" />
+        </div>
+
+        <div className="relative max-w-[1850px] mx-auto px-4 md:px-8 lg:px-14">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-[11px] md:text-[12px] font-semibold tracking-[0.22em] uppercase text-blue-700">
+              <Sparkles size={14} />
               Your Cart
             </p>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-black">
-              Shopping Cart
+
+            <h1 className="mt-5 text-3xl md:text-5xl lg:text-6xl font-bold leading-tight ">
+              <span className="text-black">Shopping</span>{' '}
+              <span className="text-blue-600">Cart</span>
             </h1>
-            <p className="mt-4 text-sm md:text-base lg:text-lg text-black/60 leading-relaxed max-w-2xl mx-auto">
-              You have {cartCount} items in your cart. Review your selection before moving to checkout.
+
+            <p className="mt-5 text-sm md:text-base lg:text-lg text-black/60 leading-relaxed max-w-2xl mx-auto">
+              You have {cartCount} items in your cart. Review your selection before
+              moving to checkout.
             </p>
           </div>
         </div>
       </section>
 
       {/* CONTENT */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20">
         <div className="max-w-[1850px] mx-auto px-4 md:px-8 lg:px-14">
           <AnimatePresence mode="wait">
             {cart.length === 0 ? (
               <motion.div
                 key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="max-w-4xl mx-auto rounded-[30px] border border-black/10 bg-white px-8 py-16 md:py-20 text-center"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="max-w-4xl mx-auto rounded-[34px] border border-black/10 bg-white px-8 py-16 md:py-20 text-center shadow-[0_12px_40px_rgba(0,0,0,0.04)]"
               >
-                <div className="h-20 w-20 rounded-[24px] border border-black/10 bg-white flex items-center justify-center mx-auto mb-6">
-                  <ShoppingBag size={40} className="text-black/20" />
+                <div className="h-20 w-20 rounded-[24px] border border-blue-100 bg-blue-50 flex items-center justify-center mx-auto mb-6">
+                  <ShoppingBag size={38} className="text-blue-600" />
                 </div>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-black mb-3">
-                  Your cart is empty
+                <h2 className="text-2xl md:text-4xl font-bold mb-3">
+                  <span className="text-black">Your Cart</span>{' '}
+                  <span className="text-blue-600">is Empty</span>
                 </h2>
-                <p className="text-black/60 text-sm md:text-base mb-8 max-w-md mx-auto">
-                  Add some products to your cart to see them here.
+
+                <p className="text-black/60 text-sm md:text-base mb-8 max-w-md mx-auto leading-relaxed">
+                  Add some products to your cart to see them here and continue with
+                  your purchase.
                 </p>
 
                 <Link
                   to="/shop"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-[16px] bg-black text-white text-sm font-semibold"
+                  className="inline-flex items-center gap-2 px-8 py-3 rounded-[16px] bg-black text-white text-sm font-semibold transition-all duration-300 hover:bg-blue-600 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(37,99,235,0.18)]"
                 >
                   Start Shopping <ArrowRight size={16} />
                 </Link>
@@ -94,19 +109,19 @@ export default function Cart() {
                     <motion.div
                       key={item.id}
                       layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      className="rounded-[28px] border border-black/10 bg-white p-5 md:p-6"
+                      className="group rounded-[30px] border border-black/10 bg-white p-5 md:p-6 shadow-[0_8px_24px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_16px_34px_rgba(37,99,235,0.08)]"
                     >
                       <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
                         {/* IMAGE */}
                         <div className="w-full md:w-auto flex justify-center">
-                          <div className="h-32 w-32 md:h-40 md:w-40 rounded-[24px] border border-black/10 bg-white p-4 flex items-center justify-center shrink-0">
+                          <div className="h-32 w-32 md:h-40 md:w-40 rounded-[24px] border border-black/10 bg-[#fbfcff] p-4 flex items-center justify-center shrink-0">
                             <img
                               src={getImagePath(item.images)}
                               alt={item.name}
-                              className="max-w-full max-h-full object-contain"
+                              className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                             />
                           </div>
                         </div>
@@ -122,25 +137,28 @@ export default function Cart() {
                                 Unit Price: $
                                 {parsePrice(item.price).toLocaleString(undefined, {
                                   minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2
+                                  maximumFractionDigits: 2,
                                 })}
                               </p>
                             </div>
 
-                            <p className="text-lg md:text-xl font-bold text-black">
+                            <p className="text-lg md:text-2xl font-bold text-black">
                               $
-                              {(parsePrice(item.price) * item.quantity).toLocaleString(undefined, {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2
-                              })}
+                              {(parsePrice(item.price) * item.quantity).toLocaleString(
+                                undefined,
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }
+                              )}
                             </p>
                           </div>
 
                           <div className="mt-6 pt-5 border-t border-black/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                            <div className="inline-flex items-center gap-3 rounded-[16px] border border-black/10 bg-white px-2 py-2">
+                            <div className="inline-flex items-center gap-3 rounded-[16px] border border-black/10 bg-[#fbfcff] px-2 py-2">
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="h-9 w-9 rounded-[12px] border border-black/10 bg-white flex items-center justify-center text-black disabled:opacity-40"
+                                className="h-9 w-9 rounded-[12px] border border-black/10 bg-white flex items-center justify-center text-black disabled:opacity-40 transition-all duration-300 hover:border-blue-200 hover:text-blue-600"
                                 disabled={item.quantity <= 1}
                               >
                                 <Minus size={14} />
@@ -152,7 +170,7 @@ export default function Cart() {
 
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="h-9 w-9 rounded-[12px] border border-black/10 bg-white flex items-center justify-center text-black"
+                                className="h-9 w-9 rounded-[12px] border border-black/10 bg-white flex items-center justify-center text-black transition-all duration-300 hover:border-blue-200 hover:text-blue-600"
                               >
                                 <Plus size={14} />
                               </button>
@@ -160,7 +178,7 @@ export default function Cart() {
 
                             <button
                               onClick={() => removeFromCart(item.id)}
-                              className="inline-flex items-center gap-2 text-sm font-semibold text-black/60"
+                              className="inline-flex items-center gap-2 text-sm font-semibold text-black/60 transition-all duration-300 hover:text-red-600"
                             >
                               <Trash2 size={16} />
                               Remove
@@ -175,9 +193,14 @@ export default function Cart() {
                 {/* SUMMARY */}
                 <div className="xl:col-span-4">
                   <div className="xl:sticky xl:top-28 space-y-5">
-                    <div className="rounded-[30px] border border-black/10 bg-white p-6 md:p-8">
-                      <h3 className="text-xl md:text-2xl font-bold text-black mb-6">
+                    <div className="rounded-[32px] border border-black/10 bg-white p-6 md:p-8 shadow-[0_10px_35px_rgba(0,0,0,0.04)]">
+                      <p className="text-[11px] md:text-[12px] font-semibold tracking-[0.22em] uppercase text-blue-700 mb-2">
                         Order Summary
+                      </p>
+
+                      <h3 className="text-2xl md:text-3xl font-bold text-black mb-6">
+                        <span className="text-black">Checkout</span>{' '}
+                        <span className="text-blue-600">Overview</span>
                       </h3>
 
                       <div className="space-y-4">
@@ -186,14 +209,14 @@ export default function Cart() {
                           <span className="font-semibold text-black">
                             ${(cartTotal || 0).toLocaleString(undefined, {
                               minimumFractionDigits: 2,
-                              maximumFractionDigits: 2
+                              maximumFractionDigits: 2,
                             })}
                           </span>
                         </div>
 
                         <div className="flex items-center justify-between text-sm md:text-base text-black/60">
                           <span>Shipping</span>
-                          <span className="font-semibold text-black">Free</span>
+                          <span className="font-semibold text-emerald-600">Free</span>
                         </div>
 
                         <div className="pt-4 border-t border-black/10 flex items-center justify-between">
@@ -201,7 +224,7 @@ export default function Cart() {
                           <span className="text-lg font-bold text-black">
                             ${(cartTotal || 0).toLocaleString(undefined, {
                               minimumFractionDigits: 2,
-                              maximumFractionDigits: 2
+                              maximumFractionDigits: 2,
                             })}
                           </span>
                         </div>
@@ -209,22 +232,22 @@ export default function Cart() {
 
                       <button
                         onClick={() => navigate('/checkout')}
-                        className="w-full mt-8 h-12 md:h-14 rounded-[16px] bg-black text-white text-sm font-semibold"
+                        className="w-full mt-8 h-12 md:h-14 rounded-[18px] bg-black text-white text-sm font-semibold transition-all duration-300 hover:bg-blue-600 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(37,99,235,0.18)]"
                       >
                         Checkout Now
                       </button>
 
                       <div className="space-y-4 pt-6">
                         <div className="flex items-center gap-3 text-sm text-black/60">
-                          <div className="h-10 w-10 rounded-[14px] border border-black/10 flex items-center justify-center">
-                            <ShieldCheck size={18} className="text-black" />
+                          <div className="h-10 w-10 rounded-[14px] border border-blue-100 bg-blue-50 flex items-center justify-center">
+                            <ShieldCheck size={18} className="text-blue-600" />
                           </div>
                           <span className="font-medium">Secure checkout process</span>
                         </div>
 
                         <div className="flex items-center gap-3 text-sm text-black/60">
-                          <div className="h-10 w-10 rounded-[14px] border border-black/10 flex items-center justify-center">
-                            <Truck size={18} className="text-black" />
+                          <div className="h-10 w-10 rounded-[14px] border border-blue-100 bg-blue-50 flex items-center justify-center">
+                            <Truck size={18} className="text-blue-600" />
                           </div>
                           <span className="font-medium">Fast shipping across USA</span>
                         </div>
@@ -233,7 +256,7 @@ export default function Cart() {
 
                     <Link
                       to="/shop"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-black/60"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-[16px] border border-black/10 bg-white text-black text-sm font-semibold transition-all duration-300 hover:border-blue-200 hover:text-blue-600 hover:-translate-y-0.5"
                     >
                       <ChevronLeft size={16} />
                       Back to Shopping

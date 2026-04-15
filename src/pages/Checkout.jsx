@@ -91,7 +91,7 @@ export default function Checkout() {
         total: total,
         items: cart,
         payment_details: paymentDetails,
-        source: 'printingstate.shop',
+        source: 'printistan.shop',
       };
  
       const response = await fetch(`${API_BASE_URL}/orders`, {
@@ -150,7 +150,7 @@ export default function Checkout() {
   if (step === 3) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center pt-20 px-6 font-['Poppins'] text-slate-900">
-        <SEO title="Order Confirmed | Printing State" />
+        <SEO title="Order Confirmed | Printistan" />
         <div className="max-w-[500px] w-full text-center space-y-8 p-10 border border-slate-200 shadow-2xl shadow-blue-900/5">
           <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="h-20 w-20 bg-green-50 text-green-600 flex items-center justify-center mx-auto border border-green-100">
             <CheckCircle2 size={40} />
@@ -177,7 +177,7 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-white font-['Poppins'] text-slate-900 pt-32 pb-24">
-      <SEO title="Secure Checkout | Printing State" />
+      <SEO title="Secure Checkout | Printistan" />
       
       <div className="max-w-[1920px] mx-auto px-4 md:px-10 lg:px-20">
         
@@ -281,7 +281,7 @@ export default function Checkout() {
                                         {formData.paymentMethod === method.id && <div className="h-2.5 w-2.5 bg-blue-600" />}
                                     </div>
                                     <div className="space-y-0.5">
-                                        <p className="text-sm font-bold text-slate-900 uppercase tracking-tight">{method.label}</p>
+                                        <p className="text-sm font-bold text-slate-900 uppercase ">{method.label}</p>
                                         <p className="text-[11px] text-slate-500 font-medium">{method.desc}</p>
                                     </div>
                                 </div>
@@ -347,11 +347,11 @@ export default function Checkout() {
               <div className="space-y-4 pt-6 border-t border-slate-200">
                 <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
                   <span>Subtotal</span>
-                  <span className="text-slate-900 font-black">${subtotal.toLocaleString()}</span>
+                  <span className="text-slate-900 font-bold">${subtotal.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between text-xs font-bold text-slate-400 uppercase tracking-widest">
                   <span>Shipping</span>
-                  <span className="text-green-600 font-black">FREE</span>
+                  <span className="text-green-600 font-bold">FREE</span>
                 </div>
                 <div className="h-px bg-slate-200 w-full" />
                 <div className="flex justify-between items-end">

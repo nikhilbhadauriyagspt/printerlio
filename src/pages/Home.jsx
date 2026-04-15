@@ -1,5 +1,6 @@
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
+import AboutSection from "@/components/AboutSection";
 import TopShowcase from "@/components/TopShowcase";
 import SEO from "@/components/SEO";
 import Collections from "@/components/Collections";
@@ -88,27 +89,30 @@ export default function Home() {
   return (
     <div className="bg-white font-jakarta overflow-x-hidden text-slate-900">
       <SEO 
-        title="Printing State | Quality Printers & Accessories"
+        title="Printistan | Quality Printers & Accessories"
         description="Your trusted source for high-quality printers and printing printer. Delivering excellence across the USA."
       />
 
       <Hero />
-      <Features />
+     
+      <AboutSection />
 
-      <ShopByCategory categories={data.categories} loading={data.loading} />
       <TripleBanners />
       
       <BestSellers products={data.all} loading={data.loading} />
       
       <PromoBanner />
-     
+           <ShopByCategory categories={data.categories} loading={data.loading} />
+
       <ProductGrid products={data.mixedArrivals.slice(0, 18)} loading={data.loading} />
+              <Features />
+
        <Collections />
-      <CategorySlider 
+      {/* <CategorySlider 
         title="Office Printers"  
         products={data.printers} 
         loading={data.loading}
-      />
+      /> */}
       <SupportCTA />
        
   </div>

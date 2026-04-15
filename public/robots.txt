@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://printingstate.shop/sitemap.xml
+Sitemap: https://printistan.shop/sitemap.xml

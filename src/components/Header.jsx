@@ -2,49 +2,44 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext';
 import API_BASE_URL from '../config';
-import { 
-  Search, 
-  User, 
-  Heart, 
-  ShoppingCart,
+import {
+  Search,
+  User,
+  Heart,
+  ShoppingBag,
   Menu,
   X,
-  ArrowRight,
   Loader2,
   ChevronDown,
   LayoutGrid,
   ChevronRight,
   LogOut,
   Mail,
-  Zap,
-  Phone,
-  Box
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../lib/utils';
 
 export default function Header() {
   const { cartCount, wishlistCount, openCartDrawer } = useCart();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isAllDropdownOpen, setIsAllDropdownOpen] = useState(false);
+  const [isSearchCategoryOpen, setIsSearchCategoryOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState({ products: [] });
   const [isSearching, setIsSearching] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState({
+    name: 'All Category',
+    slug: '',
+  });
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
-  const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const allDropdownRef = useRef(null);
+  const searchCategoryRef = useRef(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -52,15 +47,11 @@ export default function Header() {
         const res = await fetch(`${API_BASE_URL}/categories`);
         const data = await res.json();
         if (data.status === 'success') {
-          const allCats = data.data.flatMap(parent => parent.children || []);
-          const printerCats = allCats.filter(cat => {
-            const name = cat.name.toLowerCase();
-            return !name.includes('laptop') && !name.includes('computer');
-          });
-          setCategories(printerCats);
+          const allCats = data.data.flatMap((parent) => parent.children || []);
+          setCategories(allCats.filter((cat) => !cat.name.toLowerCase().includes('laptop')));
         }
       } catch (err) {
-        console.error('Category Fetch Error:', err);
+        console.error(err);
       }
     };
     fetchCategories();
@@ -68,60 +59,78 @@ export default function Header() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (allDropdownRef.current && !allDropdownRef.current.contains(event.target)) {
         setIsAllDropdownOpen(false);
       }
+      if (searchCategoryRef.current && !searchCategoryRef.current.contains(event.target)) {
+        setIsSearchCategoryOpen(false);
+      }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
-      if (searchQuery.trim().length > 0) {
+      if (searchQuery.trim().length > 1) {
         setIsSearching(true);
         try {
-          const pRes = await fetch(`${API_BASE_URL}/products?search=${encodeURIComponent(searchQuery)}&limit=5`);
-          const pData = await pRes.json();
-          if (pData.status === 'success') {
-            setSuggestions({ products: pData.data || [] });
+          let url = `${API_BASE_URL}/products?search=${encodeURIComponent(searchQuery)}&limit=5`;
+
+          if (selectedCategory.slug) {
+            url += `&category=${encodeURIComponent(selectedCategory.slug)}`;
           }
-        } catch (err) { 
-          console.error('Search Error:', err); 
-        } finally { 
-          setIsSearching(false); 
+
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data.status === 'success') {
+            setSuggestions({ products: data.data || [] });
+          }
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setIsSearching(false);
         }
       } else {
         setSuggestions({ products: [] });
       }
     };
+
     const timeoutId = setTimeout(fetchSuggestions, 300);
     return () => clearTimeout(timeoutId);
-  }, [searchQuery]);
+  }, [searchQuery, selectedCategory]);
 
-  const handleSearch = (e) => {
+  const handleSearchSubmit = (e) => {
     if (e) e.preventDefault();
+
+    const params = new URLSearchParams();
+
     if (searchQuery.trim()) {
-      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery('');
-      setIsMobileSearchOpen(false);
+      params.set('search', searchQuery.trim());
     }
+
+    if (selectedCategory.slug) {
+      params.set('category', selectedCategory.slug);
+    }
+
+    navigate(`/shop?${params.toString()}`);
+    setSearchQuery('');
+    setIsMobileSearchOpen(false);
+    setSuggestions({ products: [] });
   };
 
   useEffect(() => {
     const checkUser = () => {
-      try {
-        const storedUser = localStorage.getItem('user');
-        if (!storedUser || storedUser === 'undefined') {
-          setUser(null);
-          return;
-        }
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser && parsedUser.role !== 'admin' ? parsedUser : null);
-      } catch (e) {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser && storedUser !== 'undefined') {
+        const parsed = JSON.parse(storedUser);
+        setUser(parsed.role !== 'admin' ? parsed : null);
+      } else {
         setUser(null);
       }
     };
+
     checkUser();
     window.addEventListener('storage', checkUser);
     return () => window.removeEventListener('storage', checkUser);
@@ -129,296 +138,439 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop'},
-    { name: 'About Us', path: '/about' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'Track Order', path: '/orders' },
+    { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
-    { name: 'FAQ', path: '/faq' }
+    { name: 'FAQ', path: '/faq' },
   ];
 
   return (
     <>
-      <header className={cn(
-        "fixed top-0 left-0 right-0 z-[100] w-full transition-all duration-300 font-poppins bg-white",
-        isScrolled ? "shadow-[0_4px_30px_rgba(0,0,0,0.05)]" : ""
-      )}>
-        
-        {/* --- ROW 1: BRAND, SEARCH & ACTIONS --- */}
-        <div className="border-b border-slate-50">
-          <div className="max-w-[1920px] mx-auto px-4 md:px-10 h-20 md:h-24 flex items-center justify-between gap-6 md:gap-12">
-            
-            {/* LOGO AREA */}
-            <div className="flex items-center gap-4 shrink-0">
-              <button 
-                onClick={() => setIsSidebarOpen(true)} 
-                className="lg:hidden p-2 text-slate-900 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all"
+      <header className="w-full bg-[#f3f3f3] font-poppins relative z-[120]">
+        <div className="max-w-[1920px] mx-auto px-4 md:px-8 xl:px-12">
+          {/* Top Row */}
+          <div className="h-[86px] flex items-center justify-between gap-6">
+            {/* Logo */}
+            <div className="flex items-center gap-3 shrink-0">
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="xl:hidden p-2 rounded-lg hover:bg-black/5"
               >
                 <Menu size={24} />
               </button>
-              <Link to="/" className="shrink-0 flex items-center group">
-                <img 
-                  src="/logo/logo.png" 
-                  alt="Printing State" 
-                  className="h-8 md:h-12 transition-transform duration-500 group-hover:scale-105"
-                />
+
+              <Link to="/" className="shrink-0 ml-4 flex items-center">
+                <img src="/logo/logo.png" alt="Printistan" className="h-10 md:h-11 object-contain" />
               </Link>
             </div>
 
-            {/* EXPANDED SEARCH BAR (CENTER) */}
-            <div className="hidden lg:block flex-1 max-w-4xl relative">
-              <form onSubmit={handleSearch} className="relative">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400">
-                  <Search size={20} strokeWidth={2} />
-                </div>
-                <input 
-                  type="text" 
-                  placeholder="Search for premium printers, inks, and accessories..." 
-                  className="w-full bg-slate-50/80 border-2 border-transparent rounded-[2rem] pl-16 pr-6 py-4 text-[14px] font-medium text-slate-900 outline-none focus:bg-white focus:border-blue-600 focus:shadow-[0_10px_40px_rgba(37,99,235,0.1)] transition-all"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                {isSearching && (
-                   <Loader2 size={18} className="absolute right-6 top-1/2 -translate-y-1/2 text-blue-600 animate-spin" />
-                )}
-              </form>
+            {/* Nav */}
+            <nav className="hidden xl:flex ml-60 items-center gap-10">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={cn(
+                    'text-[15px] font-semibold transition-colors relative',
+                    location.pathname === link.path
+                      ? 'text-blue-700'
+                      : 'text-[#111111] hover:text-blue-700'
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
 
-              {/* Suggestions Dropdown */}
-              <AnimatePresence>
-                {searchQuery.length > 0 && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 15 }}
-                    className="absolute top-[calc(100%+12px)] left-0 w-full bg-white shadow-[0_30px_60px_rgba(0,0,0,0.12)] rounded-[2rem] overflow-hidden z-[110] border border-slate-100 p-3"
-                  >
-                    {suggestions.products.length > 0 ? (
-                      <div className="grid gap-2">
-                        {suggestions.products.map(p => (
-                          <Link key={p.id} to={`/product/${p.slug}`} onClick={() => setSearchQuery('')} className="flex items-center gap-4 p-4 hover:bg-blue-50/50 rounded-2xl transition-all group">
-                             <div className="h-14 w-14 bg-white rounded-xl border border-slate-100 flex items-center justify-center p-2 shadow-sm group-hover:border-blue-200">
-                                <img src={p.images ? (typeof p.images === 'string' ? JSON.parse(p.images)[0] : p.images[0]) : ''} alt="" className="max-h-full max-w-full object-contain" />
-                             </div>
-                             <div className="flex-1 min-w-0">
-                                <p className="text-[14px] font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors">{p.name}</p>
-                                <p className="text-[13px] font-black text-blue-600">${p.price}</p>
-                             </div>
-                             <div className="h-8 w-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                               <ChevronRight size={16} />
-                             </div>
-                          </Link>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="p-10 text-center text-sm text-slate-400 font-bold">No results found for "{searchQuery}"</div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            {/* ACTION ICONS */}
-            <div className="flex items-center gap-2 md:gap-5 shrink-0">
-              <button 
-                onClick={() => setIsMobileSearchOpen(true)} 
-                className="lg:hidden h-12 w-12 flex items-center justify-center text-slate-700 hover:bg-slate-100 rounded-2xl transition-all"
+            {/* Right Actions */}
+            <div className="flex items-center mr-10 gap-4 md:gap-7 shrink-0">
+              <button
+                onClick={() => setIsMobileSearchOpen(true)}
+                className="xl:hidden p-2 rounded-full hover:bg-black/5"
               >
-                <Search size={24} />
+                <Search size={22} />
               </button>
 
-              <Link to={user ? "/profile" : "/login"} className="hidden sm:flex flex-col items-center gap-1 group">
-                <div className="h-11 w-11 flex items-center justify-center bg-slate-50 group-hover:bg-blue-50 rounded-2xl transition-all border border-transparent group-hover:border-blue-100 text-slate-600 group-hover:text-blue-600">
-                  <User size={22} strokeWidth={2} />
+              <Link
+                to={user ? '/profile' : '/login'}
+                className="flex items-center gap-3 group"
+              >
+                <div className="w-11 h-11 rounded-full border border-black/15 flex items-center justify-center group-hover:border-[#13c3a3] group-hover:text-blue-700 transition-colors shrink-0">
+                  <User size={22} />
                 </div>
-                <span className="text-[10px] font-bold text-slate-400 group-hover:text-blue-600 transition-colors uppercase tracking-widest">{user ? user.name.split(' ')[0] : 'Sign In'}</span>
+                <div className="hidden xl:flex flex-col -gap-1">
+                  <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">
+                    {user ? 'Profile' : 'Sign In'}
+                  </span>
+                  <span className="text-[14px] font-bold text-[#111] group-hover:text-blue-700 transition-colors">
+                    Account
+                  </span>
+                </div>
               </Link>
 
-              <Link to="/wishlist" className="flex flex-col items-center gap-1 group relative">
-                <div className="h-11 w-11 flex items-center justify-center bg-slate-50 group-hover:bg-rose-50 rounded-2xl transition-all border border-transparent group-hover:border-rose-100 text-slate-600 group-hover:text-rose-500">
-                  <Heart size={22} strokeWidth={2} className={cn(wishlistCount > 0 && "fill-rose-500 text-rose-500")} />
+              <Link
+                to="/wishlist"
+                className="flex items-center gap-3 group"
+              >
+                <div className="relative w-11 h-11 rounded-full border border-black/15 flex items-center justify-center group-hover:border-[#13c3a3] group-hover:text-blue-700 transition-colors shrink-0">
+                  <Heart size={22} className={cn(wishlistCount > 0 && 'fill-black')} />
                   {wishlistCount > 0 && (
-                    <span className="absolute -top-1 -right-1 h-5 w-5 bg-rose-500 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-4 ring-white shadow-sm">
+                    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-blue-700 text-white text-[10px] font-bold flex items-center justify-center">
                       {wishlistCount}
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] font-bold text-slate-400 group-hover:text-rose-500 transition-colors uppercase tracking-widest">Saved</span>
+                <div className="hidden xl:flex flex-col -gap-1">
+                  <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Favorite</span>
+                  <span className="text-[14px] font-bold text-[#111] group-hover:text-blue-700 transition-colors">Wishlist</span>
+                </div>
               </Link>
 
-              <button 
-                onClick={openCartDrawer} 
-                className="h-12 md:h-14 pl-4 pr-5 md:pl-6 md:pr-8 bg-blue-600 hover:bg-slate-900 text-white rounded-2xl transition-all flex items-center gap-4 shadow-xl shadow-blue-500/10 active:scale-95 group ml-2"
+              <button
+                onClick={openCartDrawer}
+                className="flex items-center gap-3 group"
               >
-                <div className="relative">
-                  <ShoppingCart size={22} strokeWidth={2.5} />
-                  <span className="absolute -top-3 -right-3 h-5 w-5 bg-white text-blue-600 text-[11px] font-black rounded-full flex items-center justify-center shadow-lg">
-                    {cartCount}
-                  </span>
+                <div className="relative w-11 h-11 rounded-full border border-black/15 flex items-center justify-center group-hover:border-[#13c3a3] group-hover:text-blue-700 transition-colors shrink-0">
+                  <ShoppingBag size={22} />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-blue-700 text-white text-[10px] font-bold flex items-center justify-center">
+                      {cartCount}
+                    </span>
+                  )}
                 </div>
-                <div className="hidden sm:flex flex-col items-start leading-none">
-                  <span className="text-[10px] font-bold opacity-60 uppercase tracking-tighter">My Cart</span>
-                  <span className="text-[14px] font-black">Checkout</span>
+                <div className="hidden xl:flex flex-col -gap-1 text-left">
+                  <span className="text-[11px] text-gray-500 font-bold uppercase tracking-wider">Your Cart</span>
+                  <span className="text-[14px] font-bold text-[#111] group-hover:text-blue-700 transition-colors">Checkout</span>
                 </div>
               </button>
             </div>
           </div>
-        </div>
 
-        {/* --- ROW 2: CATEGORIES & NAV --- */}
-        <div className="hidden lg:block border-b border-slate-100">
-          <div className="max-w-[1920px] mx-auto px-10 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-8 h-full">
-              
-              {/* CATEGORIES PILL */}
-              <div className="relative" ref={dropdownRef}>
-                 <button 
-                   onClick={() => setIsAllDropdownOpen(!isAllDropdownOpen)}
-                   className={cn(
-                     "flex items-center gap-3 px-6 py-2.5 rounded-full text-[13px] font-bold uppercase tracking-widest transition-all",
-                     isAllDropdownOpen ? "bg-slate-900 text-white" : "bg-blue-50 text-blue-600 hover:bg-blue-100"
-                   )}
-                 >
-                   <LayoutGrid size={18} />
-                   <span>Browse Catalog</span>
-                   <ChevronDown size={14} className={cn("transition-transform duration-300", isAllDropdownOpen && "rotate-180")} />
-                 </button>
-
-                 <AnimatePresence>
-                   {isAllDropdownOpen && (
-                     <motion.div 
-                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
-                       className="absolute top-[calc(100%+10px)] left-0 w-[320px] bg-white shadow-2xl z-[500] border border-slate-100 rounded-3xl overflow-hidden p-3"
-                     >
-                        <div className="grid gap-1">
-                          {categories.slice(0, 10).map(cat => (
-                            <Link 
-                              key={cat.id} to={`/shop?category=${cat.slug}`} onClick={() => setIsAllDropdownOpen(false)}
-                              className="flex items-center justify-between px-5 py-3.5 hover:bg-slate-50 rounded-2xl text-slate-700 hover:text-blue-600 font-bold text-[13px] transition-all"
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="h-1.5 w-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100" />
-                                <span>{cat.name}</span>
-                              </div>
-                              <ChevronRight size={14} className="text-slate-200" />
-                            </Link>
-                          ))}
-                          <div className="mt-2 p-2">
-                            <Link to="/shop" onClick={() => setIsAllDropdownOpen(false)} className="flex items-center justify-center gap-2 py-3 bg-slate-900 text-white rounded-2xl text-[12px] font-bold hover:bg-blue-600 transition-all uppercase tracking-widest">
-                              View All Categories
-                            </Link>
-                          </div>
-                        </div>
-                     </motion.div>
-                   )}
-                 </AnimatePresence>
+          {/* Bottom Search Section */}
+          <div className="pb-6 hidden lg:block">
+            <div className="flex items-center gap-6">
+              {/* Mail Us instead of All Categories */}
+              <div className="relative w-[300px] shrink-0">
+                <a
+                  href="mailto:info@printistan.shop"
+                  className="w-full h-[56px] rounded-full border-[4px] border-black bg-white px-7 flex items-center gap-3 text-[#111111] font-semibold text-[15px] hover:text-blue-700 transition-colors"
+                >
+                  <div className="w-8 h-8 rounded-full bg-blue-700 flex items-center justify-center text-white shrink-0">
+                    <Mail size={16} />
+                  </div>
+                  <span className="truncate">info@printistan.shop</span>
+                </a>
               </div>
 
-              {/* CLEAN NAV LINKS */}
-              <nav className="flex items-center gap-1">
-                {navLinks.map((link) => (
-                  <Link 
-                    key={link.name} to={link.path} 
-                    className={cn(
-                      "px-5 py-2 rounded-full text-[13px] font-bold transition-all relative group",
-                      location.pathname === link.path ? "text-blue-600 bg-blue-50" : "text-slate-500 hover:text-slate-900"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+              {/* Search Bar */}
+              <div className="flex-1 relative">
+                <form onSubmit={handleSearchSubmit} className="relative">
+                  <div className="h-[56px] rounded-full border-[4px] border-black bg-white flex items-center overflow-hidden">
+                    {/* Search Category Selector */}
+                    <div className="relative h-full shrink-0" ref={searchCategoryRef}>
+                      
 
-            <div className="flex items-center gap-6">
-               <Link to="/orders" className="flex items-center gap-2 text-[12px] font-bold text-slate-400 hover:text-blue-600 transition-colors uppercase tracking-widest">
-                  <Box size={16} />
-                  <span>Track Order</span>
-               </Link>
-               <div className="h-4 w-[1px] bg-slate-200" />
-               <div className="flex items-center gap-2 text-[12px] font-bold text-slate-900 tracking-widest">
-                  <Mail size={14} className="text-blue-600" />
-                  <span>info@printingstate.shop</span>
-               </div>
+                      <AnimatePresence>
+                        {isSearchCategoryOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            className="absolute top-[calc(100%+10px)] left-0 w-[280px] bg-white rounded-3xl border border-black/10 shadow-[0_20px_40px_rgba(0,0,0,0.08)] py-3 z-[130] overflow-hidden max-h-[420px] overflow-y-auto"
+                          >
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedCategory({ name: 'All Category', slug: '' });
+                                setIsSearchCategoryOpen(false);
+                              }}
+                              className="w-full text-left px-6 py-3 text-[14px] font-medium text-[#222] hover:bg-[#f7f7f7] hover:text-blue-700 transition-colors"
+                            >
+                              All Category
+                            </button>
+
+                            {categories.map((cat) => (
+                              <button
+                                key={cat.id}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedCategory({
+                                    name: cat.name,
+                                    slug: cat.slug,
+                                  });
+                                  setIsSearchCategoryOpen(false);
+                                }}
+                                className="w-full text-left px-6 py-3 text-[14px] font-medium text-[#222] hover:bg-[#f7f7f7] hover:text-blue-700 transition-colors"
+                              >
+                                {cat.name}
+                              </button>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    <div className="w-px h-7 bg-black/10 shrink-0" />
+
+                    {/* Search Input */}
+                    <div className="relative flex-1 h-full">
+                      <input
+                        type="text"
+                        placeholder="Search"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full h-full bg-transparent px-6 pr-16 text-[16px] text-[#111111] outline-none placeholder:text-[#666]"
+                      />
+
+                      {isSearching && (
+                        <Loader2
+                          size={18}
+                          className="absolute right-24 top-1/2 -translate-y-1/2 text-blue-700 animate-spin"
+                        />
+                      )}
+                    </div>
+
+                    {/* Search Button */}
+                    <button
+                      type="submit"
+                      className="h-[40px] min-w-[140px] mr-2 rounded-full bg-blue-700 hover:bg-[#0fb292] text-white font-semibold text-[15px] transition-colors"
+                    >
+                      SEARCH
+                    </button>
+                  </div>
+                </form>
+
+                {/* Suggestions */}
+                <AnimatePresence>
+                  {searchQuery.length > 1 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-[calc(100%+12px)] left-0 w-full bg-white rounded-[28px] border border-black/10 shadow-[0_24px_60px_rgba(0,0,0,0.08)] p-3 z-[140]"
+                    >
+                      {suggestions.products.length > 0 ? (
+                        <div className="grid gap-1">
+                          {suggestions.products.map((p) => {
+                            let imageSrc = '';
+                            try {
+                              imageSrc = p.images
+                                ? typeof p.images === 'string'
+                                  ? JSON.parse(p.images)[0]
+                                  : p.images[0]
+                                : '';
+                            } catch {
+                              imageSrc = '';
+                            }
+
+                            return (
+                              <Link
+                                key={p.id}
+                                to={`/product/${p.slug}`}
+                                onClick={() => setSearchQuery('')}
+                                className="flex items-center gap-4 p-3 rounded-2xl hover:bg-[#f8f8f8] transition-colors"
+                              >
+                                <div className="h-14 w-14 rounded-xl bg-white border border-gray-100 flex items-center justify-center overflow-hidden shrink-0">
+                                  {imageSrc ? (
+                                    <img
+                                      src={imageSrc}
+                                      alt={p.name}
+                                      className="max-h-full max-w-full object-contain"
+                                    />
+                                  ) : null}
+                                </div>
+
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-[14px] font-semibold text-[#111] truncate">
+                                    {p.name}
+                                  </p>
+                                  <p className="text-[13px] text-blue-700 font-bold">
+                                    ${p.price}
+                                  </p>
+                                </div>
+
+                                <ChevronRight size={16} className="text-black/30" />
+                              </Link>
+                            );
+                          })}
+
+                          <button
+                            onClick={handleSearchSubmit}
+                            className="w-full mt-1 pt-3 border-t border-black/5 text-center text-[13px] font-semibold text-[#555] hover:text-blue-700 transition-colors"
+                          >
+                            View all results for "{searchQuery}"
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="p-8 text-center text-sm text-gray-400 font-medium">
+                          No products found for "{searchQuery}"
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Mobile Search Overlay */}
-        <AnimatePresence>
-          {isMobileSearchOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: -20, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className="lg:hidden absolute top-4 left-4 right-4 bg-white z-[200] p-3 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100"
-            >
-              <div className="flex items-center gap-3">
-                <form onSubmit={handleSearch} className="flex-1 flex items-center bg-slate-50 border border-slate-100 rounded-2xl px-5 h-14">
-                  <Search size={22} className="text-blue-600" />
-                  <input 
-                    autoFocus type="text" placeholder="Search..." 
-                    className="flex-1 bg-transparent px-3 text-base font-bold outline-none text-slate-900"
-                    value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </form>
-                <button onClick={() => setIsMobileSearchOpen(false)} className="h-14 w-14 flex items-center justify-center bg-slate-100 text-slate-500 rounded-2xl transition-colors"><X size={24} /></button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
 
-      {/* --- MOBILE SIDEBAR --- */}
+      {/* Mobile Search Overlay */}
+      <AnimatePresence>
+        {isMobileSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[1000] bg-[#111111]/95 backdrop-blur-md p-6"
+          >
+            <div className="flex justify-between items-center mb-10">
+              <img src="/logo/logo.png" alt="" className="h-8" />
+              <button onClick={() => setIsMobileSearchOpen(false)}>
+                <X size={30} className="text-white" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSearchSubmit} className="relative">
+              <input
+                autoFocus
+                type="text"
+                placeholder="Search products..."
+                className="w-full bg-transparent border-b-2 border-white/20 text-white text-2xl py-4 outline-none focus:border-[#13c3a3] transition-all placeholder:text-white/25"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="submit" className="absolute right-0 top-1/2 -translate-y-1/2 text-white">
+                <Search size={28} />
+              </button>
+
+              {/* Mobile Suggestions */}
+              <AnimatePresence>
+                {searchQuery.length > 1 && suggestions.products.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full left-0 w-full bg-white/10 backdrop-blur-xl rounded-2xl mt-4 p-2 z-[1001] max-h-[60vh] overflow-y-auto"
+                  >
+                    {suggestions.products.map((p) => {
+                      let imageSrc = '';
+                      try {
+                        imageSrc = p.images
+                          ? typeof p.images === 'string'
+                            ? JSON.parse(p.images)[0]
+                            : p.images[0]
+                          : '';
+                      } catch {
+                        imageSrc = '';
+                      }
+
+                      return (
+                        <Link
+                          key={p.id}
+                          to={`/product/${p.slug}`}
+                          onClick={() => {
+                            setSearchQuery('');
+                            setIsMobileSearchOpen(false);
+                          }}
+                          className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/10 transition-colors border-b border-white/5 last:border-0"
+                        >
+                          <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center overflow-hidden shrink-0">
+                            {imageSrc && (
+                              <img src={imageSrc} alt="" className="max-h-full max-w-full object-contain" />
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-sm font-semibold truncate">{p.name}</p>
+                            <p className="text-blue-700 text-xs font-bold">${p.price}</p>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-sm" />
-            <motion.div 
-              initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} 
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 left-0 bottom-0 w-[85%] max-w-[340px] bg-white z-[210] flex flex-col shadow-2xl"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSidebarOpen(false)}
+              className="fixed inset-0 z-[200] bg-black/50 backdrop-blur-sm"
+            />
+
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              className="fixed top-0 left-0 bottom-0 w-[310px] bg-white z-[210] flex flex-col shadow-2xl"
             >
-              <div className="p-8 flex justify-between items-center bg-slate-50">
-                 <img src="/logo/logo.png" alt="" className="h-8" />
-                 <button className="h-12 w-12 flex items-center justify-center text-slate-400" onClick={() => setIsSidebarOpen(false)}><X size={28} /></button>
+              <div className="p-8 border-b border-gray-100 flex justify-between items-center">
+                <img src="/logo/logo.png" alt="" className="h-8" />
+                <button onClick={() => setIsSidebarOpen(false)} className="p-2 bg-gray-50 rounded-lg">
+                  <X size={22} />
+                </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto py-8 px-8 no-scrollbar">
-                <div className="mb-10">
-                  <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6">Explore</p>
-                  <div className="grid gap-2">
-                    {navLinks.map(link => (
-                      <Link 
-                        key={link.name} to={link.path} onClick={() => setIsSidebarOpen(false)} 
-                        className={cn(
-                          "py-4 px-6 rounded-2xl font-bold text-[16px] transition-all",
-                          location.pathname === link.path ? "bg-blue-600 text-white shadow-xl shadow-blue-500/20" : "text-slate-700 active:bg-slate-50"
-                        )}
+              <div className="p-6 flex-1 overflow-y-auto">
+                <nav className="flex flex-col gap-2">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      onClick={() => setIsSidebarOpen(false)}
+                      className="py-3.5 px-4 rounded-xl font-semibold text-[15px] text-gray-700 hover:bg-[#f7f7f7] hover:text-blue-700 transition-all flex items-center justify-between"
+                    >
+                      {link.name}
+                      <ChevronRight size={16} className="opacity-30" />
+                    </Link>
+                  ))}
+                </nav>
+
+                <div className="mt-6 border-t border-gray-100 pt-6">
+                  <p className="px-4 text-[13px] font-semibold text-gray-500 mb-3">Shop Categories</p>
+                  <div className="flex flex-col gap-1">
+                    {categories.slice(0, 10).map((cat) => (
+                      <Link
+                        key={cat.id}
+                        to={`/shop?category=${cat.slug}`}
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="py-3 px-4 rounded-xl text-[14px] font-medium text-gray-700 hover:bg-[#f7f7f7] hover:text-blue-700 transition-all"
                       >
-                        {link.name}
+                        {cat.name}
                       </Link>
                     ))}
                   </div>
                 </div>
-
-                <div>
-                  <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6">Categories</p>
-                  <div className="grid gap-2">
-                    {categories.slice(0, 10).map(cat => (
-                       <Link 
-                        key={cat.id} to={`/shop?category=${cat.slug}`} onClick={() => setIsSidebarOpen(false)} 
-                        className="py-4 px-6 text-slate-700 active:text-blue-600 font-bold text-[16px] transition-all flex items-center justify-between bg-slate-50 rounded-2xl"
-                       >
-                         <span>{cat.name}</span>
-                         <ChevronRight size={18} className="text-slate-300" />
-                       </Link>
-                    ))}
-                  </div>
-                </div>
               </div>
 
-              <div className="p-8 border-t border-slate-100">
+              <div className="p-8 border-t border-gray-100 bg-gray-50/50">
                 {user ? (
-                   <button onClick={() => { localStorage.clear(); window.location.reload(); }} className="w-full py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold text-[14px] flex items-center justify-center gap-2">
-                     <LogOut size={18} /> Logout
-                   </button>
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.reload();
+                    }}
+                    className="w-full py-3.5 bg-white border border-gray-200 text-gray-600 rounded-xl font-bold text-[14px] flex items-center justify-center gap-2 shadow-sm"
+                  >
+                    <LogOut size={18} /> Logout
+                  </button>
                 ) : (
-                  <Link to="/login" onClick={() => setIsSidebarOpen(false)} className="block w-full py-4 bg-blue-600 text-white text-center rounded-2xl font-bold text-[14px] shadow-xl shadow-blue-500/20">
-                    Sign In
+                  <Link
+                    to="/login"
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="block w-full py-4 bg-blue-700 text-white text-center rounded-xl font-bold text-[14px]"
+                  >
+                    Sign In to Account
                   </Link>
                 )}
               </div>
@@ -426,9 +578,8 @@ export default function Header() {
           </>
         )}
       </AnimatePresence>
-      
-      {/* Spacer to prevent content from going under the fixed header */}
-      <div className="h-[120px] md:h-[160px]" />
+
+     
     </>
   );
 }

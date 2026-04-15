@@ -26,11 +26,11 @@ export const MiddleBannerOne = () => (
              transition={{ delay: 0.2 }}
              className="max-w-xl"
            >
-             <span className="inline-block py-1.5 px-4 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest mb-6">Limited Edition</span>
-             <h3 className="text-4xl md:text-6xl font-black text-white er uppercase mb-6 leading-none drop-shadow-lg">
+             <span className="inline-block py-1.5 px-4 rounded-full bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest mb-6">Limited Edition</span>
+             <h3 className="text-4xl md:text-6xl font-bold text-white er uppercase mb-6 leading-none drop-shadow-lg">
                Master your <br /><span className="text-blue-400 italic">Workflow.</span>
              </h3>
-             <Button size="xl" className="bg-white text-black hover:bg-blue-600 hover:text-white rounded-2xl px-10 h-14 font-black text-xs tracking-widest shadow-2xl transition-all">
+             <Button size="xl" className="bg-white text-black hover:bg-blue-600 hover:text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-2xl transition-all">
                CONFIGURE NOW <ArrowRight className="ml-2 h-4 w-4" />
              </Button>
            </motion.div>
@@ -58,12 +58,12 @@ export const MiddleBannerTwo = () => (
              transition={{ delay: 0.2 }}
              className="max-w-xl"
            >
-             <span className="inline-block py-1.5 px-4 rounded-full bg-purple-600 text-white text-[10px] font-black uppercase tracking-widest mb-6">New in Stock</span>
-             <h3 className="text-4xl md:text-6xl font-black text-white er uppercase mb-6 leading-none drop-shadow-lg">
+             <span className="inline-block py-1.5 px-4 rounded-full bg-purple-600 text-white text-[10px] font-bold uppercase tracking-widest mb-6">New in Stock</span>
+             <h3 className="text-4xl md:text-6xl font-bold text-white er uppercase mb-6 leading-none drop-shadow-lg">
                High Speed <br /><span className="text-purple-400 italic">Precision.</span>
              </h3>
              <div className="flex justify-end">
-               <Button size="xl" className="bg-black hover:bg-purple-600 text-white rounded-2xl px-10 h-14 font-black text-xs tracking-widest shadow-2xl transition-all">
+               <Button size="xl" className="bg-black hover:bg-purple-600 text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-2xl transition-all">
                  VIEW PRINTERS <ArrowRight className="ml-2 h-4 w-4" />
                </Button>
              </div>
@@ -92,12 +92,12 @@ export const MiddleBannerThree = () => (
              whileInView={{ opacity: 1, y: 0 }}
              transition={{ delay: 0.2 }}
            >
-             <h3 className="text-4xl md:text-5xl font-black text-white er uppercase mb-2 leading-none">
+             <h3 className="text-4xl md:text-5xl font-bold text-white er uppercase mb-2 leading-none">
                The Print <span className="text-blue-400 italic">Vault.</span>
              </h3>
              <p className="text-white/80 font-bold text-sm uppercase tracking-[0.2em]">Curated Accessories for Professionals</p>
            </motion.div>
-           <Button size="xl" className="bg-white text-black hover:bg-blue-600 hover:text-white rounded-2xl px-10 h-14 font-black text-xs tracking-widest shadow-2xl transition-all mb-2">
+           <Button size="xl" className="bg-white text-black hover:bg-blue-600 hover:text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-2xl transition-all mb-2">
              EXPLORE NOW
            </Button>
         </div>

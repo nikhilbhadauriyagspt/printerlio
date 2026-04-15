@@ -1,86 +1,52 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import promoImg from '@/assets/bannerr/6.png';
+import { ChevronRight } from 'lucide-react';
+import promoImg from '@/assets/bannerr/png-6.png';
 
 export default function PromoBanner() {
   return (
-    <section className="w-full bg-white py-10 md:py-14 font-poppins">
-      <div className="max-w-[1950px] mx-auto px-4 md:px-6">
+    <section className="w-full bg-white py-8 md:py-12 font-poppins">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="overflow-hidden  bg-[#eaf4ff] shadow-sm"
+          className="relative h-[280px] md:h-[320px] rounded-[2rem] bg-[#F3F1ED] border border-[#E8E6E1] overflow-hidden group flex items-center"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[420px] lg:min-h-[520px]">
-            
-            {/* LEFT IMAGE SIDE */}
-            <div className="relative h-[300px] sm:h-[380px] lg:h-full bg-white">
-              <img
-                src={promoImg}
-                alt="Promotional banner"
-                className="h-full w-full object-cover"
-              />
-
-              {/* Optional subtle overlay for premium feel */}
-              <div className="absolute inset-0 bg-black/5" />
-            </div>
-
-            {/* RIGHT CONTENT SIDE */}
-            <div className="relative flex items-center justify-center bg-[#eaf4ff] px-6 py-12 sm:px-10 md:px-14 lg:px-16">
-              <div className="max-w-[1920px] text-center">
-                <motion.span
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="mb-5 inline-block text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-slate-700"
-                >
-                  Save More on Smart Printing
-                </motion.span>
-
-                <motion.h2
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="text-[30px] leading-tight sm:text-[38px] md:text-[46px] font-bold  text-slate-900"
-                >
-                  Premium Printers
-                  <br />
-                  For Home & Office
-                </motion.h2>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="mx-auto mt-5 max-w-[430px] text-sm sm:text-[15px] leading-7 text-slate-600"
-                >
-                  Discover efficient, high-quality printers with modern design,
-                  smooth wireless performance, and dependable everyday output.
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
-                  className="mt-8"
-                >
-                  <Link
-                    to="/shop"
-                    className="inline-flex items-center justify-center rounded-full bg-blue-700 px-8 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-blue-800 hover:scale-[1.02]"
-                  >
-                    Shop Now
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
+          {/* Content Side */}
+          <div className="relative z-10 w-full md:w-1/2 p-8 md:p-16">
+            <span className="text-[11px] font-bold text-blue-600 uppercase tracking-[0.2em] mb-3 block">
+              Limited Time Offer
+            </span>
+            <h2 className="text-2xl md:text-4xl font-bold text-[#1A1A1A] leading-tight mb-4">
+              Reliable Office Printers <br />
+              Up to 25% Off.
+            </h2>
+            <p className="text-[14px] text-gray-500 font-medium mb-8 max-w-sm hidden md:block">
+              Upgrade your workspace with our latest high-performance laser series.
+            </p>
+            <Link
+              to="/shop"
+              className="inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-[14px] transition-all group/btn"
+            >
+              Shop Now
+              <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+            </Link>
           </div>
+
+          {/* Image Side - Simple & Clean */}
+          <div className="absolute right-0 top-0 w-1/2 h-full hidden md:flex items-center justify-end pr-10 lg:pr-20">
+            <img
+              src={promoImg}
+              alt="Promo"
+              className="h-[105%] w-auto object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+
+          {/* Subtle Accent */}
+          <div className="absolute bottom-0 right-0 w-1/3 h-1 bg-blue-600" />
         </motion.div>
       </div>
     </section>
