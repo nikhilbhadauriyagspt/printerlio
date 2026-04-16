@@ -130,7 +130,7 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-white pt-32 pb-24 font-jakarta text-slate-900 overflow-x-hidden">
-      <SEO title="My Account |Printistan" />
+      <SEO title="My Account |Printing Land" />
       
       <div className="w-full px-4 md:px-10">
         
@@ -138,7 +138,7 @@ export default function Profile() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10 mb-12">
           <div className="space-y-2 text-left">
             <h1 className="text-3xl md:text-5xl font-bold  leading-none">
-              Account <span className="text-blue-600">settings</span>
+              Account <span className="text-black">settings</span>
             </h1>
             <p className="text-slate-500 font-medium text-sm md:text-base">Managing your details and order history</p>
           </div>
@@ -146,9 +146,9 @@ export default function Profile() {
           <div className="flex items-center gap-4">
              <div className="text-right hidden sm:block">
                 <p className="text-xs font-bold text-slate-900">{user.name}</p>
-                <a href={`mailto:${user.email}`} className="text-[10px] font-medium text-slate-400 hover:text-blue-600 transition-colors">{user.email}</a>
+                <a href={`mailto:${user.email}`} className="text-[10px] font-medium text-slate-400 hover:text-black transition-colors">{user.email}</a>
              </div>
-             <button onClick={handleLogout} className="h-10 px-5 rounded-lg border border-gray-200 text-xs font-bold hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all flex items-center gap-2">
+             <button onClick={handleLogout} className="h-10 px-5 rounded-lg border border-gray-200 text-xs font-bold hover:bg-red-50 hover:text-black hover:border-red-100 transition-all flex items-center gap-2">
                 <LogOut size={14} /> Sign out
              </button>
           </div>
@@ -171,7 +171,7 @@ export default function Profile() {
                     "w-full flex items-center justify-between px-6 py-4 rounded-xl text-sm font-bold transition-all border",
                     activeTab === tab.id 
                     ? "bg-blue-500 text-slate-900 border-blue-500 shadow-lg shadow-blue-500/10" 
-                    : "bg-white text-slate-500 border-gray-100 hover:border-blue-500 hover:text-blue-600"
+                    : "bg-white text-slate-500 border-gray-100 hover:border-blue-500 hover:text-black"
                   )}
                 >
                   <div className="flex items-center gap-4">
@@ -212,7 +212,7 @@ export default function Profile() {
                         <input 
                           required value={profileForm.name}
                           onChange={(e) => setProfileForm({...profileForm, name: e.target.value})}
-                          className="w-full h-12 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-blue-600 focus:bg-white outline-none text-sm font-medium transition-all"
+                          className="w-full h-12 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-black focus:bg-white outline-none text-sm font-medium transition-all"
                         />
                       </div>
                       <div className="space-y-2">
@@ -220,7 +220,7 @@ export default function Profile() {
                         <input 
                           value={profileForm.phone}
                           onChange={(e) => setProfileForm({...profileForm, phone: e.target.value})}
-                          className="w-full h-12 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-blue-600 focus:bg-white outline-none text-sm font-medium transition-all"
+                          className="w-full h-12 px-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-black focus:bg-white outline-none text-sm font-medium transition-all"
                         />
                       </div>
                     </div>
@@ -229,12 +229,12 @@ export default function Profile() {
                       <textarea 
                         rows="3" value={profileForm.address}
                         onChange={(e) => setProfileForm({...profileForm, address: e.target.value})}
-                        className="w-full p-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-blue-600 focus:bg-white outline-none text-sm font-medium transition-all resize-none"
+                        className="w-full p-5 bg-gray-50 border border-gray-100 rounded-xl focus:border-black focus:bg-white outline-none text-sm font-medium transition-all resize-none"
                       ></textarea>
                     </div>
                     <button 
                       disabled={isUpdating}
-                      className="h-12 px-10 bg-slate-900 text-white rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95 disabled:opacity-50"
+                      className="h-12 px-10 bg-slate-900 text-white rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-black transition-all active:scale-95 disabled:opacity-50"
                     >
                       {isUpdating ? "Saving..." : "Update profile"}
                     </button>
@@ -249,19 +249,19 @@ export default function Profile() {
                 >
                   <div className="flex items-center justify-between mb-2 px-2">
                      <h2 className="text-2xl font-bold ">Recent orders</h2>
-                     <Link to="/orders" className="text-xs font-bold text-blue-600 hover:underline">View all history</Link>
+                     <Link to="/orders" className="text-xs font-bold text-black hover:underline">View all history</Link>
                   </div>
 
                   {loading ? (
                     <div className="py-20 flex flex-col items-center">
-                       <Loader2 className="animate-spin text-blue-600 mb-4" />
+                       <Loader2 className="animate-spin text-black mb-4" />
                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Loading orders</p>
                     </div>
                   ) : orders.length === 0 ? (
                     <div className="bg-gray-50 border border-gray-100 rounded-2xl py-20 text-center">
                       <ShoppingCart size={48} strokeWidth={1} className="text-slate-200 mx-auto mb-6" />
                       <p className="text-sm font-bold text-slate-400">No orders found</p>
-                      <Link to="/shop" className="mt-6 inline-flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest hover:underline">
+                      <Link to="/shop" className="mt-6 inline-flex items-center gap-2 text-black font-bold text-xs uppercase tracking-widest hover:underline">
                          Start shopping <ArrowRight size={14} />
                       </Link>
                     </div>
@@ -283,7 +283,7 @@ export default function Profile() {
                           </div>
                           <div className={cn(
                             "px-4 py-1.5 rounded-full text-[10px] font-bold border w-fit capitalize",
-                            order.status === 'delivered' ? 'bg-green-50 text-green-600 border-green-100' : 'bg-blue-50 text-blue-600 border-blue-100'
+                            order.status === 'delivered' ? 'bg-green-50 text-green-600 border-green-100' : 'bg-blue-50 text-black border-blue-100'
                           )}>
                             {order.status.replace('_', ' ')}
                           </div>
@@ -314,9 +314,9 @@ export default function Profile() {
                         <input 
                           type={showPass ? "text" : "password"} required value={securityForm.password}
                           onChange={(e) => setSecurityForm({...securityForm, password: e.target.value})}
-                          className="w-full h-12 pl-12 pr-12 bg-gray-50 border border-gray-100 rounded-xl focus:border-blue-600 focus:bg-white outline-none text-sm font-medium transition-all"
+                          className="w-full h-12 pl-12 pr-12 bg-gray-50 border border-gray-100 rounded-xl focus:border-black focus:bg-white outline-none text-sm font-medium transition-all"
                         />
-                        <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-blue-600 transition-colors">
+                        <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-black transition-colors">
                           {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
                       </div>
@@ -328,13 +328,13 @@ export default function Profile() {
                         <input 
                           type={showPass ? "text" : "password"} required value={securityForm.confirmPassword}
                           onChange={(e) => setSecurityForm({...securityForm, confirmPassword: e.target.value})}
-                          className="w-full h-12 pl-12 px-6 bg-gray-50 border border-gray-100 rounded-xl focus:border-blue-600 focus:bg-white outline-none text-sm font-medium transition-all"
+                          className="w-full h-12 pl-12 px-6 bg-gray-50 border border-gray-100 rounded-xl focus:border-black focus:bg-white outline-none text-sm font-medium transition-all"
                         />
                       </div>
                     </div>
                     <button 
                       disabled={isUpdating}
-                      className="h-12 px-10 bg-slate-900 text-white rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95 disabled:opacity-50"
+                      className="h-12 px-10 bg-slate-900 text-white rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-black transition-all active:scale-95 disabled:opacity-50"
                     >
                       {isUpdating ? "Processing..." : "Update password"}
                     </button>

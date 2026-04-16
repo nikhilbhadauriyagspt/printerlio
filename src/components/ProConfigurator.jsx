@@ -8,7 +8,7 @@ const features = [
     desc: "Up to 80% faster than previous generations.", 
     icon: Cpu, 
     color: "bg-blue-50/50", 
-    iconColor: "text-blue-600",
+    iconColor: "text-black",
     size: "lg" 
   },
   { 
@@ -41,7 +41,7 @@ export default function ProConfigurator() {
           viewport={{ once: true }}
           className="lg:col-span-8 p-10 rounded-3xl bg-slate-900 text-white relative overflow-hidden flex flex-col justify-between h-[450px]"
         >
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-600/20 to-transparent"></div>
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/20 to-transparent"></div>
           <div className="relative z-10">
             <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-400 mb-4 block">Engineered for Pro</span>
             <h3 className="text-5xl font-bold er mb-6 leading-none">BUILD YOUR <br />ULTIMATE RIG.</h3>
@@ -49,7 +49,7 @@ export default function ProConfigurator() {
           </div>
           
           <div className="relative z-10 flex items-center gap-4">
-            <Button size="xl" className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-8 h-12 font-bold text-xs tracking-widest transition-all">
+            <Button size="xl" className="bg-black hover:bg-blue-700 text-white rounded-xl px-8 h-12 font-bold text-xs tracking-widest transition-all">
               START CONFIGURING
             </Button>
             <span className="text-[10px] font-bold text-slate-500 flex items-center gap-2">

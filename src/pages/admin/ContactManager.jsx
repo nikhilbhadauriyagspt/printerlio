@@ -78,7 +78,7 @@ export default function ContactManager() {
             placeholder="SEARCH MESSAGES..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-12 pr-6 h-14 w-full md:w-96 bg-white border border-gray-200 rounded-2xl focus:border-blue-600 outline-none text-xs font-bold capitalize transition-all"
+            className="pl-12 pr-6 h-14 w-full md:w-96 bg-white border border-gray-200 rounded-2xl focus:border-black outline-none text-xs font-bold capitalize transition-all"
           />
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function ContactManager() {
               {loading ? (
                 <tr>
                   <td colSpan="5" className="py-20 text-center">
-                    <Loader2 className="animate-spin h-8 w-8 text-blue-600 mx-auto mb-4" />
+                    <Loader2 className="animate-spin h-8 w-8 text-black mx-auto mb-4" />
                     <p className="text-[10px] font-bold text-slate-400 capitalize tracking-widest">Loading Messages...</p>
                   </td>
                 </tr>
@@ -109,14 +109,14 @@ export default function ContactManager() {
                   <td className="px-8 py-6">
                     <div className="flex flex-col">
                       <span className="text-sm font-bold text-slate-900 capitalize">{contact.name}</span>
-                      <a href={`mailto:${contact.email}`} className="text-[10px] font-bold text-slate-400 lowercase mt-1 hover:text-blue-600 transition-colors">{contact.email}</a>
+                      <a href={`mailto:${contact.email}`} className="text-[10px] font-bold text-slate-400 lowercase mt-1 hover:text-black transition-colors">{contact.email}</a>
                     </div>
                   </td>
                   <td className="px-8 py-6">
                     <span className="text-xs font-bold text-slate-600 capitalize  line-clamp-1">{contact.subject}</span>
                   </td>
                   <td className="px-8 py-6">
-                    <span className={`px-3 py-1 rounded-full text-[9px] font-bold capitalize tracking-widest border ${contact.status === 'new' ? 'bg-blue-50 text-blue-600 border-blue-100' :
+                    <span className={`px-3 py-1 rounded-full text-[9px] font-bold capitalize tracking-widest border ${contact.status === 'new' ? 'bg-blue-50 text-black border-blue-100' :
                       contact.status === 'read' ? 'bg-amber-50 text-amber-600 border-amber-100' :
                         'bg-emerald-50 text-emerald-600 border-emerald-100'
                       }`}>
@@ -161,12 +161,12 @@ export default function ContactManager() {
             >
               <div className="flex items-center justify-between mb-10 pb-6 border-b border-gray-100">
                 <div className="flex items-center gap-4">
-                  <div className="h-14 w-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <div className="h-14 w-14 rounded-2xl bg-blue-50 text-black flex items-center justify-center">
                     <MessageCircle size={28} />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-slate-900 capitalize ">Inquiry Detail.</h2>
-                    <p className="text-[10px] font-bold text-blue-600 capitalize tracking-widest mt-1">Status: {selectedContact.status}</p>
+                    <p className="text-[10px] font-bold text-black capitalize tracking-widest mt-1">Status: {selectedContact.status}</p>
                   </div>
                 </div>
                 <button onClick={() => setSelectedContact(null)} className="h-12 w-12 rounded-full bg-gray-50 flex items-center justify-center hover:bg-black hover:text-white transition-all">
@@ -178,7 +178,7 @@ export default function ContactManager() {
                 <div className="space-y-1">
                   <p className="text-[9px] font-bold text-slate-400 capitalize tracking-widest">From</p>
                   <p className="text-sm font-bold text-slate-900 capitalize">{selectedContact.name}</p>
-                  <a href={`mailto:${selectedContact.email}`} className="text-xs font-bold text-slate-500 lowercase hover:text-blue-600 transition-colors">{selectedContact.email}</a>
+                  <a href={`mailto:${selectedContact.email}`} className="text-xs font-bold text-slate-500 lowercase hover:text-black transition-colors">{selectedContact.email}</a>
                 </div>
                 <div className="space-y-1 text-right">
                   <p className="text-[9px] font-bold text-slate-400 capitalize tracking-widest">Subject</p>
@@ -195,13 +195,13 @@ export default function ContactManager() {
               <div className="flex gap-4 pt-6 border-t border-gray-100">
                 <button
                   onClick={() => updateStatus(selectedContact.id, 'replied')}
-                  className="flex-1 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center gap-3 text-[10px] font-bold capitalize tracking-widest hover:bg-black transition-all shadow-xl shadow-blue-600/20"
+                  className="flex-1 h-14 bg-black text-white rounded-2xl flex items-center justify-center gap-3 text-[10px] font-bold capitalize tracking-widest hover:bg-black transition-all shadow-xl shadow-black/20"
                 >
                   <CheckCircle size={16} /> Mark as Replied
                 </button>
                 <a
                   href={`mailto:${selectedContact.email}`}
-                  className="flex-1 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center gap-3 text-[10px] font-bold capitalize tracking-widest hover:bg-blue-600 transition-all shadow-xl"
+                  className="flex-1 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center gap-3 text-[10px] font-bold capitalize tracking-widest hover:bg-black transition-all shadow-xl"
                 >
                   <Mail size={16} /> Reply via Email
                 </a>

@@ -1,53 +1,101 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import promoImg from '@/assets/bannerr/png-6.png';
+import React from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-export default function PromoBanner() {
+import colImg from "@/assets/bannerr/col.png";
+import promoImg from "@/assets/bannerr/ban4.png";
+import bannerImg from "@/assets/bannerr/banner6.png";
+import bannerImg2 from "@/assets/bannerr/ban1.png";
+
+const collectionData = [
+  {
+    title: "Office Printers",
+    desc: "High-performance printers designed for smooth workflow and daily office productivity.",
+    image: colImg,
+    link: "/shop?category=laser-printers",
+  },
+  {
+    title: "All-in-One Printers",
+    desc: "Print, scan, and copy with reliable all-in-one solutions for home and business use.",
+    image: promoImg,
+    link: "/shop?category=all-in-one-printers",
+  },
+  {
+    title: "Home Printers",
+    desc: "Easy-to-use printers built for everyday documents, school work, and personal printing.",
+    image: bannerImg,
+    link: "/shop?category=inkjet-printers",
+  },
+  {
+    title: "Printer Accessories",
+    desc: "Professional printing solutions with dependable speed, output quality, and efficiency.",
+    image: bannerImg2,
+    link: "/shop?category=printer-accessories",
+  },
+];
+
+export default function Collections() {
   return (
-    <section className="w-full bg-white py-8 md:py-12 font-poppins">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative h-[280px] md:h-[320px] rounded-[2rem] bg-[#F3F1ED] border border-[#E8E6E1] overflow-hidden group flex items-center"
-        >
-          {/* Content Side */}
-          <div className="relative z-10 w-full md:w-1/2 p-8 md:p-16">
-            <span className="text-[11px] font-bold text-blue-600 uppercase tracking-[0.2em] mb-3 block">
-              Limited Time Offer
-            </span>
-            <h2 className="text-2xl md:text-4xl font-bold text-[#1A1A1A] leading-tight mb-4">
-              Reliable Office Printers <br />
-              Up to 25% Off.
-            </h2>
-            <p className="text-[14px] text-gray-500 font-medium mb-8 max-w-sm hidden md:block">
-              Upgrade your workspace with our latest high-performance laser series.
-            </p>
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-blue-600 text-white px-8 py-3.5 rounded-xl font-bold text-[14px] transition-all group/btn"
+    <section className="w-full bg-[#f6f6f4] py-14 md:py-16 lg:py-20 font-['Poppins']">
+      <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10">
+        {/* Heading */}
+        <div className="text-center mb-12 md:mb-14">
+          <span className="block text-[12px] md:text-[13px] uppercase tracking-[3px] text-[#6b7280] mb-3">
+            Featured Collection
+          </span>
+          <h2 className="text-[32px] md:text-[44px] lg:text-[52px] leading-none font-normal text-black">
+            Explore Our Printers
+          </h2>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-7 lg:gap-8">
+          {collectionData.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              className="group border border-[#dddddd] bg-white"
             >
-              Shop Now
-              <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+              <Link to={item.link} className="block h-full">
+                {/* Image */}
+                <div className="h-[230px] md:h-[250px] bg-[#efefec] border-b border-[#e5e5e5] flex items-center justify-center px-6 overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="max-h-[180px] md:max-h-[200px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                </div>
 
-          {/* Image Side - Simple & Clean */}
-          <div className="absolute right-0 top-0 w-1/2 h-full hidden md:flex items-center justify-end pr-10 lg:pr-20">
-            <img
-              src={promoImg}
-              alt="Promo"
-              className="h-[105%] w-auto object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-700"
-            />
-          </div>
+                {/* Content */}
+                <div className="p-6 md:p-7 text-center">
+                  <span className="inline-block text-[11px] uppercase tracking-[2px] text-[#6b7280] mb-3">
+                    Shop Range
+                  </span>
 
-          {/* Subtle Accent */}
-          <div className="absolute bottom-0 right-0 w-1/3 h-1 bg-blue-600" />
-        </motion.div>
+                  <h3 className="text-[24px] md:text-[26px] leading-tight font-normal text-[#111111] min-h-[62px]">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-4 text-[15px] md:text-[16px] leading-[1.55] text-[#3f3f46] min-h-[96px]">
+                    {item.desc}
+                  </p>
+
+                  <div className="mt-6 pt-5 border-t border-[#ececec]">
+                    <span className="inline-flex items-center gap-2 text-[14px] font-semibold uppercase tracking-[1px] text-[#111111]">
+                      Shop Now
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

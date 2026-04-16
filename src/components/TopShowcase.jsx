@@ -66,11 +66,11 @@ const TopShowcase = ({ products = [] }) => {
                 
                 {/* Details Section (Right) */}
                 <div className="flex-1 min-w-0">
-                    <h3 className="text-[13px] md:text-[14px] font-bold text-slate-800 line-clamp-2 uppercase  leading-tight mb-2 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-[13px] md:text-[14px] font-bold text-slate-800 line-clamp-2 uppercase  leading-tight mb-2 group-hover:text-black transition-colors">
                         {p.name}
                     </h3>
                     <p className="text-xl font-bold text-slate-900 mb-3">${p.price}</p>
-                    <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-blue-600 group-hover:translate-x-1 transition-transform">
+                    <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black group-hover:translate-x-1 transition-transform">
                         Details <ArrowRight size={12} />
                     </div>
                 </div>

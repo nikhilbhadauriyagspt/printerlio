@@ -15,7 +15,7 @@ import {
   ShoppingBag,
   ArrowRight
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import API_BASE_URL from '../config';
 import { cn } from '../lib/utils';
 
@@ -71,7 +71,7 @@ export default function ProductDetail() {
   const getImages = (images) => {
     try {
       const imgs = typeof images === 'string' ? JSON.parse(images) : images;
-      return Array.isArray(imgs) ? imgs.map((img) => `/${img}`) : [];
+      return Array.isArray(imgs) ? imgs.map((img) => img.startsWith('http') ? img : `/${img}`) : [];
     } catch (e) {
       return [];
     }
@@ -80,7 +80,10 @@ export default function ProductDetail() {
   const getImagePath = (images) => {
     try {
       const imgs = typeof images === 'string' ? JSON.parse(images) : images;
-      if (Array.isArray(imgs) && imgs.length > 0) return `/${imgs[0]}`;
+      if (Array.isArray(imgs) && imgs.length > 0) {
+        const img = imgs[0];
+        return img.startsWith('http') ? img : `/${img}`;
+      }
     } catch (e) {}
     return 'https://via.placeholder.com/400x400?text=Product';
   };
@@ -88,22 +91,22 @@ export default function ProductDetail() {
   if (loading) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-white font-['Poppins']">
-        <Loader2 className="mb-5 h-8 w-8 animate-spin text-blue-600" strokeWidth={1.5} />
-        <p className="text-xs font-semibold text-gray-400">Loading details...</p>
+        <Loader2 className="h-10 w-10 animate-spin text-black mb-4" strokeWidth={1.5} />
+        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Loading Catalog</p>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center font-['Poppins'] text-slate-900">
-        <div className="mb-8 flex h-20 w-20 items-center justify-center border border-gray-100 bg-gray-50 rounded-[22px]">
-          <ShoppingBag size={30} className="text-gray-200" />
+      <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center font-['Poppins']">
+        <div className="mb-8 p-6 bg-gray-50 border border-gray-100">
+          <ShoppingBag size={48} className="text-gray-200" />
         </div>
-        <h2 className="mb-4 text-lg font-bold">Product not found</h2>
+        <h2 className="text-2xl font-bold mb-4">Product Not Found</h2>
         <Link
           to="/shop"
-          className="inline-flex h-11 items-center gap-2 rounded-[14px] bg-blue-600 px-7 text-sm font-semibold text-white transition-all hover:bg-slate-900"
+          className="inline-flex h-14 items-center gap-2 bg-black px-10 text-[12px] font-bold uppercase tracking-widest text-white transition-all hover:bg-gray-900"
         >
           Return to Shop
         </Link>
@@ -116,217 +119,154 @@ export default function ProductDetail() {
     images.length > 0 ? images[activeImage] : 'https://via.placeholder.com/600x600?text=No+Image';
 
   return (
-    <div className="min-h-screen bg-white pt-28 pb-20 font-['Poppins'] text-slate-900">
+    <div className="min-h-screen bg-white pt-24 pb-20 font-['Poppins'] text-[#111111]">
       <SEO
-        title={`${product.name} | Printistan`}
+        title={`${product.name} | Printing Land`}
         description={product.description?.substring(0, 160)}
       />
 
-      <div className="mx-auto max-w-[1760px] px-4 md:px-8 lg:px-14">
-        {/* BREADCRUMBS */}
-        <nav className="mb-6 flex items-center gap-2 overflow-hidden text-[11px] font-semibold text-slate-400">
-          <Link to="/" className="shrink-0 transition-colors hover:text-blue-600">
-            Home
-          </Link>
-          <ChevronRight size={11} className="shrink-0" />
-          <Link to="/shop" className="shrink-0 transition-colors hover:text-blue-600">
-            Shop
-          </Link>
-          <ChevronRight size={11} className="shrink-0" />
-          <span className="truncate font-medium capitalize text-slate-900">
-            {product.name}
-          </span>
-        </nav>
+      {/* --- Breadcrumbs --- */}
+      <section className="bg-gray-50 border-b border-gray-100 py-4">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 flex items-center gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest overflow-hidden whitespace-nowrap">
+          <Link to="/" className="hover:text-black transition-colors shrink-0">Home</Link>
+          <ChevronRight size={12} className="shrink-0" />
+          <Link to="/shop" className="hover:text-black transition-colors shrink-0">Shop</Link>
+          <ChevronRight size={12} className="shrink-0" />
+          <span className="text-gray-900 truncate">{product.name}</span>
+        </div>
+      </section>
 
-        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* LEFT: GALLERY */}
-          <div className="space-y-5 lg:col-span-5">
-            <div className="group relative flex aspect-square items-center justify-center overflow-hidden rounded-[28px] border border-slate-200 bg-[#fbfcff] p-6 md:p-10 transition-all">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          
+          {/* --- LEFT: GALLERY --- */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="relative aspect-square bg-gray-50 border border-gray-100 p-8 flex items-center justify-center overflow-hidden">
               <motion.img
                 key={activeImage}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
                 src={mainImage}
                 alt={product.name}
-                className="max-h-[72%] max-w-[72%] object-contain transition-transform duration-700 group-hover:scale-105"
+                className="max-w-full max-h-full object-contain mix-blend-multiply"
               />
-
-              <div className="absolute top-4 right-4 z-20">
-                <button
-                  onClick={() => toggleWishlist(product)}
-                  className={cn(
-                    'flex h-10 w-10 items-center justify-center rounded-[14px] border transition-all duration-300',
-                    isInWishlist(product.id)
-                      ? 'border-red-500 bg-red-500 text-white shadow-lg shadow-red-500/20'
-                      : 'border-slate-200 bg-white text-slate-400 hover:text-red-500'
-                  )}
-                >
-                  <Heart
-                    size={17}
-                    fill={isInWishlist(product.id) ? 'currentColor' : 'none'}
-                  />
-                </button>
-              </div>
+              <button
+                onClick={() => toggleWishlist(product)}
+                className={cn(
+                  'absolute top-6 right-6 w-12 h-12 flex items-center justify-center border transition-all duration-300',
+                  isInWishlist(product.id)
+                    ? 'bg-black border-black text-white'
+                    : 'bg-white border-gray-100 text-gray-300 hover:text-black'
+                )}
+              >
+                <Heart size={20} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
+              </button>
             </div>
 
             {images.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
+              <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImage(idx)}
                     className={cn(
-                      'flex h-16 w-16 shrink-0 items-center justify-center rounded-[16px] border-2 bg-white p-2 transition-all md:h-20 md:w-20',
-                      activeImage === idx
-                        ? 'border-blue-600'
-                        : 'border-slate-100 hover:border-slate-200'
+                      'w-20 h-20 shrink-0 border-2 flex items-center justify-center p-2 bg-white transition-all',
+                      activeImage === idx ? 'border-black' : 'border-gray-100 hover:border-gray-200'
                     )}
                   >
-                    <img src={img} alt="" className="max-h-full max-w-full object-contain" />
+                    <img src={img} alt="" className="max-w-full max-h-full object-contain mix-blend-multiply" />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* RIGHT: INFO */}
-          <div className="space-y-6 lg:col-span-7">
-            <div className="space-y-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-blue-600">
-                Product Details
-              </span>
-
-              <h1 className="text-2xl font-bold leading-snug capitalize text-slate-900 md:text-3xl">
-                {product.name}
-              </h1>
-
-              <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-blue-600">
-                  ${parseFloat(product.price).toLocaleString()}
-                </span>
+          {/* --- RIGHT: INFO --- */}
+          <div className="lg:col-span-6 space-y-10">
+            <div>
+              <span className="inline-block text-[11px] font-bold text-black  tracking-[0.3em] mb-4">Printer Specification</span>
+              <h1 className="text-3xl md:text-4xl text-gray-900  leading-[1.1] mb-6 ">{product.name}</h1>
+              <div className="flex items-baseline gap-4">
+                <span className="text-3xl font-bold text-black">${parseFloat(product.price).toLocaleString()}</span>
                 {product.sale_price && (
-                  <span className="text-base font-medium text-slate-300 line-through">
-                    ${parseFloat(product.sale_price).toLocaleString()}
-                  </span>
+                  <span className="text-lg text-gray-300 line-through font-medium">${parseFloat(product.sale_price).toLocaleString()}</span>
                 )}
               </div>
             </div>
 
-            <div className="space-y-3 rounded-[24px] border border-slate-100 bg-white p-5">
-              <div className="flex items-center gap-2 border-b border-slate-100 pb-2 text-slate-900">
-                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em]">
-                  About this item
-                </h4>
-              </div>
-
-              <p className="text-sm font-medium leading-relaxed text-slate-500">
-                {product.description ||
-                  'A high-performance printer solution engineered for professional and home use. Delivering consistent precision and absolute reliability for all your printing needs.'}
-              </p>
+            <div className="pt-8 border-t border-gray-100">
+               <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-6">Product Description</h4>
+               <p className="text-gray-500 font-medium leading-relaxed text-[15px]">
+                  {product.description || 'A high-performance printer solution engineered for professional and home use. Delivering consistent precision and absolute reliability for all your printing needs.'}
+               </p>
             </div>
 
-            <div className="space-y-6 border-t border-slate-100 pt-6">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-                <div className="flex h-12 w-full items-center justify-between rounded-[16px] border border-slate-200 px-2 sm:w-[145px]">
-                  <button
-                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="flex h-9 w-9 items-center justify-center rounded-[12px] text-slate-900 transition-all hover:bg-slate-50"
-                  >
-                    <Minus size={15} />
-                  </button>
-
-                  <span className="text-sm font-bold text-slate-900">{quantity}</span>
-
-                  <button
-                    onClick={() => setQuantity(quantity + 1)}
-                    className="flex h-9 w-9 items-center justify-center rounded-[12px] text-slate-900 transition-all hover:bg-slate-50"
-                  >
-                    <Plus size={15} />
-                  </button>
-                </div>
-
-                <button
-                  onClick={handleAddToCart}
-                  disabled={isAdded}
-                  className="flex h-12 flex-1 items-center justify-center gap-2 rounded-[16px] bg-blue-600 px-6 text-xs font-bold uppercase tracking-[0.18em] text-white transition-all hover:bg-slate-900 active:scale-95 disabled:opacity-50"
-                >
-                  {isAdded ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
-                  {isAdded ? 'Added to Cart' : 'Buy It Now'}
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 rounded-[24px] border border-slate-100 bg-slate-50 p-4 sm:grid-cols-3">
-                {[
-                  {
-                    icon: <Truck size={18} className="text-blue-600" />,
-                    label: 'Fast shipping across USA',
-                  },
-                  {
-                    icon: <ShieldCheck size={18} className="text-blue-600" />,
-                    label: 'Secured checkout payment',
-                  },
-                  {
-                    icon: <RefreshCcw size={18} className="text-blue-600" />,
-                    label: '7-day easy return policy',
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5">
-                    <div className="shrink-0">{item.icon}</div>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-600">
-                      {item.label}
-                    </span>
+            <div className="pt-10 border-t border-gray-100 space-y-8">
+               <div className="flex flex-col sm:flex-row gap-6">
+                  <div className="flex items-center border border-gray-200 h-14 w-fit">
+                    <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="w-14 h-full flex items-center justify-center hover:bg-gray-50 text-gray-400">
+                      <Minus size={18} />
+                    </button>
+                    <span className="w-14 text-center font-bold">{quantity}</span>
+                    <button onClick={() => setQuantity(quantity + 1)} className="w-14 h-full flex items-center justify-center hover:bg-gray-50 text-gray-400">
+                      <Plus size={18} />
+                    </button>
                   </div>
-                ))}
-              </div>
+                  <button 
+                    onClick={handleAddToCart}
+                    disabled={isAdded}
+                    className="flex-1 h-14 bg-gray-900 text-white font-bold text-[13px] uppercase tracking-widest hover:bg-blue-700 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  >
+                    {isAdded ? <CheckCircle size={20} /> : <ShoppingBag size={20} />}
+                    {isAdded ? 'Item Added' : 'Add to Cart'}
+                  </button>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { icon: <Truck size={20} />, label: 'Fast USA Shipping' },
+                    { icon: <ShieldCheck size={20} />, label: 'Secure Checkout' },
+                    { icon: <RefreshCcw size={20} />, label: 'Easy Returns' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                       <div className="text-black">{item.icon}</div>
+                       {item.label}
+                    </div>
+                  ))}
+               </div>
             </div>
           </div>
         </div>
 
-        {/* RELATED PRODUCTS */}
+        {/* --- RELATED PRODUCTS --- */}
         {relatedProducts.length > 0 && (
-          <div className="mt-20 border-t border-slate-100 pt-12">
-            <div className="mb-8 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-slate-900 md:text-2xl">
-                Recommended Products
-              </h2>
-              <Link
-                to="/shop"
-                className="group flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-blue-600"
-              >
-                See all products
-                <ArrowRight
-                  size={13}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </Link>
+          <div className="mt-32 pt-20 border-t border-gray-100">
+            <div className="flex items-center justify-between mb-12">
+               <div>
+                  <h2 className="text-2xl font-bold  uppercase">Recommended Hardware</h2>
+                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-1">Based on your selection</p>
+               </div>
+               <Link to="/shop" className="text-[11px] font-bold text-black uppercase tracking-widest border-b-2 border-black pb-1 hover:text-gray-900 hover:border-gray-900 transition-all">
+                 Browse Shop
+               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8">
-              {relatedProducts.slice(0, 8).map((p) => (
-                <div
-                  key={p.id}
-                  className="group flex h-full flex-col overflow-hidden rounded-[20px] border border-slate-200 bg-white transition-all hover:border-blue-400"
-                >
-                  <div className="relative flex aspect-square w-full items-center justify-center border-b border-slate-100 bg-white p-3">
-                    <Link to={`/product/${p.slug}`} className="absolute inset-0 z-10" />
-                    <img
-                      src={getImagePath(p.images)}
-                      className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                      alt={p.name}
-                    />
-                  </div>
-
-                  <div className="flex flex-1 flex-col p-3">
-                    <Link to={`/product/${p.slug}`}>
-                      <h3 className="mb-2 line-clamp-2 text-[11px] font-semibold uppercase text-slate-800 transition-colors group-hover:text-blue-600">
-                        {p.name}
-                      </h3>
-                    </Link>
-                    <span className="mt-auto text-sm font-bold text-slate-900">
-                      ${parseFloat(p.price).toLocaleString()}
-                    </span>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-0 border-t border-l border-gray-100">
+              {relatedProducts.slice(0, 5).map((p) => (
+                <div key={p.id} className="group relative bg-white border-r border-b border-gray-100 p-8 hover:bg-gray-50 transition-all flex flex-col">
+                   <Link to={`/product/${p.slug}`} className="aspect-square w-full mb-8 flex items-center justify-center overflow-hidden">
+                      <img 
+                        src={getImagePath(p.images)} 
+                        alt={p.name}
+                        className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
+                      />
+                   </Link>
+                   <div className="mt-auto text-center">
+                      <Link to={`/product/${p.slug}`} className="block mb-4">
+                         <h4 className="font-bold text-gray-900 uppercase  line-clamp-2 min-h-[3rem] text-sm leading-tight">{p.name}</h4>
+                      </Link>
+                      <p className="text-lg font-bold text-black">${parseFloat(p.price).toLocaleString()}</p>
+                   </div>
                 </div>
               ))}
             </div>

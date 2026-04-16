@@ -27,20 +27,20 @@ export default function QuickPicks({ products = [] }) {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="h-[1px] w-4 bg-blue-600 animate-pulse" />
-              <span className="text-[9px] font-bold text-blue-600 uppercase tracking-[0.4em]">Essential Helpers</span>
+              <span className="h-[1px] w-4 bg-black animate-pulse" />
+              <span className="text-[9px] font-bold text-black uppercase tracking-[0.4em]">Essential Helpers</span>
             </div>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-[0.85]  flex flex-col">
               <span className="capitalize">Quick</span>
-              <span className="italic text-blue-600 capitalize">Picks.</span>
+              <span className="italic text-black capitalize">Picks.</span>
             </h2>
           </div>
           
           <div className="flex items-center gap-2 mb-2">
-             <button className="qp-prev h-12 w-12 bg-white border border-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group shadow-sm cursor-pointer">
+             <button className="qp-prev h-12 w-12 bg-white border border-slate-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 group shadow-sm cursor-pointer">
                 <ChevronLeft size={20} />
              </button>
-             <button className="qp-next h-12 w-12 bg-white border border-slate-200 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300 group shadow-sm cursor-pointer">
+             <button className="qp-next h-12 w-12 bg-white border border-slate-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 group shadow-sm cursor-pointer">
                 <ChevronRight size={20} />
              </button>
           </div>
@@ -77,9 +77,9 @@ export default function QuickPicks({ products = [] }) {
                   
                   <div className="flex-1 flex flex-col pt-6 border-t border-slate-50">
                     <div className="flex items-center justify-between mb-2">
-                       <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{p.brand_name || 'Authentic'}</span>
+                       <span className="text-[10px] font-bold text-black uppercase tracking-widest">{p.brand_name || 'Authentic'}</span>
                     </div>
-                    <h4 className="text-lg font-bold text-slate-900 capitalize  line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight mb-4">{p.name.toLowerCase()}</h4>
+                    <h4 className="text-lg font-bold text-slate-900 capitalize  line-clamp-2 group-hover:text-black transition-colors leading-tight mb-4">{p.name.toLowerCase()}</h4>
                     
                     <div className="mt-auto flex items-center justify-between">
                        <p className="text-2xl font-bold text-slate-900 er">${p.price}</p>
@@ -93,7 +93,7 @@ export default function QuickPicks({ products = [] }) {
                           "h-12 w-12 flex items-center justify-center transition-all duration-300",
                           cart.find(i => i.id === p.id) 
                             ? "bg-emerald-500 text-white" 
-                            : "bg-slate-900 text-white hover:bg-blue-600"
+                            : "bg-slate-900 text-white hover:bg-black"
                         )}
                       >
                         {cart.find(i => i.id === p.id) ? <Check size={18} strokeWidth={3} /> : <Plus size={22} />}

@@ -26,12 +26,12 @@ export default function BestSellers({ products = [], loading = false }) {
         {/* --- Header Section --- */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-600 rounded-lg text-[11px] font-bold mb-3 uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-black rounded-lg text-[11px] font-bold mb-3 uppercase tracking-widest">
                <Zap size={14} fill="currentColor" />
                <span>Top Trending</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A1A]  leading-none mb-3">
-              Best <span className="text-blue-600">Sellers</span>
+              Best <span className="text-black">Sellers</span>
             </h2>
             <p className="text-gray-500 text-[14px] font-medium leading-relaxed">
               Curated collection of our highest performing printing solutions.
@@ -39,7 +39,7 @@ export default function BestSellers({ products = [], loading = false }) {
           </div>
           <Link 
             to="/shop" 
-            className="group flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-blue-600 transition-colors"
+            className="group flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-black transition-colors"
           >
             Explore All <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -71,7 +71,7 @@ export default function BestSellers({ products = [], loading = false }) {
                   
                   {/* Quick Action Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all duration-500 bg-black/5 backdrop-blur-[2px]">
-                     <Link to={`/product/${p.slug}`} className="h-8 w-8 rounded-lg bg-white text-[#1A1A1A] flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all shadow-lg active:scale-90">
+                     <Link to={`/product/${p.slug}`} className="h-8 w-8 rounded-lg bg-white text-[#1A1A1A] flex items-center justify-center hover:bg-black hover:text-white transition-all shadow-lg active:scale-90">
                                            <Eye size={14} />
                                         </Link>
                     <button className="h-8 w-8 rounded-lg bg-white text-[#1A1A1A] flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-xl active:scale-90">
@@ -83,7 +83,7 @@ export default function BestSellers({ products = [], loading = false }) {
                 {/* Info Section */}
                 <div className="flex flex-col flex-1 px-1">
                   <Link to={`/product/${p.slug}`} className="block mb-2 flex-1">
-                    <h4 className="font-bold text-[#1A1A1A] text-[13px] group-hover:text-blue-600 transition-colors leading-snug line-clamp-2">
+                    <h4 className="font-bold text-[#1A1A1A] text-[13px] group-hover:text-black transition-colors leading-snug line-clamp-2">
                       {p.name}
                     </h4>
                   </Link>
@@ -91,7 +91,7 @@ export default function BestSellers({ products = [], loading = false }) {
                   <div className="flex items-center justify-between mt-auto">
                     <p className="text-[#1A1A1A] font-bold text-[15px] leading-none">${p.price}</p>
                     
-                    <button className="h-9 w-9 rounded-xl bg-[#1A1A1A] text-white flex items-center justify-center hover:bg-blue-600 transition-all group/cart active:scale-90">
+                    <button className="h-9 w-9 rounded-xl bg-[#1A1A1A] text-white flex items-center justify-center hover:bg-black transition-all group/cart active:scale-90">
                       <ShoppingCart size={16} strokeWidth={2.5} />
                     </button>
                   </div>

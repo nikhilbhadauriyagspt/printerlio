@@ -81,11 +81,11 @@ export default function OrderManager() {
 
   const statusColors = {
     pending: 'bg-amber-50 text-amber-600 border-amber-100',
-    processing: 'bg-blue-50 text-blue-600 border-blue-100',
+    processing: 'bg-blue-50 text-black border-blue-100',
     shipped: 'bg-indigo-50 text-indigo-600 border-indigo-100',
     out_for_delivery: 'bg-purple-50 text-purple-600 border-purple-100',
     delivered: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-    cancelled: 'bg-red-50 text-red-600 border-red-100'
+    cancelled: 'bg-red-50 text-black border-red-100'
   };
 
   return (
@@ -104,7 +104,7 @@ export default function OrderManager() {
             placeholder="SEARCH BY ORDER ID, NAME, EMAIL..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-12 pr-6 h-14 w-full md:w-96 bg-white border border-gray-200 rounded-2xl focus:border-blue-600 outline-none text-xs font-bold capitalize transition-all"
+            className="pl-12 pr-6 h-14 w-full md:w-96 bg-white border border-gray-200 rounded-2xl focus:border-black outline-none text-xs font-bold capitalize transition-all"
           />
         </div>
       </div>
@@ -126,7 +126,7 @@ export default function OrderManager() {
               {loading ? (
                 <tr>
                   <td colSpan="5" className="py-20 text-center">
-                    <Loader2 className="animate-spin h-8 w-8 text-blue-600 mx-auto mb-4" />
+                    <Loader2 className="animate-spin h-8 w-8 text-black mx-auto mb-4" />
                     <p className="text-[10px] font-bold text-slate-400 capitalize tracking-widest">Loading Orders...</p>
                   </td>
                 </tr>
@@ -141,12 +141,12 @@ export default function OrderManager() {
                   <td className="px-8 py-6">
                     <div className="flex flex-col">
                       <span className="text-sm font-bold text-slate-900 capitalize">{order.first_name} {order.last_name}</span>
-                      <a href={`mailto:${order.guest_email}`} className="text-[10px] font-bold text-slate-400 capitalize mt-1 hover:text-blue-600 transition-colors">{order.guest_email}</a>
+                      <a href={`mailto:${order.guest_email}`} className="text-[10px] font-bold text-slate-400 capitalize mt-1 hover:text-black transition-colors">{order.guest_email}</a>
                     </div>
                   </td>
                   <td className="px-8 py-6">
                     <div className="flex flex-col">
-                      <span className="text-sm font-bold text-blue-600">${order.total_amount}</span>
+                      <span className="text-sm font-bold text-black">${order.total_amount}</span>
                       <span className="text-[10px] font-bold text-slate-400 capitalize mt-1">{order.payment_method}</span>
                     </div>
                   </td>
@@ -188,7 +188,7 @@ export default function OrderManager() {
               <div className="p-8 border-b border-gray-100 flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold text-slate-900  capitalize">Order Details.</h2>
-                  <p className="text-[10px] font-bold text-blue-600 capitalize tracking-widest mt-1">#PFX-{selectedOrder.id}</p>
+                  <p className="text-[10px] font-bold text-black capitalize tracking-widest mt-1">#PFX-{selectedOrder.id}</p>
                 </div>
                 <button onClick={() => setSelectedOrder(null)} className="h-12 w-12 rounded-full bg-gray-50 flex items-center justify-center hover:bg-black hover:text-white transition-all">
                   <X size={20} />
@@ -205,7 +205,7 @@ export default function OrderManager() {
                         key={s}
                         onClick={() => updateStatus(selectedOrder.id, s)}
                         className={`px-4 py-3 rounded-xl text-[9px] font-bold capitalize tracking-widest border transition-all ${selectedOrder.status === s
-                          ? 'bg-blue-600 border-blue-600 text-white'
+                          ? 'bg-black border-black text-white'
                           : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:text-white'
                           }`}
                       >
@@ -223,7 +223,7 @@ export default function OrderManager() {
                     </div>
                     <div className="bg-gray-50 rounded-2xl p-6">
                       <p className="text-sm font-bold text-slate-900 capitalize">{selectedOrder.first_name} {selectedOrder.last_name}</p>
-                      <div className="flex items-center gap-2 text-xs font-bold text-slate-500 mt-2 lowercase"><Mail size={12} /> <a href={`mailto:${selectedOrder.guest_email}`} className="hover:text-blue-600 transition-colors">{selectedOrder.guest_email}</a></div>
+                      <div className="flex items-center gap-2 text-xs font-bold text-slate-500 mt-2 lowercase"><Mail size={12} /> <a href={`mailto:${selectedOrder.guest_email}`} className="hover:text-black transition-colors">{selectedOrder.guest_email}</a></div>
                       <div className="flex items-center gap-2 text-xs font-bold text-slate-500 mt-1 capitalize"><Phone size={12} /> {selectedOrder.phone}</div>
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export default function OrderManager() {
                           </div>
                           <p className="text-xs font-bold text-slate-900 capitalize truncate max-w-[250px]">{item.product_name}</p>
                         </div>
-                        <p className="text-xs font-bold text-blue-600">${item.price}</p>
+                        <p className="text-xs font-bold text-black">${item.price}</p>
                       </div>
                     ))}
                   </div>
@@ -286,7 +286,7 @@ export default function OrderManager() {
                                   <>
                                     <div className="flex justify-between">
                                       <span className="text-[9px] font-bold text-slate-400 capitalize">Transaction ID</span>
-                                      <span className="text-[9px] font-mono font-bold text-blue-600">{details.id || 'N/A'}</span>
+                                      <span className="text-[9px] font-mono font-bold text-black">{details.id || 'N/A'}</span>
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-[9px] font-bold text-slate-400 capitalize">Payer Email</span>

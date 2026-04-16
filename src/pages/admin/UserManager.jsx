@@ -106,7 +106,7 @@ export default function UserManager() {
                 <tr key={u.id} className="hover:bg-gray-50/50 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
+                      <div className="h-10 w-10 bg-blue-100 text-black rounded-full flex items-center justify-center font-bold">
                         {u.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="flex flex-col">
@@ -119,7 +119,7 @@ export default function UserManager() {
                     <div className="flex flex-col gap-1">
                       <div className="flex items-center gap-2 text-slate-600 font-medium">
                         <Mail size={14} className="text-slate-400" />
-                        <a href={`mailto:${u.email}`} className="hover:text-blue-600 transition-colors">{u.email}</a>
+                        <a href={`mailto:${u.email}`} className="hover:text-black transition-colors">{u.email}</a>
                       </div>
                       {u.phone && (
                         <div className="flex items-center gap-2 text-slate-600 font-medium">

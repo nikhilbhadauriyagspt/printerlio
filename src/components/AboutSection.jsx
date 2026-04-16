@@ -1,90 +1,67 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Award, Users, Zap } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export default function AboutSection() {
-  const points = [
-    { title: "Reliable Quality", desc: "We source only the highest-rated printers and genuine accessories from world-class brands.", icon: <Award className="text-blue-600" size={20} /> },
-    { title: "Expert Support", desc: "Our team of  experts is available 24/7 to help you choose and set up your perfect printing solution.", icon: <Users className="text-blue-600" size={20} /> },
-    { title: "Fast Logistics", desc: "With our optimized supply chain, we ensure your orders reach you faster than anyone else in the industry.", icon: <Zap className="text-blue-600" size={20} /> },
-  ];
+// Using your local asset
+import aboutBanner from '@/assets/bannerr/bannn1.png';
 
+export default function AboutSection() {
   return (
-    <section className="w-full py-20 bg-white overflow-hidden font-poppins">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        <div className="flex flex-col lg:flex-row items-center gap-16 md:gap-24">
+    <section className="w-full py-24 bg-white overflow-hidden font-['Poppins']">
+      <div className="max-w-[1740px] mx-auto px-4 md:px-8">
+        
+        <div className="relative flex items-center min-h-[500px]">
           
-          {/* Image Side */}
+          {/* 1. Large Rectangular Image (Right aligned) */}
+          <div className="w-full md:w-[80%] ml-auto h-[400px] md:h-[700px] relative overflow-hidden bg-gray-100">
+            <img 
+              src={aboutBanner} 
+              alt="Workspace" 
+              className="w-full h-full object-cover grayscale-[0.2]"
+            />
+          </div>
+
+          {/* 2. Landscape Overlapping Card (Left) */}
+          {/* No Shadow, No Rounded Corners, Smaller than image height */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 relative"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-[90%] md:w-[600px] bg-white border border-gray-200 p-10 z-20"
           >
-            <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border-8 border-white">
-              <img 
-                src="/category/all-in-one-printers.jpg" 
-                alt="Premium Printer" 
-                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
+            <span className="text-black text-[12px] font-bold uppercase tracking-[0.2em] mb-4 block">
+              Professional Standards
+            </span>
             
-            {/* Decorative Elements */}
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-blue-50 rounded-full -z-0 blur-3xl opacity-60" />
-            <div className="absolute -bottom-10 -right-10 w-60 h-60 bg-cream-50 rounded-full -z-0 blur-3xl opacity-60" style={{ backgroundColor: '#FAF9F6' }} />
-            
-           
-          </motion.div>
-
-          {/* Content Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="w-full lg:w-1/2"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-blue-600 text-[13px] font-bold mb-6">
-              <span className="h-2 w-2 bg-blue-600 rounded-full animate-pulse" />
-              Discover Our Story
-            </div>
-            
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1A1A] leading-[1.1] mb-8">
-              Redefining the Future of <span className="text-blue-600">Professional Printing.</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
+              Excellence in Every <br /> <span className="text-black">Printed Page.</span>
             </h2>
             
-            <p className="text-[16px] text-gray-600 font-medium leading-relaxed mb-10">
-              Welcome to Printistan, your premier destination for cutting-edge printing technology. 
-              We don't just sell printers; we provide comprehensive solutions that empower businesses and 
-              individuals to bring their visions to life with unmatched clarity and precision.
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-8 max-w-md">
+              At Printing Land, we deliver global standards in printing technology directly to your workspace. Our commitment ensures your office efficiency never stops.
             </p>
 
-            <div className="grid gap-6 mb-12">
-              {points.map((point, idx) => (
-                <div key={idx} className="flex items-start gap-4 group">
-                  <div className="h-10 w-10 shrink-0 bg-[#F3F1ED] rounded-xl flex items-center justify-center">
-                    {point.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-[16px] font-bold text-[#1A1A1A] mb-1">{point.title}</h4>
-                    <p className="text-[14px] text-gray-500 font-medium leading-snug">{point.desc}</p>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+              {["Global Solutions", "Quality Certified"].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2 text-gray-800 text-sm font-semibold">
+                  <CheckCircle2 size={16} className="text-black" />
+                  {item}
                 </div>
               ))}
             </div>
 
             <Link 
               to="/about" 
-              className="inline-flex items-center gap-3 bg-[#1A1A1A] hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 group shadow-xl shadow-gray-200"
+              className="inline-flex items-center gap-4 text-gray-900 font-bold text-sm group border-b-2 border-gray-900 pb-1 hover:text-black hover:border-black transition-all"
             >
-              Learn More About Us
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+              Explore Our Story
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
-
         </div>
+
       </div>
     </section>
   );

@@ -1,58 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HelpCircle, ChevronRight, Zap, PhoneCall } from 'lucide-react';
+import { HelpCircle, ChevronRight, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function SupportCTA() {
   return (
-    <section className="w-full bg-white py-12 md:py-16 font-poppins overflow-hidden">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative bg-[#FAF9F6] border border-[#E8E6E1] rounded-[2.5rem] p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12 overflow-hidden"
-        >
-          {/* Subtle Accent Gradient */}
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50/30 to-transparent pointer-events-none" />
-          
-          {/* Left: Content Section */}
-          <div className="relative z-10 flex items-center gap-6 text-center md:text-left">
-            <div className="hidden lg:flex h-14 w-14 rounded-2xl bg-white text-blue-600 items-center justify-center shadow-sm border border-[#E8E6E1]">
-               <HelpCircle size={28} />
-            </div>
-            <div>
-              <div className="inline-flex items-center gap-2 text-[11px] font-bold text-blue-600 uppercase tracking-widest mb-2">
-                 <Zap size={14} fill="currentColor" />
-                 <span>Free Expert Advice</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1A1A1A] leading-tight">
-                Not sure which printer to buy?
-              </h2>
-              <p className="text-gray-500 text-[14px] md:text-[15px] font-medium mt-1">
-                Our specialists will help you find the perfect match for your needs.
-              </p>
-            </div>
+    <section className="w-full bg-[#f6f6f4] py-14 md:py-16 font-['Poppins'] flex items-center justify-center">
+      
+      <motion.div
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="w-full max-w-[650px] border border-[#e5e5e5] bg-white px-6 md:px-10 py-10 text-center"
+      >
+        {/* Icon */}
+        <div className="flex justify-center mb-5">
+          <div className="h-14 w-14 flex items-center justify-center border border-[#e5e5e5] bg-[#f3f3f3]">
+            <HelpCircle size={26} className="text-[#111]" />
           </div>
+        </div>
 
-          {/* Right: Action Buttons */}
-          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
-            <Link 
-              to="/contact" 
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-4 bg-[#1A1A1A] hover:bg-blue-600 text-white rounded-2xl font-bold text-[16px] transition-all shadow-xl shadow-gray-200 active:scale-95 group"
-            >
-              Get Expert Help
-              <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+        {/* Heading */}
+        <h2 className="text-[24px] md:text-[30px] font-medium text-[#111] leading-tight">
+          Need help choosing the right printer?
+        </h2>
 
-          {/* Background Decorative Element */}
-          <div className="absolute -right-10 -bottom-10 opacity-[0.05] text-[#1A1A1A] pointer-events-none hidden xl:block">
-             <HelpCircle size={200} strokeWidth={1} />
-          </div>
-        </motion.div>
-      </div>
+        {/* Text */}
+        <p className="text-[#555] text-[14px] md:text-[15px] mt-3 leading-[1.6] max-w-[480px] mx-auto">
+          Get expert guidance to find the best printer for your home, office, or business needs.
+        </p>
+
+        {/* Buttons */}
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+           {/* Contact Button */}
+          <Link
+            to="/contact"
+            className="flex items-center justify-center gap-2 px-6 h-[48px] bg-[#111] text-white text-[14px] font-semibold uppercase transition-all duration-300 hover:bg-black"
+          >
+            Contact Us
+            <MessageCircle size={16} />
+          </Link>
+
+          {/* FAQ Button */}
+          <Link
+            to="/faq"
+            className="flex items-center justify-center gap-2 px-6 h-[48px] border border-[#111] text-[#111] text-[14px] font-semibold uppercase transition-all duration-300 hover:bg-[#111] hover:text-white"
+          >
+            FAQs
+            <ChevronRight size={16} />
+          </Link>
+
+         
+        </div>
+      </motion.div>
     </section>
   );
 }

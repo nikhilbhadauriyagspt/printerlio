@@ -7,11 +7,11 @@ export default function CookiePolicy() {
     <PolicyLayout
       title="Cookie policy"
       subtitle="This cookie policy explains how we use cookies and similar technologies to provide you with a better shopping experience."
-      lastUpdated="April 16, 2026"
+      lastUpdated="April 17, 2026"
     >
       <p className="lead">
-        This cookie policy explains howPrintistan
-        ("company," "we," "us," or "our") uses cookies and similar technologies when you visit our website: <a href="https://printistan.shop/">https://printistan.shop/</a>
+        This cookie policy explains howPrinting Land
+        ("company," "we," "us," or "our") uses cookies and similar technologies when you visit our website: <a href="https://printingland.shop/">https://printingland.shop/</a>
       </p>
       <p>
         This policy should be read together with our <Link to="/privacy-policy">Privacy policy</Link> and <Link to="/terms-and-conditions">Terms and conditions</Link>.
@@ -80,7 +80,7 @@ export default function CookiePolicy() {
         We do not sell personal information. If you have any concerns regarding how your data is shared for advertising, you may exercise your rights by:
       </p>
       <ul>
-        <li>Emailing: <a href="mailto:info@printistan.shop">info@printistan.shop</a></li>
+        <li>Emailing: <a href="mailto:info@printingland.shop">info@printingland.shop</a></li>
         <li>Visiting: <Link to="/contact">Contact us</Link></li>
       </ul>
 
@@ -89,9 +89,9 @@ export default function CookiePolicy() {
       <p>If you have any questions regarding this cookie policy, please contact us:</p>
       <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed space-y-1">
-          <p className="text-slate-900">Printistan</p>
+          <p className="text-slate-900">Printing Land</p>
           <p>3001 27th St N, Birmingham, AL 35207, USA</p>
-          <p className="pt-4 text-blue-600 font-bold">info@printistan.shop</p>
+          <p className="pt-4 text-black font-bold">info@printingland.shop</p>
         </address>
       </div>
     </PolicyLayout>

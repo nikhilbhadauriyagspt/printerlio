@@ -9,7 +9,7 @@ const techProducts = [
     thermal: 92,
     display: "4K OLED",
     icon: Zap,
-    color: "bg-blue-600"
+    color: "bg-black"
   },
   {
     name: "Precision 500",
@@ -38,11 +38,11 @@ export default function TechBlueprints() {
       {/* --- UNIQUE HEADING: Printer LINE STYLE --- */}
       <div className="flex items-center gap-8 mb-20">
         <div className="h-[100px] w-px bg-gray-200 relative hidden sm:block">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-blue-600 rounded-full"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-black rounded-full"></div>
         </div>
         <div>
           <h2 className="text-4xl font-bold text-slate-900 er uppercase leading-none">
-            Printer <br /><span className="text-blue-600 italic">Blueprints.</span>
+            Printer <br /><span className="text-black italic">Blueprints.</span>
           </h2>
           <p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-4 flex items-center gap-2">
             <span className="w-4 h-px bg-gray-300"></span> Performance Benchmarks 2026
@@ -65,7 +65,7 @@ export default function TechBlueprints() {
             </div>
 
             <div className="mb-12">
-              <span className="text-[10px] font-bold tracking-widest text-blue-600 uppercase">{p.series}</span>
+              <span className="text-[10px] font-bold tracking-widest text-black uppercase">{p.series}</span>
               <h3 className="text-3xl font-bold text-slate-900 er mt-1">{p.name}</h3>
             </div>
 
@@ -108,7 +108,7 @@ export default function TechBlueprints() {
                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Display Standard</p>
                    <p className="text-sm font-bold text-slate-900 uppercase">{p.display}</p>
                  </div>
-                 <button className="text-[10px] font-bold text-blue-600 uppercase tracking-widest hover:underline">Full Specs</button>
+                 <button className="text-[10px] font-bold text-black uppercase tracking-widest hover:underline">Full Specs</button>
                </div>
             </div>
           </motion.div>

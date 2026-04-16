@@ -8,7 +8,7 @@ const exclusiveProducts = [
     desc: "The ultimate monochrome workhorse. Engineered for 60ppm output and high-fidelity archival grade printing.",
     price: "$1,899",
     image: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?q=80&w=1000&auto=format&fit=crop",
-    accent: "from-blue-600 to-indigo-600"
+    accent: "from-black to-indigo-600"
   },
   {
     name: "Precision Color G1",
@@ -29,7 +29,7 @@ export default function ExclusiveShowcase() {
           Exclusive
         </span>
         <div className="relative z-10">
-          <span className="text-blue-600 font-bold text-xs tracking-[0.4em] uppercase block mb-2 ml-1">Limited Edition</span>
+          <span className="text-black font-bold text-xs tracking-[0.4em] uppercase block mb-2 ml-1">Limited Edition</span>
           <h2 className="text-5xl font-bold text-slate-900 er uppercase">
             The <span className="italic">Elite</span> Series.
           </h2>
@@ -64,7 +64,7 @@ export default function ExclusiveShowcase() {
               </div>
 
               <div className="flex items-center gap-4 w-full sm:w-auto">
-                <Button size="xl" className="flex-1 sm:flex-none bg-black hover:bg-blue-600 text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-xl transition-all">
+                <Button size="xl" className="flex-1 sm:flex-none bg-black hover:bg-black text-white rounded-2xl px-10 h-14 font-bold text-xs tracking-widest shadow-xl transition-all">
                   ORDER NOW <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <button className="h-14 w-14 rounded-2xl border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition-colors">

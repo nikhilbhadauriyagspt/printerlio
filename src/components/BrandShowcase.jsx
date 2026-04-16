@@ -39,7 +39,7 @@ export default function BrandShowcase({ brands = [] }) {
                 className="inline-flex shrink-0 group transition-all duration-500"
               >
                 {/* Square Quality Node - Increased Size */}
-                <div className="h-28 w-48 md:h-36 md:w-64 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-6 md:p-10 transition-all duration-500 group-hover:border-blue-600/20 group-hover:bg-white group-hover:shadow-xl group-hover:shadow-black/5 relative overflow-hidden">
+                <div className="h-28 w-48 md:h-36 md:w-64 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center p-6 md:p-10 transition-all duration-500 group-hover:border-black/20 group-hover:bg-white group-hover:shadow-xl group-hover:shadow-black/5 relative overflow-hidden">
                   <img 
                     src={getBrandLogo(brand)} 
                     alt={brand.name} 
@@ -48,7 +48,7 @@ export default function BrandShowcase({ brands = [] }) {
                   
                   {/* Subtle Brand Name Overlay on Hover */}
                   <div className="absolute bottom-2 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[9px] font-bold text-blue-600 uppercase tracking-widest">{brand.name}</span>
+                    <span className="text-[9px] font-bold text-black uppercase tracking-widest">{brand.name}</span>
                   </div>
                 </div>
               </Link>

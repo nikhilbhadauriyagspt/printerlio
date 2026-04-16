@@ -17,9 +17,9 @@ const banners = [
     desc: "Laser precision for high-volume printing.",
     image: png1,
     bg: "bg-[#F3F1ED]",
-    accent: "text-blue-600",
+    accent: "text-black",
     link: "/shop?category=laser-printers",
-    icon: <Zap size={16} className="text-blue-600" />
+    icon: <Zap size={16} className="text-black" />
   },
   {
     id: "02",
@@ -79,7 +79,7 @@ export default function TripleBanners() {
                 
                 <Link 
                   to={item.link || "/shop"} 
-                  className="group/link flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-blue-600 transition-colors w-fit"
+                  className="group/link flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-black transition-colors w-fit"
                 >
                   Shop Now 
                   <ChevronRight size={16} className="group-hover/link:translate-x-1 transition-transform" />

@@ -46,21 +46,21 @@ export default function BottomNav() {
               to={item.path}
               className="flex flex-col items-center justify-center gap-1.5 w-full relative group active:scale-90 transition-transform"
             >
-              <div className={`relative transition-all duration-300 ${isActive ? 'text-blue-600' : 'text-slate-400'}`}>
+              <div className={`relative transition-all duration-300 ${isActive ? 'text-black' : 'text-slate-400'}`}>
                 <Icon size={22} strokeWidth={isActive ? 2.5 : 2} />
                 {item.name === 'Store' && cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 h-[18px] w-[18px] bg-blue-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-lg shadow-blue-100">
+                  <span className="absolute -top-2 -right-2 h-[18px] w-[18px] bg-black text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-lg shadow-blue-100">
                     {cartCount}
                   </span>
                 )}
                 {isActive && (
                   <motion.div 
                     layoutId="bottomNavActive"
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 w-[6px] h-[6px] bg-blue-600 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.5)]" 
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 w-[6px] h-[6px] bg-black rounded-full shadow-[0_0_8px_rgba(37,99,235,0.5)]" 
                   />
                 )}
               </div>
-              <span className={`text-[10px] font-medium transition-colors duration-300 ${isActive ? 'text-blue-600' : 'text-slate-500'}`}>
+              <span className={`text-[10px] font-medium transition-colors duration-300 ${isActive ? 'text-black' : 'text-slate-500'}`}>
                 {item.name}
               </span>
             </Link>

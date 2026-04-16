@@ -52,7 +52,7 @@ const AdminLayout = () => {
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
         <div className="flex items-center justify-between h-16 px-6 border-b border-slate-800">
           <div className="flex items-center">
-            <span className="text-xl font-bold er">Printistan<span className="text-blue-500">.</span>ADMIN</span>
+            <span className="text-xl font-bold er">Printing Land<span className="text-blue-500">.</span>ADMIN</span>
           </div>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-slate-400 hover:text-white">
             <X size={20} />
@@ -66,7 +66,7 @@ const AdminLayout = () => {
               to={item.path} 
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                 location.pathname === item.path 
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' 
+                  ? 'bg-black text-white shadow-lg shadow-black/20' 
                   : 'text-slate-400 hover:bg-slate-800 hover:text-white'
               }`}
             >
@@ -103,13 +103,13 @@ const AdminLayout = () => {
           <div className="flex items-center gap-4">
             <button className="relative p-2 text-slate-500 hover:bg-gray-50 rounded-lg transition-all">
               <Bell size={20} />
-              <span className="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full border-2 border-white" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-black rounded-full border-2 border-white" />
             </button>
             <div className="h-8 w-px bg-gray-100 mx-1" />
             <div className="flex items-center gap-3">
               <div className="flex flex-col items-end">
                 <p className="text-sm font-bold text-slate-900 leading-none">System Admin</p>
-                <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Superuser</p>
+                <p className="text-[10px] font-bold text-black uppercase tracking-widest mt-1">Superuser</p>
               </div>
               <div className="h-10 w-10 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-sm">
                 AD

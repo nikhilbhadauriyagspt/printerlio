@@ -43,7 +43,7 @@ export default function FlashSale({ products: deals = [] }) {
             </h2>
           </div>
         </div>
-        <Link to="/deals" className="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-2 hover:text-blue-600 transition-colors pb-1">
+        <Link to="/deals" className="text-xs font-bold uppercase tracking-widest text-slate-900 flex items-center gap-2 hover:text-black transition-colors pb-1">
           Explore All Deals <ArrowRight size={14} />
         </Link>
       </div>
@@ -71,7 +71,7 @@ export default function FlashSale({ products: deals = [] }) {
                                                 handleAddToCart(deal);
                                               }}
                                               disabled={addedItems[deal.id]}
-                                              className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all ${addedItems[deal.id] ? 'text-emerald-500' : 'text-blue-600 group-hover:gap-4'}`}
+                                              className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all ${addedItems[deal.id] ? 'text-emerald-500' : 'text-black group-hover:gap-4'}`}
                                             >
                                               {addedItems[deal.id] ? (
                                                 <><Check size={16} /> Added</>

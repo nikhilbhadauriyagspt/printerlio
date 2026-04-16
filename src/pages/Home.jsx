@@ -9,6 +9,7 @@ import PromoBanner from "@/components/PromoBanner";
 import ProductGrid from "@/components/ProductGrid";
 import CategorySlider from "@/components/CategorySlider";
 import BestSellers from "@/components/BestSellers";
+import ProductShowcase from "@/components/ProductShowcase";
 import TripleBanners from "@/components/TripleBanners";
 import QuickPicks from "@/components/QuickPicks";
 import SupportCTA from "@/components/SupportCTA";
@@ -89,23 +90,25 @@ export default function Home() {
   return (
     <div className="bg-white font-jakarta overflow-x-hidden text-slate-900">
       <SEO 
-        title="Printistan | Quality Printers & Accessories"
+        title="Printing Land | Quality Printers & Accessories"
         description="Your trusted source for high-quality printers and printing printer. Delivering excellence across the USA."
       />
 
       <Hero />
-     
+             <Features />
+
       <AboutSection />
-
-      <TripleBanners />
       
-      <BestSellers products={data.all} loading={data.loading} />
-      
-      <PromoBanner />
-           <ShopByCategory categories={data.categories} loading={data.loading} />
+      <ShopByCategory categories={data.categories} loading={data.loading} />
 
-      <ProductGrid products={data.mixedArrivals.slice(0, 18)} loading={data.loading} />
-              <Features />
+      <ProductShowcase 
+        products={data.all} 
+        arrivals={data.mixedArrivals} 
+        loading={data.loading} 
+      />
+      
+      
+
 
        <Collections />
       {/* <CategorySlider 
@@ -113,6 +116,7 @@ export default function Home() {
         products={data.printers} 
         loading={data.loading}
       /> */}
+      <PromoBanner />
       <SupportCTA />
        
   </div>
