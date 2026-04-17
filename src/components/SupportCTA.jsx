@@ -1,57 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HelpCircle, ChevronRight, MessageCircle } from 'lucide-react';
+import { Headphones, ChevronRight, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function SupportCTA() {
   return (
-    <section className="w-full bg-[#f6f6f4] py-14 md:py-16 font-['Poppins'] flex items-center justify-center">
-      
+    <section className="w-full bg-[#f7f4ef] py-12 md:py-14 font-['Poppins'] flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="w-full max-w-[650px] border border-[#e5e5e5] bg-white px-6 md:px-10 py-10 text-center"
+        className="w-full max-w-[760px] rounded-[28px] border border-[#e8dfd6] bg-white px-6 md:px-10 py-10 md:py-12 text-center shadow-[0_10px_30px_rgba(0,0,0,0.03)]"
       >
         {/* Icon */}
         <div className="flex justify-center mb-5">
-          <div className="h-14 w-14 flex items-center justify-center border border-[#e5e5e5] bg-[#f3f3f3]">
-            <HelpCircle size={26} className="text-[#111]" />
+          <div className="h-16 w-16 rounded-full flex items-center justify-center border border-[#e7d8cb] bg-[#f8f2ec] text-[#7a4320]">
+            <Headphones size={28} />
           </div>
         </div>
 
+        {/* Eyebrow */}
+        <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-3">
+          Expert Guidance
+        </span>
+
         {/* Heading */}
-        <h2 className="text-[24px] md:text-[30px] font-medium text-[#111] leading-tight">
-          Need help choosing the right printer?
+        <h2 className="text-[26px] md:text-[34px] font-semibold text-[#241812] leading-tight">
+          Need Help Finding
+          <br />
+          the Right Printer?
         </h2>
 
         {/* Text */}
-        <p className="text-[#555] text-[14px] md:text-[15px] mt-3 leading-[1.6] max-w-[480px] mx-auto">
-          Get expert guidance to find the best printer for your home, office, or business needs.
+        <p className="text-[#6b5d54] text-[14px] md:text-[15px] mt-4 leading-7 max-w-[540px] mx-auto">
+          Get simple guidance for choosing printers, accessories, and printing
+          solutions that fit your home, office, or business needs.
         </p>
 
         {/* Buttons */}
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-           {/* Contact Button */}
           <Link
             to="/contact"
-            className="flex items-center justify-center gap-2 px-6 h-[48px] bg-[#111] text-white text-[14px] font-semibold uppercase transition-all duration-300 hover:bg-black"
+            className="flex items-center justify-center gap-2 px-6 h-[48px] rounded-xl bg-[#7a4320] text-white text-[13px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#643619]"
           >
             Contact Us
             <MessageCircle size={16} />
           </Link>
 
-          {/* FAQ Button */}
           <Link
             to="/faq"
-            className="flex items-center justify-center gap-2 px-6 h-[48px] border border-[#111] text-[#111] text-[14px] font-semibold uppercase transition-all duration-300 hover:bg-[#111] hover:text-white"
+            className="flex items-center justify-center gap-2 px-6 h-[48px] rounded-xl border border-[#d8c8bb] text-[#5a2d14] text-[13px] font-semibold uppercase tracking-[0.08em] transition-all duration-300 hover:bg-[#f8f2ec]"
           >
-            FAQs
+            View FAQs
             <ChevronRight size={16} />
           </Link>
-
-         
         </div>
       </motion.div>
     </section>

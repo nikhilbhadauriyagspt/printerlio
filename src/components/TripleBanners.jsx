@@ -1,106 +1,79 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, Target, PenTool } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { Truck, ShieldCheck, Headphones, Printer } from 'lucide-react';
 
-// Assets
-import png1 from '@/assets/bannerr/png-1.png';
-import png2 from '@/assets/bannerr/png-2.png';
-import png3 from '@/assets/bannerr/png-3.png';
-
-const banners = [
+const features = [
   {
-    id: "01",
-    tag: "Pro Series",
-    title: "Enterprise Solutions",
-    desc: "Laser precision for high-volume printing.",
-    image: png1,
-    bg: "bg-[#F3F1ED]",
-    accent: "text-black",
-    link: "/shop?category=laser-printers",
-    icon: <Zap size={16} className="text-black" />
+    icon: <Printer size={24} strokeWidth={1.8} />,
+    title: 'Quality Printers',
+    desc: 'Reliable options for home and office use.',
   },
   {
-    id: "02",
-    tag: "Creative",
-    title: "Precision Inkjet",
-    desc: "Vibrant colors for professional results.",
-    image: png2,
-    bg: "bg-blue-50/60",
-    accent: "text-indigo-600",
-    icon: <Target size={16} className="text-indigo-600" />
+    icon: <ShieldCheck size={24} strokeWidth={1.8} />,
+    title: 'Trusted Products',
+    desc: 'Carefully selected printers and supplies.',
   },
   {
-    id: "03",
-    tag: "Essential",
-    title: "Inks & Toners",
-    desc: "Genuine supplies for flawless prints.",
-    image: png3,
-    bg: "bg-orange-50/40",
-    accent: "text-orange-600",
-    icon: <PenTool size={16} className="text-orange-600" />
-  }
+    icon: <Headphones size={24} strokeWidth={1.8} />,
+    title: 'Helpful Support',
+    desc: 'Easy guidance for your printing needs.',
+  },
+  {
+    icon: <Truck size={24} strokeWidth={1.8} />,
+    title: 'Fast Delivery',
+    desc: 'Quick shipping on selected printer items.',
+  },
 ];
 
 export default function TripleBanners() {
   return (
-    <section className="w-full bg-white py-12 md:py-16 font-poppins overflow-hidden">
-      <div className="max-w-[1920px] mx-auto px-4 md:px-10">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {banners.map((item, index) => (
+    <section className="w-full bg-[#6d3717] py-8 md:py-10 font-['Poppins'] overflow-hidden relative">
+      {/* subtle bg texture */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_55%)]" />
+      </div>
+
+      <div className="relative z-10 max-w-[1500px] mx-auto px-4 md:px-8">
+        {/* heading */}
+        <div className="text-center max-w-[760px] mx-auto mb-7 md:mb-8">
+          <span className="block text-white/80 text-[12px] md:text-[13px] uppercase tracking-[0.18em] mb-2">
+            Why Choose Us
+          </span>
+
+          <h2 className="text-white text-[24px] md:text-[34px] font-semibold leading-tight mb-3">
+            Everything You Need for Better Printing
+          </h2>
+
+          <p className="text-white/75 text-[13px] md:text-[15px] leading-7">
+            Find dependable printers, essential supplies, and simple support in one place.
+          </p>
+        </div>
+
+        {/* feature items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
+          {features.map((item, index) => (
             <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
+              key={index}
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.06 }}
               viewport={{ once: true }}
-              className={cn(
-                "group relative h-[220px] md:h-[240px] rounded-[2rem] overflow-hidden border border-[#E8E6E1] p-6 md:p-8 flex items-center justify-between",
-                item.bg
-              )}
+              className="text-center xl:text-left px-2"
             >
-              {/* Content Side */}
-              <div className="relative z-10 w-[60%] flex flex-col justify-center h-full">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="h-8 w-8 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                    {item.icon}
-                  </div>
-                  <span className="text-[12px] font-bold text-gray-500 uppercase tracking-wider">{item.tag}</span>
-                </div>
-                
-                <h3 className="text-xl md:text-2xl font-bold text-[#1A1A1A] leading-tight mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-[13px] text-gray-500 font-medium leading-tight mb-5 line-clamp-1">
-                  {item.desc}
-                </p>
-                
-                <Link 
-                  to={item.link || "/shop"} 
-                  className="group/link flex items-center gap-2 text-[13px] font-bold text-[#1A1A1A] hover:text-black transition-colors w-fit"
-                >
-                  Shop Now 
-                  <ChevronRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
-                </Link>
+              <div className="mb-3 flex justify-center xl:justify-start text-white">
+                {item.icon}
               </div>
 
-              {/* Image Side */}
-              <div className="relative w-[40%] h-full flex items-center justify-center pointer-events-none">
-                <img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="max-w-full max-h-[85%] object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-out"
-                />
-              </div>
+              <h3 className="text-[18px] md:text-[20px] font-semibold text-white leading-tight mb-2">
+                {item.title}
+              </h3>
 
-              {/* Subtle Decorative Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <p className="text-white/75 text-[13px] md:text-[14px] leading-6 max-w-[250px] mx-auto xl:mx-0">
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

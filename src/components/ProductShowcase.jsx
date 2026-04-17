@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Heart, ChevronRight, Zap, Eye } from "lucide-react";
+import { motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCart, Heart, ChevronRight, Zap, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCart } from "../context/CartContext";
+import { useCart } from '../context/CartContext';
 import { cn } from '../lib/utils';
 
 export default function ProductShowcase({ products = [], arrivals = [], loading = false }) {
   const [activeTab, setActiveTab] = useState('best-sellers');
   const { addToCart, openCartDrawer, toggleWishlist, isInWishlist } = useCart();
 
-  const bestSellers = products
-    .filter(p => p.price > 50)
-    .slice(0, 8);
-
+  const bestSellers = products.filter((p) => p.price > 50).slice(0, 8);
   const newArrivals = arrivals.slice(0, 8);
 
   const displayedProducts = activeTab === 'best-sellers' ? bestSellers : newArrivals;
 
   const getImagePath = (images) => {
-    if (!images) return "https://via.placeholder.com/400x400?text=Product";
+    if (!images) return 'https://via.placeholder.com/400x400?text=Product';
     try {
       const parsed = typeof images === 'string' ? JSON.parse(images) : images;
       const img = Array.isArray(parsed) ? parsed[0] : parsed;
@@ -36,121 +33,162 @@ export default function ProductShowcase({ products = [], arrivals = [], loading 
   };
 
   const tabs = [
-    { id: 'best-sellers', label: 'Best Sellers', icon: <Zap size={24} />, desc: 'Our most popular printers' },
-    { id: 'new-arrivals', label: 'New Arrivals', icon: <Zap size={24} />, desc: 'Latest technology' },
+    {
+      id: 'best-sellers',
+      label: 'Best Sellers',
+      icon: <Zap size={18} />,
+    },
+    {
+      id: 'new-arrivals',
+      label: 'New Arrivals',
+      icon: <Zap size={18} />,
+    },
   ];
 
   return (
-    <section className="w-full bg-white py-16 md:py-24 font-['Poppins']">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-        
-        {/* --- Selection Cards (Tabs) --- */}
-        <div className="flex items-center justify-center gap-3 mb-10 max-w-xl mx-auto">
+    <section className="w-full bg-[#f7f4ef] py-12 md:py-14 font-['Poppins']">
+      <div className="max-w-[1720px] mx-auto px-4 md:px-8 lg:px-10">
+        {/* Heading */}
+        <div className="text-center mb-8 md:mb-10">
+          <span className="block text-[11px] uppercase tracking-[3px] text-[#8b7768] mb-2">
+            Featured Products
+          </span>
+          <h2 className="text-[28px] md:text-[38px] font-semibold text-[#2b1d15]">
+            Popular Printer Picks
+          </h2>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex items-center justify-center gap-3 mb-8 max-w-md mx-auto">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                "flex-1 flex items-center justify-center gap-3 p-4 border transition-all duration-500 h-[60px]",
-                activeTab === tab.id 
-                  ? "bg-gray-900 border-gray-900 text-white shadow-none" 
-                  : "bg-white border-gray-200 text-gray-900 hover:border-gray-900 shadow-none"
+                'flex-1 flex items-center justify-center gap-2 h-[46px] px-4 rounded-full border transition-all duration-300 text-[12px] font-semibold uppercase tracking-[0.12em]',
+                activeTab === tab.id
+                  ? 'bg-[#8b5a3c] border-[#8b5a3c] text-white'
+                  : 'bg-white border-[#e6dbcf] text-[#5b463a] hover:border-[#8b5a3c]'
               )}
-              style={{ borderRadius: '0px' }}
             >
-              <span className={cn(activeTab === tab.id ? "text-blue-400" : "text-gray-400")}>
-                {React.cloneElement(tab.icon, { size: 18 })}
+              <span className={cn(activeTab === tab.id ? 'text-white' : 'text-[#8b5a3c]')}>
+                {tab.icon}
               </span>
-              <span className="text-[13px] font-bold uppercase tracking-widest whitespace-nowrap">{tab.label}</span>
-              {activeTab === tab.id && <motion.div layoutId="activeDot" className="w-1.5 h-1.5 bg-black rounded-full ml-1" />}
+              {tab.label}
             </button>
           ))}
         </div>
 
-        {/* --- Product Grid --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-gray-100">
-          {loading ? (
-             Array.from({ length: 4 }).map((_, i) => (
-               <div key={i} className="aspect-[3/4] bg-gray-50 animate-pulse border-r border-b border-gray-100" />
-             ))
-          ) : (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="contents"
-              >
-                {displayedProducts.map((p, i) => (
-                  <div
-                    key={p.id || i}
-                    className="group relative flex flex-col bg-white border-r border-b border-gray-100 p-8 transition-all duration-300 hover:bg-white"
+        {/* Product Grid */}
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-[340px] rounded-2xl border border-[#e6dbcf] bg-white animate-pulse"
+              />
+            ))}
+          </div>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"
+            >
+              {displayedProducts.map((p, i) => (
+                <motion.div
+                  key={p.id || i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: i * 0.04 }}
+                  viewport={{ once: true }}
+                  className="group"
+                >
+                  <Link
+                    to={`/product/${p.slug}`}
+                    className="relative flex flex-col h-full min-h-[340px] rounded-2xl border border-[#e6dbcf] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(0,0,0,0.06)]"
                   >
-                    {/* Image */}
-                    <Link 
-                      to={`/product/${p.slug}`}
-                      className="aspect-square w-full mb-8 flex items-center justify-center overflow-hidden"
-                    >
-                      <img 
-                        src={getImagePath(p.images)} 
-                        className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" 
-                        alt={p.name} 
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/400x400?text=" + p.name; }}
-                      />
-                    </Link>
-
-                    {/* Actions Overlay (Hidden by default, shows on hover like HP) */}
-                    <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <button 
-                        onClick={(e) => { e.preventDefault(); toggleWishlist(p); }}
-                        className="w-10 h-10 bg-white border border-gray-200 flex items-center justify-center text-gray-900 hover:bg-red-50 hover:text-red-500 transition-colors"
+                    {/* Top Actions */}
+                    <div className="absolute top-3 right-3 z-20 flex flex-col gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          toggleWishlist(p);
+                        }}
+                        className="w-9 h-9 rounded-full bg-white border border-[#eadfd4] flex items-center justify-center text-[#5b463a] hover:bg-red-50 hover:text-red-500 transition-colors"
                       >
-                        <Heart size={18} className={isInWishlist(p.id) ? "fill-red-500 text-red-500" : ""} />
+                        <Heart
+                          size={16}
+                          className={isInWishlist(p.id) ? 'fill-red-500 text-red-500' : ''}
+                        />
                       </button>
-                      <Link 
+
+                      <Link
                         to={`/product/${p.slug}`}
-                        className="w-10 h-10 bg-white border border-gray-200 flex items-center justify-center text-gray-900 hover:bg-blue-50 hover:text-black transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-9 h-9 rounded-full bg-white border border-[#eadfd4] flex items-center justify-center text-[#5b463a] hover:bg-[#f8f2ec] hover:text-[#8b5a3c] transition-colors"
                       >
-                        <Eye size={18} />
+                        <Eye size={16} />
                       </Link>
+                    </div>
+
+                    {/* Image */}
+                    <div className="h-[170px] md:h-[190px] bg-white border-b border-[#efe5db] flex items-center justify-center p-4 overflow-hidden">
+                      <img
+                        src={getImagePath(p.images)}
+                        className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        alt={p.name}
+                        onError={(e) => {
+                          e.target.src = `https://via.placeholder.com/400x400?text=${encodeURIComponent(
+                            p.name
+                          )}`;
+                        }}
+                      />
                     </div>
 
                     {/* Info */}
-                    <div className="mt-auto">
-                      <p className="text-[11px] font-bold text-black uppercase tracking-widest mb-2">Printer</p>
-                      <Link to={`/product/${p.slug}`} className="block mb-4">
-                        <h4 className=" text-gray-900 text-lg leading-tight line-clamp-2 min-h-[3rem]">
-                          {p.name}
-                        </h4>
-                      </Link>
-                      
-                      <div className="flex items-center justify-between mt-6">
-                        <span className="text-2xl font-bold text-gray-900">${p.price}</span>
-                        <button 
-                          onClick={(e) => handleAddToCart(e, p)}
-                          className="px-6 py-2.5 bg-black text-white  text-[13px] hover:bg-blue-700 transition-all"
-                          style={{ borderRadius: '0px' }}
-                        >
-                          Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          )}
-        </div>
+                    <div className="flex flex-col flex-1 px-4 md:px-5 py-4">
+                      <p className="text-[10px] font-semibold text-[#9a8879] uppercase tracking-[0.18em] mb-2">
+                        Printer
+                      </p>
 
-        {/* --- View All Footer --- */}
-        <div className="mt-16 text-center">
-          <Link 
-            to="/shop" 
-            className="inline-flex items-center gap-2 text-gray-900 font-bold text-[15px] border-b-2 border-gray-900 pb-1 hover:text-black hover:border-black transition-all"
+                      <h4 className="text-[#241812] text-[15px] md:text-[17px] font-semibold leading-6 line-clamp-2 min-h-[48px]">
+                        {p.name}
+                      </h4>
+
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-[18px] md:text-[20px] font-bold text-[#2b1d15]">
+                          ${p.price}
+                        </span>
+                      </div>
+
+                      <button
+                        onClick={(e) => handleAddToCart(e, p)}
+                        className="mt-4 inline-flex items-center justify-center gap-2 h-[42px] rounded-xl bg-[#8b5a3c] text-white text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#73492f] transition-all"
+                      >
+                        <ShoppingCart size={15} />
+                        Add to Cart
+                      </button>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        )}
+
+        {/* Footer */}
+        <div className="mt-10 text-center">
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-2 text-[#5b341d] font-semibold text-[14px] border-b border-[#5b341d] pb-1 hover:text-[#8b5a3c] hover:border-[#8b5a3c] transition-all"
           >
-            Explore the Full Collection <ArrowRight size={18} />
+            Explore the Full Collection <ArrowRight size={16} />
           </Link>
         </div>
       </div>
@@ -159,7 +197,16 @@ export default function ProductShowcase({ products = [], arrivals = [], loading 
 }
 
 const ArrowRight = ({ size }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path d="M5 12h14M12 5l7 7-7 7" />
   </svg>
 );

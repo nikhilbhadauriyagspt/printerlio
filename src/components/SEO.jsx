@@ -44,9 +44,9 @@ export default function SEO({ title, description, keywords, schemaType = "Websit
     const schemaData = {
       "@context": "https://schema.org",
       "@type": schemaType === "Product" ? "Product" : "Organization",
-      "name": "Printing Land",
-      "url": "https://printingland.shop",
-      "logo": "https://printingland.shop/logo/logo.png",
+      "name": "MyPrinterHero",
+      "url": "https://myprinterhero.shop",
+      "logo": "https://myprinterhero.shop/logo/logo.png",
       "description": finalDesc,
       "address": {
         "@type": "PostalAddress",

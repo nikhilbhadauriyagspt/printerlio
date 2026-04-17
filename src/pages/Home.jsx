@@ -90,7 +90,7 @@ export default function Home() {
   return (
     <div className="bg-white font-jakarta overflow-x-hidden text-slate-900">
       <SEO 
-        title="Printing Land | Quality Printers & Accessories"
+        title="MyPrinterHero | Quality Printers & Accessories"
         description="Your trusted source for high-quality printers and printing printer. Delivering excellence across the USA."
       />
 
@@ -100,7 +100,7 @@ export default function Home() {
       <AboutSection />
       
       <ShopByCategory categories={data.categories} loading={data.loading} />
-
+       <TripleBanners />
       <ProductShowcase 
         products={data.all} 
         arrivals={data.mixedArrivals} 

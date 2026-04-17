@@ -4,57 +4,60 @@ import { motion } from 'framer-motion';
 
 const features = [
   {
-    icon: <Truck size={28} strokeWidth={1.5} />,
-    title: "FREE SHIPPING",
-    desc: "On all printer orders"
+    icon: <Truck size={30} strokeWidth={1.6} />,
+    title: 'FREE SHIPPING',
+    desc: 'On all printer and accessory orders',
   },
   {
-    icon: <RotateCcw size={28} strokeWidth={1.5} />,
-    title: "EASY RETURNS",
-    desc: "7-days return policy"
+    icon: <RotateCcw size={30} strokeWidth={1.6} />,
+    title: 'EASY RETURNS',
+    desc: 'Simple 7-day return process',
   },
   {
-    icon: <ShieldCheck size={28} strokeWidth={1.5} />,
-    title: "SECURE PAYMENT",
-    desc: "100% SSL protected transactions"
+    icon: <ShieldCheck size={30} strokeWidth={1.6} />,
+    title: 'SECURE PAYMENT',
+    desc: 'Protected checkout for every purchase',
   },
   {
-    icon: <Headphones size={28} strokeWidth={1.5} />,
-    title: "EXPERT SUPPORT",
-    desc: "24/7  assistance for all"
-  }
+    icon: <Headphones size={30} strokeWidth={1.6} />,
+    title: 'EXPERT SUPPORT',
+    desc: 'Helpful printer assistance anytime',
+  },
 ];
 
 export default function Features() {
   return (
-    <section className="w-full bg-white border-t pt-7 border-gray-100 font-['Poppins']">
-      <div className="max-w-[1740px] mx-auto">
+    <section className="w-full bg-[#fbf7f3] border-t border-[#eee3d8] font-['Poppins'] overflow-hidden">
+      <div className="w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((item, index) => (
-            <motion.div 
+            <motion.div
               key={index}
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className={`flex flex-col items-center text-center p-12 border-gray-100 group transition-colors hover:bg-gray-50 ${
-                index !== features.length - 1 ? 'lg:border-r' : ''
+              className={`group relative flex flex-col items-center text-center px-8 md:px-10 py-10 md:py-12 transition-all duration-300 hover:bg-white ${
+                index !== features.length - 1 ? 'lg:border-r lg:border-[#eadfd4]' : ''
               } ${
-                index < 2 ? 'border-b lg:border-b-0' : 'sm:border-b-0'
+                index < 2 ? 'border-b border-[#eadfd4] lg:border-b-0' : ''
               } ${
-                index % 2 === 0 ? 'sm:border-r lg:border-r-0' : ''
-              } lg:border-b-0`}
+                index % 2 === 0 ? 'sm:border-r sm:border-[#eadfd4] lg:border-r-0' : ''
+              }`}
             >
-              <div className="mb-6 text-gray-400 group-hover:text-black transition-colors duration-500">
+              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#d8c2b0] bg-white text-[#9a6a4d] transition-all duration-300 group-hover:bg-[#9a6a4d] group-hover:text-white group-hover:border-[#9a6a4d]">
                 {item.icon}
               </div>
-              
-              <h3 className="text-[14px] font-bold text-gray-900 tracking-[0.1em] mb-2">
+
+              <h3 className="text-[14px] md:text-[15px] font-bold text-[#5b341d] tracking-[0.14em] mb-2 uppercase">
                 {item.title}
               </h3>
-              <p className="text-[12px] text-gray-500 leading-relaxed max-w-[200px]">
+
+              <p className="text-[13px] text-[#7b675c] leading-6 max-w-[220px]">
                 {item.desc}
               </p>
+
+              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-[#9a6a4d] transition-all duration-300 group-hover:w-[70px]" />
             </motion.div>
           ))}
         </div>

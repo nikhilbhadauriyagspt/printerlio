@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function PolicyLayout({ title, subtitle, lastUpdated, children }) {
   return (
-    <div className="bg-white min-h-screen font-['Poppins'] pb-24 text-slate-900">
+    <div className="bg-white pt-30 font-['Poppins'] pb-24 text-[#6b3d22]">
       
       {/* --- MINIMAL POLICY HEADER --- */}
       {title && (
@@ -19,12 +19,12 @@ export default function PolicyLayout({ title, subtitle, lastUpdated, children })
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-5xl font-bold text-[#6b3d22] tracking-tight leading-tight">
                 {title}
               </h1>
               
               {subtitle && (
-                <p className="text-gray-500 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+                <p className="text-[#d66625] text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
                   {subtitle}
                 </p>
               )}

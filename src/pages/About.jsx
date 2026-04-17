@@ -1,135 +1,206 @@
 import React from 'react';
-import { 
-  Printer, 
-  Settings, 
-  ShieldCheck, 
-  Truck, 
+import {
+  Printer,
+  Settings,
+  Truck,
   CheckCircle2,
   ArrowRight,
   PackageCheck,
-  ShoppingBag
+  ShieldCheck,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
-import aboutImg from '@/assets/bannerr/about1.png';
+import aboutImg from '@/assets/bannerr/bannn1.png';
+
+const features = [
+  {
+    icon: <Printer size={22} />,
+    title: 'Wide Printer Range',
+    desc: 'Browse dependable printer options for home, office, and business printing.',
+  },
+  {
+    icon: <Settings size={22} />,
+    title: 'Essential Supplies',
+    desc: 'Find quality ink, toner, and accessories for smooth day-to-day printing.',
+  },
+  {
+    icon: <PackageCheck size={22} />,
+    title: 'Checked Quality',
+    desc: 'Products are selected with a focus on performance, reliability, and value.',
+  },
+  {
+    icon: <Truck size={22} />,
+    title: 'Fast Delivery',
+    desc: 'Quick shipping helps you get the printing products you need without delay.',
+  },
+];
+
+const commitments = [
+  'Carefully selected printer collection',
+  'Reliable products for daily use',
+  'Simple and secure online shopping',
+  'Smooth ordering experience',
+  'Helpful support when needed',
+  'Solutions for home and office printing',
+];
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-white text-[#111111] font-['Poppins']">
+    <div className="pt-20 bg-[#fbf8f5] text-[#111111] font-['Poppins']">
       <SEO
-        title="About Us | Printing Land"
+        title="About Us | MyPrinterHero"
         description="Your trusted destination for quality printers and genuine printing supplies."
       />
 
-      {/* --- Simple Hero Section --- */}
-      <section className="py-16 md:py-24 bg-gray-50 border-b border-gray-100">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-          <div className="max-w-3xl">
-            <span className="text-black font-bold text-[12px] uppercase tracking-widest mb-4 block">Our Story</span>
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Quality Printing <br /> 
-              <span className="text-black">Delivered to Your Door.</span>
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-[#ebe1d8] bg-[#f4eeea]">
+        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 py-16 md:py-20 lg:py-24">
+          <div className="max-w-[900px] mx-auto text-center">
+            <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-4">
+              Our Story
+            </span>
+
+            <h1 className="text-[36px] md:text-[52px] lg:text-[66px] leading-[0.98] font-semibold text-[#241812]">
+              Smart Printing
+              <br />
+              Starts with the Right Store
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed font-medium">
-              At Printing Land, we focus on one thing: providing the best printing hardware and supplies for your home and office. We believe that quality printing should be accessible, reliable, and straightforward.
+
+            <p className="mt-5 text-[#6b5d54] text-[15px] md:text-[17px] leading-8 max-w-[760px] mx-auto">
+              At MyPrinterHero, we focus on making printers and printing supplies easier
+              to explore, compare, and choose for home, office, and everyday business needs.
             </p>
           </div>
         </div>
       </section>
 
-      {/* --- Main Content Section --- */}
-      <section className="py-20 md:py-32">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1">
-              <img 
-                src={aboutImg} 
-                alt="Printer Collection" 
-                className="w-full h-auto grayscale-[0.2] border border-gray-100 shadow-2xl"
-              />
-            </div>
-            
-            <div className="order-1 lg:order-2 space-y-10">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold mb-6">What We Offer</h2>
-                <p className="text-gray-500 leading-relaxed font-medium">
-                  We maintain a diverse inventory of printers and essential supplies to ensure you never face downtime. Whether you are looking for a new machine or just need to restock your ink and toner, we have you covered.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-blue-50 text-black flex items-center justify-center">
-                    <Printer size={24} />
-                  </div>
-                  <h4 className="font-bold text-lg">Wide Selection</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">A variety of printer models suited for every budget and requirement.</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-blue-50 text-black flex items-center justify-center">
-                    <Settings size={24} />
-                  </div>
-                  <h4 className="font-bold text-lg">Essential Supplies</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">High-quality ink and toner cartridges for all major printer models.</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-blue-50 text-black flex items-center justify-center">
-                    <PackageCheck size={24} />
-                  </div>
-                  <h4 className="font-bold text-lg">Verified Quality</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">Every product is inspected to ensure it meets our performance standards.</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="w-12 h-12 bg-blue-50 text-black flex items-center justify-center">
-                    <Truck size={24} />
-                  </div>
-                  <h4 className="font-bold text-lg">Fast Delivery</h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">Efficient shipping to get your printing supplies to you as quickly as possible.</p>
-                </div>
+      {/* Image + Intro */}
+      <section className="py-14 md:py-16 lg:py-20">
+        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_1fr] gap-10 lg:gap-14 items-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-[#d8c3b3] translate-x-4 translate-y-4 rounded-[28px] hidden md:block" />
+              <div className="relative rounded-[28px] overflow-hidden border border-[#eadfd6] bg-white">
+                <img
+                  src={aboutImg}
+                  alt="Printer Collection"
+                  className="w-full h-[320px] sm:h-[420px] md:h-[520px] object-cover"
+                />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* --- Why Us Section (Clean List) --- */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div className="lg:col-span-1">
-              <h2 className="text-3xl font-bold mb-6">Our Commitment <br /> to You</h2>
-              <p className="text-gray-400 font-medium">We pride ourselves on providing a seamless shopping experience and products you can depend on day after day.</p>
-            </div>
-            
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10">
-              {[
-                "Carefully curated product catalog",
-                "Competitive pricing on all items",
-                "Simple and secure checkout process",
-                "Reliable nationwide shipping",
-                "Easy-to-browse category sections",
-                "Dedicated to customer satisfaction"
-              ].map((text, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <CheckCircle2 className="text-blue-500 shrink-0 mt-1" size={20} />
-                  <span className="text-lg font-medium text-gray-200">{text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- Simple CTA --- */}
-      <section className="py-24">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-          <div className="bg-black p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Looking for something specific?</h2>
-              <p className="text-blue-100 font-medium text-lg">Explore our full range of products today.</p>
+              <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-4">
+                Who We Are
+              </span>
+
+              <h2 className="text-[30px] md:text-[42px] lg:text-[50px] leading-[1.02] font-semibold text-[#241812] mb-5">
+                A Reliable Place
+                <br />
+                for Better Printing
+              </h2>
+
+              <p className="text-[#6b5d54] text-[15px] md:text-[16px] leading-8 mb-5">
+                We bring together practical printer choices, genuine supplies, and useful
+                shopping support so customers can find what fits their setup without
+                unnecessary confusion.
+              </p>
+
+              <p className="text-[#6b5d54] text-[15px] md:text-[16px] leading-8 mb-8">
+                Whether you are upgrading an office printer, buying a compact home model,
+                or restocking important accessories, our goal is to make the process simple,
+                smooth, and dependable.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {features.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-[22px] border border-[#e9dfd6] bg-white p-5"
+                  >
+                    <div className="w-11 h-11 rounded-full bg-[#f8f2ec] text-[#7a4320] flex items-center justify-center mb-4">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-[18px] font-semibold text-[#241812] mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-[14px] leading-6 text-[#6b5d54]">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <Link to="/shop" className="px-10 py-5 bg-white text-black font-bold text-[14px] uppercase tracking-widest hover:bg-gray-100 transition-all flex items-center gap-3">
-              Shop Now <ArrowRight size={18} />
+          </div>
+        </div>
+      </section>
+
+      {/* Commitment */}
+      <section className="py-14 md:py-16 lg:py-20 bg-[#2d1a11] text-white">
+        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10">
+          <div className="text-center max-w-[820px] mx-auto mb-10 md:mb-12">
+            <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-white/60 mb-4">
+              Our Commitment
+            </span>
+
+            <h2 className="text-[30px] md:text-[42px] lg:text-[50px] leading-[1.02] font-semibold mb-5">
+              Built Around Simplicity,
+              <br />
+              Quality, and Trust
+            </h2>
+
+            <p className="text-white/70 text-[15px] md:text-[16px] leading-8">
+              We aim to create a smoother shopping experience with practical product choices,
+              dependable support, and solutions customers can rely on every day.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+            {commitments.map((text, i) => (
+              <div
+                key={i}
+                className="rounded-[24px] border border-white/10 bg-white/5 backdrop-blur-sm p-5 md:p-6"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#f0c29f]">
+                    <CheckCircle2 size={18} />
+                  </div>
+                  <p className="text-[15px] md:text-[16px] leading-7 text-white/85">
+                    {text}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-14 md:py-16 lg:py-20">
+        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10">
+          <div className="rounded-[32px] border border-[#eadfd6] bg-white px-6 md:px-10 lg:px-14 py-10 md:py-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="text-center lg:text-left max-w-[760px]">
+              <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-3">
+                Shop with Confidence
+              </span>
+
+              <h2 className="text-[28px] md:text-[40px] lg:text-[46px] font-semibold leading-[1.05] text-[#241812] mb-4">
+                Looking for the Right
+                <br className="hidden md:block" />
+                Printer or Supply?
+              </h2>
+
+              <p className="text-[#6b5d54] text-[15px] md:text-[16px] leading-8">
+                Explore our collection and discover dependable printers, accessories,
+                and everyday printing essentials in one place.
+              </p>
+            </div>
+
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center gap-3 h-[50px] px-8 rounded-xl bg-[#7a4320] text-white text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#643619] transition-all shrink-0"
+            >
+              Shop Now <ArrowRight size={16} />
             </Link>
           </div>
         </div>
