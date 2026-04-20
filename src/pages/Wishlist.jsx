@@ -3,10 +3,10 @@ import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import {
   Heart,
-  ArrowRight,
   ShoppingCart,
-  ChevronLeft,
   Trash2,
+  ChevronLeft,
+  ShoppingBag,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '@/components/SEO';
@@ -33,144 +33,78 @@ export default function Wishlist() {
   };
 
   return (
-    <div className="pt-20 bg-[#fbf8f5] font-['Poppins'] text-[#111111]">
-      <SEO title="My Wishlist | MyPrinterHero" />
+    <div className="min-h-screen bg-gray-50 pt-32 pb-20 font-['Poppins']">
+      <SEO title="Wishlist | USPrinterStore" />
 
-      {/* Hero */}
-      <section className="bg-[#f4eeea] border-b border-[#e8dfd6]">
-        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 py-14 md:py-18 lg:py-20 text-center">
-          <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-4">
-            Favorites
-          </span>
+      <div className="max-w-[1400px] mx-auto px-4">
+        <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden">
+          {/* Header Inside Container */}
+          <div className="px-8 py-8 border-b border-gray-50 flex items-center justify-between bg-gray-50/50">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-blue-800 text-white flex items-center justify-center shadow-lg shadow-blue-100">
+                <Heart size={24} className="fill-current" />
+              </div>
+              <div>
+                <h1 className="text-[24px] font-black text-slate-900 leading-none mb-1">My Wishlist</h1>
+                <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest">{wishlistCount} Saved Items</p>
+              </div>
+            </div>
+            <Link to="/shop" className="text-[13px] font-black text-blue-800 uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all">
+              <ChevronLeft size={16} /> Continue Shopping
+            </Link>
+          </div>
 
-          <h1 className="text-[34px] md:text-[48px] lg:text-[58px] font-semibold text-[#241812] leading-[1.02]">
-            My Wishlist
-          </h1>
-
-          <p className="max-w-[760px] mx-auto mt-4 text-[#6b5d54] text-[14px] md:text-[16px] leading-8">
-            Review and manage your saved printers and accessories in one place.
-            You currently have <span className="font-semibold text-[#7a4320]">{wishlistCount}</span> item{wishlistCount !== 1 ? 's' : ''} saved.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-12 md:py-14 lg:py-16">
-        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10">
-          <AnimatePresence mode="wait">
-            {wishlistCount === 0 ? (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="rounded-[30px] border border-dashed border-[#e7ddd4] bg-white text-center py-16 md:py-20 px-6"
-              >
-                <div className="w-16 h-16 rounded-full bg-[#f8f2ec] text-[#7a4320] flex items-center justify-center mx-auto mb-6">
-                  <Heart size={28} />
-                </div>
-
-                <h2 className="text-[26px] md:text-[34px] font-semibold text-[#241812] mb-3">
-                  Your Wishlist is Empty
-                </h2>
-
-                <p className="text-[#6b5d54] text-[14px] md:text-[15px] leading-7 max-w-[540px] mx-auto mb-8">
-                  Save the printers and accessories you like so you can easily come back to them later.
-                </p>
-
-                <Link
-                  to="/shop"
-                  className="inline-flex items-center gap-2 h-[48px] px-7 rounded-xl bg-[#7a4320] text-white text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#643619] transition-all"
+          {/* Items Section */}
+          <div className="p-2 sm:p-4">
+            <AnimatePresence mode="wait">
+              {wishlistCount === 0 ? (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="py-32 text-center"
                 >
-                  Browse Products <ArrowRight size={16} />
-                </Link>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="filled"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"
-              >
-                {wishlist.map((p, i) => (
-                  <motion.div
-                    key={p.id}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: i * 0.03 }}
-                    viewport={{ once: true }}
-                    className="group"
-                  >
-                    <div className="relative flex flex-col h-full rounded-[26px] border border-[#eadfd6] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)]">
-                      {/* Remove */}
-                      <button
-                        onClick={() => toggleWishlist(p)}
-                        className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-white border border-[#eadfd6] flex items-center justify-center text-[#5a2d14] hover:bg-red-50 hover:text-red-500 transition-colors"
-                        title="Remove from wishlist"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-
-                      {/* Image */}
-                      <Link
-                        to={`/product/${p.slug}`}
-                        className="h-[210px] md:h-[230px] bg-[#fcfaf7] border-b border-[#efe5db] flex items-center justify-center p-5 overflow-hidden"
-                      >
+                  <ShoppingBag size={48} className="mx-auto text-gray-200 mb-6" />
+                  <h2 className="text-[20px] font-bold text-slate-900 mb-2">No saved items</h2>
+                  <p className="text-gray-400 text-[14px]">Your wishlist is currently empty.</p>
+                </motion.div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {wishlist.map((p) => (
+                    <div key={p.id} className="group bg-white border border-gray-100 rounded-3xl p-4 flex flex-col hover:border-blue-800 transition-all duration-300">
+                      <div className="relative aspect-square flex items-center justify-center mb-4 bg-gray-50 rounded-2xl overflow-hidden">
                         <img
                           src={getImagePath(p.images)}
                           alt={p.name}
-                          className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => {
-                            e.target.src =
-                              'https://via.placeholder.com/400x400?text=' +
-                              encodeURIComponent(p.name);
-                          }}
+                          className="max-h-[80%] max-w-[80%] object-contain transform group-hover:scale-110 transition-transform duration-500"
                         />
-                      </Link>
-
-                      {/* Info */}
-                      <div className="flex flex-col flex-1 px-4 md:px-5 py-4">
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#9a8879] mb-2">
-                          Saved Item
-                        </p>
-
-                        <Link to={`/product/${p.slug}`} className="block">
-                          <h4 className="text-[#241812] text-[15px] md:text-[16px] font-medium leading-6 line-clamp-2 min-h-[48px]">
-                            {p.name}
-                          </h4>
-                        </Link>
-
-                        <div className="mt-auto pt-4">
-                          <div className="flex items-center justify-between gap-3">
-                            <span className="text-[18px] md:text-[20px] font-semibold text-[#241812]">
-                              ${parseFloat(p.price).toLocaleString()}
-                            </span>
-
-                            <button
-                              onClick={(e) => handleAddToCart(e, p)}
-                              className="inline-flex items-center justify-center gap-2 h-[40px] px-4 rounded-xl bg-[#7a4320] text-white text-[12px] font-semibold uppercase tracking-[0.08em] hover:bg-[#643619] transition"
-                            >
-                              <ShoppingCart size={14} />
-                              Add
-                            </button>
-                          </div>
-                        </div>
+                        <button
+                          onClick={() => toggleWishlist(p)}
+                          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white text-gray-400 hover:text-red-500 shadow-sm flex items-center justify-center transition-colors"
+                        >
+                          <Trash2 size={14} />
+                        </button>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
 
-          <div className="mt-10 text-center">
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-2 text-[#5a2d14] font-semibold text-[13px] uppercase tracking-[0.08em] border-b border-[#5a2d14] pb-1 hover:text-[#7a4320] hover:border-[#7a4320] transition-all"
-            >
-              <ChevronLeft size={16} /> Return to Shop
-            </Link>
+                      <div className="flex-grow space-y-1">
+                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{p.brand_name || 'Printer'}</p>
+                        <h4 className="text-[14px] font-bold text-slate-800 line-clamp-1 group-hover:text-blue-800 transition-colors">{p.name}</h4>
+                        <p className="text-[16px] font-black text-slate-900">${parseFloat(p.price).toLocaleString()}</p>
+                      </div>
+
+                      <button
+                        onClick={(e) => handleAddToCart(e, p)}
+                        className="mt-4 w-full h-10 bg-slate-900 text-white rounded-xl text-[11px] font-black uppercase tracking-widest hover:bg-blue-800 transition-all active:scale-95 flex items-center justify-center gap-2"
+                      >
+                        <ShoppingCart size={14} /> Add to Cart
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

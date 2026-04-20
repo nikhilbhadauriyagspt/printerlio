@@ -18,6 +18,8 @@ import {
   MapPin,
   Phone,
   Mail,
+  Settings,
+  LayoutGrid,
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import SEO from '@/components/SEO';
@@ -138,389 +140,295 @@ export default function Profile() {
   if (!user) return null;
 
   const tabs = [
-    { id: 'profile', label: 'My Details', icon: User },
+    { id: 'profile', label: 'Account Info', icon: User },
     { id: 'orders', label: 'Order History', icon: Package },
     { id: 'security', label: 'Security', icon: Lock },
   ];
 
   return (
-    <div className="pt-25 bg-[#fbf8f5] font-['Poppins'] text-[#111111]">
+    <div className="min-h-screen bg-gray-50 pt-32 pb-20 font-['Poppins'] text-slate-900">
       <SEO title="My Account | MyPrinterHero" />
 
-      {/* Hero */}
-      <section className="bg-[#f4eeea] border-b border-[#e8dfd6]">
-        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 py-14 md:py-18 lg:py-20">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-            <div className="text-center lg:text-left">
-              <span className="inline-block text-[11px] md:text-[12px] uppercase tracking-[3px] text-[#8b7768] mb-4">
-                Account Dashboard
-              </span>
-
-              <h1 className="text-[34px] md:text-[48px] lg:text-[58px] font-semibold text-[#241812] leading-[1.02]">
-                My Profile
-              </h1>
-
-              <p className="max-w-[760px] mt-4 text-[#6b5d54] text-[14px] md:text-[16px] leading-8">
-                Manage your details, review recent orders, and keep your account secure.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4 lg:gap-5">
-              <div className="text-center sm:text-right">
-                <p className="text-[15px] font-semibold text-[#241812]">{user.name}</p>
-                <a
-                  href={`mailto:${user.email}`}
-                  className="text-[13px] text-[#8b7768] hover:text-[#7a4320] transition-colors"
-                >
-                  {user.email}
-                </a>
+      <div className="max-w-[1400px] mx-auto px-4">
+        <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
+          {/* Header Inside Container */}
+          <div className="px-8 py-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gray-50/50">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-100">
+                <LayoutGrid size={24} />
               </div>
-
-              <button
+              <div>
+                <h1 className="text-[24px] font-black text-slate-900 leading-none mb-1">My Dashboard</h1>
+                <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest">
+                  Welcome back, {user.name?.split(' ')[0]}
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+               <button
                 onClick={handleLogout}
-                className="h-[44px] px-5 rounded-xl border border-[#d8c8bb] bg-white text-[#7a4320] text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#7a4320] hover:text-white transition-all flex items-center gap-2"
+                className="h-12 px-6 rounded-xl bg-slate-900 text-white text-[11px] font-black uppercase tracking-widest hover:bg-blue-600 transition-all flex items-center gap-2 active:scale-95"
               >
                 <LogOut size={14} /> Sign Out
               </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 py-12 md:py-14 lg:py-16">
-        <div className="grid grid-cols-1 xl:grid-cols-[330px_1fr] gap-8 lg:gap-10 items-start">
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="rounded-[28px] border border-[#e8dfd6] bg-white p-4 md:p-5">
-              <div className="space-y-3">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={cn(
-                      'w-full flex items-center justify-between px-4 py-4 rounded-[18px] text-sm font-medium transition-all border',
-                      activeTab === tab.id
-                        ? 'bg-[#7a4320] text-white border-[#7a4320]'
-                        : 'bg-[#fcfaf7] text-[#5f5148] border-[#ece2d9] hover:bg-white hover:border-[#d8c8bb]'
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <tab.icon size={17} />
-                      {tab.label}
-                    </div>
-                    <ChevronRight size={15} />
-                  </button>
-                ))}
+          <div className="grid grid-cols-1 lg:grid-cols-12">
+            {/* Sidebar Tabs */}
+            <div className="lg:col-span-3 border-r border-gray-50 p-6 space-y-4">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    'w-full flex items-center justify-between px-6 py-4 rounded-2xl text-[14px] font-bold transition-all border',
+                    activeTab === tab.id
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-100'
+                      : 'bg-white text-gray-500 border-gray-100 hover:border-blue-200 hover:text-slate-900'
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <tab.icon size={18} />
+                    {tab.label}
+                  </div>
+                  <ChevronRight size={16} className={cn(activeTab === tab.id ? 'opacity-100' : 'opacity-0')} />
+                </button>
+              ))}
+
+              <div className="mt-10 p-6 bg-slate-900 rounded-[2rem] text-white relative overflow-hidden group">
+                 <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" />
+                 <ShieldCheck className="text-blue-400 mb-4 relative z-10" size={24} />
+                 <h4 className="text-[16px] font-black mb-2 relative z-10">Data Safety</h4>
+                 <p className="text-[12px] text-white/50 leading-relaxed relative z-10">
+                   Your details are encrypted and stored with bank-grade security.
+                 </p>
               </div>
             </div>
 
-            <div className="rounded-[28px] bg-[#2d1a11] text-white p-6 md:p-7">
-              <ShieldCheck className="text-[#f0c29f] mb-4" size={24} />
-              <h4 className="text-[22px] font-semibold leading-tight mb-3">
-                Data Protection
-              </h4>
-              <p className="text-[14px] text-white/70 leading-7">
-                Your account information is stored securely and handled with care.
-              </p>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div>
-            <AnimatePresence mode="wait">
-              {activeTab === 'profile' && (
-                <motion.div
-                  key="profile"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="rounded-[30px] border border-[#e8dfd6] bg-white p-6 md:p-8 lg:p-10"
-                >
-                  <div className="flex items-center gap-4 mb-8 md:mb-10 pb-5 border-b border-[#eee4db]">
-                    <div className="h-12 w-12 rounded-full bg-[#f8f2ec] flex items-center justify-center text-[#7a4320]">
-                      <User size={22} />
+            {/* Main Content Area */}
+            <div className="lg:col-span-9 p-8 md:p-12">
+              <AnimatePresence mode="wait">
+                {activeTab === 'profile' && (
+                  <motion.div
+                    key="profile"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-10"
+                  >
+                    <div className="flex items-center gap-4 border-b border-gray-50 pb-6">
+                       <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                          <User size={20} />
+                       </div>
+                       <h2 className="text-[24px] font-black text-slate-900">Personal Details</h2>
                     </div>
-                    <h2 className="text-[28px] md:text-[34px] font-semibold text-[#241812]">
-                      Personal Details
-                    </h2>
-                  </div>
 
-                  <form onSubmit={handleProfileUpdate} className="space-y-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                          Full Name
-                        </label>
-                        <div className="relative">
-                          <User
-                            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b7a89c]"
-                            size={17}
-                          />
-                          <input
-                            required
-                            value={profileForm.name}
-                            onChange={(e) =>
-                              setProfileForm({ ...profileForm, name: e.target.value })
-                            }
-                            className="w-full h-14 pl-12 pr-4 rounded-xl bg-[#fcfaf7] border border-[#e7ddd4] focus:border-[#7a4320] focus:bg-white outline-none text-sm transition-all"
-                          />
+                    <form onSubmit={handleProfileUpdate} className="space-y-8 max-w-3xl">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
+                            Full Name
+                          </label>
+                          <div className="relative group">
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                            <input
+                              required
+                              value={profileForm.name}
+                              onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
+                              className="w-full h-14 pl-12 pr-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-blue-600 focus:bg-white outline-none text-[15px] font-medium transition-all"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
+                            Phone Number
+                          </label>
+                          <div className="relative group">
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                            <input
+                              value={profileForm.phone}
+                              onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                              className="w-full h-14 pl-12 pr-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-blue-600 focus:bg-white outline-none text-[15px] font-medium transition-all"
+                            />
+                          </div>
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                          Phone Number
-                        </label>
-                        <div className="relative">
-                          <Phone
-                            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b7a89c]"
-                            size={17}
-                          />
-                          <input
-                            value={profileForm.phone}
-                            onChange={(e) =>
-                              setProfileForm({ ...profileForm, phone: e.target.value })
-                            }
-                            className="w-full h-14 pl-12 pr-4 rounded-xl bg-[#fcfaf7] border border-[#e7ddd4] focus:border-[#7a4320] focus:bg-white outline-none text-sm transition-all"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
+                        <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
                           Email Address
                         </label>
-                        <div className="relative">
-                          <Mail
-                            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b7a89c]"
-                            size={17}
-                          />
+                        <div className="relative group">
+                          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
                           <input
                             value={user.email || ''}
                             disabled
-                            className="w-full h-14 pl-12 pr-4 rounded-xl bg-[#f6f1ec] border border-[#e7ddd4] text-[#8b7768] outline-none text-sm"
+                            className="w-full h-14 pl-12 pr-4 rounded-2xl bg-gray-100 border border-gray-100 text-gray-400 outline-none text-[15px] font-medium cursor-not-allowed"
+                          />
+                        </div>
+                        <p className="text-[11px] font-bold text-gray-400 pl-1">Email cannot be changed once verified.</p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
+                          Saved Address
+                        </label>
+                        <div className="relative group">
+                          <MapPin className="absolute left-4 top-5 text-gray-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                          <textarea
+                            rows="3"
+                            value={profileForm.address}
+                            onChange={(e) => setProfileForm({ ...profileForm, address: e.target.value })}
+                            className="w-full pl-12 pr-4 py-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-blue-600 focus:bg-white outline-none text-[15px] font-medium transition-all resize-none"
+                            placeholder="Enter your shipping address"
                           />
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                          Account Status
-                        </label>
-                        <div className="h-14 rounded-xl bg-[#f6f1ec] border border-[#e7ddd4] flex items-center px-4 text-sm font-medium text-[#241812]">
-                          Active Customer Account
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                        Default Address
-                      </label>
-                      <div className="relative">
-                        <MapPin
-                          className="absolute left-4 top-5 text-[#b7a89c]"
-                          size={17}
-                        />
-                        <textarea
-                          rows="4"
-                          value={profileForm.address}
-                          onChange={(e) =>
-                            setProfileForm({ ...profileForm, address: e.target.value })
-                          }
-                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#fcfaf7] border border-[#e7ddd4] focus:border-[#7a4320] focus:bg-white outline-none text-sm transition-all resize-none"
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      disabled={isUpdating}
-                      className="h-12 px-8 rounded-xl bg-[#7a4320] text-white text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#643619] transition-all active:scale-[0.98] disabled:opacity-50"
-                    >
-                      {isUpdating ? 'Saving...' : 'Update Profile'}
-                    </button>
-                  </form>
-                </motion.div>
-              )}
-
-              {activeTab === 'orders' && (
-                <motion.div
-                  key="orders"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="space-y-5"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-1">
-                    <h2 className="text-[28px] md:text-[34px] font-semibold text-[#241812]">
-                      Recent Orders
-                    </h2>
-
-                    <Link
-                      to="/orders"
-                      className="inline-flex items-center gap-2 text-[#5a2d14] font-semibold text-[13px] uppercase tracking-[0.08em] border-b border-[#5a2d14] pb-1 hover:text-[#7a4320] hover:border-[#7a4320] transition-all"
-                    >
-                      View All History <ArrowRight size={14} />
-                    </Link>
-                  </div>
-
-                  {loading ? (
-                    <div className="rounded-[30px] border border-[#e8dfd6] bg-white py-16 flex flex-col items-center">
-                      <Loader2 className="animate-spin text-[#7a4320] mb-4" />
-                      <p className="text-[12px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                        Loading Orders
-                      </p>
-                    </div>
-                  ) : orders.length === 0 ? (
-                    <div className="rounded-[30px] border border-[#e8dfd6] bg-white py-16 text-center">
-                      <ShoppingCart size={46} strokeWidth={1.5} className="text-[#d5c7bb] mx-auto mb-6" />
-                      <p className="text-[18px] font-semibold text-[#241812] mb-2">
-                        No orders found
-                      </p>
-                      <Link
-                        to="/shop"
-                        className="mt-3 inline-flex items-center gap-2 text-[#7a4320] font-semibold text-[13px] uppercase tracking-[0.08em] hover:underline"
+                      <button
+                        disabled={isUpdating}
+                        className="h-16 px-10 rounded-2xl bg-blue-600 text-white font-black text-[13px] uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-blue-100"
                       >
-                        Start Shopping <ArrowRight size={14} />
-                      </Link>
+                        {isUpdating ? <Loader2 className="animate-spin" /> : 'Save Changes'}
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+
+                {activeTab === 'orders' && (
+                  <motion.div
+                    key="orders"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-8"
+                  >
+                    <div className="flex items-center justify-between border-b border-gray-50 pb-6">
+                       <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                             <Package size={20} />
+                          </div>
+                          <h2 className="text-[24px] font-black text-slate-900">Recent Orders</h2>
+                       </div>
+                       <Link to="/orders" className="text-[12px] font-black text-blue-600 uppercase tracking-widest hover:underline">
+                         Full History
+                       </Link>
                     </div>
-                  ) : (
-                    <div className="space-y-4">
-                      {orders.slice(0, 5).map((order) => (
-                        <div
-                          key={order.id}
-                          className="rounded-[24px] border border-[#e8dfd6] bg-white p-5 md:p-6 hover:shadow-[0_14px_30px_rgba(0,0,0,0.04)] transition-all"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-6 items-center">
-                            <div>
-                              <p className="text-[10px] font-semibold text-[#8b7768] uppercase tracking-[0.18em] mb-2">
-                                Order ID
-                              </p>
-                              <h4 className="text-[14px] font-semibold text-[#241812]">
-                                #{order.order_code || order.id}
-                              </h4>
-                            </div>
 
-                            <div>
-                              <p className="text-[10px] font-semibold text-[#8b7768] uppercase tracking-[0.18em] mb-2">
-                                Placed On
-                              </p>
-                              <p className="text-[14px] font-medium text-[#241812]">
-                                {new Date(order.created_at).toLocaleDateString()}
-                              </p>
+                    {loading ? (
+                      <div className="py-20 text-center">
+                        <Loader2 className="animate-spin text-blue-600 mx-auto mb-4" />
+                        <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Fetching orders...</p>
+                      </div>
+                    ) : orders.length === 0 ? (
+                      <div className="py-20 text-center bg-gray-50 rounded-[2.5rem] border border-gray-100">
+                        <ShoppingBag size={48} className="text-gray-200 mx-auto mb-6" />
+                        <p className="text-[18px] font-bold text-slate-900 mb-8">No orders found</p>
+                        <Link to="/shop" className="h-14 px-8 bg-blue-600 text-white font-black text-[13px] uppercase tracking-widest rounded-2xl inline-flex items-center gap-2 hover:bg-blue-700 transition-all">
+                           Explore Shop <ArrowRight size={16} />
+                        </Link>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        {orders.slice(0, 4).map((order) => (
+                          <div key={order.id} className="group bg-white border border-gray-100 rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-blue-600/30 transition-all duration-300">
+                            <div className="flex items-center gap-5 w-full md:w-auto">
+                               <div className="w-12 h-12 rounded-xl bg-gray-50 flex flex-col items-center justify-center border border-gray-100 group-hover:bg-white transition-colors">
+                                  <span className="text-[14px] font-black text-slate-900">#{order.id}</span>
+                               </div>
+                               <div>
+                                  <p className="text-[14px] font-bold text-slate-900">{new Date(order.created_at).toLocaleDateString()}</p>
+                                  <div className={cn(
+                                    'text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border inline-block mt-1',
+                                    order.status === 'delivered' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-blue-50 text-blue-600 border-blue-100'
+                                  )}>
+                                    {order.status}
+                                  </div>
+                               </div>
                             </div>
-
-                            <div>
-                              <p className="text-[10px] font-semibold text-[#8b7768] uppercase tracking-[0.18em] mb-2">
-                                Amount
-                              </p>
-                              <p className="text-[14px] font-semibold text-[#241812]">
-                                ${parseFloat(order.total_amount || order.total_price || 0).toLocaleString()}
-                              </p>
-                            </div>
-
-                            <div className="md:justify-self-end">
-                              <div
-                                className={cn(
-                                  'px-4 py-2 rounded-full text-[11px] font-semibold border w-fit capitalize',
-                                  order.status === 'delivered'
-                                    ? 'bg-emerald-50 text-emerald-600 border-emerald-100'
-                                    : 'bg-[#f8f2ec] text-[#7a4320] border-[#eadfd6]'
-                                )}
-                              >
-                                {order.status.replace('_', ' ')}
-                              </div>
+                            <div className="flex items-center justify-between md:justify-end gap-10 w-full md:w-auto">
+                               <p className="text-[18px] font-black text-slate-900">${parseFloat(order.total_amount || 0).toLocaleString()}</p>
+                               <Link to="/orders" className="w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-blue-600 hover:border-blue-600 transition-all">
+                                  <ChevronRight size={18} />
+                               </Link>
                             </div>
                           </div>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+
+                {activeTab === 'security' && (
+                  <motion.div
+                    key="security"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    className="space-y-10"
+                  >
+                    <div className="flex items-center gap-4 border-b border-gray-50 pb-6">
+                       <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                          <Lock size={20} />
+                       </div>
+                       <h2 className="text-[24px] font-black text-slate-900">Security Update</h2>
+                    </div>
+
+                    <form onSubmit={handleSecurityUpdate} className="space-y-8 max-w-xl">
+                      <div className="space-y-2">
+                        <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
+                          New Password
+                        </label>
+                        <div className="relative group">
+                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                          <input
+                            type={showPass ? 'text' : 'password'}
+                            required
+                            value={securityForm.password}
+                            onChange={(e) => setSecurityForm({ ...securityForm, password: e.target.value })}
+                            className="w-full h-14 pl-12 pr-12 rounded-2xl bg-gray-50 border border-gray-100 focus:border-blue-600 focus:bg-white outline-none text-[15px] font-medium transition-all"
+                            placeholder="Min. 8 characters"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPass(!showPass)}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-slate-900 transition-colors"
+                          >
+                            {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                          </button>
                         </div>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              )}
-
-              {activeTab === 'security' && (
-                <motion.div
-                  key="security"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="rounded-[30px] border border-[#e8dfd6] bg-white p-6 md:p-8 lg:p-10"
-                >
-                  <div className="flex items-center gap-4 mb-8 md:mb-10 pb-5 border-b border-[#eee4db]">
-                    <div className="h-12 w-12 rounded-full bg-[#f8f2ec] flex items-center justify-center text-[#7a4320]">
-                      <Lock size={22} />
-                    </div>
-                    <h2 className="text-[28px] md:text-[34px] font-semibold text-[#241812]">
-                      Security Update
-                    </h2>
-                  </div>
-
-                  <form onSubmit={handleSecurityUpdate} className="space-y-8">
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                        New Password
-                      </label>
-                      <div className="relative">
-                        <Lock
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b7a89c]"
-                          size={17}
-                        />
-                        <input
-                          type={showPass ? 'text' : 'password'}
-                          required
-                          value={securityForm.password}
-                          onChange={(e) =>
-                            setSecurityForm({ ...securityForm, password: e.target.value })
-                          }
-                          className="w-full h-14 pl-12 pr-12 rounded-xl bg-[#fcfaf7] border border-[#e7ddd4] focus:border-[#7a4320] focus:bg-white outline-none text-sm transition-all"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPass(!showPass)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-[#b7a89c] hover:text-[#241812] transition-colors"
-                        >
-                          {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
-                        </button>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <label className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.18em]">
-                        Confirm Password
-                      </label>
-                      <div className="relative">
-                        <ShieldCheck
-                          className="absolute left-4 top-1/2 -translate-y-1/2 text-[#b7a89c]"
-                          size={17}
-                        />
-                        <input
-                          type={showPass ? 'text' : 'password'}
-                          required
-                          value={securityForm.confirmPassword}
-                          onChange={(e) =>
-                            setSecurityForm({
-                              ...securityForm,
-                              confirmPassword: e.target.value,
-                            })
-                          }
-                          className="w-full h-14 pl-12 pr-4 rounded-xl bg-[#fcfaf7] border border-[#e7ddd4] focus:border-[#7a4320] focus:bg-white outline-none text-sm transition-all"
-                        />
+                      <div className="space-y-2">
+                        <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-1">
+                          Confirm New Password
+                        </label>
+                        <div className="relative group">
+                          <ShieldCheck className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-600 transition-colors" size={18} />
+                          <input
+                            type={showPass ? 'text' : 'password'}
+                            required
+                            value={securityForm.confirmPassword}
+                            onChange={(e) => setSecurityForm({ ...securityForm, confirmPassword: e.target.value })}
+                            className="w-full h-14 pl-12 pr-4 rounded-2xl bg-gray-50 border border-gray-100 focus:border-blue-600 focus:bg-white outline-none text-[15px] font-medium transition-all"
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <button
-                      disabled={isUpdating}
-                      className="h-12 px-8 rounded-xl bg-[#7a4320] text-white text-[13px] font-semibold uppercase tracking-[0.08em] hover:bg-[#643619] transition-all active:scale-[0.98] disabled:opacity-50"
-                    >
-                      {isUpdating ? 'Processing...' : 'Update Password'}
-                    </button>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      <button
+                        disabled={isUpdating}
+                        className="h-16 px-10 rounded-2xl bg-blue-600 text-white font-black text-[13px] uppercase tracking-widest hover:bg-blue-700 transition-all active:scale-95 disabled:opacity-50 shadow-xl shadow-blue-100"
+                      >
+                        {isUpdating ? <Loader2 className="animate-spin" /> : 'Update Password'}
+                      </button>
+                    </form>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </div>

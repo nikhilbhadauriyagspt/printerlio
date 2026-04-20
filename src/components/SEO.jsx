@@ -44,17 +44,17 @@ export default function SEO({ title, description, keywords, schemaType = "Websit
     const schemaData = {
       "@context": "https://schema.org",
       "@type": schemaType === "Product" ? "Product" : "Organization",
-      "name": "MyPrinterHero",
-      "url": "https://myprinterhero.shop",
-      "logo": "https://myprinterhero.shop/logo/logo.png",
+      "name": "USPrinterStore",
+      "url": "https://usprinterstore.shop",
+      "logo": "https://usprinterstore.shop/logo/logo.png",
       "description": finalDesc,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "2445 4th Ave S",
-        "addressLocality": "Seattle",
-        "addressRegion": "WA",
-        "postalCode": "98134",
-        "addressCountry": "US"
+        "streetAddress": "4352 13th Ave S",
+        "addressLocality": "Fargo",
+        "addressRegion": "ND",
+        "postalCode": "58103",
+        "addressCountry": "USA"
       },
       "contactPoint": {
         "@type": "ContactPoint",

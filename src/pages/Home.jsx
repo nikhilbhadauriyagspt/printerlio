@@ -44,14 +44,16 @@ export default function Home() {
         ]);
 
         if (prodRes.status === 'success' && catRes.status === 'success' && brandRes.status === 'success') {
-          const allowedBrands = ["brother", "canon", "epson", "hp", "lexmark", "xerox"];
+          const allowedBrands = ["canon", "epson", "hp", "lexmark"];
           const filteredBrands = brandRes.data.filter(b => allowedBrands.includes(b.name.trim().toLowerCase()));
           
           const all = prodRes.data.filter(p => 
             !p.name.toLowerCase().includes('laptop') && 
             !p.name.toLowerCase().includes('macbook') && 
             !p.name.toLowerCase().includes('notebook') &&
-            !p.name.toLowerCase().includes('chromebook')
+            !p.name.toLowerCase().includes('chromebook') &&
+            !p.brand_name?.toLowerCase().includes('brother') &&
+            !p.brand_name?.toLowerCase().includes('xerox')
           );
           
           const printers = all.filter(p => 
@@ -69,10 +71,10 @@ export default function Home() {
           const shuffled = [...all].sort(() => 0.5 - Math.random());
 
           setData({
-            all,
+            all: all.slice(0, 18),
             printers,
             accessories,
-            mixedArrivals: shuffled,
+            mixedArrivals: shuffled.slice(0, 18),
             categories: catRes.data,
             brands: filteredBrands,
             loading: false
@@ -90,7 +92,7 @@ export default function Home() {
   return (
     <div className="bg-white font-jakarta overflow-x-hidden text-slate-900">
       <SEO 
-        title="MyPrinterHero | Quality Printers & Accessories"
+        title="USPrinterStore | Quality Printers & Accessories"
         description="Your trusted source for high-quality printers and printing printer. Delivering excellence across the USA."
       />
 

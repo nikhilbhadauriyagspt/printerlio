@@ -4,60 +4,61 @@ import { motion } from 'framer-motion';
 
 const features = [
   {
-    icon: <Truck size={30} strokeWidth={1.6} />,
-    title: 'FREE SHIPPING',
+    icon: <Truck size={28} />,
+    title: 'Free Shipping',
     desc: 'On all printer and accessory orders',
+    color: 'blue',
   },
   {
-    icon: <RotateCcw size={30} strokeWidth={1.6} />,
-    title: 'EASY RETURNS',
+    icon: <RotateCcw size={28} />,
+    title: 'Easy Returns',
     desc: 'Simple 7-day return process',
+    color: 'indigo',
   },
   {
-    icon: <ShieldCheck size={30} strokeWidth={1.6} />,
-    title: 'SECURE PAYMENT',
+    icon: <ShieldCheck size={28} />,
+    title: 'Secure Payment',
     desc: 'Protected checkout for every purchase',
+    color: 'sky',
   },
   {
-    icon: <Headphones size={30} strokeWidth={1.6} />,
-    title: 'EXPERT SUPPORT',
+    icon: <Headphones size={28} />,
+    title: 'Expert Support',
     desc: 'Helpful printer assistance anytime',
+    color: 'emerald',
   },
 ];
 
 export default function Features() {
   return (
-    <section className="w-full bg-[#fbf7f3] border-t border-[#eee3d8] font-['Poppins'] overflow-hidden">
-      <div className="w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="w-full bg-gray-50 py-16 px-4 md:px-8">
+      <div className="max-w-[1820px] mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className={`group relative flex flex-col items-center text-center px-8 md:px-10 py-10 md:py-12 transition-all duration-300 hover:bg-white ${
-                index !== features.length - 1 ? 'lg:border-r lg:border-[#eadfd4]' : ''
-              } ${
-                index < 2 ? 'border-b border-[#eadfd4] lg:border-b-0' : ''
-              } ${
-                index % 2 === 0 ? 'sm:border-r sm:border-[#eadfd4] lg:border-r-0' : ''
-              }`}
+              className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
             >
-              <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-[#d8c2b0] bg-white text-[#9a6a4d] transition-all duration-300 group-hover:bg-[#9a6a4d] group-hover:text-white group-hover:border-[#9a6a4d]">
-                {item.icon}
+              <div className="mb-6 relative">
+                <div className="absolute inset-0 bg-blue-800/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-800 group-hover:bg-blue-800 group-hover:text-white transition-all duration-300 shadow-sm">
+                  {item.icon}
+                </div>
               </div>
 
-              <h3 className="text-[14px] md:text-[15px] font-bold text-[#5b341d] tracking-[0.14em] mb-2 uppercase">
+              <h3 className="text-[17px]  text-gray-900 mb-2">
                 {item.title}
               </h3>
 
-              <p className="text-[13px] text-[#7b675c] leading-6 max-w-[220px]">
+              <p className="text-[14px] text-gray-500 leading-relaxed max-w-[240px]">
                 {item.desc}
               </p>
-
-              <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-[#9a6a4d] transition-all duration-300 group-hover:w-[70px]" />
+              
+              <div className="mt-6 w-10 h-1 bg-gray-100 rounded-full group-hover:w-20 group-hover:bg-blue-800 transition-all duration-300" />
             </motion.div>
           ))}
         </div>

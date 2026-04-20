@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ArrowRight, Box } from "lucide-react";
 
 export default function ShopByCategory({ categories = [], loading = false }) {
   const filteredCategories = categories.filter((cat) => {
@@ -36,88 +37,67 @@ export default function ShopByCategory({ categories = [], loading = false }) {
     return `/${image}`;
   };
 
-  const getDescription = (name) => {
-    const lower = name?.toLowerCase() || "";
-
-    if (lower.includes("laser")) {
-      return "Fast and dependable office printing.";
-    }
-    if (lower.includes("inkjet")) {
-      return "Smooth color output for daily use.";
-    }
-    if (lower.includes("accessories")) {
-      return "Essential tools for printer setup.";
-    }
-    if (lower.includes("large format")) {
-      return "Built for posters and bigger prints.";
-    }
-    if (lower.includes("supertank")) {
-      return "High-volume printing with low refill hassle.";
-    }
-    if (lower.includes("led")) {
-      return "Sharp results for modern workspaces.";
-    }
-    if (lower.includes("thermal")) {
-      return "Reliable labels and receipt printing.";
-    }
-    if (lower.includes("photo")) {
-      return "Detailed prints for creative work.";
-    }
-    if (lower.includes("dot matrix")) {
-      return "Trusted for forms and invoices.";
-    }
-    if (lower.includes("all-in-one")) {
-      return "Print, scan, and copy in one device.";
-    }
-
-    return "Explore dependable printer solutions.";
-  };
-
   return (
-    <section className="w-full bg-[#f7f4ef] py-12 md:py-14 font-['Poppins']">
-      <div className="max-w-[1720px] mx-auto px-4 md:px-8 lg:px-10">
-        {/* Heading */}
-        <div className="mb-8 md:mb-10 text-center">
-          <span className="block text-[11px] uppercase tracking-[3px] text-[#8a7566] mb-2">
-            Explore Collection
-          </span>
-          <h2 className="text-[28px] md:text-[38px] lg:text-[44px] font-semibold leading-none text-[#2b1d15]">
-            Shop by Category
-          </h2>
+    <section className="w-full bg-gray-50/50 py-20 px-4 md:px-8">
+      <div className="max-w-[1820px] mx-auto">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="h-[2px] w-8 bg-blue-800"></span>
+              <span className="text-blue-800  text-[13px] uppercase tracking-[0.2em]">Our Collections</span>
+            </div>
+            <h2 className="text-[38px] md:text-[40px]  text-slate-900 leading-[1.1]">
+              Shop by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-indigo-800">Category.</span>
+            </h2>
+          </div>
+          <Link 
+            to="/shop" 
+            className="group flex items-center gap-3 bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-800 hover:text-blue-800 transition-all  text-[15px]"
+          >
+            Explore Everything <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
-        {/* Cards */}
-        {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-[280px] rounded-2xl border border-[#e6dbcf] bg-white animate-pulse"
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5">
-            {subcategories.map((item, index) => (
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {loading ? (
+            Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="h-48 bg-gray-100 rounded-[2.5rem] animate-pulse" />
+            ))
+          ) : (
+            subcategories.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 22 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group"
               >
                 <Link
                   to={`/shop?category=${item.slug}`}
-                  className="block h-full rounded-2xl border border-[#e6dbcf] bg-white overflow-hidden transition-all duration-300 hover:shadow-[0_14px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1"
+                  className="group relative block h-48 bg-white  border border-gray-100 shadow-sm  hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="flex flex-col h-full min-h-[280px]">
-                    {/* Image */}
-                    <div className="h-[140px] md:h-[160px] bg-white border-b border-[#efe5db] flex items-center justify-center p-4 overflow-hidden">
+                  {/* Decorative Background Accent */}
+                  <div className="absolute top-0 right-0 z-110 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 group-hover:bg-blue-800 transition-colors duration-500" />
+                  
+                  <div className="absolute inset-0 p-8 flex items-center justify-between">
+                    {/* Text Content */}
+                    <div className="relative z-10 flex flex-col justify-center max-w-[60%]">
+                      <h3 className="text-[20px]  text-slate-900 leading-tight mb-2 group-hover:text-blue-800 transition-colors">
+                        {item.name}
+                      </h3>
+                      <div className="flex items-center gap-2 text-blue-800 font-bold text-[12px] uppercase tracking-wider opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+                        Shop Now <ArrowRight size={14} />
+                      </div>
+                    </div>
+
+                    {/* Image Container */}
+                    <div className="relative z-10 w-35 h-40 flex items-center justify-center p-2 ">
                       <img
                         src={getImagePath(item.image)}
                         alt={item.name}
-                        className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                        className="max-h-full max-w-full object-contain"
                         onError={(e) => {
                           e.currentTarget.src = `https://via.placeholder.com/600x400?text=${encodeURIComponent(
                             item.name
@@ -125,36 +105,12 @@ export default function ShopByCategory({ categories = [], loading = false }) {
                         }}
                       />
                     </div>
-
-                    {/* Content */}
-                    <div className="flex flex-col flex-1 px-4 md:px-5 py-4">
-                      <span className="text-[10px] uppercase tracking-[2px] text-[#9a8879] mb-2">
-                        Printer Range
-                      </span>
-
-                      <h3 className="text-[17px] md:text-[19px] leading-[1.2] font-semibold text-[#241812]">
-                        {item.name}
-                      </h3>
-
-                      <p className="mt-2 text-[13px] md:text-[14px] leading-6 text-[#6e5f55]">
-                        {getDescription(item.name)}
-                      </p>
-
-                      <div className="mt-auto pt-4">
-                        <span className="inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[1px] text-[#7c3f10]">
-                          Shop Now
-                          <span className="transition-transform duration-300 group-hover:translate-x-1">
-                            →
-                          </span>
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 </Link>
               </motion.div>
-            ))}
-          </div>
-        )}
+            ))
+          )}
+        </div>
       </div>
     </section>
   );

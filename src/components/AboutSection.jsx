@@ -1,121 +1,127 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Printer, ScanLine, Droplets, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Truck, LifeBuoy, Zap, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Using your local asset
-import aboutBanner from '@/assets/bannerr/banner6.png';
+import aboutBanner from '../assets/bannerr/banner6.png';
 
 const features = [
   {
-    icon: Printer,
-    title: 'HOME PRINTERS',
-    desc: 'Reliable printers for everyday documents, school work, and personal use.',
+    icon: CheckCircle2,
+    title: 'Best Printers',
+    desc: 'Original and reliable printers.',
   },
   {
-    icon: ScanLine,
-    title: 'ALL-IN-ONE',
-    desc: 'Print, scan, and copy with smart multifunction performance in one machine.',
+    icon: Truck,
+    title: 'Fast Shipping',
+    desc: 'Quick delivery to your door.',
   },
   {
-    icon: Droplets,
-    title: 'INK & TONER',
-    desc: 'High-quality ink and toner supplies for sharp output and smooth printing.',
+    icon: Zap,
+    title: 'Easy Setup',
+    desc: 'Get printing in just minutes.',
   },
   {
-    icon: ShieldCheck,
-    title: 'OFFICE READY',
-    desc: 'Built for business efficiency, fast workflows, and consistent page quality.',
+    icon: LifeBuoy,
+    title: 'Full Support',
+    desc: 'Friendly help whenever you need.',
   },
 ];
 
 export default function AboutSection() {
   return (
-    <section className="w-full bg-[#f6f1ef] overflow-hidden font-['Poppins']">
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 items-stretch">
-        
-        {/* Left Side Image */}
-        <motion.div
-          initial={{ opacity: 0, x: -35 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="relative min-h-[320px] sm:min-h-[380px] md:min-h-[460px] lg:min-h-[680px]"
-        >
-          <div className="absolute inset-0 bg-[#b97952] translate-x-4 translate-y-4 z-0 hidden md:block" />
+    <section className="w-full bg-white py-20 px-4 md:px-8 lg:px-12 overflow-hidden">
+      <div className="max-w-[1920px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Side: Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="absolute -top-10 -left-10 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-70" />
+            <div className="absolute -bottom-10 -right-10 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50" />
+            
+            <div className="relative z-10 brightness-105">
+              <img
+                src={aboutBanner}
+                alt="Modern Printer"
+                className="w-full h-auto object-cover "
+              />
+            </div>
+          </motion.div>
 
-          <div className="relative z-10 w-full h-full">
-            <img
-              src={aboutBanner}
-              alt="Printer workspace"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </motion.div>
+          {/* Right Side: Content */}
+          <div className="relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-800 text-[12px] font-bold uppercase tracking-wider rounded-full mb-6">
+                Easy Printing
+              </span>
 
-        {/* Right Side Content */}
-        <motion.div
-          initial={{ opacity: 0, x: 35 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="relative flex items-center px-6 sm:px-8 md:px-10 lg:px-12 xl:px-16 py-12 md:py-14 lg:py-16 min-h-[320px] sm:min-h-[380px] md:min-h-[460px] lg:min-h-[680px]"
-        >
-          {/* soft printer bg */}
-          <div className="absolute inset-0 pointer-events-none opacity-[0.05] flex items-center justify-center">
-            <Printer size={300} strokeWidth={1.1} className="text-[#8b5a3c]" />
-          </div>
+              <h2 className="text-[36px] md:text-[48px] lg:text-[46px]  text-gray-900 leading-[1.1] mb-6">
+                Making Printing <span className="text-blue-800">Simple & Reliable.</span>
+              </h2>
 
-          <div className="relative z-10 w-full max-w-[760px]">
-            <span className="text-[#9a6a4d] text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.22em] mb-3 block">
-              Printing Solutions
-            </span>
+              <p className="text-gray-500 text-[16px] md:text-[18px] leading-relaxed mb-10 max-w-[900px]">
+                We provide the best printers and original supplies to help you get your work 
+                done faster. Whether it's for home or office, we make sure you have 
+                everything you need for a smooth printing experience.
+              </p>
+            </motion.div>
 
-            <h2 className="text-[30px] sm:text-[36px] md:text-[44px] xl:text-[50px] font-bold text-[#5e3017] leading-[1.05] mb-4">
-              Smart Printer
-              <br />
-              Equipment & Supplies
-            </h2>
-
-            <p className="text-[#6d5b51] text-[14px] md:text-[15px] leading-7 max-w-[680px] mb-8">
-              Discover dependable printing technology for home, office, and business needs.
-              From compact printers to all-in-one machines and genuine consumables, we help
-              you build a smoother and more efficient printing setup.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {features.map((item, idx) => {
                 const Icon = item.icon;
                 return (
-                  <div key={idx} className="text-center sm:text-left">
-                    <div className="mb-3 flex justify-center sm:justify-start">
-                      <div className="w-14 h-14 rounded-full border border-[#cda990] flex items-center justify-center text-[#9a6a4d]">
-                        <Icon size={26} strokeWidth={1.8} />
-                      </div>
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="shrink-0 w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-blue-800 group-hover:bg-blue-800 group-hover:text-white transition-all duration-300">
+                      <Icon size={22} />
                     </div>
-
-                    <h3 className="text-[18px] md:text-[20px] font-extrabold text-[#6a381c] uppercase leading-tight mb-2">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-[#76665d] text-[14px] leading-6 max-w-[280px] mx-auto sm:mx-0">
-                      {item.desc}
-                    </p>
-                  </div>
+                    <div>
+                      <h3 className="text-[18px]  text-gray-900 mb-1 group-hover:text-blue-800 transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-[14px] text-gray-500 leading-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
                 );
               })}
             </div>
 
-            <div className="mt-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="mt-12"
+            >
               <Link
                 to="/about"
-                className="inline-flex items-center justify-center h-[46px] px-7 bg-[#9a6a4d] hover:bg-[#83583e] text-white text-[13px] font-semibold uppercase tracking-[0.08em] transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-[56px] px-8 bg-blue-800 hover:bg-blue-700 text-white  rounded-2xl shadow-lg shadow-blue-200 transition-all active:scale-95"
               >
-                Explore More
+                Learn More <ArrowRight size={20} />
               </Link>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

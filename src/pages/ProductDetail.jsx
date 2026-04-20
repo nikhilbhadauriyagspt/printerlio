@@ -14,8 +14,9 @@ import {
   CheckCircle,
   ShoppingBag,
   ArrowRight,
+  LayoutGrid,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import API_BASE_URL from '../config';
 import { cn } from '../lib/utils';
 
@@ -90,10 +91,10 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-[#fbf8f5] font-['Poppins']">
-        <Loader2 className="h-10 w-10 animate-spin text-[#7a4320] mb-4" strokeWidth={1.5} />
-        <p className="text-[11px] font-semibold text-[#8b7768] uppercase tracking-[0.2em]">
-          Loading Product
+      <div className="flex min-h-screen flex-col items-center justify-center bg-white font-['Poppins']">
+        <Loader2 className="h-10 w-10 animate-spin text-blue-800 mb-4" strokeWidth={1.5} />
+        <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">
+          Fetching Product
         </p>
       </div>
     );
@@ -101,16 +102,16 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-[#fbf8f5] px-6 text-center font-['Poppins']">
-        <div className="mb-8 w-20 h-20 rounded-full bg-[#f8f2ec] flex items-center justify-center">
-          <ShoppingBag size={34} className="text-[#7a4320]" />
+      <div className="flex min-h-screen flex-col items-center justify-center bg-white px-6 text-center font-['Poppins']">
+        <div className="mb-8 w-20 h-20 rounded-3xl bg-gray-50 flex items-center justify-center border border-gray-100 shadow-sm">
+          <ShoppingBag size={34} className="text-gray-300" />
         </div>
-        <h2 className="text-[28px] font-semibold text-[#241812] mb-4">Product Not Found</h2>
+        <h2 className="text-[32px] font-black text-slate-900 mb-4">Product Not Found</h2>
         <Link
           to="/shop"
-          className="inline-flex h-12 items-center gap-2 rounded-xl bg-[#7a4320] px-7 text-[13px] font-semibold uppercase tracking-[0.08em] text-white transition-all hover:bg-[#643619]"
+          className="inline-flex h-14 items-center gap-2 rounded-2xl bg-blue-800 px-8 text-[13px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-blue-100"
         >
-          Return to Shop
+          Return to Shop <ArrowRight size={18} />
         </Link>
       </div>
     );
@@ -121,144 +122,158 @@ export default function ProductDetail() {
     images.length > 0 ? images[activeImage] : 'https://via.placeholder.com/600x600?text=No+Image';
 
   return (
-    <div className="pt-40 bg-[#fbf8f5] font-['Poppins'] text-[#111111]">
+    <div className="bg-white font-['Poppins'] text-slate-900 pt-32 pb-20">
       <SEO
-        title={`${product.name} | MyPrinterHero`}
+        title={`${product.name} | USPrinterStore`}
         description={product.description?.substring(0, 160)}
       />
 
-      {/* Breadcrumb */}
-      <section className="bg-[#f4eeea] border-b border-[#e8dfd6] py-4">
-        <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 flex items-center gap-3 text-[10px] font-semibold text-[#8b7768] uppercase tracking-[0.18em] overflow-hidden whitespace-nowrap">
-          <Link to="/" className="hover:text-[#7a4320] transition-colors shrink-0">
-            Home
-          </Link>
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+        {/* Breadcrumb - Minimal */}
+        <div className="flex items-center gap-3 text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-10 overflow-hidden whitespace-nowrap">
+          <Link to="/" className="hover:text-blue-800 transition-colors shrink-0">Home</Link>
           <ChevronRight size={12} className="shrink-0" />
-          <Link to="/shop" className="hover:text-[#7a4320] transition-colors shrink-0">
-            Shop
-          </Link>
+          <Link to="/shop" className="hover:text-blue-800 transition-colors shrink-0">Shop</Link>
           <ChevronRight size={12} className="shrink-0" />
-          <span className="text-[#241812] truncate">{product.name}</span>
+          <span className="text-slate-900 truncate">{product.name}</span>
         </div>
-      </section>
 
-      <div className="max-w-[1700px] mx-auto px-4 md:px-8 lg:px-10 py-12 md:py-14 lg:py-16">
-        <div className="grid grid-cols-1 xl:grid-cols-[1.02fr_0.98fr] gap-10 lg:gap-14 items-start">
-          {/* Left gallery */}
-          <div className="space-y-5">
-            <div className="relative rounded-[30px] bg-white border border-[#eadfd6] p-6 md:p-8 lg:p-10 flex items-center justify-center min-h-[420px] md:min-h-[520px] overflow-hidden">
-              <motion.img
-                key={activeImage}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                src={mainImage}
-                alt={product.name}
-                className="max-w-full max-h-[430px] md:max-h-[520px] object-contain"
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Side: Gallery */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="relative aspect-[4/3] md:aspect-square bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden flex items-center justify-center p-8 md:p-12 lg:p-20">
+              {/* Main Image */}
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeImage}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.4 }}
+                  src={mainImage}
+                  alt={product.name}
+                  className="max-h-[85%] max-w-[85%] object-contain"
+                />
+              </AnimatePresence>
 
+              {/* Wishlist Toggle */}
               <button
                 onClick={() => toggleWishlist(product)}
                 className={cn(
-                  'absolute top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center border transition-all duration-300',
+                  'absolute top-6 right-6 w-12 h-12 rounded-2xl flex items-center justify-center border transition-all duration-500 shadow-sm backdrop-blur-md',
                   isInWishlist(product.id)
-                    ? 'bg-[#7a4320] border-[#7a4320] text-white'
-                    : 'bg-white border-[#eadfd6] text-[#8b7768] hover:text-[#7a4320]'
+                    ? 'bg-red-500 border-red-500 text-white shadow-red-200'
+                    : 'bg-white/80 border-white text-gray-400 hover:text-blue-800 hover:border-blue-800'
                 )}
               >
-                <Heart size={18} fill={isInWishlist(product.id) ? 'currentColor' : 'none'} />
+                <Heart size={20} className={cn(isInWishlist(product.id) && 'fill-current')} />
               </button>
             </div>
 
+            {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="flex gap-3 overflow-x-auto pb-2">
+              <div className="flex gap-3 overflow-x-auto pb-4 px-1 no-scrollbar">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImage(idx)}
                     className={cn(
-                      'w-20 h-20 md:w-24 md:h-24 shrink-0 rounded-2xl border bg-white flex items-center justify-center p-2 transition-all',
+                      'w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-2xl border-2 transition-all p-2 bg-white flex items-center justify-center shadow-sm',
                       activeImage === idx
-                        ? 'border-[#7a4320]'
-                        : 'border-[#eadfd6] hover:border-[#d4c1b1]'
+                        ? 'border-blue-800 scale-105'
+                        : 'border-gray-100 hover:border-blue-200'
                     )}
                   >
-                    <img src={img} alt="" className="max-w-full max-h-full object-contain" />
+                    <img src={img} alt="" className="max-h-full max-w-full object-contain" />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Right info */}
-          <div className="rounded-[30px] border border-[#eadfd6] bg-white p-6 md:p-8 lg:p-10">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b7768] mb-4">
-              Printer Specification
-            </span>
+          {/* Right Side: Product Info */}
+          <div className="lg:col-span-6 space-y-8">
+            <div>
+              <h1 className="text-[28px] md:text-[36px] font-medium text-slate-900 leading-[1.2] mb-5">
+                {product.name}
+              </h1>
 
-            <h1 className="text-[30px] md:text-[40px] lg:text-[46px] text-[#241812] leading-[1.06] font-semibold mb-5">
-              {product.name}
-            </h1>
-
-            <div className="flex items-end gap-4 mb-8">
-              <span className="text-[30px] md:text-[36px] font-semibold text-[#241812] leading-none">
-                ${parseFloat(product.price).toLocaleString()}
-              </span>
-              {product.sale_price && (
-                <span className="text-[18px] text-[#b6a79a] line-through font-medium">
-                  ${parseFloat(product.sale_price).toLocaleString()}
+              <div className="flex items-center gap-6">
+                <span className="text-[24px] md:text-[30px] font-black text-slate-900">
+                  ${parseFloat(product.price).toLocaleString()}
                 </span>
-              )}
+                {product.sale_price && (
+                  <span className="text-[16px] md:text-[18px] text-gray-400 line-through font-bold">
+                    ${parseFloat(product.sale_price).toLocaleString()}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <div className="border-t border-[#eee4db] pt-7">
-              <h4 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b7768] mb-4">
-                Product Description
+            {/* Description */}
+            <div className="bg-gray-50 rounded-[2rem] p-6 border border-gray-100">
+              <h4 className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-3 pl-1">
+                Overview
               </h4>
-              <p className="text-[#6b5d54] leading-8 text-[15px]">
+              <p className="text-slate-700 text-[15px] leading-relaxed">
                 {product.description ||
-                  'A dependable printer solution designed for home, office, and business printing needs with smooth performance and practical everyday use.'}
+                  'Experience efficient, high-quality results with this precision printing solution. Designed for those who demand reliability and consistency in their daily workflow.'}
               </p>
             </div>
 
-            <div className="pt-8 mt-8 border-t border-[#eee4db] space-y-7">
+            {/* Controls */}
+            <div className="space-y-6">
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center rounded-xl border border-[#e4d9cf] overflow-hidden bg-[#fcfaf7] h-14 w-fit">
+                {/* Quantity Picker */}
+                <div className="flex items-center bg-gray-50 rounded-2xl p-1 border border-gray-100 h-14 w-full sm:w-auto">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-14 h-full flex items-center justify-center hover:bg-[#f6ede6] text-[#7a4320]"
+                    className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-slate-900 hover:text-blue-800 transition-colors"
                   >
-                    <Minus size={18} />
+                    <Minus size={16} />
                   </button>
-                  <span className="w-14 text-center font-semibold text-[#241812]">{quantity}</span>
+                  <span className="w-12 text-center text-[16px] font-black text-slate-900">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-14 h-full flex items-center justify-center hover:bg-[#f6ede6] text-[#7a4320]"
+                    className="w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-slate-900 hover:text-blue-800 transition-colors"
                   >
-                    <Plus size={18} />
+                    <Plus size={16} />
                   </button>
                 </div>
 
+                {/* Add to Cart */}
                 <button
                   onClick={handleAddToCart}
                   disabled={isAdded}
-                  className="flex-1 h-14 rounded-xl bg-[#7a4320] text-white font-semibold text-[13px] uppercase tracking-[0.08em] hover:bg-[#643619] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  className={cn(
+                    "flex-1 h-14 rounded-2xl font-black text-[13px] uppercase tracking-widest transition-all flex items-center justify-center gap-3 shadow-lg active:scale-95 disabled:opacity-70",
+                    isAdded ? "bg-emerald-600 text-white shadow-emerald-100" : "bg-blue-800 text-white shadow-blue-100 hover:bg-blue-700"
+                  )}
                 >
-                  {isAdded ? <CheckCircle size={18} /> : <ShoppingBag size={18} />}
-                  {isAdded ? 'Item Added' : 'Add to Cart'}
+                  {isAdded ? (
+                    <>
+                      <CheckCircle size={18} /> Added
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag size={18} /> Add to Cart
+                    </>
+                  )}
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Trust Indicators */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
-                  { icon: <Truck size={18} />, label: 'Fast USA Shipping' },
-                  { icon: <ShieldCheck size={18} />, label: 'Secure Checkout' },
-                  { icon: <RefreshCcw size={18} />, label: 'Easy Returns' },
+                  { icon: Truck, label: 'Free Delivery' },
+                  { icon: ShieldCheck, label: 'Secure Payment' },
+                  { icon: RefreshCcw, label: '7-Day Returns' },
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="rounded-[18px] border border-[#eadfd6] bg-[#fcfaf7] px-4 py-4 flex items-center gap-3 text-[12px] font-medium text-[#6b5d54]"
+                    className="h-12 rounded-xl border border-gray-100 bg-white flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-widest text-gray-500"
                   >
-                    <div className="text-[#7a4320]">{item.icon}</div>
+                    <item.icon size={14} className="text-blue-800" />
                     {item.label}
                   </div>
                 ))}
@@ -267,61 +282,51 @@ export default function ProductDetail() {
           </div>
         </div>
 
-        {/* Related */}
+        {/* Related Section */}
         {relatedProducts.length > 0 && (
-          <div className="mt-16 md:mt-20 pt-12 border-t border-[#e8dfd6]">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
+          <div className="mt-24 pt-16 border-t border-gray-100">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
               <div>
-                <h2 className="text-[28px] md:text-[36px] font-semibold text-[#241812]">
-                  Related Products
+                <span className="text-blue-800 font-bold text-[11px] uppercase tracking-[0.3em] mb-3 block">Recommended</span>
+                <h2 className="text-[28px] md:text-[36px] font-black text-slate-900 leading-none">
+                  Related <span className="text-blue-800">Picks.</span>
                 </h2>
-                <p className="text-[12px] font-semibold text-[#8b7768] uppercase tracking-[0.18em] mt-2">
-                  Based on your selection
-                </p>
               </div>
-
               <Link
                 to="/shop"
-                className="inline-flex items-center gap-2 text-[#5a2d14] font-semibold text-[13px] uppercase tracking-[0.08em] border-b border-[#5a2d14] pb-1 hover:text-[#7a4320] hover:border-[#7a4320] transition-all"
+                className="group flex items-center gap-2 text-[13px] font-bold text-slate-900 uppercase tracking-widest hover:text-blue-800 transition-colors"
               >
-                Browse Shop <ArrowRight size={14} />
+                View More <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-px bg-gray-200 border border-gray-200 overflow-hidden rounded-[2rem]">
               {relatedProducts.slice(0, 5).map((p, i) => (
-                <motion.div
+                <div
                   key={p.id}
-                  initial={{ opacity: 0, y: 18 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.35, delay: i * 0.03 }}
-                  viewport={{ once: true }}
-                  className="group"
+                  className="group relative bg-white flex flex-col h-full"
                 >
-                  <div className="rounded-[24px] border border-[#eadfd6] bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] h-full">
-                    <Link
-                      to={`/product/${p.slug}`}
-                      className="h-[190px] bg-[#fcfaf7] border-b border-[#efe5db] flex items-center justify-center p-5 overflow-hidden"
-                    >
+                  <Link to={`/product/${p.slug}`} className="block p-5 flex-grow">
+                    <div className="aspect-square flex items-center justify-center mb-5 overflow-hidden">
                       <img
                         src={getImagePath(p.images)}
                         alt={p.name}
-                        className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                        className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105"
                       />
-                    </Link>
-
-                    <div className="p-4 md:p-5 text-center">
-                      <Link to={`/product/${p.slug}`} className="block mb-3">
-                        <h4 className="font-medium text-[#241812] line-clamp-2 min-h-[3rem] text-[14px] leading-6">
-                          {p.name}
-                        </h4>
-                      </Link>
-                      <p className="text-[18px] font-semibold text-[#241812]">
+                    </div>
+                    <div>
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1.5 block">
+                        {p.brand_name || 'Selection'}
+                      </span>
+                      <h4 className="text-slate-800 text-[13px] font-medium leading-tight line-clamp-2 h-9 mb-3 group-hover:text-blue-800 transition-colors">
+                        {p.name}
+                      </h4>
+                      <p className="text-[16px] font-bold text-slate-900">
                         ${parseFloat(p.price).toLocaleString()}
                       </p>
                     </div>
-                  </div>
-                </motion.div>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
