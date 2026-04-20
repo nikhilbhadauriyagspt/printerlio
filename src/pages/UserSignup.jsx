@@ -73,7 +73,7 @@ export default function UserSignup() {
 
   return (
     <div className=" bg-gray-50 font-['Poppins'] text-slate-900 flex items-center justify-center py-20 px-4">
-      <SEO title="Create Account | USPrinterStore" />
+      <SEO title="Create Account | US Printer Store" />
 
       <div className="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl shadow-blue-900/5 border border-gray-100">
         {/* Left Side: Benefits */}
@@ -91,7 +91,7 @@ export default function UserSignup() {
               Start Your <span className="text-blue-400">Journey.</span>
             </h1>
             <p className="text-white/60 text-[16px] leading-relaxed max-w-[340px] mb-12">
-              Join USPrinterStore today for a faster checkout experience and exclusive member deals.
+              Join US Printer Store today for a faster checkout experience and exclusive member deals.
             </p>
 
             <div className="space-y-6">

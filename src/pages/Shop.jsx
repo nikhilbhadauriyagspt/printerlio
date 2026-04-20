@@ -115,7 +115,7 @@ export default function Shop() {
   return (
     <div className="bg-white font-['Poppins'] text-[#111111]">
       <SEO
-        title="Shop Printers & Supplies | USPrinterStore"
+        title="Shop Printers & Supplies | US Printer Store"
         description="Browse our high-performance inventory of precision printers and accessories."
       />
 

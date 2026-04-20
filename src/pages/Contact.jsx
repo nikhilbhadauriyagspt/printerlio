@@ -66,7 +66,7 @@ export default function Contact() {
   return (
     <div className="bg-white font-['Poppins'] text-slate-900">
       <SEO
-        title="Contact Us | USPrinterStore Support"
+        title="Contact Us | US Printer Store Support"
         description="Connect with our professional support team for printer inquiries and order assistance."
       />
 

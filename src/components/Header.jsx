@@ -133,7 +133,7 @@ export default function Header() {
 
   const topHeaderHeight = 92;
   const navHeight = 52;
-  const totalHeaderHeight = topHeaderHeight + navHeight;
+  const totalHeaderHeight = topHeaderHeight + 10;
 
   return (
     <>
@@ -141,7 +141,7 @@ export default function Header() {
         {/* TOP HEADER */}
         <div className="bg-[#f6f6f6]">
           <div className="max-w-[1820px] mx-auto px-4 md:px-6">
-            <div className="h-[92px] grid grid-cols-[auto_1fr_auto] lg:grid-cols-3 items-center gap-4">
+            <div className="h-[70px] grid grid-cols-[auto_1fr_auto] lg:grid-cols-3 items-center gap-4">
               {/* Left Side: Logo & Mobile Menu */}
               <div className="flex items-center justify-start gap-4">
                 <div className="flex items-center lg:hidden">

@@ -64,7 +64,7 @@ export default function UserLogin() {
 
   return (
     <div className=" bg-gray-50 font-['Poppins'] text-slate-900 flex items-center justify-center py-20 px-4">
-      <SEO title="Sign In | USPrinterStore" />
+      <SEO title="Sign In | US Printer Store" />
 
       <div className="w-full max-w-[1100px] grid grid-cols-1 lg:grid-cols-2 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl shadow-blue-900/5 border border-gray-100">
         {/* Left Side: Brand & Benefits */}
@@ -197,7 +197,7 @@ export default function UserLogin() {
 
             <div className="mt-10 pt-8 border-t border-gray-50 text-center">
               <p className="text-[14px] font-bold text-gray-400">
-                New to USPrinterStore?
+                New to US Printer Store?
                 <Link
                   to="/signup"
                   className="text-blue-800 hover:underline ml-2"

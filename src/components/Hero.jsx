@@ -35,7 +35,7 @@ const Hero = () => {
   }, [nextSlide]);
 
   return (
-    <section className="relative w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[760px] overflow-hidden bg-white">
+    <section className="relative w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[650px] xl:h-[800px] overflow-hidden bg-white">
       {/* Slides */}
       <div className="relative w-full h-full">
         {slides.map((slide, idx) => (

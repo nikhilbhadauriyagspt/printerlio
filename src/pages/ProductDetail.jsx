@@ -124,7 +124,7 @@ export default function ProductDetail() {
   return (
     <div className="bg-white font-['Poppins'] text-slate-900 pt-32 pb-20">
       <SEO
-        title={`${product.name} | USPrinterStore`}
+        title={`${product.name} | US Printer Store`}
         description={product.description?.substring(0, 160)}
       />
 

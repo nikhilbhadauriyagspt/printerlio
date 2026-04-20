@@ -138,7 +138,7 @@ export default function Checkout() {
   if (step === 3) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-20 px-4 font-['Poppins'] text-slate-900">
-        <SEO title="Order Confirmed | USPrinterStore" />
+        <SEO title="Order Confirmed | US Printer Store" />
         <div className="max-w-xl w-full bg-white rounded-[3rem] border border-gray-100 p-12 text-center shadow-2xl shadow-blue-900/5">
           <div className="w-24 h-24 bg-blue-800 text-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-blue-100">
             <CheckCircle2 size={42} />
@@ -149,7 +149,7 @@ export default function Checkout() {
           </h1>
 
           <p className="text-gray-500 leading-relaxed text-[16px] max-w-md mx-auto mb-10">
-            Thank you for choosing USPrinterStore. Your order <span className="text-slate-900 font-bold">#{orderId}</span> is being processed. 
+            Thank you for choosing US Printer Store. Your order <span className="text-slate-900 font-bold">#{orderId}</span> is being processed. 
             We've sent a confirmation to <span className="text-slate-900 font-bold">{formData.email}</span>.
           </p>
 
@@ -175,7 +175,7 @@ export default function Checkout() {
 
   return (
     <div className="bg-white font-['Poppins'] text-slate-900 pt-32 pb-20">
-      <SEO title="Secure Checkout | USPrinterStore" />
+      <SEO title="Secure Checkout | US Printer Store" />
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
         {/* Header / Breadcrumb */}

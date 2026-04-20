@@ -158,7 +158,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 pb-4 border-t border-gray-50 flex flex-col lg:flex-row justify-between items-center gap-8">
           <div className="flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-3">
-            <p className="text-[12px]  text-gray-400">© {new Date().getFullYear()} USPrinterStore.All rights reserved.</p>
+            <p className="text-[12px]  text-gray-400">© {new Date().getFullYear()} US Printer Store.All rights reserved.</p>
             {legalLinks.map((link) => (
               <Link key={link.name} to={link.path} className="text-[12px] font-bold text-gray-400 hover:text-blue-800 transition-colors">{link.name}</Link>
             ))}

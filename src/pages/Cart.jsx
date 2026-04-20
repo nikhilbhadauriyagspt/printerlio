@@ -39,7 +39,7 @@ export default function Cart() {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-32 pb-20 font-['Poppins'] text-slate-900">
-      <SEO title="Shopping Cart | USPrinterStore" />
+      <SEO title="Shopping Cart | US Printer Store" />
 
       <div className="max-w-[1400px] mx-auto px-4">
         <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">

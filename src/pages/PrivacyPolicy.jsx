@@ -12,11 +12,11 @@ export default function PrivacyPolicy() {
       lastUpdated="April 21, 2026"
     >
       <p className="lead">
-        This Privacy Notice forUSPrinterStore ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:
+        This Privacy Notice forUS Printer Store ("we," "us," or "our"), describes how and why we might access, collect, store, use, and/or share ("process") your personal information when you use our services ("Services"), including when you:
       </p>
       <ul>
         <li>Visit our website at <a href="https://usprinterstore.shop/">http://usprinterstore.shop/</a> or any website of ours that links to this Privacy Notice</li>
-        <li>Use Printers, Consumables & Accessories.USPrinterStore is your trusted destination for authentic, high-performance printers and printing accessories from HP and other leading printing brands.</li>
+        <li>Use Printers, Consumables & Accessories.US Printer Store is your trusted destination for authentic, high-performance printers and printing accessories from HP and other leading printing brands.</li>
         <li>Engage with us in other related ways, including any marketing or events</li>
       </ul>
       <p>
@@ -277,7 +277,7 @@ export default function PrivacyPolicy() {
       <p>If you have questions or comments about this notice, you may email us at {emailLink} or contact us by post at:</p>
       <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed">
-         USPrinterStore <br/>
+         US Printer Store <br/>
           4352 13th Ave S, Fargo, ND 58103, USA
         </address>
       </div>

@@ -23,8 +23,8 @@ const About = () => {
   return (
     <div className="bg-white text-slate-900 font-['Poppins']">
       <SEO
-        title="About Us | USPrinterStore"
-        description="Learn more about USPrinterStore and our mission to make printing simple and reliable for everyone."
+        title="About Us | US Printer Store"
+        description="Learn more about US Printer Store and our mission to make printing simple and reliable for everyone."
       />
 
       {/* 1. Hero Section - More Impact */}
@@ -57,7 +57,7 @@ const About = () => {
                 transition={{ delay: 0.2 }}
                 className="text-gray-500 text-[18px] md:text-[20px] leading-relaxed max-w-[700px]"
               >
-                We know that printers can be confusing. That's why we created USPrinterStore—a place where you can find reliable machines and original supplies without any complicated tech talk.
+                We know that printers can be confusing. That's why we created US Printer Store—a place where you can find reliable machines and original supplies without any complicated tech talk.
               </motion.p>
             </div>
             
@@ -93,7 +93,7 @@ const About = () => {
                 We believe in <span className="text-blue-800">Doing Things Right.</span>
               </h2>
               <p className="text-gray-500 text-[16px] leading-relaxed">
-                When we started USPrinterStore, we had one goal: to make sure our customers never have to worry about their printing setup again. We noticed too many people were buying the wrong parts or getting stuck with machines that didn't fit their needs.
+                When we started US Printer Store, we had one goal: to make sure our customers never have to worry about their printing setup again. We noticed too many people were buying the wrong parts or getting stuck with machines that didn't fit their needs.
               </p>
               <p className="text-gray-500 text-[16px] leading-relaxed">
                 That's why we hand-pick everything in our store. From small home printers to heavy-duty office machines, we only sell what we know is dependable. We're not just a store; we're your partner in making sure your work gets printed perfectly.
@@ -176,7 +176,7 @@ const About = () => {
                 Whether you're printing important business reports, school projects, or family photos, the quality matters. We make sure that every printer we sell produces sharp, clear prints every single time.
               </p>
               <p className="text-gray-500 text-[16px] leading-relaxed">
-                Our team tests the products we carry to ensure they meet our standards for speed and durability. When you shop with USPrinterStore, you're getting tools that are built to last and perform.
+                Our team tests the products we carry to ensure they meet our standards for speed and durability. When you shop with US Printer Store, you're getting tools that are built to last and perform.
               </p>
               <div className="pt-4">
                 <div className="flex items-center gap-4 p-6 bg-blue-50 rounded-3xl border border-blue-100">
