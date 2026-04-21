@@ -38,7 +38,7 @@ export default function AboutSection() {
           </div>
           
           <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4">
-            Our Mission & <span className="text-[#fbb124]">Values</span>
+            Our Mission & <span className="text-blue-800">Values</span>
           </h2>
           <p className="text-gray-500 text-[15px] max-w-[700px]">
             Delivering excellence in printing technology. We are dedicated to providing 
@@ -79,7 +79,7 @@ export default function AboutSection() {
                     <div className="h-full flex items-center px-8 md:px-12 lg:px-16 py-10 md:py-14">
                       <div className="max-w-[860px]">
                         <h3 className="text-[28px] sm:text-[34px] md:text-[40px] lg:text-[46px] leading-[1.02] font-semibold text-[#222] mb-5">
-                          <span className="text-[#d98a17]">{card.titleTop} </span>
+                          <span className="text-blue-800">{card.titleTop} </span>
                           
                           {card.titleBottom}
                         </h3>
@@ -90,7 +90,7 @@ export default function AboutSection() {
 
                         <Link
                           to="/about"
-                          className="inline-flex items-center justify-center h-[52px] md:h-[58px] px-8 md:px-10 bg-[#df8b18] hover:bg-[#c97a10] text-white text-[13px] md:text-[14px] font-bold tracking-[0.08em] transition-all rounded-md "
+                          className="inline-flex items-center justify-center h-[52px] md:h-[58px] px-8 md:px-10 bg-blue-700 hover:bg-[#c97a10] text-white text-[13px] md:text-[14px] font-bold tracking-[0.08em] transition-all rounded-md "
                         >
                           {card.buttonText}
                         </Link>
@@ -103,7 +103,7 @@ export default function AboutSection() {
                     <div className="h-full flex items-center px-8 md:px-12 lg:px-16 py-10 md:py-14 order-2 lg:order-1">
                       <div className="max-w-[860px]">
                         <h3 className="text-[28px] sm:text-[34px] md:text-[40px] lg:text-[46px] leading-[1.02] font-semibold text-[#222] mb-5">
-                          <span className="text-[#d98a17]">{card.titleTop} </span>
+                          <span className="text-blue-800">{card.titleTop} </span>
                          
                           {card.titleBottom}
                         </h3>
@@ -114,7 +114,7 @@ export default function AboutSection() {
 
                         <Link
                           to="/about"
-                          className="inline-flex items-center justify-center h-[52px] md:h-[58px] px-8 md:px-10 bg-[#df8b18] hover:bg-[#c97a10] text-white text-[13px] md:text-[14px] font-bold tracking-[0.08em] transition-all rounded-md "
+                          className="inline-flex items-center justify-center h-[52px] md:h-[58px] px-8 md:px-10 bg-blue-700 hover:bg-[#c97a10] text-white text-[13px] md:text-[14px] font-bold tracking-[0.08em] transition-all rounded-md "
                         >
                           {card.buttonText}
                         </Link>

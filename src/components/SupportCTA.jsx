@@ -50,7 +50,7 @@ export default function SupportCTA() {
           </div>
           
           <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4">
-            How To <span className="text-[#fbb124]">Buy</span>
+            How To <span className="text-blue-800">Buy</span>
           </h2>
           <p className="text-gray-500 text-[15px] max-w-[600px]">
             Experience a seamless shopping journey with our simplified four-step process 
@@ -78,7 +78,7 @@ export default function SupportCTA() {
                   {/* Circle with Icon */}
                   <div className="relative mb-10">
                     <div className="w-[180px] h-[180px] rounded-full bg-white border-2 border-[#001e3c] flex items-center justify-center transition-all duration-500 group-hover:bg-[#001e3c] group-hover:border-[#fbb124] shadow-[0_15px_35px_rgba(0,0,0,0.05)] group-hover:shadow-[0_20px_40px_rgba(0,30,60,0.25)]">
-                       <Icon size={44} className="text-[#001e3c] group-hover:text-[#fbb124] transition-colors duration-500" strokeWidth={1.5} />
+                       <Icon size={44} className="text-[#001e3c] group-hover:text-blue-800 transition-colors duration-500" strokeWidth={1.5} />
                     </div>
                     
                     {/* Floating Step Number */}
@@ -89,7 +89,7 @@ export default function SupportCTA() {
 
                   {/* Text Content */}
                   <div className="text-center px-4">
-                    <h3 className="text-[19px] font-bold text-[#001e3c] mb-3 uppercase tracking-wide group-hover:text-[#fbb124] transition-colors">
+                    <h3 className="text-[19px] font-bold text-[#001e3c] mb-3 uppercase tracking-wide group-hover:text-blue-800 transition-colors">
                       {step.title}
                     </h3>
                     <p className="text-[14px] leading-relaxed text-gray-500 max-w-[260px] mx-auto">
@@ -104,7 +104,7 @@ export default function SupportCTA() {
 
         {/* Action Links */}
         <div className="mt-20 flex justify-center items-center gap-8">
-           <Link to="/shop" className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-widest text-[#001e3c] hover:text-[#fbb124] transition-colors group">
+           <Link to="/shop" className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-widest text-[#001e3c] hover:text-blue-800 transition-colors group">
               Start Shopping <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
            </Link>
            <div className="w-[1px] h-6 bg-gray-200"></div>

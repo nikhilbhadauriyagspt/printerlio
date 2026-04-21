@@ -47,7 +47,7 @@ export default function Wishlist() {
           </div>
           
           <h1 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4 uppercase tracking-tight">
-            Saved <span className="text-[#fbb124]">Items</span>
+            Saved <span className="text-blue-800">Items</span>
           </h1>
           <p className="text-gray-500 text-[15px] max-w-[500px]">
             Manage your personal selection of high-performance printing technology.
@@ -57,7 +57,7 @@ export default function Wishlist() {
         <div className="bg-white rounded-[3rem] border border-gray-100 shadow-[0_40px_100px_rgba(0,30,60,0.05)] overflow-hidden">
           <div className="px-8 py-8 border-b border-gray-50 flex items-center justify-between bg-slate-50/50">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-lg">
                 <Heart size={24} className="fill-current" />
               </div>
               <div>
@@ -65,7 +65,7 @@ export default function Wishlist() {
                 <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">{wishlistCount} Products Saved</p>
               </div>
             </div>
-            <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-[#fbb124] transition-all">
+            <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-blue-800 transition-all">
               <ChevronLeft size={16} /> Continue Shopping
             </Link>
           </div>
@@ -116,8 +116,8 @@ export default function Wishlist() {
                       </div>
 
                       <div className="flex-grow text-center space-y-2 mb-6">
-                        <p className="text-[10px] font-bold text-[#fbb124] uppercase tracking-widest">{p.brand_name || 'Premium Selection'}</p>
-                        <h4 className="text-[15px] font-semibold text-[#001e3c] line-clamp-2 h-10 group-hover:text-[#fbb124] transition-colors">{p.name}</h4>
+                        <p className="text-[10px] font-bold text-blue-800 uppercase tracking-widest">{p.brand_name || 'Premium Selection'}</p>
+                        <h4 className="text-[15px] font-semibold text-[#001e3c] line-clamp-2 h-10 group-hover:text-blue-800 transition-colors">{p.name}</h4>
                         <p className="text-[20px] font-black text-[#001e3c]">${parseFloat(p.price).toLocaleString()}</p>
                       </div>
 

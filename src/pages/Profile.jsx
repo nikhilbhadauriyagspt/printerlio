@@ -161,7 +161,7 @@ export default function Profile() {
           </div>
           
           <h1 className="text-[38px] md:text-[56px] font-semibold text-[#001e3c] leading-tight mb-4 uppercase tracking-tight">
-            Hi, <span className="text-[#fbb124]">{user.name?.split(' ')[0]}!</span>
+            Hi, <span className="text-blue-800">{user.name?.split(' ')[0]}!</span>
           </h1>
           <p className="text-gray-500 text-[16px] max-w-[600px] mx-auto">
             Manage your high-performance printing assets, order history, and security configurations in one secure dashboard.
@@ -186,10 +186,10 @@ export default function Profile() {
                   )}
                 >
                   <div className="flex items-center gap-4">
-                    <tab.icon size={20} className={cn(activeTab === tab.id ? 'text-[#fbb124]' : '')} />
+                    <tab.icon size={20} className={cn(activeTab === tab.id ? 'text-blue-800' : '')} />
                     {tab.label}
                   </div>
-                  <ChevronRight size={18} className={cn('transition-all duration-500', activeTab === tab.id ? 'translate-x-1 text-[#fbb124]' : 'opacity-0')} />
+                  <ChevronRight size={18} className={cn('transition-all duration-500', activeTab === tab.id ? 'translate-x-1 text-blue-800' : 'opacity-0')} />
                 </button>
               ))}
 
@@ -205,7 +205,7 @@ export default function Profile() {
               {/* Data Safety Card */}
               <div className="mt-12 p-8 bg-[#001e3c] rounded-[2.5rem] text-white relative overflow-hidden group shadow-xl">
                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#fbb124] rounded-full blur-[60px] opacity-20" />
-                 <ShieldCheck className="text-[#fbb124] mb-4 relative z-10" size={28} />
+                 <ShieldCheck className="text-blue-800 mb-4 relative z-10" size={28} />
                  <h4 className="text-[18px] font-semibold mb-2 relative z-10">Security Vault</h4>
                  <p className="text-[12px] text-white/50 leading-relaxed relative z-10 font-medium">
                    Your profile and payment data are encrypted using RSA 2048-bit protocols.
@@ -239,7 +239,7 @@ export default function Profile() {
                         <div className="space-y-3">
                           <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Full Identity</label>
                           <div className="relative group">
-                            <User className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors" size={18} />
+                            <User className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors" size={18} />
                             <input
                               required
                               value={profileForm.name}
@@ -252,7 +252,7 @@ export default function Profile() {
                         <div className="space-y-3">
                           <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Phone Contact</label>
                           <div className="relative group">
-                            <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors" size={18} />
+                            <Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors" size={18} />
                             <input
                               value={profileForm.phone}
                               onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
@@ -277,7 +277,7 @@ export default function Profile() {
                       <div className="space-y-3">
                         <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Deploy To Address</label>
                         <div className="relative group">
-                          <MapPin className="absolute left-5 top-6 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors" size={18} />
+                          <MapPin className="absolute left-5 top-6 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors" size={18} />
                           <textarea
                             rows="4"
                             value={profileForm.address}
@@ -379,7 +379,7 @@ export default function Profile() {
                           New Access Key
                         </label>
                         <div className="relative group">
-                          <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors" size={18} />
+                          <Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors" size={18} />
                           <input
                             type={showPass ? 'text' : 'password'}
                             required
@@ -403,7 +403,7 @@ export default function Profile() {
                           Verify Access Key
                         </label>
                         <div className="relative group">
-                          <ShieldCheck className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors" size={18} />
+                          <ShieldCheck className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors" size={18} />
                           <input
                             type={showPass ? 'text' : 'password'}
                             required

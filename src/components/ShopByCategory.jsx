@@ -57,7 +57,7 @@ export default function ShopByCategory({ categories = [], loading = false }) {
           </div>
           
           <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-6">
-            Shop by <span className="text-[#fbb124]">Category</span>
+            Shop by <span className="text-blue-800">Category</span>
           </h2>
 
         

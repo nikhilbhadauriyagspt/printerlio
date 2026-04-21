@@ -44,8 +44,8 @@ export default function Features() {
               className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
             >
               <div className="mb-6 relative">
-                <div className="absolute inset-0 bg-blue-800/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-800 group-hover:bg-blue-800 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="absolute inset-0 bg-blue-700/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                <div className="relative h-16 w-16 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-700 group-hover:bg-blue-700 group-hover:text-white transition-all duration-300 shadow-sm">
                   {item.icon}
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function Features() {
                 {item.desc}
               </p>
               
-              <div className="mt-6 w-10 h-1 bg-gray-100 rounded-full group-hover:w-20 group-hover:bg-blue-800 transition-all duration-300" />
+              <div className="mt-6 w-10 h-1 bg-gray-100 rounded-full group-hover:w-20 group-hover:bg-blue-700 transition-all duration-300" />
             </motion.div>
           ))}
         </div>

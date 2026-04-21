@@ -19,12 +19,12 @@ export default function Collections() {
           
           <div className="relative z-10 text-center md:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#fbb124]/10 border border-[#fbb124]/20 rounded-full mb-4">
-               <Zap size={14} className="text-[#fbb124] fill-[#fbb124]" />
-               <span className="text-[11px] font-bold uppercase tracking-widest text-[#fbb124]">Limited Collection</span>
+               <Zap size={14} className="text-blue-800 fill-[#fbb124]" />
+               <span className="text-[11px] font-bold uppercase tracking-widest text-blue-800">Limited Collection</span>
             </div>
             
             <h2 className="text-[28px] md:text-[36px] font-semibold text-white leading-tight">
-              Premium Printing <span className="text-[#fbb124]">Solutions</span>
+              Premium Printing <span className="text-blue-800">Solutions</span>
             </h2>
             <p className="text-white/60 text-[14px] md:text-[15px] mt-2 max-w-[450px]">
               Don't settle for less. Get high-performance printers at exclusive prices.

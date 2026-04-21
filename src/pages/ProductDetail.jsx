@@ -92,7 +92,7 @@ export default function ProductDetail() {
   if (loading) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-white font-['Poppins']">
-        <Loader2 className="h-10 w-10 animate-spin text-blue-800 mb-4" strokeWidth={1.5} />
+        <Loader2 className="h-10 w-10 animate-spin text-blue-700 mb-4" strokeWidth={1.5} />
         <p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">
           Fetching Product
         </p>
@@ -109,7 +109,7 @@ export default function ProductDetail() {
         <h2 className="text-[32px] font-black text-slate-900 mb-4">Product Not Found</h2>
         <Link
           to="/shop"
-          className="inline-flex h-14 items-center gap-2 rounded-2xl bg-blue-800 px-8 text-[13px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-blue-100"
+          className="inline-flex h-14 items-center gap-2 rounded-2xl bg-blue-700 px-8 text-[13px] font-black uppercase tracking-widest text-white transition-all shadow-xl shadow-blue-100"
         >
           Return to Shop <ArrowRight size={18} />
         </Link>
@@ -132,9 +132,9 @@ export default function ProductDetail() {
         {/* 1. Centered Header Section */}
         <div className="flex flex-col items-center justify-center text-center mb-16">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#001e3c]/50 mb-6 bg-slate-50 px-5 py-2 rounded-full border border-gray-100 font-bold">
-            <Link to="/" className="hover:text-[#fbb124] transition-colors shrink-0">Home</Link>
+            <Link to="/" className="hover:text-blue-800 transition-colors shrink-0">Home</Link>
             <ChevronRight size={10} className="shrink-0" />
-            <Link to="/shop" className="hover:text-[#fbb124] transition-colors shrink-0">Shop</Link>
+            <Link to="/shop" className="hover:text-blue-800 transition-colors shrink-0">Shop</Link>
             <ChevronRight size={10} className="shrink-0" />
             <span className="text-[#001e3c] truncate max-w-[200px]">{product.name}</span>
           </div>
@@ -202,7 +202,7 @@ export default function ProductDetail() {
             <div className="space-y-4">
                
                <div className="flex items-center gap-6">
-                <span className="text-[20px] md:text-[30px]  text-[#fbb124] leading-none">
+                <span className="text-[20px] md:text-[30px]  text-blue-800 leading-none">
                   ${parseFloat(product.price).toLocaleString()}
                 </span>
                 {product.sale_price && (
@@ -278,7 +278,7 @@ export default function ProductDetail() {
                     key={i}
                     className="h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center gap-3 text-[11px] font-bold uppercase tracking-widest text-[#001e3c]/50 shadow-sm"
                   >
-                    <item.icon size={16} className="text-[#fbb124]" />
+                    <item.icon size={16} className="text-blue-800" />
                     {item.label}
                   </div>
                 ))}
@@ -297,7 +297,7 @@ export default function ProductDetail() {
                   <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Our Recommendations</span>
                 </div>
                 <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] leading-none uppercase tracking-tight">
-                  Related <span className="text-[#fbb124]">Picks</span>
+                  Related <span className="text-blue-800">Picks</span>
                 </h2>
               </div>
               <Link
@@ -328,7 +328,7 @@ export default function ProductDetail() {
                     </div>
                     <div className="text-center px-2">
                      
-                      <h4 className="text-[#001e3c] text-[14px] font-semibold leading-tight line-clamp-4 h-10 mb-4 group-hover:text-[#fbb124] transition-colors">
+                      <h4 className="text-[#001e3c] text-[14px] font-semibold leading-tight line-clamp-4 h-10 mb-4 group-hover:text-blue-800 transition-colors">
                         {p.name}
                       </h4>
                       <p className="text-[18px] font-bold text-[#001e3c]">

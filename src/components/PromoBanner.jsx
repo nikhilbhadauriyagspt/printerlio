@@ -52,7 +52,7 @@ export default function Collections() {
             <span className="h-[1px] w-12 bg-[#001e3c]"></span>
           </div>
           <h2 className="text-[36px] md:text-[48px] font-semibold text-[#001e3c] leading-tight mb-4">
-            Reliable <span className="text-[#fbb124]">Printers</span>
+            Reliable <span className="text-blue-800">Printers</span>
           </h2>
           <p className="text-gray-500 text-[15px] max-w-[600px]">
             Explore professional-grade technology designed to deliver 
@@ -83,7 +83,7 @@ export default function Collections() {
               {/* Content Overlay - Up & Down Animation */}
               <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-[#001e3c] via-[#001e3c]/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
                 <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-100">
-                  <span className="text-[#fbb124] text-[12px] font-bold uppercase tracking-widest mb-3 inline-block">
+                  <span className="text-blue-800 text-[12px] font-bold uppercase tracking-widest mb-3 inline-block">
                     {item.tag}
                   </span>
                   <h3 className="text-white text-[28px] md:text-[34px] font-semibold mb-4 leading-tight">

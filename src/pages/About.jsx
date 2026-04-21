@@ -41,7 +41,7 @@ const About = () => {
             className="inline-flex items-center gap-3 mb-6 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100"
           >
             <span className="h-[2px] w-8 bg-[#001e3c]"></span>
-            <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Our Story</span>
+            <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">About</span>
             <span className="h-[2px] w-8 bg-[#001e3c]"></span>
           </motion.div>
 
@@ -52,7 +52,7 @@ const About = () => {
             className="text-[40px] md:text-[50px] font-semibold text-[#001e3c] leading-tight mb-8  tracking-tight"
           >
             Printing Simplified. <br />
-            <span className="text-[#fbb124]">Performance Guaranteed.</span>
+            <span className="text-blue-800">Performance Guaranteed.</span>
           </motion.h1>
 
           <motion.p 
@@ -72,7 +72,7 @@ const About = () => {
       <section className="py-24 px-4 md:px-10">
         <div className="max-w-[1820px] mx-auto">
           <div className="flex flex-col items-center text-center mb-16">
-            <h2 className="text-[32px] md:text-[46px] font-semibold mb-6">Our <span className="text-[#fbb124]">Mission</span></h2>
+            <h2 className="text-[32px] md:text-[46px] font-semibold mb-6">Our <span className="text-blue-800">Mission</span></h2>
             <p className="text-gray-500 text-[16px] max-w-[700px] leading-relaxed">
               We started with a single purpose: to ensure our customers never struggle with their printing needs. 
               Reliability is at the core of everything we do.
@@ -91,7 +91,7 @@ const About = () => {
 
             <div className="space-y-10 text-left lg:pl-10">
               <h3 className="text-[28px] md:text-[34px] font-semibold leading-tight text-[#001e3c]">
-                Driven by Quality, Focused on <span className="text-[#fbb124]">Reliability.</span>
+                Driven by Quality, Focused on <span className="text-blue-800">Reliability.</span>
               </h3>
               <p className="text-gray-500 text-[16px] leading-relaxed">
                 Every product in our inventory undergoes a rigorous selection process. We only carry brands and models that meet our high standards for speed, clarity, and longevity.
@@ -126,7 +126,7 @@ const About = () => {
               <span className="text-[13px] font-bold uppercase tracking-[0.15em] text-[#001e3c]">Why Us</span>
               <span className="h-[2px] w-8 bg-[#001e3c]"></span>
             </div>
-            <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c]">The  Printer Lio <span className="text-[#fbb124]">Standard</span></h2>
+            <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c]">The  Printer Lio <span className="text-blue-800">Standard</span></h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -144,7 +144,7 @@ const About = () => {
                 viewport={{ once: true }}
                 className="bg-white p-12 rounded-[2.5rem] border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-2xl transition-all duration-500 group text-center"
               >
-                <div className="w-20 h-20 rounded-full bg-slate-50 text-[#001e3c] flex items-center justify-center mb-8 mx-auto group-hover:bg-[#001e3c] group-hover:text-[#fbb124] transition-all border-4 border-white shadow-lg">
+                <div className="w-20 h-20 rounded-full bg-slate-50 text-[#001e3c] flex items-center justify-center mb-8 mx-auto group-hover:bg-[#001e3c] group-hover:text-blue-800 transition-all border-4 border-white shadow-lg">
                   <item.icon size={32} strokeWidth={1.5} />
                 </div>
                 <h3 className="text-[20px] font-semibold text-[#001e3c] mb-4 uppercase tracking-wide">{item.title}</h3>
@@ -167,7 +167,7 @@ const About = () => {
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#fbb124] rounded-full blur-[150px] opacity-10 -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10">
               <h2 className="text-white text-[38px] md:text-[40px] font-semibold mb-8 leading-tight  tracking-tight">
-                Ready to Upgrade Your <span className="text-[#fbb124]">Printing Technology?</span>
+                Ready to Upgrade Your <span className="text-blue-800">Printing Technology?</span>
               </h2>
               <p className="text-white/50 text-[18px] md:text-[20px] mb-14 max-w-[700px] mx-auto leading-relaxed font-medium">
                 Join thousands of businesses and homes that trust us for precision, 

@@ -84,11 +84,11 @@ export default function Contact() {
           >
             <div className="inline-flex items-center gap-3 mb-6 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100">
               <span className="h-[2px] w-8 bg-[#001e3c]"></span>
-              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Support Hub</span>
+              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Contact</span>
               <span className="h-[2px] w-8 bg-[#001e3c]"></span>
             </div>
             <h1 className="text-[40px] md:text-[40px] font-semibold text-[#001e3c] leading-tight mb-8  tracking-tight">
-              We're Here for <span className="text-[#fbb124]">Your Solutions.</span>
+              We're Here for <span className="text-blue-800">Your Solutions.</span>
             </h1>
             <p className="text-gray-500 text-[18px] md:text-[20px] leading-relaxed max-w-[750px] mx-auto">
               Whether you have technical questions or need order assistance, 
@@ -106,7 +106,7 @@ export default function Contact() {
             {/* Left Column: Quick Info */}
             <div className="lg:col-span-4 space-y-12">
               <div className="text-center lg:text-left">
-                <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] mb-6">Get in <span className="text-[#fbb124]">Touch</span></h2>
+                <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] mb-6">Get in <span className="text-blue-800">Touch</span></h2>
                 <p className="text-gray-500 text-[16px] leading-relaxed">
                   We prioritize excellence in communication. Connect with us through 
                   our professional channels for rapid response times.
@@ -140,7 +140,7 @@ export default function Contact() {
             <div className="lg:col-span-8">
               <div className="bg-white rounded-[3.5rem] p-8 md:p-12 lg:p-16 border border-gray-100 shadow-[0_30px_100px_rgba(0,0,0,0.05)]">
                 <div className="mb-14 text-center">
-                  <h3 className="text-[28px] md:text-[40px] font-semibold text-[#001e3c] mb-4">Send a <span className="text-[#fbb124]">Message</span></h3>
+                  <h3 className="text-[28px] md:text-[40px] font-semibold text-[#001e3c] mb-4">Send a <span className="text-blue-800">Message</span></h3>
                   <p className="text-gray-500 max-w-[500px] mx-auto">Fill out the secure form below and our specialists will reach out to you shortly.</p>
                 </div>
 

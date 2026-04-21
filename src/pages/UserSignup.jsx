@@ -86,9 +86,7 @@ export default function UserSignup() {
         <div className="p-8 sm:p-12">
           {/* Logo Section */}
           <div className="flex flex-col items-center mb-10">
-            <Link to="/" className="mb-8">
-              <img src="/logo/logo.png" alt="Logo" className="h-10 object-contain" />
-            </Link>
+            
             <div className="inline-flex items-center gap-2 px-4 py-1 bg-[#001e3c]/5 rounded-full mb-4">
               <User size={14} className="text-[#001e3c]" />
               <span className="text-[11px] font-bold uppercase tracking-widest text-[#001e3c]">Member Registration</span>
@@ -116,7 +114,7 @@ export default function UserSignup() {
               <div className="space-y-2">
                 <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Full Name</label>
                 <div className="relative group">
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                     <User size={18} />
                   </div>
                   <input
@@ -133,7 +131,7 @@ export default function UserSignup() {
               <div className="space-y-2">
                 <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Email</label>
                 <div className="relative group">
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                     <Mail size={18} />
                   </div>
                   <input
@@ -151,7 +149,7 @@ export default function UserSignup() {
             <div className="space-y-2">
               <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Phone Number</label>
               <div className="relative group">
-                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                   <Phone size={18} />
                 </div>
                 <input
@@ -169,7 +167,7 @@ export default function UserSignup() {
               <div className="space-y-2">
                 <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Password</label>
                 <div className="relative group">
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                     <Lock size={18} />
                   </div>
                   <input
@@ -186,7 +184,7 @@ export default function UserSignup() {
               <div className="space-y-2">
                 <label className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#001e3c]/30 pl-4">Confirm</label>
                 <div className="relative group">
-                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                     <Lock size={18} />
                   </div>
                   <input
@@ -220,7 +218,7 @@ export default function UserSignup() {
               Already a member?
               <Link
                 to="/login"
-                className="text-[#001e3c] hover:text-[#fbb124] ml-2 underline underline-offset-4 decoration-2 decoration-[#fbb124]/30 transition-all"
+                className="text-[#001e3c] hover:text-blue-800 ml-2 underline underline-offset-4 decoration-2 decoration-[#fbb124]/30 transition-all"
               >
                 Sign In
               </Link>

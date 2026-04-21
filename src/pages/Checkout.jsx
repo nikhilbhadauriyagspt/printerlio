@@ -140,12 +140,12 @@ export default function Checkout() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center py-20 px-4 font-['Poppins'] text-[#001e3c]">
         <SEO title="Order Confirmed | Printer Lio" />
         <div className="max-w-xl w-full bg-white rounded-[3.5rem] border border-gray-100 p-12 md:p-16 text-center shadow-[0_40px_100px_rgba(0,30,60,0.12)]">
-          <div className="w-28 h-28 bg-[#001e3c] text-[#fbb124] rounded-full flex items-center justify-center mx-auto mb-10 shadow-2xl shadow-blue-900/20">
+          <div className="w-28 h-28 bg-[#001e3c] text-blue-800 rounded-full flex items-center justify-center mx-auto mb-10 shadow-2xl shadow-blue-900/20">
             <CheckCircle2 size={48} />
           </div>
 
           <h1 className="text-[36px] md:text-[46px] font-semibold text-[#001e3c] mb-6 leading-tight uppercase tracking-tight">
-            Order <span className="text-[#fbb124]">Confirmed!</span>
+            Order <span className="text-blue-800">Confirmed!</span>
           </h1>
 
           <p className="text-gray-500 leading-relaxed text-[16px] max-w-md mx-auto mb-12">
@@ -182,7 +182,7 @@ export default function Checkout() {
         {/* Centered Header Section */}
         <div className="flex flex-col items-center justify-center text-center mb-16">
           <div className="flex items-center justify-center gap-3 text-[11px] font-bold text-[#001e3c]/50 uppercase tracking-[0.2em] mb-6 bg-slate-50 px-6 py-2 rounded-full border border-gray-100">
-            <Link to="/cart" className="hover:text-[#fbb124] transition-colors">Bag</Link>
+            <Link to="/cart" className="hover:text-blue-800 transition-colors">Bag</Link>
             <ChevronRight size={12} />
             <span className={cn(step === 1 ? "text-[#001e3c]" : "text-inherit")}>Shipping</span>
             <ChevronRight size={12} />
@@ -194,7 +194,7 @@ export default function Checkout() {
           </h1>
           
           <div className="inline-flex items-center gap-2 bg-slate-50 px-5 py-2.5 rounded-full border border-gray-100">
-             <Lock size={14} className="text-[#fbb124]" />
+             <Lock size={14} className="text-blue-800" />
              <span className="text-[11px] font-bold text-[#001e3c] uppercase tracking-widest">End-to-End Encrypted</span>
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function Checkout() {
                 >
                   <div className="space-y-8">
                     <div className="flex items-center gap-5">
-                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-md">
+                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-md">
                           <Mail size={20} />
                        </div>
                        <h3 className="text-[26px] font-semibold text-[#001e3c]">Contact Details</h3>
@@ -237,7 +237,7 @@ export default function Checkout() {
 
                   <div className="space-y-8">
                     <div className="flex items-center gap-5">
-                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-md">
+                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-md">
                           <MapPin size={20} />
                        </div>
                        <h3 className="text-[26px] font-semibold text-[#001e3c]">Shipping Address</h3>
@@ -349,7 +349,7 @@ export default function Checkout() {
                 >
                   <div className="space-y-8">
                     <div className="flex items-center gap-5">
-                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-md">
+                       <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-md">
                           <CreditCard size={20} />
                        </div>
                        <h3 className="text-[26px] font-semibold text-[#001e3c]">Payment Method</h3>
@@ -526,19 +526,19 @@ export default function Checkout() {
                <div className="absolute top-0 right-0 w-32 h-32 bg-[#fbb124] rounded-full blur-[60px] opacity-20 -mr-10 -mt-10" />
                <div className="space-y-6 relative z-10">
                   <div className="flex items-center gap-5">
-                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#fbb124]">
+                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-blue-800">
                         <ShieldCheck size={18} />
                      </div>
                      <span className="text-[13px] font-bold uppercase tracking-wider">PCI Secure Payment</span>
                   </div>
                   <div className="flex items-center gap-5">
-                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#fbb124]">
+                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-blue-800">
                         <Truck size={18} />
                      </div>
                      <span className="text-[13px] font-bold uppercase tracking-wider">Tracked Delivery</span>
                   </div>
                   <div className="flex items-center gap-5">
-                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-[#fbb124]">
+                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-blue-800">
                         <Package size={18} />
                      </div>
                      <span className="text-[13px] font-bold uppercase tracking-wider">Genuine Assurance</span>

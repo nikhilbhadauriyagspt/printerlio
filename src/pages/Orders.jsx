@@ -85,7 +85,7 @@ export default function Orders() {
           </div>
           
           <h1 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4 uppercase tracking-tight">
-            Order <span className="text-[#fbb124]">History</span>
+            Order <span className="text-blue-800">History</span>
           </h1>
           <p className="text-gray-500 text-[15px] max-w-[500px]">
             Review your past purchases and track the status of your current deliveries.
@@ -96,7 +96,7 @@ export default function Orders() {
           {/* Header Inside Container */}
           <div className="px-8 py-8 border-b border-gray-50 flex items-center justify-between bg-slate-50/50">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-lg">
                 <Package size={24} />
               </div>
               <div>
@@ -105,7 +105,7 @@ export default function Orders() {
               </div>
             </div>
             {!loading && orders.length > 0 && (
-              <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-[#fbb124] transition-all">
+              <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-blue-800 transition-all">
                 Shop More <ArrowRight size={16} />
               </Link>
             )}
@@ -190,7 +190,7 @@ export default function Orders() {
                <HelpCircle size={18} />
                <span className="text-[14px] font-medium">Need help with an order?</span>
              </div>
-             <Link to="/contact" className="text-[13px] font-bold text-[#001e3c] hover:text-[#fbb124] transition-colors uppercase tracking-widest">
+             <Link to="/contact" className="text-[13px] font-bold text-[#001e3c] hover:text-blue-800 transition-colors uppercase tracking-widest">
                Contact Support
              </Link>
           </div>
@@ -258,7 +258,7 @@ export default function Orders() {
 
                 <div className="pt-8 border-t border-gray-100 flex items-center justify-between">
                   <span className="text-[18px] font-semibold text-[#001e3c]">Grand Total</span>
-                  <span className="text-[28px] font-bold text-[#fbb124]">${parseFloat(selectedOrder.total_amount).toLocaleString()}</span>
+                  <span className="text-[28px] font-bold text-blue-800">${parseFloat(selectedOrder.total_amount).toLocaleString()}</span>
                 </div>
               </div>
 

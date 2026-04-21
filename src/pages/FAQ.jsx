@@ -123,11 +123,11 @@ export default function FAQ() {
           >
             <div className="inline-flex items-center gap-3 mb-6 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100">
               <span className="h-[2px] w-8 bg-[#001e3c]"></span>
-              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Knowledge Base</span>
+              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">FAQ</span>
               <span className="h-[2px] w-8 bg-[#001e3c]"></span>
             </div>
             <h1 className="text-[40px] md:text-[40px] font-semibold text-[#001e3c] leading-tight mb-8  tracking-tight">
-              Answers for <span className="text-[#fbb124]">Your Questions.</span>
+              Answers for <span className="text-blue-800">Your Questions.</span>
             </h1>
             <p className="text-gray-500 text-[18px] md:text-[20px] leading-relaxed max-w-[750px] mx-auto">
               Find detailed solutions and expert insights about orders, shipping, 
@@ -193,8 +193,8 @@ export default function FAQ() {
             <main className="lg:col-span-8">
               <div className="mb-14 text-center lg:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#fbb124]/10 rounded-full mb-4">
-                   <HelpCircle size={14} className="text-[#fbb124]" />
-                   <span className="text-[11px] font-black uppercase tracking-widest text-[#fbb124]">Viewing Section</span>
+                   <HelpCircle size={14} className="text-blue-800" />
+                   <span className="text-[11px] font-black uppercase tracking-widest text-blue-800">Viewing Section</span>
                 </div>
                 <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] leading-tight">
                   {activeCategory}
@@ -226,7 +226,7 @@ export default function FAQ() {
 
                       <div className={cn(
                         "shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-500",
-                        activeIdx === i ? "bg-[#001e3c] text-[#fbb124] rotate-180" : "bg-white text-[#001e3c] shadow-sm"
+                        activeIdx === i ? "bg-[#001e3c] text-blue-800 rotate-180" : "bg-white text-[#001e3c] shadow-sm"
                       )}>
                         {activeIdx === i ? <Minus size={18} /> : <Plus size={18} />}
                       </div>
@@ -268,7 +268,7 @@ export default function FAQ() {
           >
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#fbb124]/10 rounded-full blur-[100px]" />
             <h2 className="text-[34px] md:text-[56px] font-semibold text-[#001e3c] mb-8 relative z-10 leading-tight">
-              Need Personal <span className="text-[#fbb124]">Assistance?</span>
+              Need Personal <span className="text-blue-800">Assistance?</span>
             </h2>
             <p className="text-gray-500 text-[18px] md:text-[20px] max-w-[700px] mx-auto mb-14 relative z-10 font-medium">
               Our professional support experts are available to guide you through 

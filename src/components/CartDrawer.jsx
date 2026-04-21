@@ -73,7 +73,7 @@ export default function CartDrawer() {
             {/* Header */}
             <div className="px-8 py-8 border-b border-gray-50 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-lg">
+                <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-lg">
                   <ShoppingCart size={20} />
                 </div>
                 <div>
@@ -133,7 +133,7 @@ export default function CartDrawer() {
                       <div className="flex-1 min-w-0 flex flex-col justify-between py-1">
                         <div>
                           <div className="flex justify-between items-start gap-2 mb-1">
-                            <h4 className="text-[14px] font-semibold text-[#001e3c] line-clamp-1 group-hover:text-[#fbb124] transition-colors">
+                            <h4 className="text-[14px] font-semibold text-[#001e3c] line-clamp-1 group-hover:text-blue-800 transition-colors">
                               {item.name}
                             </h4>
                             <button
@@ -200,7 +200,7 @@ export default function CartDrawer() {
 
                   <div className="pt-4 border-t border-gray-50 flex justify-between items-end">
                     <div>
-                       <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#fbb124] block mb-1">
+                       <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-blue-800 block mb-1">
                         Final Total
                       </span>
                       <span className="text-[28px] font-semibold text-[#001e3c] leading-none tracking-tight">
@@ -230,10 +230,10 @@ export default function CartDrawer() {
 
                 <div className="mt-8 flex items-center justify-center gap-6">
                    <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <ShieldCheck size={14} className="text-[#fbb124]" /> Secure
+                      <ShieldCheck size={14} className="text-blue-800" /> Secure
                    </div>
                    <div className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      <Truck size={14} className="text-[#fbb124]" /> Free Delivery
+                      <Truck size={14} className="text-blue-800" /> Free Delivery
                    </div>
                 </div>
               </div>

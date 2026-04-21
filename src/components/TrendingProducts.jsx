@@ -110,7 +110,7 @@ export default function TrendingProducts() {
                     {p.name}
                   </h4>
                   <div className="flex items-center gap-1.5 bg-amber-50 px-2 py-1 rounded-lg">
-                    <Star size={12} className="fill-amber-400 text-amber-400" />
+                    <Star size={12} className="fill-blue-700 text-blue-700" />
                     <span className="text-[12px] font-bold text-amber-600">{p.rating}</span>
                   </div>
                 </div>

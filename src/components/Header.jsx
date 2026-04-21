@@ -154,7 +154,7 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 w-full z-[140] bg-white border-b border-[#ece7dc] shadow-sm font-['Poppins']">
         {/* Top Main Header */}
-        <div className="h-[92px] bg-amber-400 flex items-center">
+        <div className="h-[92px] bg-blue-700 flex items-center">
           <div className="max-w-[1820px] mx-auto px-4 md:px-8 xl:px-10 w-full flex items-center gap-4 lg:gap-8">
             {/* Left */}
             <div className="flex items-center gap-3 shrink-0 min-w-fit">
@@ -216,7 +216,7 @@ export default function Header() {
 
                 <button
                   type="submit"
-                  className="h-full w-[54px] bg-[#976500] text-white flex items-center justify-center hover:bg-[#ffaa00] transition-colors"
+                  className="h-full w-[54px] bg-blue-900 text-white flex items-center justify-center hover:bg-[#ffaa00] transition-colors"
                   aria-label="Search"
                 >
                   {isSearching ? (
@@ -293,12 +293,12 @@ export default function Header() {
             <div className="flex items-center gap-3 md:gap-5 shrink-0 ml-auto">
               <Link
                 to="/wishlist"
-                className="relative text-[#2f2f2f] hover:text-[#c4902b] transition-colors"
+                className="relative text-white hover:text-[#c4902b] transition-colors"
               >
                 <Heart size={21} strokeWidth={1.8} />
                 
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-2 -right-2 min-w-[17px] h-[17px] px-1 rounded-full bg-[#976500] text-white text-[10px] flex items-center justify-center font-semibold">
+                  <span className="absolute -top-2 -right-2 min-w-[17px] h-[17px] px-1 rounded-full bg-blue-900 text-white text-[10px] flex items-center justify-center font-semibold">
                     {wishlistCount}
                   
                   </span>
@@ -307,7 +307,7 @@ export default function Header() {
 
               <button
                 onClick={openCartDrawer}
-                className="relative text-[#2f2f2f] hover:text-[#c4902b] transition-colors"
+                className="relative text-white hover:text-[#c4902b] transition-colors"
               >
                 <ShoppingBag size={21} strokeWidth={1.8} />
                 {cartCount > 0 && (
@@ -319,7 +319,7 @@ export default function Header() {
 
               <Link
                 to={user ? '/profile' : '/login'}
-                className="hidden sm:inline-flex items-center gap-2 h-[40px] px-5 rounded-md bg-[#976500] text-white text-[13px] font-semibold hover:bg-[#bf8f31] transition-colors"
+                className="hidden sm:inline-flex items-center gap-2 h-[40px] px-5 rounded-md bg-blue-900 text-white text-[13px] font-semibold hover:bg-[#bf8f31] transition-colors"
               >
                 <User size={16} />
                 {user ? 'My Account' : 'Login'}
@@ -351,7 +351,7 @@ export default function Header() {
                   <Link
                     to={link.path}
                     className={cn(
-                      'h-full flex items-center gap-1 text-[13px] font-medium text-[#444] hover:text-[#c4902b] transition-colors',
+                      'h-full flex items-center gap-1 text-[13px] font-medium text-[#444] hover:text-blue-900 transition-colors',
                       location.pathname === link.path && 'text-[#c4902b]'
                     )}
                   >

@@ -52,7 +52,7 @@ export default function Cart() {
           </div>
           
           <h1 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4 uppercase tracking-tight">
-            Shopping <span className="text-[#fbb124]">Cart</span>
+            Shopping <span className="text-blue-800">Cart</span>
           </h1>
           <p className="text-gray-500 text-[15px] max-w-[500px]">
             Review your selected printing solutions before proceeding to secure payment.
@@ -63,7 +63,7 @@ export default function Cart() {
           {/* Header Inside Container */}
           <div className="px-8 py-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-6 bg-slate-50/50">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-[#fbb124] flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-[#001e3c] text-blue-800 flex items-center justify-center shadow-lg">
                 <ShoppingCart size={24} />
               </div>
               <div>
@@ -76,9 +76,9 @@ export default function Cart() {
             
             <div className="flex items-center gap-8">
                <div className="hidden sm:flex items-center gap-2 text-[11px] font-bold text-gray-400 uppercase tracking-widest">
-                  <ShieldCheck size={16} className="text-[#fbb124]" /> 256-bit Encryption
+                  <ShieldCheck size={16} className="text-blue-800" /> 256-bit Encryption
                </div>
-               <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-[#fbb124] transition-all">
+               <Link to="/shop" className="text-[12px] font-bold text-[#001e3c] uppercase tracking-widest flex items-center gap-2 hover:text-blue-800 transition-all">
                 <ChevronLeft size={16} /> Add More Items
               </Link>
             </div>
@@ -133,7 +133,7 @@ export default function Cart() {
                           <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                              {item.brand_name || 'Premium Selection'}
                           </p>
-                          <h4 className="text-[16px] sm:text-[18px] font-semibold text-[#001e3c] line-clamp-2 group-hover:text-[#fbb124] transition-colors">
+                          <h4 className="text-[16px] sm:text-[18px] font-semibold text-[#001e3c] line-clamp-2 group-hover:text-blue-800 transition-colors">
                             {item.name}
                           </h4>
                           <p className="text-[18px] font-black text-[#001e3c]">
@@ -195,7 +195,7 @@ export default function Cart() {
                           </div>
                           <div className="flex justify-between text-[14px] font-bold text-white/60 uppercase tracking-widest">
                             <span>Shipping</span>
-                            <span className="text-[#fbb124]">Free</span>
+                            <span className="text-blue-800">Free</span>
                           </div>
                           <div className="flex justify-between text-[14px] font-bold text-white/60 uppercase tracking-widest">
                             <span>Estimated Tax</span>
@@ -207,7 +207,7 @@ export default function Cart() {
                       <div className="pt-8 border-t border-white/10 relative z-10">
                         <div className="flex justify-between items-end mb-10">
                           <div>
-                            <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#fbb124] block mb-2">
+                            <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-blue-800 block mb-2">
                               Grand Total
                             </span>
                             <span className="text-[40px] font-semibold text-white leading-none tracking-tight">
@@ -225,10 +225,10 @@ export default function Cart() {
                         
                         <div className="space-y-4 pt-4 border-t border-white/5">
                           <div className="flex items-center gap-3 text-[11px] font-bold text-white/40 uppercase tracking-widest">
-                             <ShieldCheck size={16} className="text-[#fbb124]" /> Bank-Grade Security
+                             <ShieldCheck size={16} className="text-blue-800" /> Bank-Grade Security
                           </div>
                           <div className="flex items-center gap-3 text-[11px] font-bold text-white/40 uppercase tracking-widest">
-                             <Truck size={16} className="text-[#fbb124]" /> Insured Delivery
+                             <Truck size={16} className="text-blue-800" /> Insured Delivery
                           </div>
                         </div>
                       </div>

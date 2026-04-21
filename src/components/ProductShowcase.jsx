@@ -48,7 +48,7 @@ export default function ProductShowcase({ products = [], arrivals = [], loading 
           </div>
           
           <h2 className="text-[34px] md:text-[46px] font-semibold text-[#001e3c] leading-tight mb-4">
-            Featured <span className="text-[#fbb124]">Products</span>
+            Featured <span className="text-blue-800">Products</span>
           </h2>
           <p className="text-gray-500 text-[15px] max-w-[600px]">
             Discover our handpicked selection of top-rated printers and accessories, 
@@ -110,7 +110,7 @@ export default function ProductShowcase({ products = [], arrivals = [], loading 
 
                   {/* Content */}
                   <div className="flex flex-col text-center">
-                    <h3 className="text-[14px] font-semibold text-[#001e3c] leading-snug mb-3 line-clamp-2 h-10 group-hover:text-[#fbb124] transition-colors">
+                    <h3 className="text-[14px] font-semibold text-[#001e3c] leading-snug mb-3 line-clamp-2 h-10 group-hover:text-blue-800 transition-colors">
                       {p.name}
                     </h3>
                     

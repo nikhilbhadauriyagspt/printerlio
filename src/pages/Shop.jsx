@@ -123,7 +123,7 @@ export default function Shop() {
       <section className="w-full bg-gradient-to-b from-[#001e3c]/5 to-transparent py-10 md:py-14 border-b border-gray-100">
         <div className="max-w-[1820px] mx-auto px-4 md:px-10 text-center">
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] text-[#001e3c]/40 mb-3 bg-white px-4 py-1.5 rounded-full shadow-sm border border-gray-100 font-bold">
-            <Link to="/" className="hover:text-[#fbb124] transition-colors">Home</Link>
+            <Link to="/" className="hover:text-blue-800 transition-colors">Home</Link>
             <ChevronRight size={10} />
             <span className="text-[#001e3c]">Shop</span>
           </div>
@@ -287,7 +287,7 @@ export default function Shop() {
 
                       {/* Product Info */}
                       <div className="flex flex-col text-center">
-                        <h4 className="text-[#001e3c] text-[13px] md:text-[14px] font-semibold leading-tight line-clamp-2 h-9 mb-4 group-hover:text-[#fbb124] transition-colors px-1">
+                        <h4 className="text-[#001e3c] text-[13px] md:text-[14px] font-semibold leading-tight line-clamp-2 h-9 mb-4 group-hover:text-blue-800 transition-colors px-1">
                           {p.name}
                         </h4>
                         

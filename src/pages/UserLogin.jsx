@@ -77,9 +77,7 @@ export default function UserLogin() {
         <div className="p-8 sm:p-12">
           {/* Logo Section */}
           <div className="flex flex-col items-center mb-12">
-            <Link to="/" className="mb-8">
-              <img src="/logo/logo.png" alt="Logo" className="h-10 object-contain" />
-            </Link>
+           
             <div className="inline-flex items-center gap-2 px-4 py-1 bg-[#001e3c]/5 rounded-full mb-4">
               <Lock size={14} className="text-[#001e3c]" />
               <span className="text-[11px] font-bold uppercase tracking-widest text-[#001e3c]">Authorized Access</span>
@@ -108,7 +106,7 @@ export default function UserLogin() {
                 Email Address
               </label>
               <div className="relative group">
-                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                   <Mail size={18} />
                 </div>
                 <input
@@ -127,7 +125,7 @@ export default function UserLogin() {
                 Secure Password
               </label>
               <div className="relative group">
-                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-[#fbb124] transition-colors">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-[#001e3c]/30 group-focus-within:text-blue-800 transition-colors">
                   <Lock size={18} />
                 </div>
                 <input
@@ -167,7 +165,7 @@ export default function UserLogin() {
               New to our store?
               <Link
                 to="/signup"
-                className="text-[#001e3c] hover:text-[#fbb124] ml-2 underline underline-offset-4 decoration-2 decoration-[#fbb124]/30 transition-all"
+                className="text-[#001e3c] hover:text-blue-800 ml-2 underline underline-offset-4 decoration-2 decoration-[#fbb124]/30 transition-all"
               >
                 Create Account
               </Link>
