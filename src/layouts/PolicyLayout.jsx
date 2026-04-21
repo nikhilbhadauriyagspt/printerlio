@@ -19,7 +19,7 @@ export default function PolicyLayout({ title, subtitle, lastUpdated, children })
             </div>
 
             <div className="space-y-4">
-              <h1 className="text-3xl md:text-5xl italic text-blue-800 tracking-tight leading-tight">
+              <h1 className="text-3xl md:text-5xl italic text-amber-400 tracking-tight font-bold   leading-tight">
                 {title}
               </h1>
               

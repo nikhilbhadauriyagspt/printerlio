@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Apni local banner images
+// Local banner images
 import banner1 from '../assets/bannerr/21.png';
 import banner2 from '../assets/bannerr/22.png';
 
@@ -30,62 +30,64 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
     return () => clearInterval(timer);
   }, [nextSlide]);
 
   return (
-    <section className="relative w-full h-[250px] sm:h-[400px] md:h-[500px] lg:h-[650px] xl:h-[800px] overflow-hidden bg-white">
-      {/* Slides */}
+    <section className="relative w-full h-screen  overflow-hidden bg-white">
       <div className="relative w-full h-full">
         {slides.map((slide, idx) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-in-out ${
-              idx === current ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              idx === current ? 'opacity-100 z-20' : 'opacity-0 z-10'
             }`}
           >
             <img
               src={slide.image}
               alt={slide.alt}
-              className="w-full h-full object-contain md:object-cover object-center"
+              className="w-full h-auto object-contain"
             />
           </div>
         ))}
-      </div>
 
-      {/* Left Arrow */}
-      <button
-        onClick={prevSlide}
-        aria-label="Previous slide"
-        className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/20 hover:bg-black/35 text-white backdrop-blur-sm transition-all"
-      >
-        <ChevronLeft size={24} className="mx-auto" />
-      </button>
+        {/* Left Arrow */}
+        <button
+          onClick={prevSlide}
+          aria-label="Previous slide"
+          className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/80 hover:bg-white text-[#222] shadow-md transition-all"
+        >
+          <ChevronLeft size={22} className="mx-auto" />
+        </button>
 
-      {/* Right Arrow */}
-      <button
-        onClick={nextSlide}
-        aria-label="Next slide"
-        className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-black/20 hover:bg-black/35 text-white backdrop-blur-sm transition-all"
-      >
-        <ChevronRight size={24} className="mx-auto" />
-      </button>
+        {/* Right Arrow */}
+        <button
+          onClick={nextSlide}
+          aria-label="Next slide"
+          className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/80 hover:bg-white text-[#222] shadow-md transition-all"
+        >
+          <ChevronRight size={22} className="mx-auto" />
+        </button>
 
-      {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 z-30">
-        {slides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrent(idx)}
-            aria-label={`Go to slide ${idx + 1}`}
-            className={`transition-all duration-300 rounded-full ${
-              idx === current
-                ? 'w-10 h-2 bg-white'
-                : 'w-2.5 h-2.5 bg-white/60 hover:bg-white'
-            }`}
-          />
-        ))}
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrent(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`rounded-full transition-all duration-300 ${
+                idx === current
+                  ? 'w-8 h-2 bg-white'
+                  : 'w-2.5 h-2.5 bg-white/60 hover:bg-white'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

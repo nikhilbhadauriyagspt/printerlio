@@ -5,6 +5,7 @@ import {
   Truck,
   Info,
   RotateCcw,
+  ChevronRight,
   Plus,
   Minus,
   Search,
@@ -102,49 +103,50 @@ export default function FAQ() {
   const filteredFaqs = currentCategoryData?.questions || [];
 
   return (
-    <div className="bg-white font-['Poppins'] text-slate-900">
+    <div className="bg-white font-['Poppins'] text-[#001e3c]">
       <SEO
         title="FAQ | Support & Guidance"
         description="Find answers to common questions about orders, shipping, and printer information."
       />
 
-      {/* Hero Section */}
-      <section className="relative pt-15 pb-16 md:pt-20 md:pb-24 bg-gray-50 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 -mr-20 -mt-20" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -ml-20 -mb-20" />
+      {/* 1. Centered Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-20 md:pb-32 bg-slate-50 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-full opacity-5 pointer-events-none">
+           <div className="absolute top-0 right-0 w-96 h-96 bg-[#fbb124] rounded-full blur-[120px]" />
+           <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#001e3c] rounded-full blur-[120px]" />
+        </div>
         
-        <div className="max-w-[1820px] mx-auto px-4 md:px-6 relative z-10 text-center">
+        <div className="max-w-[1820px] mx-auto px-4 md:px-10 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-800 text-[12px]  uppercase tracking-[0.2em] rounded-full mb-6">
-              Knowledge Base
-            </span>
-            <h1 className="text-[40px] md:text-[60px]  text-slate-900 leading-tight mb-8">
-              Common <span className="text-blue-800">Questions.</span>
+            <div className="inline-flex items-center gap-3 mb-6 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100">
+              <span className="h-[2px] w-8 bg-[#001e3c]"></span>
+              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Knowledge Base</span>
+              <span className="h-[2px] w-8 bg-[#001e3c]"></span>
+            </div>
+            <h1 className="text-[40px] md:text-[40px] font-semibold text-[#001e3c] leading-tight mb-8  tracking-tight">
+              Answers for <span className="text-[#fbb124]">Your Questions.</span>
             </h1>
-            <p className="text-gray-500 text-[16px] md:text-[18px] leading-relaxed max-w-[700px] mx-auto">
-              Find instant answers about orders, shipping, and printer setups. 
-              We've organized everything to make your experience smoother.
+            <p className="text-gray-500 text-[18px] md:text-[20px] leading-relaxed max-w-[750px] mx-auto">
+              Find detailed solutions and expert insights about orders, shipping, 
+              and technical printer configurations.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-20 md:py-32">
-        <div className="max-w-[1820px] mx-auto px-4 md:px-6">
+      {/* 2. Main Content: Categories & Accordion */}
+      <section className="py-24 px-4 md:px-10">
+        <div className="max-w-[1820px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             
-            {/* Sidebar: Categories */}
-            <aside className="lg:col-span-4 space-y-10">
-              <div>
-                <h2 className="text-[28px]  text-slate-900 mb-6 flex items-center gap-3">
-                  <HelpCircle className="text-blue-800" size={28} />
-                  Categories
-                </h2>
-                <div className="flex flex-col gap-2">
+            {/* Left Column: Category Selection */}
+            <aside className="lg:col-span-4 space-y-12">
+              <div className="text-center lg:text-left">
+                <h2 className="text-[28px] font-semibold text-[#001e3c] mb-8 border-b border-gray-100 pb-4">Categories</h2>
+                <div className="flex flex-col gap-3">
                   {faqs.map((f) => (
                     <button
                       key={f.category}
@@ -153,72 +155,78 @@ export default function FAQ() {
                         setActiveIdx(null);
                       }}
                       className={cn(
-                        'w-full flex items-center justify-between gap-4 rounded-2xl px-6 py-5 text-left border transition-all duration-300',
+                        'w-full flex items-center justify-between gap-4 rounded-[1.5rem] px-8 py-6 text-left transition-all duration-500 group',
                         activeCategory === f.category
-                          ? 'bg-blue-800 border-blue-800 text-white shadow-xl shadow-blue-100'
-                          : 'bg-white border-gray-100 text-gray-500 hover:bg-gray-50 hover:text-slate-900'
+                          ? 'bg-[#001e3c] text-white shadow-2xl'
+                          : 'bg-slate-50 text-[#001e3c]/60 hover:bg-gray-100'
                       )}
                     >
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-5">
                         <div className={cn(
-                          'w-10 h-10 rounded-xl flex items-center justify-center',
-                          activeCategory === f.category ? 'bg-white/20' : 'bg-gray-50 text-blue-800'
+                          'w-12 h-12 rounded-xl flex items-center justify-center transition-all',
+                          activeCategory === f.category ? 'bg-white text-[#001e3c]' : 'bg-white text-[#001e3c] shadow-sm'
                         )}>
                           {f.icon}
                         </div>
-                        <span className="text-[15px] font-bold">{f.category}</span>
+                        <span className="text-[16px] font-bold uppercase tracking-wide">{f.category}</span>
                       </div>
-                      {activeCategory === f.category && <ArrowRight size={18} />}
+                      <ChevronRight size={18} className={cn('transition-transform duration-500', activeCategory === f.category ? 'opacity-100' : 'opacity-0')} />
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Still Have Questions Box */}
-              <div className="bg-slate-900 rounded-[2.5rem] p-10 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-800 rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity" />
-                <h3 className="text-white text-[24px]  mb-4 relative z-10">Still Unsure?</h3>
-                <p className="text-white/60 text-[14px] leading-relaxed mb-8 relative z-10">
-                  If you couldn't find your answer here, our team is happy to help you personally.
+              {/* Still Need Help Box */}
+              <div className="bg-[#001e3c] rounded-[2.5rem] p-10 relative overflow-hidden group shadow-2xl">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#fbb124] rounded-full blur-[80px] opacity-20" />
+                <h3 className="text-white text-[24px] font-semibold mb-3 relative z-10">Unresolved?</h3>
+                <p className="text-white/50 text-[14px] leading-relaxed mb-8 relative z-10">
+                  If your question remains unanswered, our dedicated support staff is ready to assist.
                 </p>
-                <Link to="/contact" className="inline-flex items-center gap-2 text-white  text-[12px] uppercase tracking-wider relative z-10 hover:gap-3 transition-all">
+                <Link to="/contact" className="inline-flex items-center gap-3 h-12 px-8 bg-[#fbb124] text-[#001e3c] font-bold rounded-xl text-[12px] uppercase tracking-widest relative z-10 transition-all hover:bg-white active:scale-95 shadow-lg">
                   Contact Support <ArrowRight size={16} />
                 </Link>
               </div>
             </aside>
 
-            {/* Main: Accordion Area */}
+            {/* Right Column: Accordion */}
             <main className="lg:col-span-8">
-              <div className="mb-12">
-                <h3 className="text-[12px]  uppercase tracking-[0.3em] text-blue-800 mb-4">Questions For</h3>
-                <h2 className="text-[32px] md:text-[42px] text-slate-900 leading-tight">
+              <div className="mb-14 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#fbb124]/10 rounded-full mb-4">
+                   <HelpCircle size={14} className="text-[#fbb124]" />
+                   <span className="text-[11px] font-black uppercase tracking-widest text-[#fbb124]">Viewing Section</span>
+                </div>
+                <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] leading-tight">
                   {activeCategory}
                 </h2>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {filteredFaqs.map((faq, i) => (
-                  <div
+                  <motion.div
                     key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
                     className={cn(
-                      "rounded-3xl border transition-all duration-300",
-                      activeIdx === i ? "border-blue-800 bg-blue-50/30 shadow-sm" : "border-gray-100 bg-white"
+                      "rounded-[2rem] border transition-all duration-500 overflow-hidden",
+                      activeIdx === i ? "border-[#001e3c] bg-white shadow-[0_20px_50px_rgba(0,30,60,0.08)]" : "border-gray-100 bg-slate-50"
                     )}
                   >
                     <button
                       onClick={() => toggle(i)}
-                      className="w-full flex items-center justify-between gap-6 px-8 py-7 text-left"
+                      className="w-full flex items-center justify-between gap-6 px-10 py-8 text-left"
                     >
                       <span className={cn(
-                        "text-[16px] md:text-[19px] font-bold leading-tight pr-6",
-                        activeIdx === i ? "text-blue-800" : "text-slate-900"
+                        "text-[17px] md:text-[20px] font-semibold leading-tight pr-6",
+                        activeIdx === i ? "text-[#001e3c]" : "text-[#001e3c]/80"
                       )}>
                         {faq.q}
                       </span>
 
                       <div className={cn(
-                        "shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all",
-                        activeIdx === i ? "bg-blue-800 text-white rotate-180" : "bg-gray-50 text-gray-400"
+                        "shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-500",
+                        activeIdx === i ? "bg-[#001e3c] text-[#fbb124] rotate-180" : "bg-white text-[#001e3c] shadow-sm"
                       )}>
                         {activeIdx === i ? <Minus size={18} /> : <Plus size={18} />}
                       </div>
@@ -230,19 +238,18 @@ export default function FAQ() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeOut" }}
-                          className="overflow-hidden"
+                          transition={{ duration: 0.4, ease: "easeOut" }}
                         >
-                          <div className="px-8 pb-8">
-                            <div className="h-px w-12 bg-blue-200 mb-6" />
-                            <p className="text-[15px] md:text-[16px] text-gray-500 leading-relaxed max-w-3xl">
+                          <div className="px-10 pb-10">
+                            <div className="h-[2px] w-16 bg-[#fbb124] mb-8 rounded-full" />
+                            <p className="text-[16px] md:text-[17px] text-gray-500 leading-relaxed max-w-3xl font-medium">
                               {faq.a}
                             </p>
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </main>
@@ -250,33 +257,38 @@ export default function FAQ() {
         </div>
       </section>
 
-      {/* CTA Bottom Section */}
-      <section className="py-20 md:py-32 bg-gray-50">
-        <div className="max-w-[1820px] mx-auto px-4 md:px-6">
-          <div className="bg-white rounded-[3rem] p-12 md:p-20 text-center border border-gray-100 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full blur-[100px] opacity-20 -mr-32 -mt-32" />
-            <h2 className="text-[32px] md:text-[48px]  text-slate-900 mb-8 relative z-10">
-              Need More Assistance?
+      {/* 3. Bottom CTA: Centered & Impactful */}
+      <section className="py-24 px-4 md:px-10 bg-slate-50">
+        <div className="max-w-[1820px] mx-auto">
+           <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-[3.5rem] p-12 md:p-24 text-center border border-gray-100 shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#fbb124]/10 rounded-full blur-[100px]" />
+            <h2 className="text-[34px] md:text-[56px] font-semibold text-[#001e3c] mb-8 relative z-10 leading-tight">
+              Need Personal <span className="text-[#fbb124]">Assistance?</span>
             </h2>
-            <p className="text-gray-500 text-[16px] md:text-[18px] max-w-[600px] mx-auto mb-12 relative z-10">
-              Our professional support team is available round the clock to help you with 
-              your printer setups and order inquiries.
+            <p className="text-gray-500 text-[18px] md:text-[20px] max-w-[700px] mx-auto mb-14 relative z-10 font-medium">
+              Our professional support experts are available to guide you through 
+              product choices, technical setups, and order tracking.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 relative z-10">
               <Link
                 to="/contact"
-                className="w-full sm:w-auto h-16 px-12 bg-blue-800 text-white  text-[14px] uppercase tracking-widest rounded-2xl flex items-center justify-center gap-2 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95"
+                className="w-full sm:w-auto h-16 px-14 bg-[#001e3c] text-white font-bold rounded-2xl flex items-center justify-center gap-4 hover:bg-[#fbb124] hover:text-[#001e3c] transition-all shadow-xl uppercase tracking-widest text-[13px] active:scale-95"
               >
-                Message Support <ArrowRight size={20} />
+                Send Support Message <ArrowRight size={20} />
               </Link>
               <Link
                 to="/shop"
-                className="text-slate-900  text-[14px] uppercase tracking-widest hover:text-blue-800 transition-colors"
+                className="text-[#001e3c]/50 font-bold uppercase tracking-widest text-[13px] hover:text-[#001e3c] transition-colors"
               >
-                Go Back to Shopping
+                Return to Shop
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

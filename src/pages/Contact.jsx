@@ -64,97 +64,84 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-white font-['Poppins'] text-slate-900">
+    <div className="bg-white font-['Poppins'] text-[#001e3c]">
       <SEO
-        title="Contact Us | US Printer Store Support"
+        title="Contact Us | Printer Lio Support"
         description="Connect with our professional support team for printer inquiries and order assistance."
       />
 
-      {/* Hero Section */}
-      <section className="relative pt-15 pb-16 md:pt-20 md:pb-24 bg-gray-50 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 -mr-20 -mt-20" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -ml-20 -mb-20" />
+      {/* 1. Centered Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-20 md:pb-32 bg-slate-50 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-full opacity-5 pointer-events-none">
+           <div className="absolute top-0 right-0 w-96 h-96 bg-[#fbb124] rounded-full blur-[120px]" />
+           <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#001e3c] rounded-full blur-[120px]" />
+        </div>
         
-        <div className="max-w-[1820px] mx-auto px-4 md:px-6 relative z-10 text-center">
+        <div className="max-w-[1820px] mx-auto px-4 md:px-10 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-800 text-[12px]  uppercase tracking-[0.2em] rounded-full mb-6">
-              Support Center
-            </span>
-            <h1 className="text-[40px] md:text-[60px]  text-slate-900 leading-tight mb-8">
-              We’re Here to <span className="text-blue-800">Help.</span>
+            <div className="inline-flex items-center gap-3 mb-6 bg-white px-5 py-2 rounded-full shadow-sm border border-gray-100">
+              <span className="h-[2px] w-8 bg-[#001e3c]"></span>
+              <span className="text-[#001e3c] text-[12px] font-bold uppercase tracking-[0.2em]">Support Hub</span>
+              <span className="h-[2px] w-8 bg-[#001e3c]"></span>
+            </div>
+            <h1 className="text-[40px] md:text-[40px] font-semibold text-[#001e3c] leading-tight mb-8  tracking-tight">
+              We're Here for <span className="text-[#fbb124]">Your Solutions.</span>
             </h1>
-            <p className="text-gray-500 text-[16px] md:text-[18px] leading-relaxed max-w-[700px] mx-auto">
-              Got a question about a printer? Need help with an order? 
-              Our team is ready to provide the answers you need.
+            <p className="text-gray-500 text-[18px] md:text-[20px] leading-relaxed max-w-[750px] mx-auto">
+              Whether you have technical questions or need order assistance, 
+              our dedicated team is standing by to provide expert guidance.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-20 md:py-32">
-        <div className="max-w-[1820px] mx-auto px-4 md:px-6">
+      {/* 2. Main Content: Info Cards & Form */}
+      <section className="py-24 px-4 md:px-10">
+        <div className="max-w-[1820px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
             
-            {/* Left Info Column */}
+            {/* Left Column: Quick Info */}
             <div className="lg:col-span-4 space-y-12">
-              <div>
-                <h2 className="text-[32px]  text-slate-900 mb-6">Get in Touch</h2>
+              <div className="text-center lg:text-left">
+                <h2 className="text-[32px] md:text-[42px] font-semibold text-[#001e3c] mb-6">Get in <span className="text-[#fbb124]">Touch</span></h2>
                 <p className="text-gray-500 text-[16px] leading-relaxed">
-                  We value clear communication and fast responses. Reach out through any of these 
-                  channels and we'll get back to you as soon as possible.
+                  We prioritize excellence in communication. Connect with us through 
+                  our professional channels for rapid response times.
                 </p>
               </div>
 
-              <div className="space-y-8">
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center shrink-0 group-hover:bg-blue-800 group-hover:text-white transition-all">
-                    <Mail size={24} />
+              <div className="grid grid-cols-1 gap-6">
+                {[
+                  { icon: Mail, label: 'Email Support', val: 'info@printerlio.shop', link: 'mailto:info@printerlio.shop' },
+                  { icon: MapPin, label: 'Headquarters', val: '4352 13th Ave S, Fargo, ND 58103, USA' },
+                  { icon: Clock3, label: 'Operational Hours', val: '24/7 Digital Assistance' }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-6 p-8 rounded-[2.5rem] bg-slate-50 border border-gray-100 group hover:bg-[#001e3c] transition-all duration-500">
+                    <div className="w-16 h-16 rounded-full bg-white text-[#001e3c] flex items-center justify-center shrink-0 shadow-lg group-hover:bg-[#fbb124] transition-all">
+                      <item.icon size={28} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-1 group-hover:text-white/50 transition-colors">{item.label}</p>
+                      {item.link ? (
+                        <a href={item.link} className="text-[18px] font-semibold text-[#001e3c] group-hover:text-white transition-colors">{item.val}</a>
+                      ) : (
+                        <p className="text-[18px] font-semibold text-[#001e3c] group-hover:text-white transition-colors leading-snug">{item.val}</p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-1">Email Support</p>
-                    <a href="mailto:info@usprinterstore.shop" className="text-[18px]  text-slate-900 hover:text-blue-800 transition-colors">
-                      info@usprinterstore.shop
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center shrink-0 group-hover:bg-blue-800 group-hover:text-white transition-all">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-1">Our Office</p>
-                    <p className="text-[18px]  text-slate-900 leading-snug">
-                      4352 13th Ave S, Fargo, ND 58103, USA
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-6 group">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center shrink-0 group-hover:bg-blue-800 group-hover:text-white transition-all">
-                    <Clock3 size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-1">Availability</p>
-                    <p className="text-[18px]  text-slate-900">
-                      24/7 Online Assistance
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-
             </div>
 
-            {/* Right Form Column */}
+            {/* Right Column: Contact Form */}
             <div className="lg:col-span-8">
-              <div className="bg-gray-50 rounded-[3rem] p-8 md:p-12 lg:p-16 border border-gray-100 shadow-sm">
-                <div className="mb-12">
-                  <h3 className="text-[28px] md:text-[36px] text-slate-900 mb-4">Send a Message</h3>
-                  <p className="text-gray-500">Fill out the form below and our team will be in touch shortly.</p>
+              <div className="bg-white rounded-[3.5rem] p-8 md:p-12 lg:p-16 border border-gray-100 shadow-[0_30px_100px_rgba(0,0,0,0.05)]">
+                <div className="mb-14 text-center">
+                  <h3 className="text-[28px] md:text-[40px] font-semibold text-[#001e3c] mb-4">Send a <span className="text-[#fbb124]">Message</span></h3>
+                  <p className="text-gray-500 max-w-[500px] mx-auto">Fill out the secure form below and our specialists will reach out to you shortly.</p>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -162,104 +149,94 @@ export default function Contact() {
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="bg-white rounded-[2rem] border border-gray-100 text-center py-20 px-8"
+                      className="text-center py-16 px-8"
                     >
-                      <div className="w-20 h-20 bg-blue-50 text-blue-800 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle2 size={40} />
+                      <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+                        <CheckCircle2 size={48} />
                       </div>
-                      <h4 className="text-[32px] font-black mb-4">Message Sent!</h4>
-                      <p className="text-gray-500 max-w-md mx-auto mb-10 text-[16px] leading-relaxed">
-                        Thank you for reaching out. We have received your message and will respond within 24 hours.
+                      <h4 className="text-[36px] font-semibold mb-4">Inquiry Received</h4>
+                      <p className="text-gray-500 max-w-md mx-auto mb-12 text-[17px] leading-relaxed font-medium">
+                        Your message has been logged into our support queue. We will provide a response within 24 business hours.
                       </p>
                       <button
                         onClick={() => setStatus(null)}
-                        className="h-14 px-10 bg-slate-900 text-white font-bold rounded-2xl hover:bg-blue-800 transition-all active:scale-95"
+                        className="h-14 px-10 bg-[#001e3c] text-white font-bold rounded-2xl hover:bg-[#fbb124] hover:text-[#001e3c] transition-all uppercase tracking-widest text-[12px] shadow-xl"
                       >
-                        Send Another Message
+                        Send Another Inquiry
                       </button>
                     </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-2">
-                            Full Name
-                          </label>
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <label className="text-[12px] font-bold uppercase tracking-widest text-[#001e3c]/30 pl-4">Your Name</label>
                           <input
                             required
                             type="text"
-                            placeholder="Your name"
+                            placeholder="Full Name"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full h-14 rounded-2xl bg-white border border-gray-100 px-6 text-[15px] font-medium focus:border-blue-800 outline-none transition-all"
+                            className="w-full h-14 rounded-2xl bg-slate-50 border border-gray-100 px-6 text-[15px] font-semibold text-[#001e3c] focus:bg-white focus:border-[#fbb124] outline-none transition-all shadow-sm"
                           />
                         </div>
-                        <div className="space-y-2">
-                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-2">
-                            Email Address
-                          </label>
+                        <div className="space-y-3">
+                          <label className="text-[12px] font-bold uppercase tracking-widest text-[#001e3c]/30 pl-4">Email Address</label>
                           <input
                             required
                             type="email"
-                            placeholder="email@example.com"
+                            placeholder="name@business.com"
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full h-14 rounded-2xl bg-white border border-gray-100 px-6 text-[15px] font-medium focus:border-blue-800 outline-none transition-all"
+                            className="w-full h-14 rounded-2xl bg-slate-50 border border-gray-100 px-6 text-[15px] font-semibold text-[#001e3c] focus:bg-white focus:border-[#fbb124] outline-none transition-all shadow-sm"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-2">
-                            Phone (Optional)
-                          </label>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-3">
+                          <label className="text-[12px] font-bold uppercase tracking-widest text-[#001e3c]/30 pl-4">Phone Number</label>
                           <input
                             type="tel"
-                            placeholder="Your phone number"
+                            placeholder="+1 (555) 000-0000"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full h-14 rounded-2xl bg-white border border-gray-100 px-6 text-[15px] font-medium focus:border-blue-800 outline-none transition-all"
+                            className="w-full h-14 rounded-2xl bg-slate-50 border border-gray-100 px-6 text-[15px] font-semibold text-[#001e3c] focus:bg-white focus:border-[#fbb124] outline-none transition-all shadow-sm"
                           />
                         </div>
-                        <div className="space-y-2">
-                          <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-2">
-                            Subject
-                          </label>
+                        <div className="space-y-3">
+                          <label className="text-[12px] font-bold uppercase tracking-widest text-[#001e3c]/30 pl-4">Inquiry Subject</label>
                           <div className="relative">
                             <select
                               value={formData.subject}
                               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                              className="w-full h-14 rounded-2xl bg-white border border-gray-100 px-6 text-[15px] font-medium focus:border-blue-800 outline-none transition-all appearance-none cursor-pointer"
+                              className="w-full h-14 rounded-2xl bg-slate-50 border border-gray-100 px-6 text-[15px] font-semibold text-[#001e3c] focus:bg-white focus:border-[#fbb124] outline-none transition-all appearance-none cursor-pointer shadow-sm"
                             >
                               <option>General Inquiry</option>
-                              <option>Product Question</option>
-                              <option>Order Support</option>
-                              <option>Technical Help</option>
+                              <option>Product Specifications</option>
+                              <option>Order Status</option>
+                              <option>Technical Support</option>
                             </select>
-                            <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={18} />
+                            <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-[#001e3c]/30 pointer-events-none" size={18} />
                           </div>
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <label className="text-[12px] font-black uppercase tracking-widest text-gray-400 pl-2">
-                          Your Message
-                        </label>
+                      <div className="space-y-3">
+                        <label className="text-[12px] font-bold uppercase tracking-widest text-[#001e3c]/30 pl-4">Detailed Message</label>
                         <textarea
                           required
                           rows="6"
-                          placeholder="How can we help you today?"
+                          placeholder="How can our specialists assist you today?"
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          className="w-full rounded-2xl bg-white border border-gray-100 p-6 text-[15px] font-medium focus:border-blue-800 outline-none transition-all resize-none"
+                          className="w-full rounded-[2rem] bg-slate-50 border border-gray-100 p-8 text-[15px] font-semibold text-[#001e3c] focus:bg-white focus:border-[#fbb124] outline-none transition-all resize-none shadow-sm"
                         />
                       </div>
 
-                      <div className="pt-4">
+                      <div className="pt-6 text-center">
                         <button
                           disabled={loading}
-                          className="w-full md:w-auto h-16 px-12 bg-blue-800 text-white font-black text-[14px] uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 disabled:opacity-70 active:scale-95"
+                          className="w-full md:w-auto h-16 px-14 bg-[#001e3c] text-white font-bold text-[13px] uppercase tracking-[0.2em] rounded-2xl flex items-center justify-center gap-4 hover:bg-[#fbb124] hover:text-[#001e3c] transition-all shadow-2xl active:scale-95 disabled:opacity-70 mx-auto"
                         >
                           {loading ? (
                             <>
@@ -267,15 +244,15 @@ export default function Contact() {
                             </>
                           ) : (
                             <>
-                              Send Message <ArrowRight size={20} />
+                              Send Inquiry <ArrowRight size={20} />
                             </>
                           )}
                         </button>
 
                         {status === 'error' && (
-                          <p className="text-red-500 text-[13px] font-bold mt-4 flex items-center gap-2">
+                          <p className="text-red-500 text-[13px] font-bold mt-6 flex items-center justify-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-red-500" />
-                            Something went wrong. Please try again.
+                            Connection error. Please attempt again.
                           </p>
                         )}
                       </div>

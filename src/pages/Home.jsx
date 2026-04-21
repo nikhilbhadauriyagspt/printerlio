@@ -10,7 +10,7 @@ import ProductGrid from "@/components/ProductGrid";
 import CategorySlider from "@/components/CategorySlider";
 import BestSellers from "@/components/BestSellers";
 import ProductShowcase from "@/components/ProductShowcase";
-import TripleBanners from "@/components/TripleBanners";
+import DualBanners from "@/components/TripleBanners";
 import QuickPicks from "@/components/QuickPicks";
 import SupportCTA from "@/components/SupportCTA";
 import TheVault from "@/components/TheVault";
@@ -92,34 +92,36 @@ export default function Home() {
   return (
     <div className="bg-white font-jakarta overflow-x-hidden text-slate-900">
       <SEO 
-        title="US Printer Store | Quality Printers & Accessories"
+        title="Printer Lio | Quality Printers & Accessories"
         description="Your trusted source for high-quality printers and printing printer. Delivering excellence across the USA."
       />
 
       <Hero />
-             <Features />
-
+ 
       <AboutSection />
       
       <ShopByCategory categories={data.categories} loading={data.loading} />
-       <TripleBanners />
+      
       <ProductShowcase 
         products={data.all} 
         arrivals={data.mixedArrivals} 
         loading={data.loading} 
       />
-      
-      
+{/*       
+             <DualBanners /> */}
 
+            
 
-       <Collections />
+ <SupportCTA />
+       
       {/* <CategorySlider 
         title="Office Printers"  
         products={data.printers} 
         loading={data.loading}
       /> */}
       <PromoBanner />
-      <SupportCTA />
+      <Collections />
+     
        
   </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import colImg from "../assets/bannerr/exp1.png";
 import promoImg from "../assets/bannerr/exp3.png";
@@ -10,92 +10,105 @@ import bannerImg2 from "../assets/bannerr/exp4.png";
 
 const collectionData = [
   {
-    title: "Office Printers",
-    desc: "High-performance printers designed for smooth workflow and daily office productivity.",
+    title: "Office Productivity",
+    desc: "Engineered for high-volume tasks and seamless workplace efficiency.",
     image: colImg,
     link: "/shop?category=laser-printers",
-    tag: "Work Setup",
-    bg: "bg-[#f9f9f9]",
+    tag: "Pro Series",
   },
   {
-    title: "Inkjet Printers",
-    desc: "Print, scan, and copy with reliable inkjet solutions for home and business use.",
+    title: "Vibrant Inkjet",
+    desc: "Experience true-to-life colors and sharp details for every print.",
     image: promoImg,
     link: "/shop?category=inkjet-printers",
-    tag: "Multi Function",
-    bg: "bg-[#f2f2f2]",
+    tag: "Creative",
   },
   {
-    title: "Home Printers",
-    desc: "Easy-to-use printers built for everyday documents, school work, and personal printing.",
+    title: "Smart Home",
+    desc: "Compact, wireless solutions designed for the modern family life.",
     image: bannerImg,
     link: "/shop?category=inkjet-printers",
-    tag: "Daily Use",
-    bg: "bg-[#f5f5f5]",
+    tag: "Everyday",
   },
   {
-    title: "Printer Accessories",
-    desc: "Dependable accessories that support better printing performance and smoother workflow.",
+    title: "Essential Gear",
+    desc: "The perfect support system for your professional printing setup.",
     image: bannerImg2,
     link: "/shop?category=printer-accessories",
-    tag: "Support Range",
-    bg: "bg-[#efefef]",
+    tag: "Add-ons",
   },
 ];
 
 export default function Collections() {
   return (
-    <section className="w-full bg-white py-16 px-4 md:px-6 lg:px-8 border-t border-gray-100 font-['Poppins']">
+    <section className="w-full bg-white py-24 px-4 md:px-10 font-['Poppins']">
       <div className="max-w-[1820px] mx-auto">
-       <div className="max-w-2xl mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="h-[2px] w-8 bg-blue-800"></span>
-              <span className="text-blue-800  text-[13px] uppercase tracking-[0.2em]">Reliable printers</span>
-            </div>
-            <h2 className="text-[38px] md:text-[40px]  text-slate-900 leading-[1.1]">
-              Explore <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-indigo-800">Now</span>
-            </h2>
+
+        {/* Centered Premium Heading */}
+        <div className="flex flex-col items-center justify-center text-center mb-16">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <span className="h-[1px] w-12 bg-[#001e3c]"></span>
+            <span className="text-[13px] font-semibold uppercase tracking-[0.2em] text-[#001e3c]">Premium Range</span>
+            <span className="h-[1px] w-12 bg-[#001e3c]"></span>
           </div>
+          <h2 className="text-[36px] md:text-[48px] font-semibold text-[#001e3c] leading-tight mb-4">
+            Reliable <span className="text-[#fbb124]">Printers</span>
+          </h2>
+          <p className="text-gray-500 text-[15px] max-w-[600px]">
+            Explore professional-grade technology designed to deliver 
+            unmatched reliability and precision.
+          </p>
+        </div>
 
-        {/* Minimal Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-200 border border-gray-200">
+        {/* Sharp Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
           {collectionData.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`relative ${item.bg} flex flex-col sm:flex-row items-center min-h-[300px] overflow-hidden`}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="group relative h-[400px] md:h-[500px] border border-gray-100 overflow-hidden bg-[#fbfbfb]"
             >
-              {/* Content Area */}
-              <div className="flex-1 p-8 md:p-10 lg:p-12 order-2 sm:order-1">
-                <span className="inline-block text-[10px]  uppercase tracking-[2px] text-gray-500 mb-4">
-                  {item.tag}
-                </span>
-
-                <h3 className="text-[22px] md:text-[26px]  leading-tight text-slate-900 mb-4">
-                  {item.title}
-                </h3>
-
-                <p className="text-[14px] leading-7 text-gray-600 max-w-[380px] mb-8">
-                  {item.desc}
-                </p>
-
-                <Link
-                  to={item.link}
-                  className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[2px] text-blue-800 border-b-2 border-transparent hover:border-blue-800 transition-all pb-1"
-                >
-                  Shop Now
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-
-              {/* Image Area */}
-              <div className="w-full sm:w-[45%] h-[240px] sm:h-full flex items-center justify-center p-6 order-1 sm:order-2">
+              {/* Background Image - Clean & Centered */}
+              <div className="absolute inset-0 flex items-center justify-center p-12 md:p-20 transition-transform duration-700 group-hover:scale-105 group-hover:blur-[2px]">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="max-w-full max-h-full object-contain grayscale-[0.2] hover:grayscale-0 transition-all duration-500"
+                  className="max-w-full max-h-full object-contain opacity-90"
                 />
               </div>
-            </div>
+
+              {/* Content Overlay - Up & Down Animation */}
+              <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 bg-gradient-to-t from-[#001e3c] via-[#001e3c]/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                <div className="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                  <span className="text-[#fbb124] text-[12px] font-bold uppercase tracking-widest mb-3 inline-block">
+                    {item.tag}
+                  </span>
+                  <h3 className="text-white text-[28px] md:text-[34px] font-semibold mb-4 leading-tight">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/70 text-[15px] max-w-[400px] mb-8 leading-relaxed">
+                    {item.desc}
+                  </p>
+                  <Link
+                    to={item.link}
+                    className="inline-flex items-center gap-3 bg-[#fbb124] text-[#001e3c] px-8 py-3.5 text-[13px] font-bold uppercase tracking-widest hover:bg-white transition-colors"
+                  >
+                    Explore Now
+                    <MoveRight size={18} />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Default View Tag - Slides down on hover */}
+              <div className="absolute top-8 left-8 group-hover:-translate-y-20 transition-transform duration-500">
+                 <h4 className="text-[#001e3c] text-[20px] font-semibold border-l-4 border-[#fbb124] pl-4">
+                    {item.title}
+                 </h4>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
