@@ -50,10 +50,10 @@ export default function SEO({ title, description, keywords, schemaType = "Websit
       "description": finalDesc,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "4352 13th Ave S",
-        "addressLocality": "Fargo",
-        "addressRegion": "ND",
-        "postalCode": "58103",
+        "streetAddress": "9 E 36th St",
+        "addressLocality": "New York",
+        "addressRegion": "NY",
+        "postalCode": "10016",
         "addressCountry": "USA"
       },
       "contactPoint": {

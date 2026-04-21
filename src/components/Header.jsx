@@ -296,9 +296,11 @@ export default function Header() {
                 className="relative text-[#2f2f2f] hover:text-[#c4902b] transition-colors"
               >
                 <Heart size={21} strokeWidth={1.8} />
+                
                 {wishlistCount > 0 && (
                   <span className="absolute -top-2 -right-2 min-w-[17px] h-[17px] px-1 rounded-full bg-[#976500] text-white text-[10px] flex items-center justify-center font-semibold">
                     {wishlistCount}
+                  
                   </span>
                 )}
               </Link>

@@ -12,7 +12,7 @@ export default function TermsAndConditions() {
       <p>
         We arePrinter Lio
  
-  ("Company," "we," "us," "our"), a company registered in Minnesota, United States at 4352 13th Ave S, Fargo, ND 58103, USA
+  ("Company," "we," "us," "our"), a company registered in Minnesota, United States at 9 E 36th St, New York, NY 10016, USA
       </p>
       <p>
         We operate the website <a href="http://printerlio.shop/">http://printerlio.shop/</a> (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").
@@ -23,7 +23,7 @@ export default function TermsAndConditions() {
   is your trusted destination for authentic, high-performance printers and printing accessories from HP and other leading printing brands.
       </p>
       <p>
-        You can contact us by email at <a href="mailto:info@printerlio.shop">info@printerlio.shop</a>, or by mail to 4352 13th Ave S, Fargo, ND 58103, USA
+        You can contact us by email at <a href="mailto:info@printerlio.shop">info@printerlio.shop</a>, or by mail to 9 E 36th St, New York, NY 10016, USA
       </p>
       <p>
         These Legal Terms constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you"), andPrinter Lio
@@ -207,7 +207,7 @@ export default function TermsAndConditions() {
       <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed space-y-2 uppercase er">
           <p className="text-slate-900 font-bold">Printer Lio </p>
-          <p>4352 13th Ave S, Fargo, ND 58103, USA</p>
+          <p>9 E 36th St, New York, NY 10016, USA</p>
           
           <p className="pt-4 text-black font-bold lowercase">Email: <a href="mailto:info@printerlio.shop" className="hover:underline">info@printerlio.shop</a></p>
         </address>

@@ -278,7 +278,7 @@ export default function PrivacyPolicy() {
       <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed">
          Printer Lio <br/>
-          4352 13th Ave S, Fargo, ND 58103, USA
+          9 E 36th St, New York, NY 10016, USA
         </address>
       </div>
 

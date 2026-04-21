@@ -116,7 +116,7 @@ export default function Contact() {
               <div className="grid grid-cols-1 gap-6">
                 {[
                   { icon: Mail, label: 'Email Support', val: 'info@printerlio.shop', link: 'mailto:info@printerlio.shop' },
-                  { icon: MapPin, label: 'Headquarters', val: '4352 13th Ave S, Fargo, ND 58103, USA' },
+                  { icon: MapPin, label: 'Headquarters', val: '9 E 36th St, New York, NY 10016, USA' },
                   { icon: Clock3, label: 'Operational Hours', val: '24/7 Digital Assistance' }
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-6 p-8 rounded-[2.5rem] bg-slate-50 border border-gray-100 group hover:bg-[#001e3c] transition-all duration-500">

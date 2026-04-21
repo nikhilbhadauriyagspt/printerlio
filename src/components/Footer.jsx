@@ -157,7 +157,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <MapPin size={18} className="text-[#001e3c] shrink-0" />
-                <p className="text-[14px] font-medium leading-relaxed">4352 13th Ave S, Fargo, ND 58103, USA</p>
+                <p className="text-[14px] font-medium leading-relaxed">9 E 36th St, New York, NY 10016, USA</p>
               </div>
             </div>
           </div>

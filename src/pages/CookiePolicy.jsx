@@ -90,7 +90,7 @@ export default function CookiePolicy() {
       <div className="bg-gray-50 p-8 rounded-xl border border-gray-100 my-8 not-prose">
         <address className="not-italic text-slate-700 font-bold leading-relaxed space-y-1">
           <p className="text-slate-900">Printer Lio</p>
-          <p>4352 13th Ave S, Fargo, ND 58103, USA</p>
+          <p>9 E 36th St, New York, NY 10016, USA</p>
           <p className="pt-4 text-black font-bold">info@printerlio.shop</p>
         </address>
       </div>
